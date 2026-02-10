@@ -80,6 +80,17 @@ const AdminPost = ({ goBack }) => {
         }
     };
 
+    const triggerDeployHook = async () => {
+        try {
+            await fetch('https://api.vercel.com/v1/integrations/deploy/prj_cBqi949okdukHX34r5MAnvD5fHcx/OPesSy3UMD', {
+                method: 'POST'
+            });
+            console.log('Deploy hook triggered successfully');
+        } catch (err) {
+            console.error('Failed to trigger deploy hook:', err);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -91,15 +102,18 @@ const AdminPost = ({ goBack }) => {
                     .from('articles')
                     .insert([formData]);
                 if (error) throw error;
-                setStatus({ type: 'success', message: 'Artigo publicado com sucesso!' });
+                setStatus({ type: 'success', message: 'Artigo publicado com sucesso! Iniciando sincronização...' });
             } else {
                 const { error } = await supabase
                     .from('articles')
                     .update(formData)
                     .match({ id: editingId });
                 if (error) throw error;
-                setStatus({ type: 'success', message: 'Artigo atualizado com sucesso!' });
+                setStatus({ type: 'success', message: 'Artigo atualizado com sucesso! Iniciando sincronização...' });
             }
+
+            // Trigger Vercel Deploy Hook to update fallback
+            triggerDeployHook();
 
             setFormData(initialForm);
             setEditingId(null);
@@ -124,8 +138,12 @@ const AdminPost = ({ goBack }) => {
                 .delete()
                 .match({ id });
             if (error) throw error;
+
+            // Trigger Vercel Deploy Hook to update fallback
+            triggerDeployHook();
+
             fetchArticles();
-            alert('Artigo removido!');
+            alert('Artigo removido! O site será atualizado em instantes.');
         } catch (err) {
             console.error('Erro ao deletar:', err);
             alert('Erro ao deletar: ' + err.message);
