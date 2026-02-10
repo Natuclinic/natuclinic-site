@@ -6,15 +6,10 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
     const [searchTerm, setSearchTerm] = React.useState('');
     const [visibleCount, setVisibleCount] = React.useState(6);
 
-    if (loading) {
-        return (
-            <div className="min-h-screen pt-32 pb-20 bg-[#FAFAFA] flex justify-center items-center">
-                <Unicon name="spinner" className="w-10 h-10 text-natu-brown animate-spin" />
-            </div>
-        );
-    }
+    // Carregamento silencioso para evitar telas em branco
+    const safeArticles = articles || [];
 
-    const filteredArticles = articles.filter(post =>
+    const filteredArticles = safeArticles.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.category.toLowerCase().includes(searchTerm.toLowerCase())
     );

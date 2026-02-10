@@ -538,16 +538,7 @@ const BlogPostWrapper = ({ articles, loading }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="scale-75 md:scale-100">
-          <DnaAnimationClean color="#4C261A" />
-        </div>
-      </div>
-    );
-  }
-
+  // Removido carregamento inicial para navegação instantânea
   const normalizedId = String(id || '').toLowerCase().replace(/\/$/, '');
   const post = articles.find(a => {
     const aId = String(a.id || '').toLowerCase().replace(/\/$/, '');
@@ -556,7 +547,7 @@ const BlogPostWrapper = ({ articles, loading }) => {
   });
 
   if (!post) {
-    console.warn(`Artigo não encontrado: ${id}. Redirecionando para /blog.`);
+    if (loading) return null; // Wait for data without showing a loader
     return <Navigate to="/blog" />;
   }
 
@@ -579,13 +570,7 @@ export default function App() {
     <div className="min-h-screen bg-white">
       {!isServicePage && <Navbar />}
 
-      <React.Suspense fallback={
-        <div className="fixed inset-0 flex items-center justify-center bg-white z-[100]">
-          <div className="scale-50 sm:scale-75 md:scale-95 lg:scale-100 origin-center">
-            <DnaAnimationClean color="#4C261A" />
-          </div>
-        </div>
-      }>
+      <React.Suspense fallback={null}>
         <main className="relative z-10 bg-white">
           <Routes>
             <Route path="/" element={
