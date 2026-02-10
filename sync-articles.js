@@ -5,8 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // --- CONFIGURATION ---
-const SUPABASE_URL = 'https://dkjgskucppssvjvucmqy.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRramdza3VjcHBzc3ZqdnVjbXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQzNDA2NjAsImV4cCI6MjA3OTkxNjY2MH0.NqwEUwOdm2XZjPiDyfZnpB97CPWOP_yC1Z6coM4MVGo';
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL || 'https://dkjgskucppssvjvucmqy.supabase.co';
+const SUPABASE_KEY = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRramdza3VjcHBzc3ZqdnVjbXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQzNDA2NjAsImV4cCI6MjA3OTkxNjY2MH0.NqwEUwOdm2XZjPiDyfZnpB97CPWOP_yC1Z6coM4MVGo';
 // ---------------------
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

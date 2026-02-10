@@ -35,6 +35,11 @@ const AdminPost = ({ goBack }) => {
     }, [isAuthenticated]);
 
     const fetchArticles = async () => {
+        if (!supabase) {
+            setStatus({ type: 'error', message: 'Erro de Configuração: As chaves do Supabase não foram encontradas na Vercel.' });
+            setLoading(false);
+            return;
+        }
         setLoading(true);
         try {
             const { data, error } = await supabase
