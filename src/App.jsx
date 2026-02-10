@@ -538,15 +538,7 @@ const BlogPostWrapper = ({ articles, loading }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  if (loading) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-white z-[100]">
-        <div className="scale-75">
-          <DnaAnimationClean color="#4C261A" />
-        </div>
-      </div>
-    );
-  }
+
 
   const post = articles.find(a => a.id === id || a.slug === id);
 
