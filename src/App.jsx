@@ -538,11 +538,27 @@ const BlogPostWrapper = ({ articles, loading }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="scale-75 md:scale-100">
+          <DnaAnimationClean color="#4C261A" />
+        </div>
+      </div>
+    );
+  }
 
+  const normalizedId = String(id || '').toLowerCase().replace(/\/$/, '');
+  const post = articles.find(a => {
+    const aId = String(a.id || '').toLowerCase().replace(/\/$/, '');
+    const aSlug = String(a.slug || '').toLowerCase().replace(/\/$/, '');
+    return aId === normalizedId || (a.slug && aSlug === normalizedId);
+  });
 
-  const post = articles.find(a => a.id === id || a.slug === id);
-
-  if (!post) return <Navigate to="/blog" />;
+  if (!post) {
+    console.warn(`Artigo não encontrado: ${id}. Redirecionando para /blog.`);
+    return <Navigate to="/blog" />;
+  }
 
   return <BlogPostGeneric goBack={() => navigate('/blog')} post={post} articles={articles} setCurrentPage={(newId) => navigate(`/blog/${newId}`)} />;
 };
