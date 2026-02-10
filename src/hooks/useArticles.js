@@ -11,6 +11,13 @@ export const useArticles = () => {
         const fetchArticles = async () => {
             try {
                 setLoading(true);
+                if (!supabase) {
+                    console.warn('Supabase not configured. Using fallback local data.');
+                    setArticles(fallbackArticles || []);
+                    setLoading(false);
+                    return;
+                }
+
                 const { data, error: sbError } = await supabase
                     .from('articles')
                     .select('*')
