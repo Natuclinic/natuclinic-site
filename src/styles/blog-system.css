@@ -1,0 +1,388 @@
+/* Blog System Scoped Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+.blog-system-wrapper {
+    /* Variables from the provided CSS */
+    --accent-light: #4C261A;
+    --accent-dark: #3a1d13;
+    --font-size-min: 16;
+    --font-size-max: 20;
+    --font-ratio-min: 1.2;
+    --font-ratio-max: 1.33;
+    --font-width-min: 375;
+    --font-width-max: 1500;
+
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    letter-spacing: -0.01em;
+    background-color: #fff;
+    width: 100%;
+    min-height: auto;
+    padding-bottom: 0;
+    background-image:
+        radial-gradient(at 0% 0%, rgba(76, 38, 26, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(193, 155, 140, 0.03) 0px, transparent 50%);
+}
+
+/* Scoped Utility Classes */
+.blog-system-wrapper .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Fluid Typography Mixin/Logic Adaptation */
+.blog-system-wrapper .fluid {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    /* Simplified fluid for now to avoid complex calc issues in CSS modules/scoped */
+    line-height: 1.1;
+    text-wrap: balance;
+    margin-bottom: 0.5rem;
+}
+
+/* Centered Layout */
+.blog-system-wrapper .container {
+    display: grid;
+    /* 3 Columns: Sidebar Left | Content (centered) | TOC Right */
+    grid-template-columns: 280px min(75ch, 100%) 280px;
+    max-width: 1600px;
+    padding-inline: 2rem;
+    gap: 4rem;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 1280px) {
+    .blog-system-wrapper .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-inline: 1.25rem;
+    }
+}
+
+.blog-system-wrapper .container header {
+    grid-column: 2;
+    /* grid-row: 1; -> Natural Flow */
+}
+
+.blog-system-wrapper .container main {
+    grid-column: 2;
+    /* grid-row: 2; -> Natural Flow */
+}
+
+.blog-system-wrapper .container>hr {
+    grid-column: 2;
+    /* grid-row: 3; -> Natural Flow */
+    margin-block: 2rem;
+}
+
+.blog-system-wrapper .container footer {
+    grid-column: 2;
+    /* grid-row: 4; -> Natural Flow */
+}
+
+.blog-system-wrapper .container .related-posts {
+    grid-column: 1;
+    grid-row: 2;
+    position: sticky;
+    align-self: start;
+    top: 8rem;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.blog-system-wrapper .related-posts h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.blog-system-wrapper .related-posts .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Hide related posts on mobile, or move to bottom? 
+   For now, strictly following "Left Side" request implies desktop. 
+   On mobile they will disappear with this grid-column 1 if not handled.
+*/
+.blog-system-wrapper .related-articles-sidebar {
+    grid-column: 1;
+    grid-row: 1 / span 10;
+    position: relative;
+    padding-right: 2rem;
+    border-right: 1px solid rgba(76, 38, 26, 0.05);
+}
+
+.blog-system-wrapper table-of-contents {
+    grid-column: 3;
+    grid-row: 1 / span 10;
+    position: sticky;
+    align-self: start;
+    top: 10rem;
+    font-size: 0.8rem;
+    min-width: 220px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(76, 38, 26, 0.05);
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+.blog-system-wrapper table-of-contents nav {
+    position: relative;
+}
+
+.blog-system-wrapper table-of-contents h2 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+}
+
+.blog-system-wrapper table-of-contents ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 1px solid #e5e5e5;
+}
+
+.blog-system-wrapper table-of-contents li {
+    position: relative;
+}
+
+.blog-system-wrapper table-of-contents a {
+    display: block;
+    padding: 0.5rem 0 0.5rem 1rem;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+}
+
+.blog-system-wrapper table-of-contents a:hover {
+    color: #000;
+}
+
+.blog-system-wrapper table-of-contents a.active {
+    color: var(--accent-dark);
+    border-left-color: var(--accent-dark);
+    font-weight: 500;
+}
+
+.blog-system-wrapper .back-to-top {
+    margin-top: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.blog-system-wrapper .back-to-top.visible {
+    opacity: 1;
+}
+
+.blog-system-wrapper .back-to-top a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #666;
+}
+
+/* Header & Author */
+.blog-system-wrapper header {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
+
+.blog-system-wrapper .author-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+}
+
+.blog-system-wrapper .author-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Main Content */
+.blog-system-wrapper article h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.blog-system-wrapper article h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.blog-system-wrapper article p {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.blog-system-wrapper article>p:first-of-type::first-letter {
+    font-family: var(--font-primary, serif);
+    font-size: 3.5rem;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.75rem;
+    margin-top: 0.25rem;
+    color: var(--accent-light);
+    font-style: italic;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .blog-system-wrapper article>p:first-of-type::first-letter {
+        font-size: 2.8rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.blog-system-wrapper article blockquote {
+    border-left: 4px solid var(--accent-light);
+    padding-left: 2rem;
+    margin: 3rem 0;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--accent-light);
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+.blog-system-wrapper article img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 2rem;
+}
+
+/* Footer & Form */
+.blog-system-wrapper footer {
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.blog-system-wrapper .waitlist-form {
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.blog-system-wrapper form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.blog-system-wrapper input[type="text"],
+.blog-system-wrapper input[type="email"] {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    min-width: 200px;
+}
+
+.blog-system-wrapper button[type="submit"] {
+    padding: 0.75rem 1.5rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.blog-system-wrapper button[type="submit"]:hover {
+    background: #333;
+}
+
+.blog-system-wrapper .newsletter-opt {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Responsive refinements */
+@media (max-width: 1280px) {
+    .blog-system-wrapper .related-articles-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .blog-system-wrapper table-of-contents {
+        display: none;
+    }
+
+    .blog-system-wrapper .container header,
+    .blog-system-wrapper .container main,
+    .blog-system-wrapper .container>hr,
+    .blog-system-wrapper .container footer {
+        grid-column: 1;
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .blog-system-wrapper .fluid {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-system-wrapper .fluid {
+        font-size: 2rem;
+    }
+
+    .blog-system-wrapper article p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .blog-system-wrapper article blockquote {
+        font-size: 1.2rem;
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .blog-system-wrapper article img {
+        margin-block: 1rem;
+        border-radius: 1rem;
+    }
+}

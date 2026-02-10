@@ -1,0 +1,222 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@theme {
+  --color-natu-brown: #4C261A;
+  --color-natu-pink: #FFC2C2;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Helvetica", "Arial", sans-serif;
+}
+
+@layer base {
+  :root {
+    --font-primary: 'Playfair Display', serif;
+    --font-secondary: 'Helvetica', 'Arial', sans-serif;
+    --color-primary: #4C261A;
+    --color-accent: #FFC2C2;
+    --theme-brown: 14 49% 14%;
+    --theme-pink: 0 100% 88%;
+  }
+
+  html,
+  body,
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    font-family: var(--font-secondary);
+    color: var(--color-primary);
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .pebble-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    min-width: 260px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(76, 38, 26, 0.1);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .button-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    z-index: 1;
+  }
+
+  .icon-wrapper-fab {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+
+  /* New NatuButton Styles */
+  .natu-button {
+    line-height: 1;
+    text-decoration: none;
+    display: inline-flex;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--color-natu-brown);
+    color: #fff;
+    border-radius: 10rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s;
+  }
+
+  .natu-button__icon-wrapper {
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    color: var(--color-natu-brown);
+    background-color: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .natu-button:hover {
+    background-color: #000;
+  }
+
+  .natu-button:hover .natu-button__icon-wrapper {
+    color: #000;
+  }
+
+  .natu-button__icon-svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .natu-button__icon-svg--copy {
+    position: absolute;
+    transform: translate(-150%, 150%);
+  }
+
+  .natu-button:hover .natu-button__icon-svg:first-child {
+    transition: transform 0.3s ease-in-out;
+    transform: translate(150%, -150%);
+  }
+
+  .natu-button:hover .natu-button__icon-svg--copy {
+    transition: transform 0.3s ease-in-out 0.1s;
+    transform: translate(0);
+  }
+
+  /* DNA Animation */
+  .dna {
+    perspective: 270px;
+    transform-style: preserve-3d;
+    display: inline-block;
+    letter-spacing: -5px;
+    /* Important from original snippet to remove inline-block gaps if any */
+  }
+
+  .dna .ele {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    animation: rotate 3s linear infinite;
+    transform: rotateX(-360deg) translateZ(0);
+    transform-style: preserve-3d;
+  }
+
+  .dna .dot {
+    width: inherit;
+    height: inherit;
+    transform: translateZ(-20px);
+    transform-style: preserve-3d;
+  }
+
+  /* Even dots - color 2 */
+  .dna .dot::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    display: block;
+    background: var(--dna-color, #C8A492);
+    /* Base color light brown */
+    border-radius: 50%;
+    animation: rotate 3s linear infinite reverse;
+    transform: rotateX(-360deg) translateZ(0);
+  }
+
+  @keyframes rotate {
+    to {
+      transform: none;
+    }
+  }
+
+  /* DNA animation helper */
+  .dna .dot::before {
+    animation-delay: var(--dot-delay) !important;
+  }
+
+  .reveal-text {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .desktop-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  .font-serif {
+    font-family: var(--font-primary);
+  }
+
+  .font-sans {
+    font-family: var(--font-secondary);
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
