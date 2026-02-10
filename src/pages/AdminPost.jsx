@@ -303,41 +303,6 @@ const AdminPost = ({ goBack }) => {
                                     <option>Tratamentos</option>
                                 </select>
                             </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Autor (Nome)</label>
-                                <input
-                                    required
-                                    name="author_name"
-                                    value={formData.author_name}
-                                    onChange={handleChange}
-                                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-sm"
-                                    placeholder="Equipe Natuclinic"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Data de Publicação</label>
-                                <input
-                                    required
-                                    name="date"
-                                    value={formData.date}
-                                    onChange={handleChange}
-                                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-sm"
-                                    placeholder="Ex: 10 Fev 2026"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Avatar do Autor (URL)</label>
-                                <input
-                                    name="author_avatar"
-                                    value={formData.author_avatar}
-                                    onChange={handleChange}
-                                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-[10px] font-mono"
-                                    placeholder="URL da foto do autor..."
-                                />
-                            </div>
                         </div>
 
                         <div className="pt-4 border-t border-gray-100">
