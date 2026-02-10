@@ -65,7 +65,27 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
             metaKeywords.name = "keywords";
             document.head.appendChild(metaKeywords);
         }
-        metaKeywords.content = post.meta_keywords || post.meta?.keywords || "";
+        // Update JSON-LD Structured Data
+        let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
+        if (!jsonLdScript) {
+            jsonLdScript = document.createElement('script');
+            jsonLdScript.type = "application/ld+json";
+            document.head.appendChild(jsonLdScript);
+        }
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "image": [post.image],
+            "datePublished": post.created_at || new Date().toISOString(),
+            "dateModified": post.updated_at || new Date().toISOString(),
+            "author": {
+                "@type": "Person",
+                "name": post.author_name || "Natuclinic"
+            },
+            "description": post.meta_description || post.excerpt
+        };
+        jsonLdScript.text = JSON.stringify(structuredData);
 
     }, [post]);
 
