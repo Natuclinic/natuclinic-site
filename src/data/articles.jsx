@@ -3,23 +3,9 @@ import React from 'react';
 
 // ARQUIVO GERADO AUTOMATICAMENTE - NÃO EDITE DIRETAMENTE
 // Este arquivo serve como fallback de alta performance e SEO para a Vercel.
-// Sincronizado em: 10/02/2026, 08:40:47
+// Sincronizado em: 10/02/2026, 08:44:47
 
 export const articles = [
-    {
-        "id": "t",
-        "title": "test",
-        "category": "Saúde Integrativa",
-        "date": "10 de fev. de 2026",
-        "image": "teste",
-        "excerpt": "teste",
-        "content": "teste",
-        "meta_description": "test",
-        "meta_keywords": "teste",
-        "created_at": "2026-02-10T11:33:47.697229+00:00",
-        "author_name": "Equipe Natuclinic",
-        "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff"
-    },
     {
         "id": "como-kris-jenner-rejuvenesceu-aos-69-anos-tratamentos",
         "title": "Aos 69 Anos, Kris Jenner Choca a Internet: O Segredo Por Trás do Rejuvenescimento que Viralizou",
