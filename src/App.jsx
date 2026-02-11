@@ -31,6 +31,7 @@ const FeedbackSection = React.lazy(() => import('./components/FeedbackSection'))
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const BlogHighlights = React.lazy(() => import('./components/BlogHighlights'));
 const VideoFeedbacks = React.lazy(() => import('./components/VideoFeedbacks'));
+const GluteoLanding = React.lazy(() => import('./pages/GluteoLanding'));
 import { useArticles } from './hooks/useArticles';
 
 // Register GSAP plugin
@@ -611,6 +612,8 @@ export default function App() {
             {/* Legacy/Other routes */}
             <Route path="/blog-post-demo" element={<BlogPostDemo goBack={() => navigate(-1)} />} />
             <Route path="/blog-post-nutricao" element={<BlogPostNutricao goBack={() => navigate(-1)} />} />
+
+            <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
 
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
