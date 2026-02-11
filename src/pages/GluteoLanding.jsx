@@ -168,9 +168,9 @@ const GluteoLanding = () => {
             </section>
 
             {/* Horizontal Results Section */}
-            <section id="transformation" className="py-24 md:py-32 bg-white overflow-hidden">
+            <section id="transformation" className="py-12 md:py-24 bg-white overflow-hidden">
                 <div className="max-w-[100vw] mx-auto">
-                    <BlurFade className="px-6 mb-16 text-center">
+                    <BlurFade className="px-6 mb-8 text-center">
                         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-natu-pink mb-4 block">PORTFÓLIO DE TRANSFORMAÇÕES</span>
                         <h2 className="text-4xl md:text-5xl font-sans font-bold text-natu-brown tracking-tighter uppercase">Resultados extraordinários.</h2>
                     </BlurFade>
@@ -198,7 +198,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* Professional Section */}
-            <section className="py-24 bg-white relative overflow-hidden">
+            <section className="py-12 md:py-24 bg-white relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                     <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
                         {/* Image Column */}
@@ -215,7 +215,7 @@ const GluteoLanding = () => {
 
                         {/* Text Column */}
                         <BlurFade className="w-full md:w-1/2 flex flex-col items-start" delay={0.2}>
-                            <div className="w-64 md:w-[20rem] mb-8">
+                            <div className="w-48 md:w-[20rem] mb-6">
                                 <img
                                     src="/avatar instagram dra debora.png"
                                     alt="Dra. Debora Avatar"
@@ -225,7 +225,7 @@ const GluteoLanding = () => {
                                 />
                             </div>
                             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-natu-pink mb-6 block">EXPERTISE E CUIDADO</span>
-                            <h2 className="text-4xl md:text-5xl font-sans font-bold text-black tracking-tight mb-8 leading-[1.1] uppercase">
+                            <h2 className="text-4xl md:text-5xl font-sans font-bold text-black tracking-tight mb-4 leading-[1.1] uppercase">
                                 Dra. Debora Meneses
                             </h2>
                             <h3 className="text-lg md:text-xl font-sans font-semibold text-black mb-2 uppercase tracking-wider">
@@ -249,7 +249,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* Image Section - Professional Executing */}
-            <section className="w-full bg-white py-12">
+            <section className="w-full bg-white py-6 md:py-12">
                 <BlurFade className="max-w-4xl mx-auto px-6 overflow-hidden">
                     <img
                         src="/harmonização de-gluteo/fotos-da-profissional-executando.png"
@@ -259,9 +259,9 @@ const GluteoLanding = () => {
                 </BlurFade>
             </section>
 
-            <section className="py-24 bg-white relative">
+            <section className="py-12 md:py-24 bg-white relative">
                 <div className="max-w-7xl mx-auto px-6 md:px-12">
-                    <BlurFade className="text-center mb-16">
+                    <BlurFade className="text-center mb-10">
                         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-natu-pink mb-4 block">A TRANSFORMAÇÃO É INTERNA</span>
                         <h2 className="text-5xl md:text-7xl font-sans font-bold text-natu-brown tracking-tight">
                             Se sinta <span className="text-natu-pink">+</span>
