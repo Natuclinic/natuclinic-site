@@ -93,7 +93,9 @@ const Navbar = () => {
                             { label: 'Harmonização de Glúteos', path: '/gluteo-dos-sonhos' },
                             { label: 'Harmonização Facial', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Harmonização Facial.' },
                             { label: 'Ninfoplastia Sem Cortes', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Ninfoplastia Sem Cortes.' },
-                            { label: 'Endolaser', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Endolaser.' }
+                            { label: 'Endolaser', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Endolaser.' },
+                            { label: 'Bioestimuladores de Colágeno', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Bioestimuladores.' },
+                            { label: 'Lipo sem Cortes', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Lipo sem Cortes.' }
                         ]
                     }
                 ]
@@ -180,37 +182,39 @@ const Navbar = () => {
                                         <div className="absolute -top-12 left-0 w-full h-12 bg-transparent" />
 
                                         <div className="bg-white shadow-[0_40px_100px_rgba(0,0,0,0.1)] rounded-b-[40px] overflow-hidden">
-                                            <div className="max-w-7xl mx-auto px-12 py-16 grid grid-cols-12 gap-16">
-                                                {/* Left side: Image and Text */}
-                                                {item.megaMenu.featured && (
-                                                    <div className="col-span-3 flex flex-col gap-6 group/featured">
-                                                        <div className="aspect-[21/9] w-full overflow-hidden rounded-2xl relative">
-                                                            <img
-                                                                src={item.megaMenu.featured.image}
-                                                                alt={item.label}
-                                                                className="w-full h-full object-cover transition-transform duration-700 group-hover/featured:scale-105"
-                                                            />
+                                            <div className="max-w-7xl mx-auto px-12 py-16 flex flex-col gap-12">
+                                                <div className="grid grid-cols-12 gap-16">
+                                                    {/* Left side: Image and Text */}
+                                                    {item.megaMenu.featured && (
+                                                        <div className="col-span-3 flex flex-col gap-5 group/featured">
+                                                            <div className="aspect-[21/9] w-full overflow-hidden rounded-2xl relative">
+                                                                <img
+                                                                    src={item.megaMenu.featured.image}
+                                                                    alt={item.label}
+                                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover/featured:scale-105"
+                                                                />
+                                                            </div>
+                                                            <div className="flex flex-col gap-2">
+                                                                <h4 className="text-xl font-[Helvetica,Arial,sans-serif] font-bold text-natu-brown">
+                                                                    {item.label}
+                                                                </h4>
+                                                                <p className="text-sm font-[Helvetica,Arial,sans-serif] font-normal text-natu-brown leading-relaxed max-w-[280px] [text-wrap:balance]">
+                                                                    {item.megaMenu.featured.text}
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                        <p className="text-lg font-[Helvetica,Arial,sans-serif] font-bold text-natu-brown leading-tight max-w-[280px] [text-wrap:balance]">
-                                                            {item.megaMenu.featured.text}
-                                                        </p>
-                                                    </div>
-                                                )}
+                                                    )}
 
-                                                {/* Right side: Categories and Links */}
-                                                <div className="col-span-9 grid grid-cols-1 gap-12">
-                                                    {item.megaMenu.categories.map((cat, j) => (
-                                                        <div key={j} className="flex flex-col gap-8">
-                                                            <h4 className="text-base font-[Helvetica,Arial,sans-serif] font-bold text-natu-brown border-b border-natu-brown/10 pb-4">
-                                                                {cat.title}
-                                                            </h4>
-                                                            <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                                                    {/* Right side: Categories and Links */}
+                                                    <div className="col-span-9 grid grid-cols-1 gap-12">
+                                                        {item.megaMenu.categories.map((cat, j) => (
+                                                            <div key={j} className="grid grid-cols-2 gap-x-12 gap-y-4">
                                                                 {cat.links.map((link, k) => (
                                                                     <MenuLink key={k} link={link} onClick={handleNavigation} />
                                                                 ))}
                                                             </div>
-                                                        </div>
-                                                    ))}
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
