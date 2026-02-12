@@ -26,7 +26,7 @@ const CeoSection = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="py-12 md:py-20 bg-[#F9F7F5] relative overflow-hidden">
+        <section id="especialistas" ref={containerRef} className="py-12 md:py-20 bg-[#F9F7F5] relative overflow-hidden">
             {/* Subtle Texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-fixed"></div>
 

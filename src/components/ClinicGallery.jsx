@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -111,6 +111,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ClinicGallery = () => {
     const containerRef = useRef(null);
+    const [isInView, setIsInView] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsInView(entry.isIntersecting),
+            { threshold: 0.1 }
+        );
+        if (containerRef.current) observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -130,8 +140,8 @@ const ClinicGallery = () => {
     }, []);
 
     return (
-        <section className="pt-12 md:pt-20 pb-12 md:pb-16 bg-white relative overflow-hidden">
-            <ParametricBackground />
+        <section id="espaco" ref={containerRef} className="pt-12 md:pt-20 pb-12 md:pb-16 bg-white relative overflow-hidden">
+            {isInView && <ParametricBackground />}
 
             {/* Parallax elements */}
             <div className="absolute top-20 left-10 w-64 h-64 bg-natu-pink/10 rounded-full blur-3xl" />
@@ -147,7 +157,6 @@ const ClinicGallery = () => {
                 </div>
 
                 <div
-                    ref={containerRef}
                     className="grid grid-cols-4 grid-rows-5 gap-3 md:gap-8 h-[400px] md:h-[800px] mx-auto max-w-5xl"
                 >
                     {/* Div 1: Left Top */}
@@ -156,6 +165,7 @@ const ClinicGallery = () => {
                             src="/espaco-1.jpg"
                             alt="Recepção Natuclinic"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>
@@ -166,6 +176,7 @@ const ClinicGallery = () => {
                             src="/espaco-2.jpg"
                             alt="Sala de Procedimentos"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>
@@ -176,6 +187,7 @@ const ClinicGallery = () => {
                             src="/sala-dra-debora.jpg"
                             alt="Estética Avançada"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>

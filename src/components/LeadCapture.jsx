@@ -79,7 +79,7 @@ const LeadCapture = () => {
     return (
         <section className="relative py-12 md:py-20 bg-natu-brown overflow-hidden">
             {/* Background Silk Effect */}
-            <div className="absolute inset-y-0 left-[-0.5%] w-[101%] z-0 pointer-events-none">
+            <div className="absolute inset-0 z-0 pointer-events-none flicker-fix">
                 <Silk
                     speed={3.5}
                     scale={0.6}
@@ -90,7 +90,7 @@ const LeadCapture = () => {
             </div>
 
             <div className="desktop-container relative z-10">
-                <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-16 rounded-[3rem]">
+                <div className="max-w-4xl mx-auto bg-[#2b1d15] border border-white/5 p-8 md:p-16 rounded-[3rem] shadow-2xl flicker-fix">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left Side: Copy */}

@@ -60,6 +60,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
                 alt={`${altText} - Depois`}
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 draggable="false"
+                loading="lazy"
             />
 
             {/* Before Image (Foreground with Clip Path) */}
@@ -72,6 +73,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
                     alt={`${altText} - Antes`}
                     className="absolute inset-0 w-full h-full object-cover max-w-none"
                     draggable="false"
+                    loading="lazy"
                 />
             </div>
 

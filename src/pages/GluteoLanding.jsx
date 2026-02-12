@@ -142,13 +142,13 @@ const GluteoLanding = () => {
                             <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 w-full md:w-auto">
                                 <NatuButton
                                     onClick={handleWhatsApp}
-                                    className="px-10 py-5 bg-[#2D1B14] text-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all shadow-2xl shadow-black/20 hover:scale-105 active:scale-95"
+                                    className="px-6 py-3 bg-[#2D1B14] text-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all shadow-2xl shadow-black/20 hover:scale-105 active:scale-95"
                                 >
                                     Agendar consulta
                                 </NatuButton>
                                 <button
                                     onClick={() => document.getElementById('transformation').scrollIntoView({ behavior: 'smooth' })}
-                                    className="px-10 py-5 bg-transparent border-2 border-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase text-white hover:bg-white hover:text-black transition-all hover:scale-[1.03]"
+                                    className="px-6 py-3 bg-transparent border-2 border-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase text-white hover:bg-white hover:text-black transition-all hover:scale-[1.03]"
                                 >
                                     Ver Resultados
                                 </button>
@@ -376,27 +376,24 @@ const GluteoLanding = () => {
             {/* Final CTA Section - Full Bleed Design */}
             <section className="bg-natu-brown relative overflow-hidden">
                 <div className="w-full">
-                    <div className="grid lg:grid-cols-2 gap-0 items-stretch lg:min-h-screen min-h-[700px]">
-                        <BlurFade className="relative group min-h-[400px] lg:min-h-full">
+                    <div className="lg:flex gap-0 items-stretch lg:h-screen min-h-[700px]">
+                        <BlurFade className="relative group min-h-[400px] lg:min-h-full lg:w-auto lg:shrink-0">
                             <div className="relative h-full w-full overflow-hidden">
                                 <img
                                     src="/harmonização de-gluteo/debora-final-section-cta.jpg"
                                     alt="Dra. Debora Meneses"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    className="h-full w-auto object-cover transition-transform duration-700 group-hover:scale-105 block"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/40 to-transparent opacity-60" />
                             </div>
                         </BlurFade>
 
-                        <BlurFade className="bg-natu-brown p-8 md:p-16 lg:p-20 shadow-2xl shadow-black/20 text-white relative overflow-hidden flex flex-col justify-center items-start w-full py-16 md:py-24" delay={0.2}>
-                            <div
-                                className="absolute -right-20 -top-20 w-64 h-64 opacity-[0.03] pointer-events-none"
-                                style={{
-                                    maskImage: 'url(/logo-outline-svg.svg)',
-                                    WebkitMaskImage: 'url(/logo-outline-svg.svg)',
-                                    maskSize: 'contain',
-                                    WebkitMaskRepeat: 'no-repeat'
-                                }}
+                        <BlurFade className="bg-natu-brown p-8 md:p-16 lg:p-20 shadow-2xl shadow-black/20 text-white relative overflow-hidden flex flex-col justify-center items-start w-full py-16 md:py-24 flex-1" delay={0.2}>
+                            {/* Logo Grafismo Background */}
+                            <img
+                                src="/logo-outline-svg.svg"
+                                alt=""
+                                className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/3 w-[120%] h-auto opacity-[0.06] pointer-events-none select-none invert rotate-[-12deg]"
                             />
 
                             <div className="max-w-lg w-full">
