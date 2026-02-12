@@ -39,6 +39,7 @@ const MenuLink = ({ link, onClick }) => (
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -154,21 +155,22 @@ const Navbar = () => {
                 </button>
 
                 {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-10 font-[Helvetica,Arial,sans-serif]">
+                <div className="hidden md:flex items-center gap-14 font-[Helvetica,Arial,sans-serif]">
                     {menuItems.map((item, i) => (
                         <div key={i} className="group/nav py-8 flex items-center">
                             {item.megaMenu ? (
-                                <button className="text-[10px] uppercase tracking-widest font-bold text-natu-brown bg-transparent border-0 p-0 cursor-pointer relative">
+                                <button className="text-[10px] uppercase tracking-widest font-medium text-natu-brown bg-transparent border-0 p-0 cursor-pointer relative flex items-center gap-1">
                                     {item.label}
+                                    <span className="text-[10px] transition-transform duration-300 group-hover/nav:-rotate-180">⌵</span>
                                     <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-natu-brown transition-all duration-300 group-hover/nav:w-full" />
                                 </button>
                             ) : item.path ? (
-                                <button onClick={() => handleNavigation(item.path)} className="text-[10px] uppercase tracking-widest font-bold bg-transparent border-0 p-0 text-natu-brown cursor-pointer relative">
+                                <button onClick={() => handleNavigation(item.path)} className="text-[10px] uppercase tracking-widest font-medium bg-transparent border-0 p-0 text-natu-brown cursor-pointer relative">
                                     {item.label}
                                     <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-natu-brown transition-all duration-300 group-hover/nav:w-full" />
                                 </button>
                             ) : (
-                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest font-bold text-natu-brown no-underline relative">
+                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest font-medium text-natu-brown no-underline relative">
                                     {item.label}
                                     <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-natu-brown transition-all duration-300 group-hover/nav:w-full" />
                                 </a>
@@ -183,10 +185,10 @@ const Navbar = () => {
 
                                         <div className="bg-white shadow-[0_40px_100px_rgba(0,0,0,0.1)] rounded-b-[40px] overflow-hidden">
                                             <div className="max-w-7xl mx-auto px-12 py-16 flex flex-col gap-12">
-                                                <div className="grid grid-cols-12 gap-16">
+                                                <div className="grid grid-cols-12 gap-24 items-start">
                                                     {/* Left side: Image and Text */}
                                                     {item.megaMenu.featured && (
-                                                        <div className="col-span-3 flex flex-col gap-5 group/featured">
+                                                        <div className="col-span-4 flex flex-col gap-5 group/featured">
                                                             <div className="aspect-[21/9] w-full overflow-hidden rounded-2xl relative">
                                                                 <img
                                                                     src={item.megaMenu.featured.image}
@@ -195,25 +197,27 @@ const Navbar = () => {
                                                                 />
                                                             </div>
                                                             <div className="flex flex-col gap-2">
-                                                                <h4 className="text-xl font-[Helvetica,Arial,sans-serif] font-bold text-natu-brown">
+                                                                <h4 className="text-xl font-[Helvetica,Arial,sans-serif] font-medium text-natu-brown">
                                                                     {item.label}
                                                                 </h4>
-                                                                <p className="text-sm font-[Helvetica,Arial,sans-serif] font-normal text-natu-brown leading-relaxed max-w-[280px] [text-wrap:balance]">
+                                                                <p className="text-sm font-[Helvetica,Arial,sans-serif] font-normal text-gray-500 leading-relaxed max-w-[280px] [text-wrap:balance]">
                                                                     {item.megaMenu.featured.text}
                                                                 </p>
                                                             </div>
                                                         </div>
                                                     )}
 
-                                                    {/* Right side: Categories and Links */}
-                                                    <div className="col-span-9 grid grid-cols-1 gap-12">
-                                                        {item.megaMenu.categories.map((cat, j) => (
-                                                            <div key={j} className="grid grid-cols-2 gap-x-12 gap-y-4">
-                                                                {cat.links.map((link, k) => (
-                                                                    <MenuLink key={k} link={link} onClick={handleNavigation} />
-                                                                ))}
-                                                            </div>
-                                                        ))}
+                                                    {/* Right side: Categories and Links (Divided into 2 columns for a 3-column total look) */}
+                                                    <div className="col-span-8 flex justify-center">
+                                                        <div className="w-full grid grid-cols-2 gap-x-24 gap-y-4">
+                                                            {item.megaMenu.categories.map((cat, j) => (
+                                                                <React.Fragment key={j}>
+                                                                    {cat.links.map((link, k) => (
+                                                                        <MenuLink key={k} link={link} onClick={handleNavigation} />
+                                                                    ))}
+                                                                </React.Fragment>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,33 +237,56 @@ const Navbar = () => {
             <div className={`fixed inset-0 bg-white transition-all duration-500 md:hidden flex flex-col p-8 overflow-y-auto ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
                 <div className="w-full mt-24 flex flex-col gap-12 font-[Helvetica,Arial,sans-serif]">
                     {menuItems.map((item, i) => (
-                        <div key={i} className="flex flex-col gap-6">
+                        <div key={i} className="flex flex-col border-b border-gray-100 last:border-0 pb-6">
                             {item.megaMenu ? (
                                 <>
-                                    <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-natu-pink">
-                                        {item.label}
-                                    </h3>
-                                    <div className="flex flex-col gap-8 pl-4 border-l border-gray-100">
-                                        {item.megaMenu.categories.map((cat, j) => (
-                                            <div key={j} className="flex flex-col gap-4">
-                                                {cat.title !== item.label && (
-                                                    <h4 className="text-[9px] uppercase tracking-[0.2em] font-bold text-natu-brown/40">
-                                                        {cat.title}
-                                                    </h4>
-                                                )}
-                                                <div className="flex flex-col gap-3">
-                                                    {cat.links.map((link, k) => (
-                                                        <MenuLink key={k} link={link} onClick={handleNavigation} />
-                                                    ))}
+                                    <button
+                                        onClick={() => setActiveMobileSubmenu(activeMobileSubmenu === i ? null : i)}
+                                        className="flex items-center justify-between w-full bg-transparent border-0 p-0 cursor-pointer group"
+                                    >
+                                        <div className="flex flex-col items-start gap-1">
+                                            <h3 className="text-2xl font-medium text-natu-brown">
+                                                {item.label}
+                                            </h3>
+                                            <p className="text-sm text-gray-500 font-normal text-left">
+                                                {item.megaMenu.featured.text}
+                                            </p>
+                                        </div>
+                                        <span className={`text-xl transition-transform duration-300 ${activeMobileSubmenu === i ? 'rotate-180' : ''}`}>⌵</span>
+                                    </button>
+
+                                    <div className={`overflow-hidden transition-all duration-500 ${activeMobileSubmenu === i ? 'max-h-[800px] mt-8 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                        <div className="flex flex-col gap-6 pl-4 border-l-2 border-natu-pink/20">
+                                            {item.megaMenu.categories.map((cat, j) => (
+                                                <div key={j} className="flex flex-col gap-4">
+                                                    <div className="flex flex-col gap-4">
+                                                        {cat.links.map((link, k) => (
+                                                            <button
+                                                                key={k}
+                                                                onClick={() => {
+                                                                    if (link.path) handleNavigation(link.path);
+                                                                    else window.open(link.href, '_blank');
+                                                                    setMobileMenuOpen(false);
+                                                                }}
+                                                                className="text-lg text-natu-brown/70 text-left bg-transparent border-0 p-0 hover:text-natu-pink transition-colors"
+                                                            >
+                                                                {link.label}
+                                                            </button>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
                                     </div>
                                 </>
                             ) : (
                                 <button
-                                    onClick={() => item.path ? handleNavigation(item.path) : window.open(item.href, '_blank')}
-                                    className="text-2xl font-bold text-natu-brown text-left bg-transparent border-0 p-0 cursor-pointer"
+                                    onClick={() => {
+                                        if (item.path) handleNavigation(item.path);
+                                        else window.open(item.href, '_blank');
+                                        setMobileMenuOpen(false);
+                                    }}
+                                    className="text-2xl font-medium text-natu-brown text-left bg-transparent border-0 p-0 cursor-pointer"
                                 >
                                     {item.label}
                                 </button>
