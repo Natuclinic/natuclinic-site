@@ -39,6 +39,7 @@ import HomeIntro from './components/HomeIntro';
 import HomeManifesto from './components/HomeManifesto';
 import ProceduresSection from './components/ProceduresSection';
 import QuietCTA from './components/QuietCTA';
+import CookieConsent from './components/CookieConsent';
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -172,6 +173,7 @@ export default function App() {
       </a>
 
       <SpeedInsights />
+      <CookieConsent />
     </div>
   );
 }
