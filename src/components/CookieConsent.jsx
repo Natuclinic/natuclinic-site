@@ -72,35 +72,35 @@ const CookieConsent = () => {
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 100, opacity: 0 }}
-                    className="fixed bottom-6 left-6 right-6 md:left-auto md:right-10 md:max-w-md z-[100] font-sans"
+                    className="fixed bottom-6 left-6 right-6 md:left-auto md:right-10 md:max-w-xs z-[100] font-sans"
                 >
-                    <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(76,38,26,0.15)] border border-natu-brown/5 overflow-hidden p-8 flex flex-col gap-6">
+                    <div className="bg-white rounded-[1.5rem] shadow-[0_15px_40px_rgba(76,38,26,0.12)] border border-natu-brown/5 overflow-hidden p-6 flex flex-col gap-5">
                         {!showPreferences ? (
                             <>
-                                <div className="flex flex-col gap-3">
-                                    <h3 className="text-xl font-medium text-natu-brown">Sua privacidade importa</h3>
-                                    <p className="text-sm text-gray-500 leading-relaxed font-light">
-                                        Utilizamos cookies para personalizar sua experiência, analisar o tráfego do site e oferecer anúncios relevantes. Ao clicar em "Aceitar todos", você concorda com o uso de todas as categorias de cookies. Consulte nossa <a href="/politica-de-privacidade" className="text-natu-brown underline font-normal">Política de Privacidade</a>.
+                                <div className="flex flex-col gap-2">
+                                    <h3 className="text-lg font-medium text-natu-brown">Sua privacidade</h3>
+                                    <p className="text-[13px] text-gray-500 leading-relaxed font-light">
+                                        Usamos cookies para melhorar sua experiência. Ao aceitar, você concorda com nossa <a href="/politica-de-privacidade" className="text-natu-brown underline font-normal">Política de Privacidade</a>.
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-2">
                                     <button
                                         onClick={handleAcceptAll}
-                                        className="w-full bg-natu-brown text-white py-3.5 rounded-full font-medium hover:bg-black transition-colors"
+                                        className="w-full bg-natu-brown text-white py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors"
                                     >
                                         Aceitar todos
                                     </button>
-                                    <div className="grid grid-cols-2 gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
                                         <button
                                             onClick={handleRejectAll}
-                                            className="bg-gray-50 text-gray-600 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors"
+                                            className="bg-gray-50 text-gray-600 py-2.5 rounded-full text-xs font-medium hover:bg-gray-100 transition-colors"
                                         >
                                             Recusar
                                         </button>
                                         <button
                                             onClick={() => setShowPreferences(true)}
-                                            className="bg-transparent border border-gray-200 text-gray-600 py-3 rounded-full text-sm font-medium hover:border-natu-brown hover:text-natu-brown transition-all"
+                                            className="bg-transparent border border-gray-100 text-gray-600 py-2.5 rounded-full text-xs font-medium hover:border-natu-brown hover:text-natu-brown transition-all"
                                         >
                                             Preferências
                                         </button>
