@@ -113,7 +113,7 @@ const GluteoLanding = () => {
 
 
             {/* Hero Section (Cloned from Home style) */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white pt-12 md:pt-16">
+            <section id="topo" className="relative h-screen flex items-center justify-center overflow-hidden bg-white pt-12 md:pt-16">
                 {/* Background/Image Card */}
                 <div className="absolute inset-0 flex items-center justify-center p-0 md:p-8 z-0 pt-24 md:pt-32">
                     <div className="relative w-full h-full md:w-[95%] md:h-[85%] rounded-b-[2.5rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100/10">
@@ -147,7 +147,7 @@ const GluteoLanding = () => {
                                     Agendar consulta
                                 </NatuButton>
                                 <button
-                                    onClick={() => document.getElementById('transformation').scrollIntoView({ behavior: 'smooth' })}
+                                    onClick={() => document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' })}
                                     className="px-6 py-3 bg-transparent border-2 border-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase text-white hover:bg-white hover:text-black transition-all hover:scale-[1.03]"
                                 >
                                     Ver Resultados
@@ -168,7 +168,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* Horizontal Results Section */}
-            <section id="transformation" className="py-12 md:py-24 bg-white overflow-hidden">
+            <section id="resultados" className="py-12 md:py-24 bg-white overflow-hidden">
                 <div className="max-w-[100vw] mx-auto">
                     <BlurFade className="px-6 mb-8 text-center">
                         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-natu-pink mb-4 block">PORTFÓLIO DE TRANSFORMAÇÕES</span>
@@ -198,7 +198,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* Professional Section */}
-            <section className="py-12 md:py-24 bg-white relative overflow-hidden">
+            <section id="especialista" className="py-12 md:py-24 bg-white relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                     <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
                         {/* Image Column */}
@@ -259,7 +259,7 @@ const GluteoLanding = () => {
                 </BlurFade>
             </section>
 
-            <section className="py-12 md:py-24 bg-white relative">
+            <section id="transformacao" className="py-12 md:py-24 bg-white relative">
                 <div className="max-w-7xl mx-auto px-6 md:px-12">
                     <BlurFade className="text-center mb-10">
                         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-natu-pink mb-4 block">A TRANSFORMAÇÃO É INTERNA</span>
@@ -306,7 +306,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* Resolution Section */}
-            <section className="py-24 bg-natu-brown relative border-y border-white/5">
+            <section id="indicações" className="py-24 bg-natu-brown relative border-y border-white/5">
                 <div className="max-w-7xl mx-auto px-6 md:px-12">
                     <div className="grid lg:grid-cols-12 gap-16 items-stretch">
                         <BlurFade className="lg:col-span-5 flex flex-col justify-between h-full">
@@ -374,7 +374,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* Final CTA Section - Full Bleed Design */}
-            <section className="bg-natu-brown relative overflow-hidden">
+            <section id="agendar" className="bg-natu-brown relative overflow-hidden">
                 <div className="w-full">
                     <div className="lg:flex gap-0 items-stretch lg:h-screen min-h-[700px]">
                         <BlurFade className="relative group min-h-[400px] lg:min-h-full lg:w-auto lg:shrink-0">
@@ -449,7 +449,7 @@ const GluteoLanding = () => {
             </section>
 
             {/* FAQ Section */}
-            <section className="py-24 bg-white relative overflow-hidden">
+            <section id="duvidas" className="py-24 bg-white relative overflow-hidden">
                 <div className="max-w-4xl mx-auto px-6 md:px-12">
                     <BlurFade className="text-center mb-16">
                         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-natu-pink mb-4 block">DÚVIDAS FREQUENTES</span>
