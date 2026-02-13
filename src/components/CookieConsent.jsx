@@ -23,10 +23,12 @@ const CookieConsent = () => {
     }, []);
 
     const applyConsent = (consents) => {
-        // Update Google Consent Mode
+        // Update Google Consent Mode v2
         if (window.gtag) {
             window.gtag('consent', 'update', {
                 'ad_storage': consents.marketing ? 'granted' : 'denied',
+                'ad_user_data': consents.marketing ? 'granted' : 'denied',
+                'ad_personalization': consents.marketing ? 'granted' : 'denied',
                 'analytics_storage': consents.statistical ? 'granted' : 'denied',
                 'personalization_storage': consents.marketing ? 'granted' : 'denied',
             });
