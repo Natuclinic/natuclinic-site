@@ -55,11 +55,10 @@ const CeoSection = () => {
                             <div className="space-y-1 mb-6">
                                 <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Nutricionista Ortomolecular • Farmacêutico</p>
                                 <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Doutor em Naturopatia • Biologia Molecular</p>
-                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Oncologista • Fitoterapia</p>
-                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Modulação Intestinal.</p>
+                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Oncologista • Fitoterapia • Modulação Intestinal.</p>
                             </div>
                             <p className="font-sans font-light text-gray-500 leading-relaxed text-pretty max-w-sm">
-                                Com uma visão integrativa que une bioquímica e naturopatia, Dr. Julimar lidera protocolos focados na raiz celular das disfunções estéticas e de saúde, garantindo resultados sustentáveis e seguros.
+                                Com uma visão integrativa que une bioquímica e naturopatia, Dr. Julimar lidera protocolos focados na raiz celular das disfunções nutricionais e de saúde, tratando de dentro para fora.
                             </p>
                         </div>
                     </div>
@@ -86,8 +85,7 @@ const CeoSection = () => {
                         <div>
                             <h3 className="font-sans font-bold uppercase text-3xl md:text-4xl text-natu-brown mb-3">Dra. Débora Meneses</h3>
                             <div className="space-y-1 mb-6">
-                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Biomédica Esteta</p>
-                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Especialista em Harmonização Facial</p>
+                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Biomédica Esteta • Especialista em Harmonização Facial</p>
                             </div>
                             <p className="font-sans font-light text-gray-500 leading-relaxed text-pretty max-w-sm">
                                 Responsável pela excelência técnica dos procedimentos estéticos, Dra. Débora une senso artístico apurado e rigor científico para realçar a beleza natural sem descaracterizar a identidade do paciente.

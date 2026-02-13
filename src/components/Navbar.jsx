@@ -40,6 +40,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
+    const [hoveredItem, setHoveredItem] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -129,7 +130,9 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`fixed w-full z-50 transition-[padding,background-color] duration-500 ${isScrolled || mobileMenuOpen ? 'bg-white py-4 border-b border-gray-100' : 'bg-transparent py-8'}`}>
+        <nav
+            className={`fixed w-full z-50 transition-[padding,background-color] duration-300 antialiased italic-font-fix ${isScrolled || mobileMenuOpen || hoveredItem !== null ? 'bg-[#ffffff] py-4' : 'bg-transparent py-8'} ${isScrolled && hoveredItem === null ? 'border-b border-gray-100' : ''}`}
+        >
             <div className="desktop-container flex justify-between items-center">
                 <span onClick={() => handleNavigation('/')} className="cursor-pointer z-50 relative">
                     <img
@@ -157,33 +160,35 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-14 font-[Helvetica,Arial,sans-serif]">
                     {menuItems.map((item, i) => (
-                        <div key={i} className="group/nav py-8 flex items-center">
+                        <div
+                            key={i}
+                            className="group/nav py-8 flex items-center"
+                            onMouseEnter={() => setHoveredItem(i)}
+                            onMouseLeave={() => setHoveredItem(null)}
+                        >
                             {item.megaMenu ? (
-                                <button className="text-[10px] uppercase tracking-widest font-medium text-natu-brown bg-transparent border-0 p-0 cursor-pointer relative flex items-center gap-1">
+                                <button className="text-[11px] uppercase tracking-widest font-bold text-natu-brown bg-transparent border-0 p-0 cursor-pointer relative flex items-center gap-1 font-sans">
                                     {item.label}
-                                    <span className="text-[10px] transition-transform duration-300 group-hover/nav:-rotate-180">⌵</span>
-                                    <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-natu-brown transition-all duration-300 group-hover/nav:w-full" />
+                                    <span className="text-[11px] transition-transform duration-300 group-hover/nav:-rotate-180 font-sans">⌵</span>
                                 </button>
                             ) : item.path ? (
-                                <button onClick={() => handleNavigation(item.path)} className="text-[10px] uppercase tracking-widest font-medium bg-transparent border-0 p-0 text-natu-brown cursor-pointer relative">
+                                <button onClick={() => handleNavigation(item.path)} className="text-[11px] uppercase tracking-widest font-bold bg-transparent border-0 p-0 text-natu-brown cursor-pointer relative font-sans">
                                     {item.label}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-natu-brown transition-all duration-300 group-hover/nav:w-full" />
                                 </button>
                             ) : (
-                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest font-medium text-natu-brown no-underline relative">
+                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[11px] uppercase tracking-widest font-bold text-natu-brown no-underline relative font-sans">
                                     {item.label}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-natu-brown transition-all duration-300 group-hover/nav:w-full" />
                                 </a>
                             )}
 
                             {/* Mega Menu Dropdown */}
                             {item.megaMenu && (
-                                <div className="absolute top-full left-0 w-full pt-0 opacity-0 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:pointer-events-auto transition-all duration-300 z-[60]">
+                                <div className="absolute top-full left-0 w-full pt-0 opacity-0 -translate-y-4 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-500 ease-out z-[60]">
                                     <div className="relative group/menu">
                                         {/* Invisible Bridge */}
                                         <div className="absolute -top-12 left-0 w-full h-12 bg-transparent" />
 
-                                        <div className="bg-white shadow-[0_40px_100px_rgba(0,0,0,0.1)] rounded-b-[40px] overflow-hidden">
+                                        <div className="bg-[#ffffff] rounded-b-[40px] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.03)]">
                                             <div className="max-w-7xl mx-auto px-12 py-16 flex flex-col gap-12">
                                                 <div className="grid grid-cols-12 gap-24 items-start">
                                                     {/* Left side: Image and Text */}
