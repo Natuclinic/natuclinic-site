@@ -49,8 +49,8 @@ const LeadCapture = () => {
         setLoading(true);
 
         try {
-            // Tenta enviar para a API do Cloudflare primeiro
-            const cfResponse = await fetch('/api/leads', {
+            // Tenta enviar para a API do Cloudflare Workers primeiro
+            const cfResponse = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/leads', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

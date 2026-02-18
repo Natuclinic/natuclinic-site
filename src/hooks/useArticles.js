@@ -11,8 +11,8 @@ export const useArticles = () => {
             try {
                 setLoading(true);
 
-                // Tenta buscar da API do Cloudflare Pages
-                const response = await fetch('/api/articles');
+                // Tenta buscar da API do Cloudflare Workers
+                const response = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/articles');
 
                 if (response.ok) {
                     const data = await response.json();
