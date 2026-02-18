@@ -1,0 +1,10 @@
+name = "natuclinic-web"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "natuclinic-db"
+database_id = "96a7cb1e-d219-42a5-914f-f5c19644863d"
+
+[vars]
+# You can add other environment variables here if needed

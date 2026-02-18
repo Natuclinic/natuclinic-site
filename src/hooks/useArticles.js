@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../services/supabase';
 import { articles as fallbackArticles } from '../data/articles.jsx';
 
 export const useArticles = () => {
@@ -11,29 +10,23 @@ export const useArticles = () => {
         const fetchArticles = async () => {
             try {
                 setLoading(true);
-                if (!supabase) {
-                    console.warn('Supabase not configured. Using fallback local data.');
-                    setArticles(fallbackArticles || []);
-                    setLoading(false);
-                    return;
+
+                // Tenta buscar da API do Cloudflare Pages
+                const response = await fetch('/api/articles');
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.length > 0) {
+                        setArticles(data);
+                        return;
+                    }
                 }
 
-                const { data, error: sbError } = await supabase
-                    .from('articles')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (sbError) throw sbError;
-
-                if (!data || data.length === 0) {
-                    console.log('Supabase returned empty. Using fallback local data.');
-                    setArticles(fallbackArticles || []);
-                } else {
-                    setArticles(data);
-                }
+                // Se falhar ou estiver vazio, usa o fallback local (que é sincronizado no build)
+                console.log('API Cloudflare não disponível ou vazia. Usando dados locais.');
+                setArticles(fallbackArticles || []);
             } catch (err) {
-                console.error('Error fetching articles:', err);
-                setError(err.message);
+                console.warn('Erro ao buscar artigos da API:', err);
                 setArticles(fallbackArticles || []);
             } finally {
                 setLoading(false);

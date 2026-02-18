@@ -49,6 +49,29 @@ const LeadCapture = () => {
         setLoading(true);
 
         try {
+            // Tenta enviar para a API do Cloudflare primeiro
+            const cfResponse = await fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    source: 'newsletter_section'
+                })
+            });
+
+            if (cfResponse.ok) {
+                setStatus({
+                    type: 'success',
+                    message: 'Inscrição realizada com sucesso! Em breve entraremos em contato.'
+                });
+                setFormData({ name: '', email: '', phone: '' });
+                return;
+            }
+
+            // Fallback para Supabase se a API do Cloudflare falhar (ex: em ambiente local)
+            console.log('API Cloudflare falhou ou não existe. Tentando Supabase...');
             const { error } = await supabase
                 .from('leads')
                 .insert([{
