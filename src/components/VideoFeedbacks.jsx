@@ -236,7 +236,11 @@ const VideoFeedbacks = () => {
                                                 className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 drop-shadow-lg"
                                                 title="Expandir vídeo"
                                             >
-                                                <Unicon name="expand" size={20} />
+                                                <img
+                                                    src="/expand-natuclinic-icon-svg.svg"
+                                                    className="w-5 h-5 brightness-0 invert opacity-80"
+                                                    alt="Expandir"
+                                                />
                                             </button>
                                         )}
                                     </div>
