@@ -6,30 +6,30 @@ const feedbacks = [
     {
         id: 'edilza',
         name: "Edilza",
-        video: "https://dkjgskucppssvjvucmqy.supabase.co/storage/v1/object/public/Natuclinic%20-%20Site/emagrecimento-edilza.mp4#t=0.001",
+        video: "https://pub-cf3f0550e96b441691fba3f1c70e6a39.r2.dev/edilza.mp4#t=0.001",
         title: "Emagrecimento Saudável",
         result: "Emagreceu 10kg e melhorou sua saúde por completo."
     },
     {
         id: 'elizangela',
         name: "Elizangela",
-        video: "https://dkjgskucppssvjvucmqy.supabase.co/storage/v1/object/public/Natuclinic%20-%20Site/emagrecimento-elizangela.mp4#t=0.001",
+        video: "https://pub-cf3f0550e96b441691fba3f1c70e6a39.r2.dev/elisangela.mp4#t=0.001",
         title: "Transformação Corporal",
         result: "Elizangela perdeu +de 5kg e elevou sua qualidade de vida."
     },
     {
         id: 'margarete',
         name: "Margarete",
-        video: "https://dkjgskucppssvjvucmqy.supabase.co/storage/v1/object/public/Natuclinic%20-%20Site/emagrecimento-margarete.mp4#t=0.001",
+        video: "https://pub-cf3f0550e96b441691fba3f1c70e6a39.r2.dev/margarete.mp4#t=0.001",
         title: "Qualidade de Vida",
         result: "Margarete tomou iniciativa de cuidar de si mesma e hoje colhe os frutos."
     },
     {
-        id: 'peronilda',
-        name: "Peronilda",
-        video: "https://dkjgskucppssvjvucmqy.supabase.co/storage/v1/object/public/Natuclinic%20-%20Site/emagrecimento-peronilda.mp4#t=0.001",
+        id: 'josi',
+        name: "Josi",
+        video: "https://pub-cf3f0550e96b441691fba3f1c70e6a39.r2.dev/josi.mp4#t=0.001",
         title: "Metodologia Natuclinic",
-        result: "Depois de anos sofrendo de má digestão, Peronilda mudou sua vida."
+        result: "Josi emagreceu e transformou sua autoestima com o nosso acompanhamento."
     }
 ];
 
