@@ -117,7 +117,7 @@ export default function App() {
       {!isServicePage && <Navbar />}
 
       <React.Suspense fallback={null}>
-        <main className="relative z-10 bg-white">
+        <main className="relative bg-white">
           <Routes>
             <Route path="/" element={
               <>

@@ -282,7 +282,7 @@ const VideoFeedbacks = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8"
+                        className="fixed inset-0 z-[10000] flex items-center justify-center p-4 md:p-8 isolate"
                     >
                         {/* Background Blur Overlay */}
                         <div
