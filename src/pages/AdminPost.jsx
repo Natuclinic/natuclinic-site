@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../services/supabase';
 import Unicon from '../components/Unicon';
 import ImageUpload from '../components/ImageUpload';
 
@@ -35,21 +34,15 @@ const AdminPost = ({ goBack }) => {
     }, [isAuthenticated]);
 
     const fetchArticles = async () => {
-        if (!supabase) {
-            setStatus({ type: 'error', message: 'Erro de Configuração: As chaves do Supabase não foram encontradas na Vercel.' });
-            setLoading(false);
-            return;
-        }
         setLoading(true);
         try {
-            const { data, error } = await supabase
-                .from('articles')
-                .select('*')
-                .order('created_at', { ascending: false });
-            if (error) throw error;
+            const response = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/articles');
+            if (!response.ok) throw new Error('Falha ao buscar artigos do Cloudflare');
+            const data = await response.json();
             setArticles(data || []);
         } catch (err) {
             console.error('Erro ao buscar artigos:', err);
+            setStatus({ type: 'error', message: 'Erro ao carregar artigos do Cloudflare D1.' });
         } finally {
             setLoading(false);
         }
@@ -76,7 +69,7 @@ const AdminPost = ({ goBack }) => {
                 .replace(/ /g, '-')
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                 .replace(/[^\w-]+/g, '');
-            setFormData(prev => ({ ...prev, id: slug }));
+            setFormData(prev => ({ ...prev, id: slug, slug: slug }));
         }
     };
 
@@ -97,22 +90,28 @@ const AdminPost = ({ goBack }) => {
         setStatus({ type: '', message: '' });
 
         try {
-            if (view === 'create') {
-                const { error } = await supabase
-                    .from('articles')
-                    .insert([formData]);
-                if (error) throw error;
-                setStatus({ type: 'success', message: 'Artigo publicado com sucesso! Iniciando sincronização...' });
-            } else {
-                const { error } = await supabase
-                    .from('articles')
-                    .update(formData)
-                    .match({ id: editingId });
-                if (error) throw error;
-                setStatus({ type: 'success', message: 'Artigo atualizado com sucesso! Iniciando sincronização...' });
+            const method = view === 'create' ? 'POST' : 'PUT';
+            const url = view === 'create'
+                ? 'https://natuclinic-api.fabriccioarts.workers.dev/articles'
+                : `https://natuclinic-api.fabriccioarts.workers.dev/articles/${editingId}`;
+
+            const response = await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Falha ao salvar artigo');
             }
 
-            // Trigger Vercel Deploy Hook to update fallback
+            setStatus({
+                type: 'success',
+                message: view === 'create' ? 'Artigo publicado com sucesso!' : 'Artigo atualizado com sucesso!'
+            });
+
+            // Trigger Vercel Deploy Hook to update static fallback if needed
             triggerDeployHook();
 
             setFormData(initialForm);
@@ -133,17 +132,17 @@ const AdminPost = ({ goBack }) => {
 
         setLoading(true);
         try {
-            const { error } = await supabase
-                .from('articles')
-                .delete()
-                .match({ id });
-            if (error) throw error;
+            const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/articles/${id}`, {
+                method: 'DELETE'
+            });
 
-            // Trigger Vercel Deploy Hook to update fallback
+            if (!response.ok) throw new Error('Falha ao deletar artigo');
+
+            // Trigger Vercel Deploy Hook
             triggerDeployHook();
 
             fetchArticles();
-            alert('Artigo removido! O site será atualizado em instantes.');
+            alert('Artigo removido com sucesso!');
         } catch (err) {
             console.error('Erro ao deletar:', err);
             alert('Erro ao deletar: ' + err.message);
