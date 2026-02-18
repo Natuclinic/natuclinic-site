@@ -10,12 +10,23 @@ const HomeIntro = () => {
     const indicatorRef = useRef(null);
 
     useEffect(() => {
-        if (bgRef.current) {
-            bgRef.current.defaultMuted = true;
-            bgRef.current.muted = true;
-            bgRef.current.play().catch(error => {
-                console.log("Video autoplay blocked:", error);
-            });
+        const video = bgRef.current;
+        if (video) {
+            video.defaultMuted = true;
+            video.muted = true;
+
+            // Try playing after a short delay to ensure the browser is ready
+            const playVideo = () => {
+                video.play().catch(error => {
+                    console.log("Video autoplay blocked or failed:", error);
+                });
+            };
+
+            if (video.readyState >= 3) {
+                playVideo();
+            } else {
+                video.addEventListener('canplay', playVideo, { once: true });
+            }
         }
 
         const ctx = gsap.context(() => {
@@ -55,12 +66,13 @@ const HomeIntro = () => {
                     <video
                         ref={bgRef}
                         className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none"
-                        src="/dna-video.mp4#t=0.001"
+                        src="/dna-video.mp4"
+                        poster="/natuclinic-reception.jpg"
                         autoPlay
                         loop
                         muted
                         playsInline
-                        webkit-playsinline="true"
+                        webkitPlaysInline
                         preload="auto"
                         disableRemotePlayback
                         disablePictureInPicture

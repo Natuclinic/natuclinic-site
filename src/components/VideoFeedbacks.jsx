@@ -39,8 +39,10 @@ const VideoFeedbacks = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const videoRefs = useRef({});
+    const modalVideoRef = useRef(null);
     const scrollContainerRef = useRef(null);
     const itemRefs = useRef({});
+    const [modalIsPlaying, setModalIsPlaying] = useState(true);
 
     // Drag state
     const [isDown, setIsDown] = React.useState(false);
@@ -143,6 +145,19 @@ const VideoFeedbacks = () => {
         }
     };
 
+    const toggleModalPlay = () => {
+        const video = modalVideoRef.current;
+        if (video) {
+            if (video.paused) {
+                video.play();
+                setModalIsPlaying(true);
+            } else {
+                video.pause();
+                setModalIsPlaying(false);
+            }
+        }
+    };
+
     const activeFeedback = feedbacks.find(f => f.id === activeId);
 
     return (
@@ -232,8 +247,18 @@ const VideoFeedbacks = () => {
                                         {/* Minimalist Expand Button (Bottom Left) */}
                                         {isActive && (
                                             <button
-                                                onClick={(e) => { e.stopPropagation(); setIsFullscreen(true); }}
-                                                className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 drop-shadow-lg"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // Pause card video
+                                                    const video = videoRefs.current[activeId];
+                                                    if (video) {
+                                                        video.pause();
+                                                        setIsPlaying(false);
+                                                    }
+                                                    setModalIsPlaying(true);
+                                                    setIsFullscreen(true);
+                                                }}
+                                                className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 drop-shadow-lg hidden lg:block"
                                                 title="Expandir vídeo"
                                             >
                                                 <img
@@ -301,6 +326,7 @@ const VideoFeedbacks = () => {
                             style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
                         >
                             <video
+                                ref={modalVideoRef}
                                 src={activeFeedback.video}
                                 className="w-full h-full object-cover rounded-[2rem]"
                                 autoPlay
@@ -309,11 +335,26 @@ const VideoFeedbacks = () => {
                                 onContextMenu={(e) => e.preventDefault()}
                                 controlsList="nodownload noplaybackrate"
                                 disablePictureInPicture
+                                onPlay={() => setModalIsPlaying(true)}
+                                onPause={() => setModalIsPlaying(false)}
                                 onClick={(e) => {
-                                    const v = e.target;
-                                    if (v.paused) v.play(); else v.pause();
+                                    e.stopPropagation();
+                                    toggleModalPlay();
                                 }}
                             />
+
+                            {/* Play/Pause Overlay for Modal */}
+                            <div
+                                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 pointer-events-none
+                                    ${modalIsPlaying ? 'opacity-0' : 'opacity-100 bg-black/10'}`}
+                            >
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); toggleModalPlay(); }}
+                                    className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 flex items-center justify-center text-white pointer-events-auto hover:bg-white hover:text-black transition-all active:scale-95 flicker-fix"
+                                >
+                                    <Unicon name={modalIsPlaying ? "pause" : "play"} size={22} className={modalIsPlaying ? "" : "ml-1"} />
+                                </button>
+                            </div>
 
                             {/* Back Button (Circular on Top-Left) */}
                             <button
