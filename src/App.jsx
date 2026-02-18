@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Unicon from './components/Unicon';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -39,10 +42,40 @@ import ProceduresSection from './components/ProceduresSection';
 import QuietCTA from './components/QuietCTA';
 import CookieConsent from './components/CookieConsent';
 
-// Register GSAP plugin
-gsap.registerPlugin(ScrollTrigger);
 
-import { useSmoothScroll } from './hooks/useSmoothScroll';
+import Lenis from 'lenis';
+
+// Initialize Lenis global smooth scroll
+const useSmoothScroll = () => {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Ease Out Quart
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Sync GSAP ticker with Lenis requestAnimationFrame
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    // Turn off GSAP's lag smoothing to avoid jitters with Lenis
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+    };
+  }, []);
+};
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
