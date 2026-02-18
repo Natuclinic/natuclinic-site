@@ -111,6 +111,7 @@ const FeedbackSection = () => {
                             <img
                                 src="/Feedbacks.gif"
                                 alt="Feedbacks Natuclinic Google"
+                                loading="lazy"
                                 className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
                             />
                             {/* Overlay for depth */}

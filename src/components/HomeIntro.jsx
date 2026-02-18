@@ -55,14 +55,13 @@ const HomeIntro = () => {
                     <video
                         ref={bgRef}
                         className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none"
+                        src="/dna-video.mp4"
                         autoPlay
                         loop
                         muted
                         playsInline
                         preload="auto"
-                    >
-                        <source src="https://pub-cf3f0550e96b441691fba3f1c70e6a39.r2.dev/dna-video.mp4" type="video/mp4" />
-                    </video>
+                    />
 
                     {/* Content positioned bottom-left inside the card */}
                     <div className="absolute inset-0 z-10 flex flex-col justify-center md:justify-end items-center md:items-start p-6 pb-0 md:p-20 md:pb-24">

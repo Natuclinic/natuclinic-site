@@ -47,6 +47,7 @@ const CeoSection = () => {
                             <img
                                 src="/dr-julimar.png"
                                 alt="Dr. Julimar Meneses"
+                                loading="lazy"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                         </div>
@@ -70,6 +71,7 @@ const CeoSection = () => {
                                 <img
                                     src="/dra-debora.jpg"
                                     alt="Dra. Débora Meneses"
+                                    loading="lazy"
                                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                 />
                             </div>

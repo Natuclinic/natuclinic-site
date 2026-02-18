@@ -198,6 +198,7 @@ const Navbar = () => {
                                                                 <img
                                                                     src={item.megaMenu.featured.image}
                                                                     alt={item.label}
+                                                                    loading="lazy"
                                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover/featured:scale-105"
                                                                 />
                                                             </div>
