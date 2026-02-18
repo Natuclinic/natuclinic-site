@@ -90,7 +90,7 @@ const HomeIntro = () => {
             {/* Scroll Indicator */}
             <div ref={indicatorRef} className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50">
                 <div className="animate-bounce">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-white/40 cursor-pointer">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-white/40 cursor-pointer flicker-fix">
                         <Unicon name="arrow-down" className="w-5 h-5 text-natu-brown" />
                     </div>
                 </div>

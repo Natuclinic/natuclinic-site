@@ -91,7 +91,7 @@ const FeedbackSection = () => {
                             <p className="text-[#F2F0E9]/90 text-xs md:text-sm font-bold uppercase tracking-wider">
                                 Somos a clínica mais avaliada de Taguatinga
                             </p>
-                            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-3">
+                            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-3 flicker-fix">
                                 <img src="/google-icon.png" alt="Google" className="w-6 h-6" />
                                 <div className="flex gap-0.5 text-[#FFB800]">
                                     {Array.from({ length: 5 }).map((_, i) => (

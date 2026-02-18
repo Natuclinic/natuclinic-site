@@ -25,7 +25,7 @@ const ProcedureCard = ({ imageUrl, title, category, onClick, themeColor }) => {
                         {category}
                     </span>
                     <h3 className="text-3xl font-serif leading-tight">{title}</h3>
-                    <div className="mt-8 flex items-center justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-5 py-4 transition-all duration-300 group-hover:bg-white/20 group-hover:border-white/40">
+                    <div className="mt-8 flex items-center justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-5 py-4 transition-all duration-300 group-hover:bg-white/20 group-hover:border-white/40 flicker-fix">
                         <span className="text-[10px] font-bold uppercase tracking-widest font-sans">Saber Mais</span>
                         <Unicon name="arrow-right" className="h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
                     </div>

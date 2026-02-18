@@ -222,7 +222,7 @@ const VideoFeedbacks = () => {
                                             >
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); togglePlay(f.id); }}
-                                                    className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 flex items-center justify-center text-white pointer-events-auto hover:bg-white hover:text-black transition-all active:scale-95"
+                                                    className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 flex items-center justify-center text-white pointer-events-auto hover:bg-white hover:text-black transition-all active:scale-95 flicker-fix"
                                                 >
                                                     <Unicon name={isPlaying ? "pause" : "play"} size={22} className={isPlaying ? "" : "ml-1"} />
                                                 </button>
@@ -286,7 +286,8 @@ const VideoFeedbacks = () => {
                     >
                         {/* Background Blur Overlay */}
                         <div
-                            className="absolute inset-0 bg-black/60 backdrop-blur-xl"
+                            className="absolute inset-0 bg-black/60 backdrop-blur-xl flicker-fix"
+                            style={{ willChange: 'backdrop-filter' }}
                             onClick={() => setIsFullscreen(false)}
                         />
 
@@ -296,7 +297,7 @@ const VideoFeedbacks = () => {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="relative w-full max-w-[80vw] md:max-w-[340px] aspect-[9/16] max-h-[85vh] rounded-[2rem] overflow-hidden shadow-2xl z-10 isolate"
+                            className="relative w-full max-w-[80vw] md:max-w-[340px] aspect-[9/16] max-h-[85vh] rounded-[2rem] overflow-hidden shadow-2xl z-10 isolate flicker-fix"
                             style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
                         >
                             <video
@@ -317,14 +318,14 @@ const VideoFeedbacks = () => {
                             {/* Back Button (Circular on Top-Left) */}
                             <button
                                 onClick={() => setIsFullscreen(false)}
-                                className="absolute top-6 left-6 w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-xl border border-white/40 rounded-full text-white hover:bg-white hover:text-black transition-all active:scale-95 group z-20"
+                                className="absolute top-6 left-6 w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-xl border border-white/40 rounded-full text-white hover:bg-white hover:text-black transition-all active:scale-95 group z-20 flicker-fix"
                             >
                                 <Unicon name="arrow-left" size={20} className="transition-transform group-hover:-translate-x-1" />
                             </button>
 
                             {/* Name Overlay (Plain) */}
                             <div className="absolute bottom-8 left-0 right-0 px-8 pointer-events-none text-center">
-                                <span className="text-white/40 text-[9px] uppercase tracking-[0.4em] font-bold block mb-1">Resultado Real</span>
+                                <span className="text-white/40 text-[9px] uppercase tracking-[0.4em] font-bold block mb-1">Resultado</span>
                                 <h3 className="text-white text-2xl font-serif italic">{activeFeedback.name}</h3>
                             </div>
                         </motion.div>

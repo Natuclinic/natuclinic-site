@@ -224,7 +224,7 @@
     transform: translateZ(0);
     -webkit-perspective: 1000;
     perspective: 1000;
-    will-change: transform, opacity;
+    will-change: transform, opacity, backdrop-filter;
   }
 }
 

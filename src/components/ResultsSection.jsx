@@ -77,22 +77,21 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
                 />
             </div>
 
-            {/* Slider Handle */}
             <div
                 className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize z-20"
                 style={{ left: `${sliderPosition}%` }}
                 onMouseDown={(e) => e.stopPropagation()}
             >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110 flicker-fix">
                     <Unicon name="arrows-h-alt" size={16} className="text-white" />
                 </div>
             </div>
 
             {/* Labels */}
-            <div className={`absolute bottom-4 left-4 bg-black/50 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full backdrop-blur-sm pointer-events-none transition-opacity duration-300 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`absolute bottom-4 left-4 bg-black/50 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full backdrop-blur-sm pointer-events-none transition-opacity duration-300 flicker-fix ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
                 Antes
             </div>
-            <div className={`absolute bottom-4 right-4 bg-white/80 text-natu-brown text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full backdrop-blur-sm pointer-events-none transition-opacity duration-300 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`absolute bottom-4 right-4 bg-white/80 text-natu-brown text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full backdrop-blur-sm pointer-events-none transition-opacity duration-300 flicker-fix ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
                 Depois
             </div>
         </div>
