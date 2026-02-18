@@ -114,10 +114,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {!isServicePage && <Navbar />}
-
       <React.Suspense fallback={null}>
-        <main className="relative bg-white">
+        <main className="relative z-10 bg-white">
+          {!isServicePage && <Navbar />}
           <Routes>
             <Route path="/" element={
               <>
