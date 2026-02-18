@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Unicon from './Unicon';
 import { gsap } from 'gsap';
+import { motion, AnimatePresence } from 'motion/react';
 
 const feedbacks = [
     {
@@ -36,6 +37,7 @@ const feedbacks = [
 const VideoFeedbacks = () => {
     const [activeId, setActiveId] = useState(feedbacks[0].id);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const videoRefs = useRef({});
     const scrollContainerRef = useRef(null);
     const itemRefs = useRef({});
@@ -141,6 +143,8 @@ const VideoFeedbacks = () => {
         }
     };
 
+    const activeFeedback = feedbacks.find(f => f.id === activeId);
+
     return (
         <section className="py-12 md:py-24 bg-white overflow-hidden">
             <div className="desktop-container">
@@ -202,7 +206,12 @@ const VideoFeedbacks = () => {
                                             loop
                                             muted={!isActive}
                                             onEnded={() => setIsPlaying(false)}
-                                            onClick={() => isActive && togglePlay(f.id)}
+                                            onClick={(e) => {
+                                                if (isActive) {
+                                                    e.stopPropagation();
+                                                    togglePlay(f.id);
+                                                }
+                                            }}
                                         />
 
                                         {/* Play/Pause Overlay */}
@@ -218,6 +227,17 @@ const VideoFeedbacks = () => {
                                                     <Unicon name={isPlaying ? "pause" : "play"} size={22} className={isPlaying ? "" : "ml-1"} />
                                                 </button>
                                             </div>
+                                        )}
+
+                                        {/* Minimalist Expand Button (Bottom Left) */}
+                                        {isActive && (
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); setIsFullscreen(true); }}
+                                                className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 drop-shadow-lg"
+                                                title="Expandir vídeo"
+                                            >
+                                                <Unicon name="expand" size={20} />
+                                            </button>
                                         )}
                                     </div>
 
@@ -250,6 +270,63 @@ const VideoFeedbacks = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Fullscreen Video Modal */}
+            <AnimatePresence>
+                {isFullscreen && activeFeedback && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8"
+                    >
+                        {/* Background Blur Overlay */}
+                        <div
+                            className="absolute inset-0 bg-black/60 backdrop-blur-xl"
+                            onClick={() => setIsFullscreen(false)}
+                        />
+
+                        {/* Centered Video Card */}
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                            className="relative w-full max-w-[80vw] md:max-w-[340px] aspect-[9/16] max-h-[85vh] rounded-[2rem] overflow-hidden shadow-2xl z-10 isolate"
+                            style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
+                        >
+                            <video
+                                src={activeFeedback.video}
+                                className="w-full h-full object-cover rounded-[2rem]"
+                                autoPlay
+                                playsInline
+                                loop
+                                onContextMenu={(e) => e.preventDefault()}
+                                controlsList="nodownload noplaybackrate"
+                                disablePictureInPicture
+                                onClick={(e) => {
+                                    const v = e.target;
+                                    if (v.paused) v.play(); else v.pause();
+                                }}
+                            />
+
+                            {/* Back Button (Circular on Top-Left) */}
+                            <button
+                                onClick={() => setIsFullscreen(false)}
+                                className="absolute top-6 left-6 w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-xl border border-white/40 rounded-full text-white hover:bg-white hover:text-black transition-all active:scale-95 group z-20"
+                            >
+                                <Unicon name="arrow-left" size={20} className="transition-transform group-hover:-translate-x-1" />
+                            </button>
+
+                            {/* Name Overlay (Plain) */}
+                            <div className="absolute bottom-8 left-0 right-0 px-8 pointer-events-none text-center">
+                                <span className="text-white/40 text-[9px] uppercase tracking-[0.4em] font-bold block mb-1">Resultado Real</span>
+                                <h3 className="text-white text-2xl font-serif italic">{activeFeedback.name}</h3>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
