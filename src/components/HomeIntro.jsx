@@ -67,7 +67,6 @@ const HomeIntro = () => {
                         ref={bgRef}
                         className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none"
                         src="/dna-video.mp4"
-                        poster="/natuclinic-reception.jpg"
                         autoPlay
                         loop
                         muted
