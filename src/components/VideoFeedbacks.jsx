@@ -265,6 +265,7 @@ const VideoFeedbacks = () => {
                                                     src="/expand-natuclinic-icon-svg.svg"
                                                     className="w-5 h-5 brightness-0 invert opacity-80"
                                                     alt="Expandir"
+                                                    loading="lazy"
                                                 />
                                             </button>
                                         )}

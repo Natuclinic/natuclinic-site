@@ -9,10 +9,11 @@ const ProcedureCard = ({ imageUrl, title, category, onClick, themeColor }) => {
             <div
                 className="relative block w-full h-full rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 ease-in-out group-hover:scale-[1.02]"
             >
-                <div
-                    className="absolute inset-0 bg-cover bg-center grayscale-[20%] transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:grayscale-0"
-                    style={{ backgroundImage: `url(${imageUrl})` }}
+                <img
+                    src={imageUrl}
+                    alt={title}
                     loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:grayscale-0"
                 />
                 <div
                     className="absolute inset-0"

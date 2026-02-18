@@ -141,6 +141,8 @@ const Navbar = () => {
                         className="h-12 md:h-16 w-auto object-contain"
                         width="180"
                         height="64"
+                        loading="eager"
+                        decoding="async"
                     />
                 </span>
 
