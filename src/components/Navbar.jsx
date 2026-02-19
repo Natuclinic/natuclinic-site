@@ -143,6 +143,7 @@ const Navbar = () => {
                         height="64"
                         loading="eager"
                         decoding="async"
+                        fetchpriority="high"
                     />
                 </span>
 

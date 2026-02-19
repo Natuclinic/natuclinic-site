@@ -73,6 +73,8 @@ const HomeIntro = () => {
                         playsInline
                         webkitPlaysInline
                         preload="auto"
+                        poster="/natuclinic-reception.jpg"
+                        fetchpriority="high"
                         disableRemotePlayback
                         disablePictureInPicture
                     />

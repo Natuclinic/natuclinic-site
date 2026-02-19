@@ -49,6 +49,7 @@ const CeoSection = () => {
                                 alt="Dr. Julimar Meneses"
                                 loading="lazy"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                decoding="async"
                             />
                         </div>
                         <div>
@@ -73,6 +74,7 @@ const CeoSection = () => {
                                     alt="Dra. Débora Meneses"
                                     loading="lazy"
                                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                    decoding="async"
                                 />
                             </div>
                             <div className="absolute -top-12 -right-6 md:-right-10 z-20">

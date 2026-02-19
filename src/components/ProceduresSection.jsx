@@ -13,6 +13,7 @@ const ProcedureCard = ({ imageUrl, title, category, onClick, themeColor }) => {
                     src={imageUrl}
                     alt={title}
                     loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover grayscale-[20%] transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:grayscale-0"
                 />
                 <div

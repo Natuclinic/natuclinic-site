@@ -113,6 +113,7 @@ const FeedbackSection = () => {
                                 alt="Feedbacks Natuclinic Google"
                                 loading="lazy"
                                 className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                                decoding="async"
                             />
                             {/* Overlay for depth */}
                             <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/40 to-transparent pointer-events-none" />

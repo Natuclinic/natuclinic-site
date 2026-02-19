@@ -166,6 +166,7 @@ const ClinicGallery = () => {
                             alt="Recepção Natuclinic"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             loading="lazy"
+                            decoding="async"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>
@@ -177,6 +178,7 @@ const ClinicGallery = () => {
                             alt="Sala de Procedimentos"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             loading="lazy"
+                            decoding="async"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>
@@ -188,6 +190,7 @@ const ClinicGallery = () => {
                             alt="Estética Avançada"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             loading="lazy"
+                            decoding="async"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
                     </div>
