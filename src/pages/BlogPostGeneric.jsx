@@ -347,40 +347,47 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                         </NatuButton>
                     </div>
 
-                    {/* Author Section Header */}
-                    <div className="flex items-center gap-2 mb-8">
-                        <h3 className="font-sans font-bold text-natu-brown text-sm uppercase tracking-[0.3em] flex items-center gap-3">
-                            Escrito por
-                            <span className="w-8 h-[1px] bg-natu-pink"></span>
-                        </h3>
-                    </div>
+                    {/* Enhanced Author Card — Escrito por movido para dentro */}
+                    <div
+                        className="author-card p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center gap-8 md:gap-10 mb-12 relative overflow-hidden group"
+                        style={{
+                            backgroundImage: 'url(/background-card.svg)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    >
+                        {/* Overlay escuro para contraste */}
+                        <div className="absolute inset-0 bg-natu-brown/70 rounded-3xl z-0" />
 
-                    {/* Enhanced Author Card */}
-                    <div className="author-card p-8 md:p-10 bg-[#F9F7F5] border border-natu-brown/5 rounded-3xl flex flex-col md:flex-row items-center gap-8 md:gap-10 mb-12 relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-natu-pink/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-
-                        <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white shrink-0 relative z-10 transition-transform duration-500 group-hover:scale-105">
+                        <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white/30 shrink-0 relative z-10 transition-transform duration-500 group-hover:scale-105">
                             <img
                                 src={post.author_avatar || "https://ui-avatars.com/api/?name=Equipe+Natuclinic&background=4C261A&color=fff"}
                                 alt={post.author_name || "Equipe Natuclinic"}
                                 className="w-full h-full object-cover"
                             />
                         </div>
+
                         <div className="flex flex-col flex-grow text-center md:text-left relative z-10">
-                            <h4 className="font-serif italic text-3xl text-natu-brown mb-2">
+                            {/* "Escrito por" agora dentro do card */}
+                            <span className="font-sans font-bold text-white/60 text-[10px] uppercase tracking-[0.3em] mb-1 flex items-center justify-center md:justify-start gap-2">
+                                Escrito por
+                                <span className="w-6 h-[1px] bg-white/30 inline-block" />
+                            </span>
+                            <h4 className="blog-title text-3xl text-white mb-1">
                                 {post.author_name || "Equipe Natuclinic"}
                             </h4>
-                            <p className="text-natu-brown/50 text-xs uppercase tracking-widest font-sans font-bold mb-6">Equipe de Especialistas Natuclinic</p>
+                            <p className="text-white/60 text-xs uppercase tracking-widest font-sans font-bold mb-6">Equipe de Especialistas Natuclinic</p>
                             <div className="flex items-center justify-center md:justify-start gap-4">
-                                <span className="p-2.5 bg-white text-natu-brown rounded-full cursor-pointer hover:bg-natu-brown hover:text-white transition-all border border-natu-brown/5">
+                                <span className="p-2.5 bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
                                     <Unicon name="envelope" size={14} />
                                 </span>
-                                <span className="p-2.5 bg-white text-natu-brown rounded-full cursor-pointer hover:bg-natu-brown hover:text-white transition-all border border-natu-brown/5">
+                                <span className="p-2.5 bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
                                     <Unicon name="link" size={14} />
                                 </span>
                             </div>
                         </div>
                     </div>
+
 
                     {/* Organic Tags Section */}
                     <div className="tags-section flex flex-wrap gap-3 mb-12">
