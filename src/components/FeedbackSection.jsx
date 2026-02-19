@@ -105,13 +105,13 @@ const FeedbackSection = () => {
                         </div>
                     </div>
 
-                    {/* Right Media Column - Removed from inner overflow and made full */}
-                    <div ref={imageRef} className="flex-1 w-full z-10 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 flex items-center justify-center p-4 lg:p-0">
+                    {/* Right Media Column - Balanced size and margins */}
+                    <div ref={imageRef} className="flex-1 w-full z-10 lg:absolute lg:right-4 lg:top-0 lg:bottom-0 lg:w-[48%] flex items-center justify-center p-6 lg:p-10">
                         <img
                             src="/feedbacks.png"
                             alt="Feedbacks Natuclinic Google"
                             loading="lazy"
-                            className="w-full h-auto max-h-full object-contain transition-all duration-700 drop-shadow-2xl"
+                            className="w-full h-auto max-h-[92%] object-contain transition-all duration-700 drop-shadow-2xl hover:scale-[1.02]"
                             decoding="async"
                         />
                     </div>
