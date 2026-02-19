@@ -4,7 +4,8 @@
   --color-natu-brown: #4C261A;
   --color-natu-pink: #FFC2C2;
   --font-serif: "Playfair Display", serif;
-  --font-sans: "Helvetica", "Arial", sans-serif;
+  --font-sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --font-blog-title: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 @layer base {
@@ -201,6 +202,13 @@
 
   .font-sans {
     font-family: var(--font-secondary);
+  }
+
+  /* Blog titles forced to Helvetica Bold */
+  .blog-title {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
   }
 
   .glass-morphism {

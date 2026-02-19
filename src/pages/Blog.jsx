@@ -64,7 +64,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                                 <span>•</span>
                                 <span>{featuredPost.date}</span>
                             </div>
-                            <h2 className="text-[22px] md:text-[28px] font-sans font-bold text-black mb-4 group-hover:text-natu-pink transition-colors leading-[1.2]">
+                            <h2 className="blog-title text-[22px] md:text-[28px] text-black mb-4 group-hover:text-natu-pink transition-colors leading-[1.2]">
                                 {featuredPost.title}
                             </h2>
                             <p className="font-sans font-light text-gray-500 mb-6 text-base leading-relaxed line-clamp-3">
@@ -111,7 +111,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                                     <span>{post.date}</span>
                                 </div>
 
-                                <h3 className="text-2xl font-sans font-bold text-black mb-4 group-hover:text-natu-pink transition-colors leading-tight">
+                                <h3 className="blog-title text-2xl text-black mb-4 group-hover:text-natu-pink transition-colors leading-tight">
                                     {post.title}
                                 </h3>
 

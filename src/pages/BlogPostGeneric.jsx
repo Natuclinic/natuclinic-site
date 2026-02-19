@@ -240,7 +240,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                         <span>{post.date}</span>
                     </div>
 
-                    <h1 className="fluid mt-1 mb-0 font-sans font-bold text-natu-brown leading-[1.1] tracking-tight">
+                    <h1 className="blog-title fluid mt-1 mb-0 text-natu-brown leading-[1.1] tracking-tight">
                         {post.title}
                     </h1>
 
