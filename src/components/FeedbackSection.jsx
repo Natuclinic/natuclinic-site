@@ -67,7 +67,7 @@ const FeedbackSection = () => {
             <div className="desktop-container">
                 <div
                     ref={cardRef}
-                    className="relative bg-natu-brown rounded-[2.5rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-2xl overflow-hidden"
+                    className="relative bg-natu-brown rounded-[2.5rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-2xl"
                 >
                     {/* Subtle Background Glows */}
                     <div className="absolute -top-24 -left-24 w-96 h-96 bg-natu-pink/10 rounded-full blur-[100px] pointer-events-none" />
@@ -105,19 +105,15 @@ const FeedbackSection = () => {
                         </div>
                     </div>
 
-                    {/* Right Media Column */}
-                    <div ref={imageRef} className="flex-1 w-full max-w-[500px] lg:max-w-none z-10">
-                        <div className="relative aspect-[4/5] md:aspect-[5/4] lg:aspect-square bg-white/5 rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
-                            <img
-                                src="/feedbacks.png"
-                                alt="Feedbacks Natuclinic Google"
-                                loading="lazy"
-                                className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
-                                decoding="async"
-                            />
-                            {/* Overlay for depth */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/40 to-transparent pointer-events-none" />
-                        </div>
+                    {/* Right Media Column - Removed from inner overflow and made full */}
+                    <div ref={imageRef} className="flex-1 w-full z-10 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 flex items-center justify-center p-4 lg:p-0">
+                        <img
+                            src="/feedbacks.png"
+                            alt="Feedbacks Natuclinic Google"
+                            loading="lazy"
+                            className="w-full h-auto max-h-full object-contain transition-all duration-700 drop-shadow-2xl"
+                            decoding="async"
+                        />
                     </div>
                 </div>
             </div>
