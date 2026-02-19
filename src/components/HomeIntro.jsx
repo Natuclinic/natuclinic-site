@@ -73,7 +73,7 @@ const HomeIntro = () => {
                         playsInline
                         webkitPlaysInline
                         preload="auto"
-                        poster="/natuclinic-reception.jpg"
+                        poster="/dna-foto-preload-natuclinic-estetica-e-nutrição-ortomolecular.webp"
                         fetchpriority="high"
                         disableRemotePlayback
                         disablePictureInPicture
