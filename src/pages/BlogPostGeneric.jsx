@@ -188,13 +188,13 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                                                 setCurrentPage(related.slug || related.id);
                                                 window.scrollTo(0, 0);
                                             }}
-                                            className="group cursor-pointer flex gap-4 items-start"
+                                            className="group cursor-pointer flex flex-col gap-4 items-start"
                                         >
-                                            <div className="w-16 h-16 shrink-0 rounded-lg overflow-hidden border border-natu-brown/5">
+                                            <div className="w-full aspect-[16/9] shrink-0 rounded-xl overflow-hidden border border-natu-brown/5">
                                                 <img src={related.image} alt={related.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </div>
-                                            <div className="flex flex-col gap-1">
-                                                <h4 className="blog-title text-[13px] leading-tight text-natu-brown group-hover:text-natu-pink transition-colors line-clamp-2">
+                                            <div className="flex flex-col gap-1 w-full">
+                                                <h4 className="blog-title text-[14px] leading-tight text-natu-brown group-hover:text-natu-pink transition-colors line-clamp-2">
                                                     {related.title}
                                                 </h4>
                                                 <span className="text-[10px] text-natu-brown/40 font-medium lowercase">
@@ -341,7 +341,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                     </div>
 
                     {/* Natuclinic Protocol CTA */}
-                    <div className="flex justify-center mb-16 px-4">
+                    <div className="flex justify-center mt-12 md:mt-16 mb-16 px-4">
                         <NatuButton href="https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma consulta ideal.">
                             <span className="text-center">Falar com Especialista</span>
                         </NatuButton>
@@ -415,9 +415,10 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                             href="https://wa.me/5561992551867?text=Olá! Desejo resultados reais. Gostaria de agendar uma avaliação."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative z-10 px-10 py-5 bg-natu-brown text-white rounded-full font-bold uppercase text-[10px] tracking-[0.3em] hover:scale-105 transition-all"
+                            className="relative z-10 px-8 py-4 bg-natu-brown text-white rounded-full font-medium text-base hover:scale-105 transition-all flex items-center gap-3"
                         >
-                            WhatsApp Agendamento
+                            <Unicon name="whatsapp" size={24} />
+                            Agendar minha avaliação
                         </a>
                     </div>
 
