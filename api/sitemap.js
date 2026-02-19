@@ -1,25 +1,13 @@
 
-import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req, res) {
-    // Use environment variables (make sure to set these in Vercel project settings)
-    const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://dkjgskucppssvjvucmqy.supabase.co';
-    const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRramdza3VjcHBzc3ZqdnVjbXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQzNDA2NjAsImV4cCI6MjA3OTkxNjY2MH0.NqwEUwOdm2XZjPiDyfZnpB97CPWOP_yC1Z6coM4MVGo';
-
-    if (!supabaseUrl || !supabaseKey) {
-        return res.status(500).json({ error: 'Supabase credentials not configured' });
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const API_URL = 'https://natuclinic-api.fabriccioarts.workers.dev/articles';
 
     try {
-        // Fetch all articles
-        const { data: articles, error } = await supabase
-            .from('articles')
-            .select('id, slug, updated_at, created_at')
-            .order('created_at', { ascending: false });
-
-        if (error) throw error;
+        // Fetch all articles from Cloudflare D1
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Failed to fetch articles from Cloudflare');
+        const articles = await response.json();
 
         // Generate XML content
         const baseUrl = 'https://natuclinic.com.br'; // Adjust to your actual domain

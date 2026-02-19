@@ -5,13 +5,24 @@ export default {
         // CORS Headers
         const corsHeaders = {
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, X-Custom-Auth",
+            "Access-Control-Max-Age": "86400",
         };
 
-        // Handle CORS Preflight
+        // Handle CORS Preflight for ALL routes
         if (request.method === "OPTIONS") {
-            return new Response(null, { headers: corsHeaders });
+            return new Response(null, { status: 204, headers: corsHeaders });
+        }
+
+        // Health check / debug route
+        if (url.pathname === "/health") {
+            return new Response(JSON.stringify({
+                status: "ok",
+                r2: env.IMAGES ? "connected" : "NOT BOUND",
+                db: env.DB ? "connected" : "NOT BOUND",
+                timestamp: new Date().toISOString()
+            }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
         }
 
         // Handle Article Routes
@@ -99,6 +110,68 @@ export default {
                         headers: { ...corsHeaders, "Content-Type": "application/json" }
                     });
                 }
+            }
+        }
+
+        // Image Upload to R2: POST /upload (multipart or raw body)
+        if (url.pathname === "/upload" && request.method === "POST") {
+            try {
+                if (!env.IMAGES) throw new Error("R2 bucket (IMAGES) not bound!");
+
+                const formData = await request.formData();
+                const file = formData.get("file");
+
+                if (!file) throw new Error("No file field in form data");
+
+                const fileExt = file.name.split('.').pop() || 'jpg';
+                const cleanName = file.name.split('.')[0]
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]/g, '-')
+                    .replace(/-+/g, '-');
+                const filename = `${cleanName}-${Date.now()}.${fileExt}`;
+
+                // Save to R2
+                const arrayBuffer = await file.arrayBuffer();
+                await env.IMAGES.put(filename, arrayBuffer, {
+                    httpMetadata: { contentType: file.type || "application/octet-stream" }
+                });
+
+                const publicUrl = `${url.origin}/images/${filename}`;
+
+                return new Response(JSON.stringify({
+                    success: true,
+                    url: publicUrl
+                }), {
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            } catch (e) {
+                return new Response(JSON.stringify({ error: e.message }), {
+                    status: 500,
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            }
+        }
+
+        // Serve Images from R2: GET /images/:filename
+        if (url.pathname.startsWith("/images/")) {
+            try {
+                const filename = url.pathname.split('/')[2];
+                const object = await env.IMAGES.get(filename);
+
+                if (object === null) {
+                    return new Response("Image Not Found", { status: 404, headers: corsHeaders });
+                }
+
+                const headers = new Headers();
+                object.writeHttpMetadata(headers);
+                headers.set("etag", object.httpEtag);
+                headers.append("Access-Control-Allow-Origin", "*");
+
+                return new Response(object.body, {
+                    headers,
+                });
+            } catch (e) {
+                return new Response(e.message, { status: 500, headers: corsHeaders });
             }
         }
 

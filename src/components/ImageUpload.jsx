@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { supabase } from '../services/supabase';
 import Unicon from './Unicon';
 
 const ImageUpload = ({ onUploadSuccess }) => {
     const [uploading, setUploading] = useState(false);
     const [preview, setPreview] = useState(null);
     const [dragActive, setDragActive] = useState(false);
+    const [altText, setAltText] = useState('');
 
     const handleFileUpload = async (file) => {
         if (!file) return;
@@ -13,33 +13,31 @@ const ImageUpload = ({ onUploadSuccess }) => {
         try {
             setUploading(true);
 
-            // Generate unique filename
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
-            const filePath = `blog-images/${fileName}`;
+            // Send via FormData (most compatible with browsers)
+            const formData = new FormData();
+            formData.append('file', file);
 
-            // Upload to Supabase Storage
-            const { error: uploadError } = await supabase.storage
-                .from('articles') // Ensure this bucket exists in Supabase
-                .upload(filePath, file);
+            const response = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/upload', {
+                method: 'POST',
+                body: formData
+            });
 
-            if (uploadError) throw uploadError;
-
-            // Get public URL
-            const { data } = supabase.storage
-                .from('articles')
-                .getPublicUrl(filePath);
-
-            if (onUploadSuccess) {
-                onUploadSuccess(data.publicUrl);
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.error || `Erro ${response.status}`);
             }
 
-            // Success vibration/effect
-            setPreview(data.publicUrl);
+            const data = await response.json();
+
+            if (onUploadSuccess) {
+                onUploadSuccess(data.url);
+            }
+
+            setPreview(data.url);
 
         } catch (error) {
             console.error('Error uploading image:', error.message);
-            alert('Falha ao subir imagem. Verifique o Supabase Storage.');
+            alert('Falha ao subir imagem: ' + error.message);
         } finally {
             setUploading(false);
         }
@@ -70,7 +68,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full space-y-4">
             <div
                 className={`relative border-2 border-dashed rounded-2xl p-6 transition-all duration-300 flex flex-col items-center justify-center min-h-[160px] ${dragActive ? 'border-natu-pink bg-natu-pink/5 scale-[1.02]' : 'border-gray-200 bg-gray-50'
                     }`}
@@ -82,10 +80,10 @@ const ImageUpload = ({ onUploadSuccess }) => {
                 {uploading ? (
                     <div className="flex flex-col items-center gap-3">
                         <Unicon name="spinner" size={32} className="text-natu-pink animate-spin" />
-                        <p className="text-xs font-bold text-natu-brown/40 uppercase tracking-widest">Enviando...</p>
+                        <p className="text-xs font-bold text-natu-brown/40 uppercase tracking-widest">Enviando para Cloudflare...</p>
                     </div>
                 ) : preview ? (
-                    <div className="relative group w-full aspect-video rounded-xl overflow-hidden shadow-inner">
+                    <div className="relative group w-full aspect-video rounded-xl overflow-hidden shadow-inner bg-white">
                         <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                             <button
@@ -93,7 +91,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
                                     navigator.clipboard.writeText(preview);
                                     alert('Link copiado!');
                                 }}
-                                className="p-3 bg-white rounded-full text-natu-brown hover:scale-110 transition-transform"
+                                className="p-3 bg-white rounded-full text-natu-brown hover:scale-110 transition-transform shadow-lg"
                                 title="Copiar Link"
                             >
                                 <Unicon name="check" size={20} />
@@ -101,11 +99,12 @@ const ImageUpload = ({ onUploadSuccess }) => {
                             <button
                                 onClick={() => {
                                     setPreview(null);
+                                    setAltText('');
                                 }}
-                                className="p-3 bg-white text-red-500 rounded-full hover:scale-110 transition-transform"
+                                className="p-3 bg-white text-red-500 rounded-full hover:scale-110 transition-transform shadow-lg"
                                 title="Remover"
                             >
-                                <Unicon name="times" size={20} />
+                                <Unicon name="trash" size={20} />
                             </button>
                         </div>
                     </div>
@@ -115,7 +114,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
                         <p className="text-sm font-sans text-natu-brown/60 mb-2">
                             Arraste ou <span className="text-natu-pink font-bold cursor-pointer">escolha uma imagem</span>
                         </p>
-                        <p className="text-[10px] uppercase tracking-widest text-natu-brown/30 font-bold">PNG, JPG ou WEBP até 2MB</p>
+                        <p className="text-[10px] uppercase tracking-widest text-natu-brown/30 font-bold">Cloudflare R2 (Mais rápido & Melhor SEO)</p>
                         <input
                             type="file"
                             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
@@ -127,11 +126,38 @@ const ImageUpload = ({ onUploadSuccess }) => {
             </div>
 
             {preview && (
-                <div className="mt-4 p-4 bg-natu-brown/5 rounded-xl border border-natu-brown/10">
-                    <p className="text-[10px] font-bold text-natu-brown uppercase tracking-widest mb-2">Link gerado para o Markdown:</p>
-                    <code className="text-[10px] block p-2 bg-white rounded border border-gray-100 overflow-x-auto whitespace-nowrap">
-                        {`![Descrição]( ${preview} )`}
-                    </code>
+                <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
+                    <div>
+                        <label className="block text-[10px] font-bold text-natu-brown uppercase tracking-widest mb-2 flex items-center gap-2">
+                            Texto Alternativo (SEO)
+                            <span className="text-natu-pink font-normal lowercase opacity-60">Recomendado</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Ex: Dra. fulana realizando procedimento de endolaser"
+                            className="w-full p-3 bg-white border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-natu-pink/10 outline-none transition-all"
+                            value={altText}
+                            onChange={(e) => setAltText(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="p-4 bg-natu-brown/5 rounded-xl border border-natu-brown/10">
+                        <p className="text-[10px] font-bold text-natu-brown uppercase tracking-widest mb-2">Código para colar no Blog:</p>
+                        <div className="flex items-center gap-2">
+                            <code className="flex-1 text-[10px] block p-2 bg-white rounded border border-gray-100 overflow-x-auto whitespace-nowrap font-mono">
+                                {`![${altText || 'Descrição da imagem'}]( ${preview} )`}
+                            </code>
+                            <button
+                                onClick={() => {
+                                    navigator.clipboard.writeText(`![${altText || 'Descrição da imagem'}](${preview})`);
+                                    alert('Markdown copiado!');
+                                }}
+                                className="p-2 bg-natu-brown text-white rounded-lg hover:opacity-90 transition-all"
+                            >
+                                <Unicon name="copy" size={14} />
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
