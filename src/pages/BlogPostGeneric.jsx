@@ -194,7 +194,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                                                 <img src={related.image} alt={related.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </div>
                                             <div className="flex flex-col gap-1">
-                                                <h4 className="font-sans text-[13px] font-bold leading-tight text-natu-brown group-hover:text-natu-pink transition-colors line-clamp-2">
+                                                <h4 className="blog-title text-[13px] leading-tight text-natu-brown group-hover:text-natu-pink transition-colors line-clamp-2">
                                                     {related.title}
                                                 </h4>
                                                 <span className="text-[10px] text-natu-brown/40 font-medium lowercase">
@@ -312,7 +312,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                 <footer className="article-footer pt-4 mt-8">
                     {/* Mobile/Tablet Related Posts (shown when sidebar is hidden) */}
                     <div className="xl:hidden mt-20 pt-20 border-t border-gray-100">
-                        <h3 className="font-serif text-2xl text-natu-brown mb-10">Leia também</h3>
+                        <h3 className="blog-title text-2xl text-natu-brown mb-10">Leia também</h3>
                         <div className="grid md:grid-cols-2 gap-8">
                             {articles
                                 .filter(a => a.id !== post.id)
@@ -331,7 +331,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                                         </div>
                                         <div>
                                             <span className="text-[10px] text-natu-pink font-bold uppercase tracking-widest">{related.category}</span>
-                                            <h4 className="font-serif text-lg text-natu-brown group-hover:text-natu-pink transition-colors mt-2 leading-tight">
+                                            <h4 className="blog-title text-lg text-natu-brown group-hover:text-natu-pink transition-colors mt-2 leading-tight">
                                                 {related.title}
                                             </h4>
                                         </div>
