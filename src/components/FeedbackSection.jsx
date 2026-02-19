@@ -109,7 +109,7 @@ const FeedbackSection = () => {
                     <div ref={imageRef} className="flex-1 w-full max-w-[500px] lg:max-w-none z-10">
                         <div className="relative aspect-[4/5] md:aspect-[5/4] lg:aspect-square bg-white/5 rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
                             <img
-                                src="/Feedbacks.gif"
+                                src="/feedbacks.png"
                                 alt="Feedbacks Natuclinic Google"
                                 loading="lazy"
                                 className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
