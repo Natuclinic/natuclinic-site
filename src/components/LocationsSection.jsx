@@ -16,6 +16,7 @@ const LocationCard = ({ title, address, mapSrc, mapLink }) => (
                 marginWidth="0"
                 className="grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
                 title={title}
+                loading="lazy"
             ></iframe>
             {/* Overlay gradient for text readability if needed, though we have a card below */}
         </div>

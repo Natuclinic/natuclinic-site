@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../services/supabase';
 import Unicon from './Unicon';
 import Silk from './Silk';
+import { API_URLS } from '../constants/links';
 
 const LeadCapture = () => {
     const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ const LeadCapture = () => {
 
         try {
             // Tenta enviar para a API do Cloudflare Workers primeiro
-            const cfResponse = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/leads', {
+            const cfResponse = await fetch(`${API_URLS.BASE}/leads`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

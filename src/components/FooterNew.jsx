@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Unicon from './Unicon';
+import { WHATSAPP_LINKS } from '../constants/links';
 
 const LocationCard = ({ title, address, mapSrc, mapLink }) => (
     <div className="group relative w-full h-[220px] rounded-[1.5rem] overflow-hidden bg-white/5 border border-[#F2F0E9]/10 transition-all duration-500 hover:border-[#F2F0E9]/30">
@@ -16,6 +17,7 @@ const LocationCard = ({ title, address, mapSrc, mapLink }) => (
                 marginWidth="0"
                 className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 invert-[0.1] group-hover:invert-0"
                 title={title}
+                loading="lazy"
             ></iframe>
         </div>
 
@@ -77,11 +79,11 @@ const FooterNew = () => {
             {
                 title: "Procedimentos",
                 links: [
-                    { label: "Ninfoplastia", href: "https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre a Ninfoplastia." },
-                    { label: "Endolaser", href: "https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre o Endolaser." },
-                    { label: "Harmonização", href: "https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre a Harmonização." },
-                    { label: "Emagrecimento", href: "https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre o Emagrecimento." },
-                    { label: "Ortomolecular", href: "https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre a Nutrição Ortomolecular." },
+                    { label: "Ninfoplastia", href: WHATSAPP_LINKS.PROCEDURES },
+                    { label: "Endolaser", href: WHATSAPP_LINKS.PROCEDURES },
+                    { label: "Harmonização", href: WHATSAPP_LINKS.PROCEDURES },
+                    { label: "Emagrecimento", href: WHATSAPP_LINKS.PROCEDURES },
+                    { label: "Ortomolecular", href: WHATSAPP_LINKS.PROCEDURES },
                 ],
             },
             {
@@ -91,7 +93,7 @@ const FooterNew = () => {
                     { label: "Corpo Clínico", path: "/" },
                     { label: "Blog", path: "/blog" },
                     { label: "Política de Privacidade", path: "/politica-de-privacidade" },
-                    { label: "Contato", href: "https://wa.me/5561992551867" },
+                    { label: "Contato", href: WHATSAPP_LINKS.GENERAL },
                 ],
             },
         ],

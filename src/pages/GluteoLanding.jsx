@@ -6,6 +6,7 @@ import { supabase } from '../services/supabase';
 import { motion } from "motion/react";
 import Unicon from '../components/Unicon';
 import Silk from '../components/Silk';
+import { WHATSAPP_LINKS } from '../constants/links';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,9 +64,9 @@ const GluteoLanding = () => {
     }, []);
 
     const handleWhatsApp = () => {
-        const phone = "5561992551867";
-        const message = encodeURIComponent(`Olá! Meu nome é ${formData.name}. Vim pela página dos Glúteos dos Sonhos e gostaria de agendar uma consulta.`);
-        window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        const message = encodeURIComponent(`Olá! Meu nome é ${formData.name || 'interessado(a)'}. Vim pela página dos Glúteos dos Sonhos e gostaria de agendar uma consulta.`);
+        const url = `${WHATSAPP_LINKS.GLUTEO}&text=${message}`;
+        window.open(url, '_blank');
     };
 
     const handleSubmit = async (e) => {

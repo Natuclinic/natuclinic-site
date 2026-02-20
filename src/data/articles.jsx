@@ -3,7 +3,7 @@ import React from 'react';
 
 // ARQUIVO GERADO AUTOMATICAMENTE - NÃO EDITE DIRETAMENTE
 // Este arquivo serve como fallback de alta performance e SEO para a Vercel.
-// Sincronizado em: 20/02/2026, 14:53:04
+// Sincronizado em: 20/02/2026, 18:07:43
 
 export const articles = [
     {
@@ -53,7 +53,7 @@ export const articles = [
     },
     {
         "id": "-melasma",
-        "title": "MELASMA",
+        "title": "Tudo Sobre Melasma e Tratamentos ",
         "category": "Estética Avançada",
         "date": "04 de fev. de 2026",
         "image": "https://natuclinic-api.fabriccioarts.workers.dev/images/procedimento-para-melasma-em-taguatinga-df-natuclinic-tratamento-regenerativo-1771522032067.webp",
@@ -68,7 +68,7 @@ export const articles = [
     },
     {
         "id": "harmonizao-de-glteos",
-        "title": "HARMONIZAÇÃO DE GLÚTEOS",
+        "title": "Harmonização de Glúteos",
         "category": "Estética Avançada",
         "date": "04 de fev. de 2026",
         "image": "https://natuclinic-api.fabriccioarts.workers.dev/images/harmoniza-o-de-gluteos-em-brasilia-df-clinica-de-estetica-especialistas-em-gluteos-1771522874897.webp",
@@ -98,7 +98,7 @@ export const articles = [
     },
     {
         "id": "ninfoplastia-sem-cortes",
-        "title": "NINFOPLASTIA SEM CORTES",
+        "title": "Ninfoplastia sem Cortes",
         "category": "Estética Avançada",
         "date": "04 de fev. de 2026",
         "image": "https://natuclinic-api.fabriccioarts.workers.dev/images/procedimento-para-harmoniza-o-intima-em-brasilia-ninfoescultura-labioplastia-1771523734068.webp",

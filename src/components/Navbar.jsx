@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Unicon from './Unicon';
+import { WHATSAPP_LINKS } from '../constants/links';
 
 const NatuButton = ({ children, onClick, className, ...props }) => (
     <button className={`natu-button ${className || ''}`} onClick={onClick} {...props} style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
@@ -50,9 +51,7 @@ const Navbar = () => {
     }, []);
 
     const handleWhatsApp = () => {
-        const phone = "5561992551867";
-        const message = encodeURIComponent("Olá! Gostaria de agendar uma consulta na Natuclinic.");
-        window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        window.open(WHATSAPP_LINKS.AGENDAMENTO, '_blank');
     };
 
     const menuItems = [
@@ -68,14 +67,14 @@ const Navbar = () => {
                     {
                         title: 'Saúde',
                         links: [
-                            { label: 'Nutrição Ortomolecular', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Nutrição Ortomolecular.' },
-                            { label: 'Emagrecimento Saudável', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Emagrecimento Saudável.' },
-                            { label: 'Soroterapia', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Soroterapia.' },
-                            { label: 'Ozonioterapia', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Ozonioterapia.' },
-                            { label: 'Eletroestimulação', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Eletroestimulação.' },
-                            { label: 'Suplementação', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Suplementação.' },
-                            { label: 'Ginecologia', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Ginecologia.' },
-                            { label: 'Nutrição Esportiva', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Nutrição Esportiva.' }
+                            { label: 'Nutrição Ortomolecular', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Emagrecimento Saudável', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Soroterapia', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Ozonioterapia', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Eletroestimulação', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Suplementação', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Ginecologia', href: WHATSAPP_LINKS.GENERAL },
+                            { label: 'Nutrição Esportiva', href: WHATSAPP_LINKS.GENERAL }
                         ]
                     }
                 ]
@@ -93,11 +92,11 @@ const Navbar = () => {
                         title: 'Estética',
                         links: [
                             { label: 'Harmonização de Glúteos', path: '/gluteo-dos-sonhos' },
-                            { label: 'Harmonização Facial', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Harmonização Facial.' },
-                            { label: 'Ninfoplastia Sem Cortes', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Ninfoplastia Sem Cortes.' },
-                            { label: 'Endolaser', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Endolaser.' },
-                            { label: 'Bioestimuladores de Colágeno', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Bioestimuladores.' },
-                            { label: 'Lipo sem Cortes', href: 'https://wa.me/5561992551867?text=Olá! Gostaria de saber mais sobre Lipo sem Cortes.' }
+                            { label: 'Harmonização Facial', href: WHATSAPP_LINKS.PROCEDURES },
+                            { label: 'Ninfoplastia Sem Cortes', href: WHATSAPP_LINKS.PROCEDURES },
+                            { label: 'Endolaser', href: WHATSAPP_LINKS.PROCEDURES },
+                            { label: 'Bioestimuladores de Colágeno', href: WHATSAPP_LINKS.PROCEDURES },
+                            { label: 'Lipo sem Cortes', href: WHATSAPP_LINKS.PROCEDURES }
                         ]
                     }
                 ]

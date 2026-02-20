@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { articles as fallbackArticles } from '../data/articles.jsx';
+import { API_URLS } from '../constants/links';
 
 export const useArticles = () => {
     const [articles, setArticles] = useState([]);
@@ -12,7 +13,7 @@ export const useArticles = () => {
                 setLoading(true);
 
                 // Tenta buscar da API do Cloudflare Workers
-                const response = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/articles');
+                const response = await fetch(`${API_URLS.BASE}/articles`);
 
                 if (response.ok) {
                     const data = await response.json();
