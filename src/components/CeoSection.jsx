@@ -82,7 +82,7 @@ const CeoSection = () => {
                                     text="INSTITUTO * NATUCLINIC *"
                                     onHover="speedUp"
                                     spinDuration={20}
-                                    className="w-24 h-24 md:w-32 md:h-32 text-[8px] md:text-[10px] font-bold tracking-widest text-natu-brown bg-white/30 backdrop-blur-md rounded-full border border-white/40 shadow-xl flicker-fix"
+                                    className="w-24 h-24 md:w-32 md:h-32 text-[8px] md:text-[10px] font-bold tracking-widest text-natu-brown bg-white/30 backdrop-blur-md rounded-full border border-white/40 flicker-fix"
                                 />
                             </div>
                         </div>

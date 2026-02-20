@@ -209,7 +209,7 @@ const VideoFeedbacks = () => {
                                     {/* Video Container */}
                                     <div
                                         className={`relative w-full h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden bg-gray-100 cursor-pointer transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
-                                            ${isActive ? 'shadow-xl shadow-natu-brown/10' : 'opacity-80 scale-[0.98] lg:scale-100'}
+                                            ${isActive ? '' : 'opacity-80 scale-[0.98] lg:scale-100'}
                                         `}
                                     >
                                         <video
@@ -258,7 +258,7 @@ const VideoFeedbacks = () => {
                                                     setModalIsPlaying(true);
                                                     setIsFullscreen(true);
                                                 }}
-                                                className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 drop-shadow-lg hidden lg:block"
+                                                className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 hidden lg:block"
                                                 title="Expandir vídeo"
                                             >
                                                 <img
@@ -323,7 +323,7 @@ const VideoFeedbacks = () => {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="relative w-full max-w-[80vw] md:max-w-[340px] aspect-[9/16] max-h-[85vh] rounded-[2rem] overflow-hidden shadow-2xl z-10 isolate flicker-fix"
+                            className="relative w-full max-w-[80vw] md:max-w-[340px] aspect-[9/16] max-h-[85vh] rounded-[2rem] overflow-hidden z-10 isolate flicker-fix"
                             style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
                         >
                             <video

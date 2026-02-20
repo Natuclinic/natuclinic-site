@@ -160,7 +160,7 @@ const AdminPost = ({ goBack }) => {
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen pt-32 flex flex-col items-center justify-center bg-gray-50 p-4">
-                <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm text-center border border-gray-100">
+                <div className="bg-white p-8 rounded-2xl w-full max-w-sm text-center border border-gray-100">
                     <Unicon name="lock" size={48} className="text-natu-brown mx-auto mb-4 opacity-30" />
                     <h2 className="text-xl font-bold text-natu-brown mb-6">Acesso Restrito</h2>
                     <form onSubmit={handleLogin} className="space-y-4">
@@ -171,7 +171,7 @@ const AdminPost = ({ goBack }) => {
                             value={accessCode}
                             onChange={(e) => setAccessCode(e.target.value)}
                         />
-                        <button type="submit" className="w-full bg-natu-brown text-white py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-lg shadow-natu-brown/10">
+                        <button type="submit" className="w-full bg-natu-brown text-white py-3 rounded-lg font-bold hover:opacity-90 transition-all">
                             Entrar
                         </button>
                     </form>
@@ -182,7 +182,7 @@ const AdminPost = ({ goBack }) => {
 
     return (
         <div className="pt-32 pb-20 min-h-screen bg-gray-50 px-4">
-            <div className="container max-w-4xl mx-auto p-4 md:p-10 bg-white rounded-3xl shadow-xl border border-gray-100">
+            <div className="container max-w-4xl mx-auto p-4 md:p-10 bg-white rounded-3xl border border-gray-100">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
                         <h1 className="text-3xl font-serif text-natu-brown">
@@ -195,7 +195,7 @@ const AdminPost = ({ goBack }) => {
                         {view === 'list' ? (
                             <button
                                 onClick={() => { setFormData(initialForm); setView('create'); }}
-                                className="bg-natu-brown text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-natu-brown/10"
+                                className="bg-natu-brown text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
                             >
                                 <Unicon name="plus" size={14} /> Novo Post
                             </button>
@@ -384,7 +384,7 @@ const AdminPost = ({ goBack }) => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className={`w-full py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-3 shadow-xl ${view === 'edit' ? 'bg-natu-pink text-white shadow-natu-pink/10' : 'bg-natu-brown text-white shadow-natu-brown/10'}`}
+                            className={`w-full py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-3 ${view === 'edit' ? 'bg-natu-pink text-white' : 'bg-natu-brown text-white'}`}
                         >
                             {loading ? <Unicon name="spinner" className="animate-spin" size={16} /> : (
                                 <>

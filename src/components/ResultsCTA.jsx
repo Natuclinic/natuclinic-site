@@ -48,7 +48,7 @@ const ResultsCTA = () => {
                 onClick={handleWhatsApp}
                 className="desktop-container pointer-events-auto"
             >
-                <div className="bg-natu-brown rounded-[2rem] p-12 md:p-16 relative overflow-hidden cursor-pointer group hover:scale-[1.01] transition-transform duration-500">
+                <div className="bg-natu-brown rounded-[2rem] p-12 md:p-16 relative overflow-hidden cursor-pointer group hover:scale-[1.01] transition-transform duration-500 [backface-visibility:hidden] [transform:translate3d(0,0,0)]">
                     {/* Decorative Background Elements */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-colors duration-500"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/3 group-hover:bg-white/10 transition-colors duration-500"></div>

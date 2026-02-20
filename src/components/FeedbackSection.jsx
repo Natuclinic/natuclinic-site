@@ -67,11 +67,18 @@ const FeedbackSection = () => {
             <div className="desktop-container">
                 <div
                     ref={cardRef}
-                    className="relative bg-natu-brown rounded-[2.5rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-2xl"
+                    className="relative bg-natu-brown rounded-[2.5rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
                 >
                     {/* Subtle Background Glows */}
                     <div className="absolute -top-24 -left-24 w-96 h-96 bg-natu-pink/10 rounded-full blur-[100px] pointer-events-none" />
                     <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-[100px] pointer-events-none" />
+
+                    {/* Background Texture/Image */}
+                    <img
+                        src="/fundo-card.jpg"
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    />
 
                     {/* Left Content Column */}
                     <div ref={contentRef} className="flex-1 text-center lg:text-left z-10">
@@ -111,7 +118,7 @@ const FeedbackSection = () => {
                             src="/feedbacks.png"
                             alt="Feedbacks Natuclinic Google"
                             loading="lazy"
-                            className="w-full h-auto max-h-full lg:max-h-[92%] object-contain transition-all duration-700 drop-shadow-2xl hover:scale-[1.02]"
+                            className="w-full h-auto max-h-full lg:max-h-[92%] object-contain transition-all duration-700 hover:scale-[1.02]"
                             decoding="async"
                         />
                     </div>

@@ -100,20 +100,11 @@ const LeadCapture = () => {
     };
 
     return (
-        <section className="relative py-12 md:py-20 bg-natu-brown overflow-hidden">
-            {/* Background Silk Effect */}
-            <div className="absolute inset-0 z-0 pointer-events-none flicker-fix">
-                <Silk
-                    speed={3.5}
-                    scale={0.6}
-                    color="#37261c"
-                    noiseIntensity={1.2}
-                    rotation={0}
-                />
-            </div>
+        <section className="relative py-12 md:py-20 bg-white overflow-hidden">
+
 
             <div className="desktop-container relative z-10">
-                <div className="max-w-4xl mx-auto bg-[#2b1d15] border border-white/5 p-8 md:p-16 rounded-[3rem] shadow-2xl flicker-fix">
+                <div className="bg-natu-brown p-8 md:p-16 rounded-[2.5rem] relative overflow-hidden">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left Side: Copy */}
@@ -133,7 +124,7 @@ const LeadCapture = () => {
                         {/* Right Side: Form */}
                         <div className="relative">
                             {status.type === 'success' ? (
-                                <div className="text-center p-10 bg-white/10 rounded-[2rem] border border-white/20 animate-in zoom-in duration-500">
+                                <div className="text-center p-10 bg-white/10 rounded-xl border border-white/20 animate-in zoom-in duration-500">
                                     <div className="w-16 h-16 bg-natu-pink rounded-full flex items-center justify-center mx-auto mb-6">
                                         <Unicon name="check-circle" className="text-white w-8 h-8" />
                                     </div>

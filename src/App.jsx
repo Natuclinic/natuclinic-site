@@ -28,7 +28,6 @@ const BlogPostNutricao = React.lazy(() => import('./pages/BlogPostNutricao'));
 const BlogPostGeneric = React.lazy(() => import('./pages/BlogPostGeneric'));
 const AdminPost = React.lazy(() => import('./pages/AdminPost'));
 const LeadCapture = React.lazy(() => import('./components/LeadCapture'));
-const FeedbackSection = React.lazy(() => import('./components/FeedbackSection'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const BlogHighlights = React.lazy(() => import('./components/BlogHighlights'));
 const VideoFeedbacks = React.lazy(() => import('./components/VideoFeedbacks'));
@@ -128,7 +127,6 @@ export default function App() {
                 <ResultsSection id="results" />
                 <VideoFeedbacks />
                 <ResultsCTA />
-                <FeedbackSection />
                 <ClinicGallery />
                 <StatsSection />
                 <BlogHighlights />

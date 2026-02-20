@@ -76,7 +76,7 @@ const CookieConsent = () => {
                     exit={{ y: 100, opacity: 0 }}
                     className="fixed bottom-6 left-6 right-6 md:left-auto md:right-10 md:max-w-xs z-[100] font-sans"
                 >
-                    <div className="bg-white rounded-[1.5rem] shadow-[0_15px_40px_rgba(76,38,26,0.12)] border border-natu-brown/5 overflow-hidden p-6 flex flex-col gap-5">
+                    <div className="bg-white rounded-[1.5rem] border border-natu-brown/5 overflow-hidden p-6 flex flex-col gap-5">
                         {!showPreferences ? (
                             <>
                                 <div className="flex flex-col gap-2">
@@ -128,7 +128,7 @@ const CookieConsent = () => {
                                                 <span className="text-[11px] text-gray-500 font-light leading-snug">Necessários para as funcionalidades básicas do site.</span>
                                             </div>
                                             <div className="w-10 h-6 bg-natu-brown rounded-full flex items-center px-1 opacity-50 cursor-not-allowed">
-                                                <div className="w-4 h-4 bg-white rounded-full translate-x-4 shadow-sm" />
+                                                <div className="w-4 h-4 bg-white rounded-full translate-x-4" />
                                             </div>
                                         </div>
 
@@ -142,7 +142,7 @@ const CookieConsent = () => {
                                                 onClick={() => setPreferences(prev => ({ ...prev, statistical: !prev.statistical }))}
                                                 className={`w-10 h-6 rounded-full flex items-center px-1 transition-colors ${preferences.statistical ? 'bg-natu-brown' : 'bg-gray-200'}`}
                                             >
-                                                <div className={`w-4 h-4 bg-white rounded-full shadow-sm transition-transform ${preferences.statistical ? 'translate-x-4' : 'translate-x-0'}`} />
+                                                <div className={`w-4 h-4 bg-white rounded-full transition-transform ${preferences.statistical ? 'translate-x-4' : 'translate-x-0'}`} />
                                             </button>
                                         </div>
 
@@ -156,7 +156,7 @@ const CookieConsent = () => {
                                                 onClick={() => setPreferences(prev => ({ ...prev, marketing: !prev.marketing }))}
                                                 className={`w-10 h-6 rounded-full flex items-center px-1 transition-colors ${preferences.marketing ? 'bg-natu-brown' : 'bg-gray-200'}`}
                                             >
-                                                <div className={`w-4 h-4 bg-white rounded-full shadow-sm transition-transform ${preferences.marketing ? 'translate-x-4' : 'translate-x-0'}`} />
+                                                <div className={`w-4 h-4 bg-white rounded-full transition-transform ${preferences.marketing ? 'translate-x-4' : 'translate-x-0'}`} />
                                             </button>
                                         </div>
                                     </div>

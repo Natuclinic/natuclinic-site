@@ -83,7 +83,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
                         <p className="text-xs font-bold text-natu-brown/40 uppercase tracking-widest">Enviando para Cloudflare...</p>
                     </div>
                 ) : preview ? (
-                    <div className="relative group w-full aspect-video rounded-xl overflow-hidden shadow-inner bg-white">
+                    <div className="relative group w-full aspect-video rounded-xl overflow-hidden bg-white border border-gray-100">
                         <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                             <button
@@ -91,7 +91,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
                                     navigator.clipboard.writeText(preview);
                                     alert('Link copiado!');
                                 }}
-                                className="p-3 bg-white rounded-full text-natu-brown hover:scale-110 transition-transform shadow-lg"
+                                className="p-3 bg-white rounded-full text-natu-brown hover:scale-110 transition-transform border border-gray-100"
                                 title="Copiar Link"
                             >
                                 <Unicon name="check" size={20} />
@@ -101,7 +101,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
                                     setPreview(null);
                                     setAltText('');
                                 }}
-                                className="p-3 bg-white text-red-500 rounded-full hover:scale-110 transition-transform shadow-lg"
+                                className="p-3 bg-white text-red-500 rounded-full hover:scale-110 transition-transform border border-gray-100"
                                 title="Remover"
                             >
                                 <Unicon name="trash" size={20} />

@@ -120,10 +120,10 @@ export const ImageComparisonSlider = React.forwardRef(
                     {/* Handle */}
                     <div
                         className={cn(
-                            "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-12 w-12 flex items-center justify-center rounded-full bg-white/80 text-natu-brown shadow-xl backdrop-blur-md",
+                            "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-12 w-12 flex items-center justify-center rounded-full bg-white/80 text-natu-brown border border-white/20 backdrop-blur-md",
                             "transition-all duration-300 ease-in-out",
                             "group-hover:scale-105",
-                            isDragging && "scale-105 shadow-2xl shadow-natu-pink/50"
+                            isDragging && "scale-105"
                         )}
                         role="slider"
                         aria-valuenow={sliderPosition}
@@ -133,8 +133,8 @@ export const ImageComparisonSlider = React.forwardRef(
                         aria-label="Image comparison slider"
                     >
                         <div className="flex items-center text-natu-brown">
-                            <Unicon name="angle-left" size={20} className="drop-shadow-md" />
-                            <Unicon name="angle-right" size={20} className="drop-shadow-md" />
+                            <Unicon name="angle-left" size={20} />
+                            <Unicon name="angle-right" size={20} />
                         </div>
                     </div>
                 </div>

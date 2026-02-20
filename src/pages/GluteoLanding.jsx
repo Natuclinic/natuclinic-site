@@ -142,7 +142,7 @@ const GluteoLanding = () => {
                             <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 w-full md:w-auto">
                                 <NatuButton
                                     onClick={handleWhatsApp}
-                                    className="px-6 py-3 bg-[#2D1B14] text-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all shadow-2xl shadow-black/20 hover:scale-105 active:scale-95"
+                                    className="px-6 py-3 bg-[#2D1B14] text-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all hover:scale-105 active:scale-95"
                                 >
                                     Agendar consulta
                                 </NatuButton>
@@ -182,7 +182,7 @@ const GluteoLanding = () => {
                             className="flex gap-8"
                         >
                             {[1, 2, 3, 4, 1, 2, 3, 4].map((num, idx) => (
-                                <div key={idx} className="h-[300px] md:h-[450px] flex-shrink-0 bg-white rounded-[1.5rem] overflow-hidden shadow-xl shadow-black/5 border border-black/5 group">
+                                <div key={idx} className="h-[300px] md:h-[450px] flex-shrink-0 bg-white rounded-[1.5rem] overflow-hidden border border-black/5 group">
                                     <img
                                         src={`/harmonização de-gluteo/result ${num}.png`}
                                         alt={`Resultado ${num}`}
@@ -203,7 +203,7 @@ const GluteoLanding = () => {
                     <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
                         {/* Image Column */}
                         <BlurFade className="w-full md:w-1/2 relative lg:pr-12">
-                            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl shadow-black/10 transition-transform duration-700 hover:scale-[1.02]">
+                            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden transition-transform duration-700 hover:scale-[1.02]">
                                 <img
                                     src="/dra-debora.jpg"
                                     alt="Dra. Debora Meneses"
@@ -254,7 +254,7 @@ const GluteoLanding = () => {
                     <img
                         src="/harmonização de-gluteo/fotos-da-profissional-executando.png"
                         alt="Dra. Debora executando o procedimento"
-                        className="w-full h-auto object-cover rounded-[2rem] shadow-lg shadow-black/5"
+                        className="w-full h-auto object-cover rounded-[2rem]"
                     />
                 </BlurFade>
             </section>
@@ -297,7 +297,7 @@ const GluteoLanding = () => {
                     <BlurFade className="mt-20 flex justify-center" delay={0.4}>
                         <NatuButton
                             onClick={handleWhatsApp}
-                            className="px-10 py-5 bg-[#2D1B14] text-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all shadow-2xl shadow-black/20 hover:scale-105 active:scale-95 w-fit"
+                            className="px-10 py-5 bg-[#2D1B14] text-white rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all hover:scale-105 active:scale-95 w-fit"
                         >
                             Quero me sentir assim
                         </NatuButton>
@@ -324,7 +324,7 @@ const GluteoLanding = () => {
                             <div className="mt-8 lg:mt-0">
                                 <NatuButton
                                     onClick={handleWhatsApp}
-                                    className="px-10 py-5 bg-white text-[#2D1B14] rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all shadow-2xl shadow-black/5 hover:scale-105 active:scale-95 border-none"
+                                    className="px-10 py-5 bg-white text-[#2D1B14] rounded-full text-xs tracking-[0.2em] font-sans font-bold uppercase transition-all hover:scale-105 active:scale-95 border-none"
                                 >
                                     Agendar avaliação
                                 </NatuButton>
@@ -388,7 +388,7 @@ const GluteoLanding = () => {
                             </div>
                         </BlurFade>
 
-                        <BlurFade className="bg-natu-brown p-8 md:p-16 lg:p-20 shadow-2xl shadow-black/20 text-white relative overflow-hidden flex flex-col justify-center items-start w-full py-16 md:py-24 flex-1" delay={0.2}>
+                        <BlurFade className="bg-natu-brown p-8 md:p-16 lg:p-20 text-white relative overflow-hidden flex flex-col justify-center items-start w-full py-16 md:py-24 flex-1" delay={0.2}>
                             {/* Logo Grafismo Background */}
                             <img
                                 src="/logo-outline-svg.svg"
@@ -427,7 +427,7 @@ const GluteoLanding = () => {
                                     <NatuButton
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full mt-4 py-6 bg-white text-[#2D1B14] rounded-full text-sm tracking-[0.2em] font-sans font-bold uppercase transition-all shadow-xl hover:scale-105 active:scale-95 border-none disabled:opacity-50"
+                                        className="w-full mt-4 py-6 bg-white text-[#2D1B14] rounded-full text-sm tracking-[0.2em] font-sans font-bold uppercase transition-all hover:scale-105 active:scale-95 border-none disabled:opacity-50"
                                     >
                                         {loading ? 'Processando...' : 'Quero agendar'}
                                     </NatuButton>

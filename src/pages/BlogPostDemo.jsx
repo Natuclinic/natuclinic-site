@@ -82,7 +82,7 @@ const BlogPostDemo = ({ goBack }) => {
                 <table-of-contents ref={tocRef}></table-of-contents>
 
                 <header id="pre" className="relative">
-                    <div className="absolute -top-12 left-0 z-10 flex bg-white/80 rounded-full shadow-sm border border-stone-200 p-0.5">
+                    <div className="absolute -top-12 left-0 z-10 flex bg-white/80 rounded-full border border-stone-200 p-0.5">
                         <button
                             onClick={() => setLang('pt')}
                             className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${lang === 'pt' ? 'bg-[#4C261A] text-white' : 'text-gray-500 hover:text-[#4C261A]'}`}

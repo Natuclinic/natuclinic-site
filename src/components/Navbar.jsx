@@ -191,7 +191,7 @@ const Navbar = () => {
                                         {/* Invisible Bridge */}
                                         <div className="absolute -top-12 left-0 w-full h-12 bg-transparent" />
 
-                                        <div className="bg-[#ffffff] rounded-b-[40px] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.03)]">
+                                        <div className="bg-[#ffffff] rounded-b-[40px] overflow-hidden border border-gray-100">
                                             <div className="max-w-7xl mx-auto px-12 py-16 flex flex-col gap-12">
                                                 <div className="grid grid-cols-12 gap-24 items-start">
                                                     {/* Left side: Image and Text */}

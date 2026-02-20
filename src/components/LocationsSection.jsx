@@ -2,7 +2,7 @@ import React from 'react';
 import Unicon from './Unicon';
 
 const LocationCard = ({ title, address, mapSrc, mapLink }) => (
-    <div className="group relative w-full h-[500px] rounded-[2.5rem] overflow-hidden bg-white shadow-xl border border-natu-brown/5 transition-all duration-500 hover:shadow-2xl">
+    <div className="group relative w-full h-[500px] rounded-[2.5rem] overflow-hidden bg-white border border-natu-brown/5 transition-all duration-500">
         {/* Map Iframe */}
         <div className="absolute inset-0 z-0">
             <iframe
@@ -21,7 +21,7 @@ const LocationCard = ({ title, address, mapSrc, mapLink }) => (
         </div>
 
         {/* Floating Info Card */}
-        <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-3xl border border-white/40 shadow-lg transition-transform duration-500 group-hover:-translate-y-2">
+        <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-3xl border border-white/40 transition-transform duration-500 group-hover:-translate-y-2">
             <div className="flex justify-between items-start">
                 <div>
                     <h3 className="font-serif text-2xl text-natu-brown mb-2">{title}</h3>
