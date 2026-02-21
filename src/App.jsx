@@ -80,7 +80,7 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-const BlogPostWrapper = ({ articles, loading }) => {
+const BlogPostWrapper = ({ articles, adConfig, loading }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -97,12 +97,12 @@ const BlogPostWrapper = ({ articles, loading }) => {
     return <Navigate to="/blog" />;
   }
 
-  return <BlogPostGeneric goBack={() => navigate('/blog')} post={post} articles={articles} setCurrentPage={(newId) => navigate(`/blog/${newId}`)} />;
+  return <BlogPostGeneric goBack={() => navigate('/blog')} post={post} articles={articles} adConfig={adConfig} setCurrentPage={(newId) => navigate(`/blog/${newId}`)} />;
 };
 
 export default function App() {
   useSmoothScroll();
-  const { articles, loading } = useArticles();
+  const { articles, adConfig, loading } = useArticles();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -147,7 +147,7 @@ export default function App() {
             <Route path="/procedimentos/harmonizacao-facial" element={<HarmonizacaoFacial goBack={() => navigate(-1)} />} />
 
             <Route path="/blog" element={<Blog goBack={() => navigate('/')} setCurrentPage={(id) => navigate(`/blog/${id}`)} articles={articles} loading={loading} />} />
-            <Route path="/blog/:id" element={<BlogPostWrapper articles={articles} loading={loading} />} />
+            <Route path="/blog/:id" element={<BlogPostWrapper articles={articles} adConfig={adConfig} loading={loading} />} />
 
             <Route path="/adminblogpost" element={<AdminPost goBack={() => navigate(-1)} />} />
             <Route path="/politica-de-privacidade" element={<PrivacyPolicy goBack={() => navigate(-1)} />} />

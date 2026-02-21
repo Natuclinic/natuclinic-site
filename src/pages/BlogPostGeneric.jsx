@@ -7,7 +7,7 @@ import { gsap } from 'gsap';
 
 const NatuButton = ({ children, href, className }) => (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`natu-button ${className || ''}`} style={{ padding: '1rem 2rem', fontSize: '12px', letterSpacing: '0.2em' }}>
-        <span className="natu-button__icon-wrapper">
+        <span className="natu-button__icon-wrapper flicker-fix">
             <svg viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="natu-button__icon-svg" width="10">
                 <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z" fill="currentColor"></path>
             </svg>
@@ -19,21 +19,24 @@ const NatuButton = ({ children, href, className }) => (
     </a>
 );
 
-const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
+const BlogPostGeneric = ({ goBack, post, articles = [], adConfig, setCurrentPage }) => {
     const tocRef = useRef(null);
     const contentRef = useRef(null);
-    const [scrollProgress, setScrollProgress] = useState(0);
+    const progressBarRef = useRef(null);
 
     // Reading Progress Logic
     useEffect(() => {
         const updateProgress = () => {
             const scrolled = window.scrollY;
             const height = document.documentElement.scrollHeight - window.innerHeight;
-            if (height > 0) {
-                setScrollProgress((scrolled / height) * 100);
+            if (height > 0 && progressBarRef.current) {
+                const progress = (scrolled / height) * 100;
+                progressBarRef.current.style.width = `${progress}%`;
             }
         };
-        window.addEventListener('scroll', updateProgress);
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        // Initial update
+        updateProgress();
         return () => window.removeEventListener('scroll', updateProgress);
     }, []);
 
@@ -43,11 +46,12 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power4.out" }
         );
-    }, [post.id]);
+    }, [post?.id]);
 
     useEffect(() => {
+        if (!post) return;
         // Update Title
-        document.title = `${post.title} - Blog Natuclinic`;
+        document.title = `${post.title || ''} - Blog Natuclinic`;
 
         // Update Meta Description
         let metaDesc = document.querySelector('meta[name="description"]');
@@ -56,7 +60,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
             metaDesc.name = "description";
             document.head.appendChild(metaDesc);
         }
-        metaDesc.content = post.meta_description || post.meta?.description || post.excerpt;
+        metaDesc.content = post.meta_description || post.meta?.description || post.excerpt || '';
 
         // Update Meta Keywords
         let metaKeywords = document.querySelector('meta[name="keywords"]');
@@ -91,7 +95,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
 
     // Generate TOC
     useEffect(() => {
-        if (!contentRef.current || !tocRef.current) return;
+        if (!post || !contentRef.current || !tocRef.current) return;
 
         const article = contentRef.current;
         const headings = Array.from(article.querySelectorAll('h2, h3'));
@@ -99,6 +103,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
         // Only show TOC if there are headings
         if (headings.length === 0) {
             tocRef.current.innerHTML = '';
+            tocRef.current.className = '';
             return;
         }
 
@@ -137,6 +142,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
         // Clear previous TOC if any (for hot reload)
         tocRef.current.innerHTML = '';
         tocRef.current.appendChild(nav);
+        tocRef.current.className = 'table-of-contents animate-in fade-in duration-500';
 
         // Simple ScrollSpy
         const observer = new IntersectionObserver((entries) => {
@@ -165,9 +171,11 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
         <div className="blog-system-wrapper pt-44 md:pt-48">
             {/* Reading Progress Bar */}
             <div
+                ref={progressBarRef}
                 className="fixed top-0 left-0 h-1.5 bg-natu-pink z-[100] transition-all duration-150 ease-out"
-                style={{ width: `${scrollProgress}%` }}
+                style={{ width: '0%' }}
             />
+
 
             <div className="container">
                 {/* Lateral Esquerda - Leia Também & Tags (Desktop) */}
@@ -222,7 +230,32 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                     </div>
                 </aside>
 
-                <table-of-contents ref={tocRef} className="hidden lg:block"></table-of-contents>
+                <aside className="blog-sidebar-right hidden lg:block">
+                    <div className="sticky top-32 space-y-4">
+                        <div ref={tocRef}></div>
+
+                        {/* Sidebar Ad (3:4 Proportion) */}
+                        {adConfig && adConfig.content === 'active' && adConfig.image && (
+                            <div className="animate-in fade-in duration-1000">
+                                <a
+                                    href={adConfig.excerpt || '#'}
+                                    target={adConfig.excerpt?.startsWith('http') ? '_blank' : '_self'}
+                                    rel="noopener noreferrer"
+                                    className="block group relative"
+                                >
+                                    <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-natu-brown/5 bg-gray-50 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:border-natu-pink/20">
+                                        <img
+                                            src={adConfig.image}
+                                            alt="Anúncio"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-natu-brown/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        )}
+                    </div>
+                </aside>
 
                 <header id="pre" className="relative mb-0 blog-header-content">
                     {/* Breadcrumbs / Directory */}
@@ -288,21 +321,24 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                     <div className="absolute -left-12 top-0 bottom-0 w-[1px] bg-gradient-to-b from-natu-brown/10 via-transparent to-transparent hidden xl:block"></div>
                     <article ref={contentRef} className="relative z-10">
                         {/* Render the content with enhanced image styling */}
-                        {typeof ContentComponent === 'function' ? (
+                        {typeof ContentComponent === 'function' || (typeof ContentComponent === 'object' && ContentComponent !== null) ? (
                             <ContentComponent />
                         ) : (
                             <div className="prose max-w-none prose-img:rounded-2xl prose-img:my-6">
                                 <ReactMarkdown
                                     components={{
-                                        img: ({ node, ...props }) => (
-                                            <img
-                                                className="w-full aspect-video object-cover rounded-2xl mt-[10px] mb-8 border border-gray-100"
-                                                {...props}
-                                            />
-                                        ),
+                                        img: ({ ...props }) => {
+                                            const { node, ...rest } = props;
+                                            return (
+                                                <img
+                                                    className="w-full aspect-video object-cover rounded-2xl mt-[10px] mb-8 border border-gray-100"
+                                                    {...rest}
+                                                />
+                                            );
+                                        },
                                     }}
                                 >
-                                    {ContentComponent}
+                                    {String(ContentComponent || '')}
                                 </ReactMarkdown>
                             </div>
                         )}
@@ -312,6 +348,27 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                 <footer className="article-footer pt-4 mt-8">
                     {/* Mobile/Tablet Related Posts (shown when sidebar is hidden) */}
                     <div className="xl:hidden mt-20 pt-20 border-t border-gray-100">
+                        {/* Mobile Ad (3:4 Proportion) */}
+                        {adConfig && adConfig.content === 'active' && adConfig.image && (
+                            <div className="mb-16 animate-in fade-in duration-1000">
+                                <a
+                                    href={adConfig.excerpt || '#'}
+                                    target={adConfig.excerpt?.startsWith('http') ? '_blank' : '_self'}
+                                    rel="noopener noreferrer"
+                                    className="block group relative"
+                                >
+                                    <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-natu-brown/5 bg-gray-50 shadow-sm transition-all duration-500">
+                                        <img
+                                            src={adConfig.image}
+                                            alt="Anúncio"
+                                            className="w-full h-full object-cover transition-transform duration-700"
+                                        />
+                                        <div className="absolute inset-0 bg-natu-brown/5"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        )}
+
                         <h3 className="blog-title text-2xl text-natu-brown mb-10">Leia também</h3>
                         <div className="grid md:grid-cols-2 gap-8">
                             {articles
@@ -378,11 +435,11 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                             </h4>
                             <p className="text-white/60 text-xs uppercase tracking-widest font-sans font-bold mb-6">Equipe de Especialistas Natuclinic</p>
                             <div className="flex items-center justify-center md:justify-start gap-4">
-                                <span className="p-2.5 bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
-                                    <Unicon name="envelope" size={14} />
+                                <span className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
+                                    <Unicon name="envelope" size={16} />
                                 </span>
-                                <span className="p-2.5 bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
-                                    <Unicon name="link" size={14} />
+                                <span className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
+                                    <Unicon name="link" size={16} />
                                 </span>
                             </div>
                         </div>
@@ -405,7 +462,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                         <div className="absolute inset-0 bg-gradient-to-r from-natu-brown/0 via-natu-brown/5 to-natu-brown/0 -translate-x-full animate-[shimmer_3s_infinite]"></div>
 
                         <div className="relative z-10 max-w-lg">
-                            <h3 className="font-serif text-4xl mb-4 text-natu-brown">Deseja resultados reais como estes?</h3>
+                            <h3 className="font-serif text-4xl mb-4 text-natu-brown">E se esses resultados fossem seus?</h3>
                             <p className="font-sans font-light text-natu-brown/70 text-lg">
                                 Agende sua consulta e inicie sua jornada de transformação com nossa equipe.
                             </p>
@@ -422,7 +479,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], setCurrentPage }) => {
                         </a>
                     </div>
 
-                    <p className="text-center opacity-30 text-[10px] uppercase tracking-widest font-bold pt-8 pb-0">© 2026 Natuclinic • Ciência e Saúde</p>
+                    <p className="text-center opacity-30 text-[10px] uppercase tracking-widest font-bold pt-8 pb-0">© 2026 Natuclinic | Blog • Estética e Nutrição Ortomolecular</p>
                 </footer>
             </div>
         </div>

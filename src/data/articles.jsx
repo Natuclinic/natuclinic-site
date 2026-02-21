@@ -3,9 +3,39 @@ import React from 'react';
 
 // ARQUIVO GERADO AUTOMATICAMENTE - NÃO EDITE DIRETAMENTE
 // Este arquivo serve como fallback de alta performance e SEO para a Vercel.
-// Sincronizado em: 20/02/2026, 18:07:43
+// Sincronizado em: 21/02/2026, 10:55:45
 
 export const articles = [
+    {
+        "id": "sidebar-ad-global",
+        "title": "Global Sidebar Ad",
+        "category": "Internal_Config",
+        "date": "21 de fev. de 2026",
+        "image": "https://natuclinic-api.fabriccioarts.workers.dev/images/frame-421-1771681841356.jpg",
+        "excerpt": "https://wa.me/5561992551867?text=Olá!%20Gostaria%20de%20presentear%20a%20mulher%20da%20minha%20vida%20com%20saúde%20e%20beleza%20neste%20Dia%20Internacional%20da%20Mulher.%20Quais%20são%20as%20condições%20especiais%20disponíveis%3F",
+        "content": "active",
+        "meta_description": "",
+        "meta_keywords": "",
+        "author_name": "Equipe Natuclinic",
+        "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
+        "created_at": "2026-02-21 13:50:48",
+        "slug": "sidebar-ad-global"
+    },
+    {
+        "id": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve",
+        "title": "Nutrição Ortomolecular: o que é, como funciona e para que serve",
+        "category": "Saúde Integrativa",
+        "date": "21 de fev. de 2026",
+        "image": "https://natuclinic-api.fabriccioarts.workers.dev/images/transferir-20--1771672869524.png",
+        "excerpt": "Cansaço, inflamações e humor instável podem ter uma origem molecular. Descubra como a Nutrição Ortomolecular identifica esses desequilíbrios e age de forma personalizada.",
+        "content": "# Nutrição Ortomolecular: o que é e por que você deveria conhecer\n\nSe você já sentiu que algo no seu corpo está \"fora do lugar\" — cansaço sem explicação, humor instável, inflamações que não somem — talvez a resposta esteja em algo que ninguém te contou ainda: a composição molecular do seu organismo.\n\nÉ exatamente isso que a Nutrição Ortomolecular estuda. E não, não é modinha. É ciência com décadas de história.\n\n## A história começa com um Nobel\n\nLinus Pauling era químico e ganhou dois Prêmios Nobel em áreas diferentes — o que já diz muito sobre o calibre do homem. Mas foi a obsessão dele em entender a relação entre nutrientes e células que nos deixou um legado que usamos até hoje.\n\nEm 1949, ele identificou a anemia falciforme como a primeira doença de origem molecular da história. Quase vinte anos depois, publicou na revista *Science* o artigo *Psiquiatria Ortomolecular*, comprovando que o equilíbrio do organismo tem ligação direta com o que a gente come.\n\nSimples assim. E ao mesmo tempo, revolucionário.\n\n## O que significa \"ortomolecular\"?\n\n*Orthos* em grego quer dizer \"correto\". Então ortomolecular é, literalmente, colocar as moléculas certas no organismo — na quantidade certa, para a pessoa certa.\n\nIsso envolve combater os radicais livres, moléculas instáveis que em excesso causam o estresse oxidativo. Esse processo silencioso está por trás de diabetes, doenças cardiovasculares, inflamações crônicas e envelhecimento precoce. O problema é que a maioria das pessoas nem sabe que isso está acontecendo dentro do próprio corpo.\n\n## Não é só sobre alimentação\n\nUma coisa que ainda surpreende muita gente: a Nutrição Ortomolecular também atua no campo da saúde mental. Depressão, ansiedade, TDAH, transtorno bipolar — todas essas condições têm uma base bioquímica, e corrigir deficiências nutricionais pode melhorar significativamente a resposta ao tratamento convencional.\n\nNão é substituir remédio. É dar ao organismo o suporte que ele precisa para funcionar melhor.\n\n## O que diferencia essa abordagem\n\nA medicina tradicional tende a tratar o sintoma. A Nutrição Ortomolecular quer entender o que gerou aquele sintoma — e agir na origem, ajustando a bioquímica individual de cada paciente.\n\nNão tem protocolo único. Não tem receita pronta. Tem avaliação, personalização e acompanhamento. É mais trabalhoso, sim. Mas os resultados costumam ser mais duradouros.\n\nPauling dedicou décadas da vida a mostrar que o que entra no corpo importa mais do que a maioria das pessoas imagina. A Nutrição Ortomolecular é a prova viva disso.\n\n*Referência: Janson M. Orthomolecular medicine: the therapeutic use of dietary supplements for anti-aging. Clin Interv Aging. 2006;1(3):261-5.*",
+        "meta_description": "Saiba o que é Nutrição Ortomolecular, como ela combate radicais livres e por que vai além da nutrição tradicional. Entenda a ciência por trás da abordagem.",
+        "meta_keywords": "Nutrição Ortomolecular, suplementação ortomolecular, diferença entre nutrição convencional e ortomolecular, nutrição ortomolecular benefícios, nutrição ortomolecular radicais livres, Linus Pauling ortomolecular",
+        "author_name": "Equipe Natuclinic",
+        "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
+        "created_at": "2026-02-21 11:22:17",
+        "slug": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve"
+    },
     {
         "id": "como-kris-jenner-rejuvenesceu-aos-69-anos-tratamentos",
         "title": "Aos 69 Anos, Kris Jenner Choca a Internet: O Segredo Por Trás do Rejuvenescimento que Viralizou",

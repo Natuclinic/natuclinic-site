@@ -7,7 +7,7 @@ const AdminPost = ({ goBack }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
-    const [view, setView] = useState('list'); // 'list', 'edit', 'create'
+    const [view, setView] = useState('list'); // 'list', 'edit', 'create', 'ad-config'
     const [articles, setArticles] = useState([]);
     const [editingId, setEditingId] = useState(null);
 
@@ -90,8 +90,9 @@ const AdminPost = ({ goBack }) => {
         setStatus({ type: '', message: '' });
 
         try {
-            const method = view === 'create' ? 'POST' : 'PUT';
-            const url = view === 'create'
+            const isAdCreate = view === 'ad-config-create';
+            const method = (view === 'create' || isAdCreate) ? 'POST' : 'PUT';
+            const url = (view === 'create' || isAdCreate)
                 ? 'https://natuclinic-api.fabriccioarts.workers.dev/articles'
                 : `https://natuclinic-api.fabriccioarts.workers.dev/articles/${editingId}`;
 
@@ -157,6 +158,28 @@ const AdminPost = ({ goBack }) => {
         setView('edit');
     };
 
+    const openAdConfig = () => {
+        const adArticle = articles.find(a => a.id === 'sidebar-ad-global');
+        if (adArticle) {
+            setFormData(adArticle);
+            setEditingId('sidebar-ad-global');
+            setView('ad-config-edit'); // Alterado para distinguir de criação
+        } else {
+            setFormData({
+                ...initialForm,
+                id: 'sidebar-ad-global',
+                title: 'Global Sidebar Ad',
+                category: 'Internal_Config',
+                slug: 'sidebar-ad-global',
+                excerpt: '', // Link
+                image: '',   // Image
+                content: 'active'
+            });
+            setEditingId('sidebar-ad-global');
+            setView('ad-config-create'); // Alterado para distinguir
+        }
+    };
+
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen pt-32 flex flex-col items-center justify-center bg-gray-50 p-4">
@@ -186,19 +209,29 @@ const AdminPost = ({ goBack }) => {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
                         <h1 className="text-3xl font-serif text-natu-brown">
-                            {view === 'list' ? 'Gerenciar Blog' : view === 'edit' ? 'Editar Artigo' : 'Novo Artigo'}
+                            {view === 'list' ? 'Gerenciar Blog' :
+                                view === 'edit' ? 'Editar Artigo' :
+                                    view.startsWith('ad-config') ? 'Configurar Anúncio' : 'Novo Artigo'}
                         </h1>
                         <p className="text-xs text-natu-brown/40 uppercase tracking-widest font-bold mt-1">Painel Administrativo</p>
                     </div>
 
                     <div className="flex gap-2">
                         {view === 'list' ? (
-                            <button
-                                onClick={() => { setFormData(initialForm); setView('create'); }}
-                                className="bg-natu-brown text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
-                            >
-                                <Unicon name="plus" size={14} /> Novo Post
-                            </button>
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={() => { setFormData(initialForm); setView('create'); }}
+                                    className="bg-natu-brown text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
+                                >
+                                    <Unicon name="plus" size={14} /> Novo Post
+                                </button>
+                                <button
+                                    onClick={openAdConfig}
+                                    className="bg-natu-pink text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
+                                >
+                                    <Unicon name="image" size={14} /> Anúncio Lateral
+                                </button>
+                            </div>
                         ) : (
                             <button
                                 onClick={() => setView('list')}
@@ -233,14 +266,19 @@ const AdminPost = ({ goBack }) => {
                                                 <img src={article.image} alt="" className="w-full h-full object-cover" />
                                             </div>
                                             <div className="overflow-hidden">
-                                                <h3 className="font-bold text-natu-brown text-sm truncate max-w-xs">{article.title}</h3>
-                                                <p className="text-[10px] text-gray-400 uppercase tracking-widest">{article.category} • {article.date}</p>
+                                                <h3 className="font-bold text-natu-brown text-sm truncate max-w-xs">
+                                                    {article.id === 'sidebar-ad-global' ? <span className="text-natu-pink font-bold">[ANÚNCIO] </span> : ''}
+                                                    {article.title}
+                                                </h3>
+                                                <p className="text-[10px] text-gray-400 uppercase tracking-widest">
+                                                    {article.id === 'sidebar-ad-global' ? (article.content === 'active' ? '🟢 ATIVO' : '🔴 INATIVO') : article.category} • {article.date}
+                                                </p>
                                             </div>
                                         </div>
 
                                         <div className="flex gap-2 mt-4 md:mt-0 w-full md:w-auto">
                                             <button
-                                                onClick={() => startEdit(article)}
+                                                onClick={() => article.id === 'sidebar-ad-global' ? openAdConfig() : startEdit(article)}
                                                 className="flex-1 md:flex-none p-3 bg-white border border-gray-200 rounded-xl text-gray-600 hover:text-natu-brown hover:border-natu-brown transition-all"
                                                 title="Editar"
                                             >
@@ -261,54 +299,40 @@ const AdminPost = ({ goBack }) => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="md:col-span-2">
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Título do Artigo</label>
-                                <input
-                                    required
-                                    name="title"
-                                    value={formData.title}
-                                    onChange={handleChange}
-                                    className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none transition-all font-serif text-xl"
-                                    placeholder="Ex: Tudo sobre Endolaser"
-                                />
-                            </div>
+                        {view.startsWith('ad-config') ? (
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                <div className="p-6 bg-natu-pink/5 border border-natu-pink/10 rounded-2xl">
+                                    <h3 className="text-sm font-bold text-natu-pink uppercase tracking-widest mb-2">Configuração do Anúncio</h3>
+                                    <p className="text-xs text-natu-brown/60 leading-relaxed">Este anúncio aparecerá na lateral direita de todos os artigos, abaixo do sumário. Mantenha a proporção de 3:4 para melhores resultados.</p>
+                                </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Slug (URL)</label>
-                                <input
-                                    required
-                                    name="id"
-                                    value={formData.id}
-                                    onChange={handleChange}
-                                    disabled={view === 'edit'}
-                                    className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-xs ${view === 'edit' ? 'bg-gray-100 text-gray-400' : 'bg-gray-50'}`}
-                                    placeholder="slug-do-artigo"
-                                />
-                                {view === 'edit' && <p className="text-[9px] text-gray-400 mt-1">* Slugs não podem ser editados para manter SEO.</p>}
-                            </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Categoria</label>
-                                <select
-                                    name="category"
-                                    value={formData.category}
-                                    onChange={handleChange}
-                                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none cursor-pointer text-sm"
-                                >
-                                    <option>Saúde Integrativa</option>
-                                    <option>Estética Avançada</option>
-                                    <option>Nutrição</option>
-                                    <option>Tratamentos</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-gray-100">
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Mídia e Imagens</label>
-                            <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
-                                    <span className="text-[10px] font-bold text-natu-pink uppercase block">1. Imagem de Capa</span>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Botão de On/Off</label>
+                                    <select
+                                        name="content"
+                                        value={formData.content}
+                                        onChange={handleChange}
+                                        className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none"
+                                    >
+                                        <option value="active">Ativado</option>
+                                        <option value="inactive">Desativado</option>
+                                    </select>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Link do Anúncio (URL)</label>
+                                    <input
+                                        required
+                                        name="excerpt"
+                                        value={formData.excerpt}
+                                        onChange={handleChange}
+                                        className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none"
+                                        placeholder="https://wa.me/... ou /procedimentos/..."
+                                    />
+                                </div>
+
+                                <div className="space-y-4">
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Banner do Anúncio (Proporção 3:4)</label>
                                     <ImageUpload onUploadSuccess={(url) => setFormData(prev => ({ ...prev, image: url }))} />
                                     <input
                                         required
@@ -316,79 +340,151 @@ const AdminPost = ({ goBack }) => {
                                         value={formData.image}
                                         onChange={handleChange}
                                         className="w-full p-3 bg-gray-50 border border-gray-100 rounded-xl text-[10px] font-mono"
-                                        placeholder="URL da imagem..."
+                                        placeholder="URL da imagem (será preenchida automaticamente após o upload)"
+                                    />
+                                    {formData.image && (
+                                        <div className="mt-4 w-48 aspect-[3/4] rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
+                                            <img src={formData.image} alt="Preview do Anúncio" className="w-full h-full object-cover" />
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="pt-6 border-t border-gray-100 italic text-[10px] text-gray-400">
+                                    * Nota: Ao salvar, o site passará por um novo deploy para atualizar o banner globalmente.
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="md:col-span-2">
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Título do Artigo</label>
+                                        <input
+                                            required
+                                            name="title"
+                                            value={formData.title}
+                                            onChange={handleChange}
+                                            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none transition-all font-serif text-xl"
+                                            placeholder="Ex: Tudo sobre Endolaser"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Slug (URL)</label>
+                                        <input
+                                            required
+                                            name="id"
+                                            value={formData.id}
+                                            onChange={handleChange}
+                                            disabled={view === 'edit'}
+                                            className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-xs ${view === 'edit' ? 'bg-gray-100 text-gray-400' : 'bg-gray-50'}`}
+                                            placeholder="slug-do-artigo"
+                                        />
+                                        {view === 'edit' && <p className="text-[9px] text-gray-400 mt-1">* Slugs não podem ser editados para manter SEO.</p>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Categoria</label>
+                                        <select
+                                            name="category"
+                                            value={formData.category}
+                                            onChange={handleChange}
+                                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none cursor-pointer text-sm"
+                                        >
+                                            <option>Saúde Integrativa</option>
+                                            <option>Estética Avançada</option>
+                                            <option>Nutrição</option>
+                                            <option>Tratamentos</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className="pt-4 border-t border-gray-100">
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Mídia e Imagens</label>
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div className="space-y-4">
+                                            <span className="text-[10px] font-bold text-natu-pink uppercase block">1. Imagem de Capa</span>
+                                            <ImageUpload onUploadSuccess={(url) => setFormData(prev => ({ ...prev, image: url }))} />
+                                            <input
+                                                required
+                                                name="image"
+                                                value={formData.image}
+                                                onChange={handleChange}
+                                                className="w-full p-3 bg-gray-50 border border-gray-100 rounded-xl text-[10px] font-mono"
+                                                placeholder="URL da imagem..."
+                                            />
+                                        </div>
+                                        <div className="space-y-4">
+                                            <span className="text-[10px] font-bold text-gray-400 uppercase block">2. Upload para Conteúdo</span>
+                                            <ImageUpload />
+                                            <p className="text-[9px] text-gray-400 italic">Use este campo para gerar links de imagens secundárias.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Resumo (Excerpt)</label>
+                                    <textarea
+                                        required
+                                        name="excerpt"
+                                        value={formData.excerpt}
+                                        onChange={handleChange}
+                                        rows="2"
+                                        className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-sm"
+                                        placeholder="Breve descrição para o card do blog..."
                                     />
                                 </div>
-                                <div className="space-y-4">
-                                    <span className="text-[10px] font-bold text-gray-400 uppercase block">2. Upload para Conteúdo</span>
-                                    <ImageUpload />
-                                    <p className="text-[9px] text-gray-400 italic">Use este campo para gerar links de imagens secundárias.</p>
+
+                                <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Conteúdo (Markdown)</label>
+                                        <span className="text-[9px] bg-natu-pink/10 text-natu-pink px-2 py-0.5 rounded font-bold">EDITOR ATIVO</span>
+                                    </div>
+                                    <textarea
+                                        required
+                                        name="content"
+                                        value={formData.content}
+                                        onChange={handleChange}
+                                        rows="12"
+                                        className="w-full p-6 bg-white border border-gray-200 rounded-2xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-sm leading-relaxed"
+                                        placeholder="# Título\n\nSeu texto aqui...\n\n![Imagem](link-da-imagem)"
+                                    />
                                 </div>
-                            </div>
-                        </div>
 
-                        <div>
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Resumo (Excerpt)</label>
-                            <textarea
-                                required
-                                name="excerpt"
-                                value={formData.excerpt}
-                                onChange={handleChange}
-                                rows="2"
-                                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-sm"
-                                placeholder="Breve descrição para o card do blog..."
-                            />
-                        </div>
-
-                        <div>
-                            <div className="flex items-center justify-between mb-2">
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Conteúdo (Markdown)</label>
-                                <span className="text-[9px] bg-natu-pink/10 text-natu-pink px-2 py-0.5 rounded font-bold">EDITOR ATIVO</span>
-                            </div>
-                            <textarea
-                                required
-                                name="content"
-                                value={formData.content}
-                                onChange={handleChange}
-                                rows="12"
-                                className="w-full p-6 bg-white border border-gray-200 rounded-2xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-sm leading-relaxed"
-                                placeholder="# Título\n\nSeu texto aqui...\n\n![Imagem](link-da-imagem)"
-                            />
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Meta Description (SEO)</label>
-                                <textarea
-                                    name="meta_description"
-                                    value={formData.meta_description}
-                                    onChange={handleChange}
-                                    rows="2"
-                                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-xs"
-                                    placeholder="Descrição para o Google..."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Keywords (SEO)</label>
-                                <textarea
-                                    name="meta_keywords"
-                                    value={formData.meta_keywords}
-                                    onChange={handleChange}
-                                    rows="2"
-                                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-xs"
-                                    placeholder="tags, separadas, por, virgula"
-                                />
-                            </div>
-                        </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Meta Description (SEO)</label>
+                                        <textarea
+                                            name="meta_description"
+                                            value={formData.meta_description}
+                                            onChange={handleChange}
+                                            rows="2"
+                                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-xs"
+                                            placeholder="Descrição para o Google..."
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Keywords (SEO)</label>
+                                        <textarea
+                                            name="meta_keywords"
+                                            value={formData.meta_keywords}
+                                            onChange={handleChange}
+                                            rows="2"
+                                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none text-xs"
+                                            placeholder="tags, separadas, por, virgula"
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        )}
 
                         <button
                             type="submit"
                             disabled={loading}
-                            className={`w-full py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-3 ${view === 'edit' ? 'bg-natu-pink text-white' : 'bg-natu-brown text-white'}`}
+                            className={`w-full py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-3 ${view === 'edit' || view.startsWith('ad-config') ? 'bg-natu-pink text-white' : 'bg-natu-brown text-white'}`}
                         >
                             {loading ? <Unicon name="spinner" className="animate-spin" size={16} /> : (
                                 <>
-                                    {view === 'edit' ? 'Atualizar Artigo' : 'Publicar Agora'}
+                                    {view.startsWith('ad-config') ? 'Salvar Configurações do Anúncio' : view === 'edit' ? 'Atualizar Artigo' : 'Publicar Agora'}
                                     <Unicon name="check" size={14} />
                                 </>
                             )}

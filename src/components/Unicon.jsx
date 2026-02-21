@@ -62,7 +62,7 @@ const Unicon = ({ name, className = "w-5 h-5", size, color, strokeWidth = 2, ani
     const LucideComponent = LucideIcons[lucideName];
 
     const commonProps = {
-        className,
+        className: `${className} flicker-fix`,
         style: {
             width: size || undefined,
             height: size || undefined,
@@ -73,38 +73,55 @@ const Unicon = ({ name, className = "w-5 h-5", size, color, strokeWidth = 2, ani
     // Animation settings for premium feel
     const motionProps = animate ? {
         initial: { opacity: 0, scale: 0.8 },
-        animate: { opacity: 1, scale: 1 },
+        whileInView: { opacity: 1, scale: 1 },
+        viewport: { once: true },
         whileHover: { scale: 1.1 },
         whileTap: { scale: 0.95 },
         transition: { type: "spring", stiffness: 400, damping: 17 }
     } : {};
 
     if (LucideComponent) {
-        const MotionLucide = motion(LucideComponent);
-        // Star is usually filled in ratings
         const isFilled = fill || name === 'star';
 
         return (
-            <MotionLucide
-                {...commonProps}
+            <motion.div
                 {...motionProps}
-                strokeWidth={strokeWidth}
-                fill={isFilled ? 'currentColor' : 'none'}
-            />
+                className={`inline-flex items-center justify-center ${className} flicker-fix`}
+                style={{
+                    width: size || undefined,
+                    height: size || undefined,
+                    color: color || 'currentColor'
+                }}
+            >
+                <LucideComponent
+                    size={size || 20}
+                    strokeWidth={strokeWidth}
+                    fill={isFilled ? 'currentColor' : 'none'}
+                />
+            </motion.div>
         );
     }
 
     if (customPath) {
         return (
-            <motion.svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                {...commonProps}
+            <motion.div
                 {...motionProps}
+                className={`inline-flex items-center justify-center ${className} flicker-fix`}
+                style={{
+                    width: size || undefined,
+                    height: size || undefined,
+                    color: color || 'currentColor'
+                }}
             >
-                <path d={customPath} />
-            </motion.svg>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    style={{ width: '100%', height: '100%' }}
+                >
+                    <path d={customPath} />
+                </svg>
+            </motion.div>
         );
     }
 

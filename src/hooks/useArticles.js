@@ -4,6 +4,7 @@ import { API_URLS } from '../constants/links';
 
 export const useArticles = () => {
     const [articles, setArticles] = useState([]);
+    const [adConfig, setAdConfig] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -18,17 +19,22 @@ export const useArticles = () => {
                 if (response.ok) {
                     const data = await response.json();
                     if (data && data.length > 0) {
-                        setArticles(data);
+                        setArticles(data.filter(a => a.id !== 'sidebar-ad-global'));
+                        setAdConfig(data.find(a => a.id === 'sidebar-ad-global'));
                         return;
                     }
                 }
 
                 // Se falhar ou estiver vazio, usa o fallback local (que é sincronizado no build)
                 console.log('API Cloudflare não disponível ou vazia. Usando dados locais.');
-                setArticles(fallbackArticles || []);
+                const filteredFallback = (fallbackArticles || []).filter(a => a.id !== 'sidebar-ad-global');
+                setArticles(filteredFallback);
+                setAdConfig((fallbackArticles || []).find(a => a.id === 'sidebar-ad-global'));
             } catch (err) {
                 console.warn('Erro ao buscar artigos da API:', err);
-                setArticles(fallbackArticles || []);
+                const filteredFallback = (fallbackArticles || []).filter(a => a.id !== 'sidebar-ad-global');
+                setArticles(filteredFallback);
+                setAdConfig((fallbackArticles || []).find(a => a.id === 'sidebar-ad-global'));
             } finally {
                 setLoading(false);
             }
@@ -41,5 +47,5 @@ export const useArticles = () => {
         return articles.find(a => a.id === id);
     };
 
-    return { articles, loading, error, getArticleById };
+    return { articles, adConfig, loading, error, getArticleById };
 };
