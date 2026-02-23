@@ -103,6 +103,7 @@ const Navbar = () => {
             }
         },
         { label: 'Blog', path: '/blog' },
+        { label: 'Contato', path: '/contato' },
     ];
 
     const handleNavigation = (path) => {

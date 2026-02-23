@@ -3,6 +3,11 @@
  */
 
 const PHONE_NUMBER = "5561992551867"; // Natuclinic Official Number
+export const UNIT_PHONES = {
+    TAGUATINGA: "(61) 3372-9962",
+    PLANALTINA: "(61) 3388-6025",
+    WHATSAPP: "(61) 99255-1867"
+};
 
 const WHATSAPP_BASE = `https://wa.me/${PHONE_NUMBER}`;
 

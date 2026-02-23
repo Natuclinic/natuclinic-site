@@ -32,6 +32,7 @@ const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const BlogHighlights = React.lazy(() => import('./components/BlogHighlights'));
 const VideoFeedbacks = React.lazy(() => import('./components/VideoFeedbacks'));
 const GluteoLanding = React.lazy(() => import('./pages/GluteoLanding'));
+const Contato = React.lazy(() => import('./pages/Contato'));
 import { useArticles } from './hooks/useArticles';
 
 import Navbar from './components/Navbar';
@@ -49,24 +50,30 @@ const useSmoothScroll = () => {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Ease Out Quart
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
       touchMultiplier: 2,
+      infinite: false,
     });
 
-    // Connect Lenis to GSAP ScrollTrigger
+    // Request animation frame loop
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Sync with ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    // Sync GSAP ticker with Lenis requestAnimationFrame
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
 
-    // Turn off GSAP's lag smoothing to avoid jitters with Lenis
     gsap.ticker.lagSmoothing(0);
 
     return () => {
@@ -157,6 +164,7 @@ export default function App() {
             <Route path="/blog-post-nutricao" element={<BlogPostNutricao goBack={() => navigate(-1)} />} />
 
             <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
+            <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
 
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
