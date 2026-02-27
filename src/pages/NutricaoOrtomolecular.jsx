@@ -54,6 +54,8 @@ const NutricaoOrtomolecular = ({ goBack }) => {
     const card1Ref = useRef(null);
     const card2Ref = useRef(null);
     const card3Ref = useRef(null);
+    const [symptomsIndex, setSymptomsIndex] = useState(0);
+    const symptomsScrollRef = useRef(null);
     const progressRef = useRef(null);
     const journeyContainerRef = useRef(null);
 
@@ -316,9 +318,16 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             </NatuButton>
                         </motion.div>
 
-                        {/* Coluna da Direita: Grid de Sinais */}
                         {/* Coluna da Direita: Horizontal scroll on mobile, Grid on desktop */}
-                        <div className="w-full max-w-4xl mx-auto overflow-x-auto no-scrollbar snap-x snap-mandatory lg:overflow-visible -mx-6 px-6 lg:mx-0 lg:px-0">
+                        <div
+                            ref={symptomsScrollRef}
+                            onScroll={(e) => {
+                                const container = e.currentTarget;
+                                const index = Math.round(container.scrollLeft / (container.offsetWidth * 0.8));
+                                setSymptomsIndex(index);
+                            }}
+                            className="w-full max-w-4xl mx-auto overflow-x-auto no-scrollbar snap-x snap-mandatory lg:overflow-visible -mx-6 px-6 lg:mx-0 lg:px-0"
+                        >
                             <div className="flex lg:grid lg:grid-cols-2 gap-6 min-w-max lg:min-w-0 items-stretch">
                                 {[
                                     { title: "Fadiga Crônica", desc: "Cansaço persistente que não cessa com o repouso comum.", delay: 0 },
@@ -355,6 +364,17 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                     </motion.div>
                                 ))}
                             </div>
+                        </div>
+
+                        {/* Pagination Dots (Mobile only) */}
+                        <div className="flex lg:hidden justify-center gap-2 mt-8">
+                            {[0, 1, 2, 3].map((dot) => (
+                                <div
+                                    key={dot}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${symptomsIndex === dot ? 'w-6 bg-natu-brown' : 'w-1.5 bg-natu-brown/20'
+                                        }`}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
