@@ -153,7 +153,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             alt="Nutrição Ortomolecular na Natuclinic"
                             className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none object-[70%_center] md:object-center"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-[5] transition-opacity duration-700 group-hover:opacity-90" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-[5] transition-opacity duration-700 group-hover:opacity-90 md:hidden" />
 
                         {/* Content */}
                         <div className="absolute inset-0 z-10 flex flex-col justify-end items-center md:items-start p-6 pb-10 md:p-20 md:pb-24">
