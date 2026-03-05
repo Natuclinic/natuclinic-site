@@ -214,7 +214,7 @@ const FooterNew = () => {
                                 rel="noopener noreferrer"
                                 className="transition-all hover:opacity-80"
                             >
-                                <img src="/Bio _ Marketing.svg" alt="Bio Marketing" className="h-6 w-auto object-contain" />
+                                <img src="/Bio _ Marketing.svg" alt="Bio Marketing" className="h-6 w-auto object-contain opacity-30" />
                             </a>
                         </div>
                     </div>

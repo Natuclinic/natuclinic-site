@@ -90,7 +90,7 @@ const Navbar = () => {
                     {
                         title: 'Estética',
                         links: [
-                            { label: 'Harmonização de Glúteos', path: '/procedimentos/harmonizacao' },
+                            { label: 'Harmonização de Glúteos', path: '/gluteo-dos-sonhos' },
                             { label: 'Harmonização Facial', href: WHATSAPP_LINKS.PROCEDURES },
                             { label: 'Ninfoplastia Sem Cortes', href: WHATSAPP_LINKS.PROCEDURES },
                             { label: 'Bioestimuladores de Colágeno', href: WHATSAPP_LINKS.PROCEDURES },
