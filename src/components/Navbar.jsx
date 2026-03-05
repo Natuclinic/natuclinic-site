@@ -68,7 +68,6 @@ const Navbar = () => {
                         title: 'Saúde',
                         links: [
                             { label: 'Nutrição Ortomolecular', path: '/procedimentos/nutricao-ortomolecular' },
-                            { label: 'Emagrecimento Saudável', href: WHATSAPP_LINKS.GENERAL },
                             { label: 'Soroterapia', href: WHATSAPP_LINKS.GENERAL },
                             { label: 'Ozonioterapia', href: WHATSAPP_LINKS.GENERAL },
                             { label: 'Eletroestimulação', href: WHATSAPP_LINKS.GENERAL },
@@ -91,12 +90,11 @@ const Navbar = () => {
                     {
                         title: 'Estética',
                         links: [
-                            { label: 'Harmonização de Glúteos', path: '/gluteo-dos-sonhos' },
+                            { label: 'Harmonização de Glúteos', path: '/procedimentos/harmonizacao' },
                             { label: 'Harmonização Facial', href: WHATSAPP_LINKS.PROCEDURES },
                             { label: 'Ninfoplastia Sem Cortes', href: WHATSAPP_LINKS.PROCEDURES },
-                            { label: 'Endolaser', href: WHATSAPP_LINKS.PROCEDURES },
                             { label: 'Bioestimuladores de Colágeno', href: WHATSAPP_LINKS.PROCEDURES },
-                            { label: 'Lipo sem Cortes', href: WHATSAPP_LINKS.PROCEDURES }
+                            { label: 'Harmonização Corporal', path: '/procedimentos/endolaser' }
                         ]
                     }
                 ]

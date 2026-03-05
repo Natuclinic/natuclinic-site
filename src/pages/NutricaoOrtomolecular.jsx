@@ -494,7 +494,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     >
                         <div className="rounded-xl overflow-hidden aspect-[3/4]">
                             <img
-                                src="/nutricionista-dr-ortomolecular.jfif"
+                                src="/nutricionista-ortomolecular-integrativo-dr-julimar-meneses.jpeg"
                                 alt="Dr. Julimar Meneses - Nutricionista Ortomolecular"
                                 className="w-full h-full object-cover object-top"
                             />

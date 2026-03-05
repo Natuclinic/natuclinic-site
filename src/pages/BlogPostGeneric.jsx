@@ -399,7 +399,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig, setCurrentPage
 
                     {/* Natuclinic Protocol CTA */}
                     <div className="flex justify-center mt-12 md:mt-16 mb-16 px-4">
-                        <NatuButton href="https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma consulta ideal.">
+                        <NatuButton href="https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma consulta.">
                             <span className="text-center">Falar com Especialista</span>
                         </NatuButton>
                     </div>

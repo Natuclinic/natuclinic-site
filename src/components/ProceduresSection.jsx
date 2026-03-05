@@ -43,12 +43,12 @@ const ProcedureCard = ({ imageUrl, title, category, path, themeColor }) => {
 const ProceduresSection = () => {
     const navigate = useNavigate();
     const procedimentos = [
-        { title: "Nutrição Ortomolecular", category: "Saúde Celular", imageUrl: "/soroterapia.jpg", theme: "var(--theme-brown)", path: "/procedimentos/nutricao-ortomolecular" },
+        { title: "Nutrição Ortomolecular", category: "Saúde Celular", imageUrl: "/emagrecimento-saudavel.jpg", theme: "var(--theme-brown)", path: "/procedimentos/nutricao-ortomolecular" },
         { title: "Ninfoplastia Sem Cortes", category: "Estética Íntima", imageUrl: "/ninfoplastia.jpeg", theme: "var(--theme-pink)", path: "/procedimentos/ninfoplastia" },
-        { title: "Endolaser", category: "Tecnologia Avançada", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/procedimentos/endolaser" },
+        { title: "Harmonização Corporal", category: "Estética Corporal", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/procedimentos/endolaser" },
         { title: "Harmonização de Glúteos", category: "Estética Corporal", imageUrl: "/harmonizacao-de-gluteo.jpg", theme: "var(--theme-pink)", path: "/procedimentos/harmonizacao" },
         { title: "Harmonização Facial", category: "Estética Facial", imageUrl: "/harmonizacao-facial.jpg", theme: "var(--theme-brown)", path: "/procedimentos/harmonizacao-facial" },
-        { title: "Emagrecimento Saudável", category: "Nutrição Taguatinga", imageUrl: "/emagrecimento-saudavel.jpg", theme: "var(--theme-pink)", path: "/blog/-nutrio-ortomolecular-e-naturopatia" },
+        { title: "Terapia Injetável", category: "Soroterapia & Nutrição", imageUrl: "/soroterapia-terapia-injetavel-vitaminas-e-aminoacidos.png", theme: "var(--theme-pink)", path: "/procedimentos/nutricao-ortomolecular" },
     ];
 
     return (

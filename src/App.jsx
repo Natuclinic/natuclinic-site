@@ -178,8 +178,8 @@ export default function App() {
       </React.Suspense>
 
       {/* WhatsApp Flutuante - Global */}
-      <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="fixed bottom-10 right-10 bg-natu-brown text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 transition-transform z-[9999] shadow-lg">
-        <Unicon name="whatsapp" size={38} />
+      <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="fixed bottom-10 right-10 bg-whatsapp text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 z-[9999] shadow-lg shadow-[inset_0_0_20px_var(--color-whatsapp-dark)] border border-white/10">
+        <Unicon name="whatsapp" size={38} className="drop-shadow-md" />
       </a>
 
       <SpeedInsights />

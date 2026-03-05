@@ -45,7 +45,7 @@ const CeoSection = () => {
                     <div className="ceo-block flex flex-col gap-8">
                         <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-gray-200 w-full relative group">
                             <img
-                                src="/dr-julimar.png"
+                                src="/nutricionista-ortomolecular-integrativo-dr-julimar-meneses.jpeg"
                                 alt="Dr. Julimar Meneses"
                                 loading="lazy"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
