@@ -22,6 +22,8 @@
     background-image:
         radial-gradient(at 0% 0%, rgba(76, 38, 26, 0.03) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(193, 155, 140, 0.03) 0px, transparent 50%);
+    overflow-x: hidden;
+    position: relative;
 }
 
 /* Scoped Utility Classes */
@@ -61,9 +63,10 @@
 
 @media (max-width: 1280px) {
     .blog-system-wrapper .container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
         gap: 2rem;
         padding-inline: 1.25rem;
+        overflow-x: hidden;
     }
 }
 
@@ -384,30 +387,39 @@
 
 @media (max-width: 768px) {
     .blog-system-wrapper .fluid {
-        font-size: 2rem;
+        font-size: 1.85rem;
+        letter-spacing: -0.02em;
     }
 
     .blog-system-wrapper article p {
-        font-size: 1.15rem;
-        line-height: 1.8;
+        font-size: 1.1rem;
+        line-height: 1.75;
+        margin-bottom: 1.25rem;
     }
 
     .blog-system-wrapper article blockquote {
-        font-size: 1.2rem;
-        padding-left: 1.5rem;
+        font-size: 1.15rem;
+        padding-left: 1.25rem;
         margin: 2rem 0;
+        border-left-width: 3px;
     }
 
     .blog-system-wrapper article img {
         margin-block: 1rem;
-        border-radius: 1rem;
+        border-radius: 0.75rem;
     }
 
     .blog-system-wrapper article h2 {
-        font-size: 1.75rem;
+        font-size: 1.6rem;
+        margin-top: 2.5rem;
     }
 
     .blog-system-wrapper article h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        margin-top: 2rem;
+    }
+
+    .blog-system-wrapper .container {
+        padding-inline: 1rem;
     }
 }
