@@ -419,6 +419,17 @@
         margin-top: 2rem;
     }
 
+    /* Compact Tables for Mobile */
+    .blog-system-wrapper article table {
+        font-size: 0.85rem;
+        margin: 1.5rem 0;
+    }
+
+    .blog-system-wrapper article th,
+    .blog-system-wrapper article td {
+        padding: 0.75rem 0.5rem;
+    }
+
     .blog-system-wrapper .container {
         padding-inline: 1rem;
     }
