@@ -474,7 +474,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                         ))}
                     </div>
 
-                    <hr className="my-12 border-gray-100" />
+                    <hr className="my-12 border-natu-brown/5" />
 
                     <div className="waitlist-form bg-[#F2F0E9] text-natu-brown p-8 md:p-16 rounded-3xl relative overflow-hidden text-left flex flex-col md:flex-row items-center justify-between gap-10">
                         {/* Shimmer effect for premium feel */}

@@ -268,7 +268,7 @@ const Ninfoplastia = ({ goBack }) => {
                         ))}
                     </div>
 
-                    <hr className="my-12 border-gray-100" />
+                    <hr className="my-12 border-natu-brown/5" />
 
                     <div className="waitlist-form bg-[#F2F0E9] text-natu-brown p-8 md:p-10 rounded-3xl relative overflow-hidden text-left flex flex-col md:flex-row items-center justify-between gap-8 mb-16">
                         <div className="absolute inset-0 bg-gradient-to-r from-natu-brown/0 via-natu-brown/5 to-natu-brown/0 -translate-x-full animate-[shimmer_3s_infinite]"></div>
