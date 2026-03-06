@@ -329,6 +329,23 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                                 </table>
                                             </div>
                                         ),
+                                        a: ({ node, children, href, ...props }) => {
+                                            if (href && href.startsWith('#button:')) {
+                                                const realHref = href.replace('#button:', '');
+                                                return (
+                                                    <div className="flex justify-center my-10 w-full">
+                                                        <NatuButton href={realHref} className="scale-90 md:scale-100">
+                                                            {children}
+                                                        </NatuButton>
+                                                    </div>
+                                                );
+                                            }
+                                            return (
+                                                <a href={href} {...props} className="text-natu-pink hover:underline font-medium">
+                                                    {children}
+                                                </a>
+                                            );
+                                        },
                                         img: ({ ...props }) => {
                                             const { node, ...rest } = props;
                                             return (
