@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import '../styles/blog-system.css';
 import Unicon from '../components/Unicon';
 import { gsap } from 'gsap';
@@ -317,8 +318,9 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                         {typeof ContentComponent === 'function' || (typeof ContentComponent === 'object' && ContentComponent !== null) ? (
                             <ContentComponent />
                         ) : (
-                            <div className="prose max-w-none prose-img:rounded-2xl prose-img:my-6">
+                            <div className="prose max-w-none prose-img:rounded-2xl prose-img:my-6 prose-table:border-collapse prose-table:w-full prose-table:text-left prose-table:my-8 prose-table:border prose-table:border-gray-200 prose-th:bg-gray-50 prose-th:p-4 prose-th:border prose-th:border-gray-200 prose-td:p-4 prose-td:border prose-td:border-gray-200 prose-tr:transition-colors hover:prose-tr:bg-gray-50/50">
                                 <ReactMarkdown
+                                    remarkPlugins={[remarkGfm]}
                                     components={{
                                         img: ({ ...props }) => {
                                             const { node, ...rest } = props;

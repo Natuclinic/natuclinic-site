@@ -165,7 +165,7 @@ const Ninfoplastia = ({ goBack }) => {
                             A ninfoescultura sem cortes, referida frequentemente como ninfoplastia não cirúrgica, é um protocolo de cuidado íntimo integrativo. Esse tratamento foi pensado para mulheres que desejam restaurar o conforto, a estética e, principalmente, a autoconfiança de forma segura.
                         </p>
 
-                        <img src="/ninfoplastia.jpeg" alt="Ninfoescultura Sem Cortes na Natuclinic" className="w-full aspect-video object-cover rounded-2xl mb-8 border border-natu-brown/5 shadow-sm" />
+                        <img src="/ninfoescultura-ninfoplastia.png" alt="Ninfoescultura Sem Cortes na Natuclinic" className="w-full aspect-video object-cover rounded-2xl mb-8 border border-natu-brown/5" />
 
                         <h2 id="o-que-e">O que é a ninfoescultura sem cortes?</h2>
                         <p>
