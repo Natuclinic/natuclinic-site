@@ -20,7 +20,7 @@ const AdminPost = ({ goBack }) => {
         excerpt: '',
         content: '',
         author_name: 'Equipe Natuclinic',
-        author_avatar: 'https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff',
+        author_avatar: '/images/blog-images/avatar-natuclinic-blog.jpg',
         meta_description: '',
         meta_keywords: '',
     };

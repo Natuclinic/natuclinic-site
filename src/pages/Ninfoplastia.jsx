@@ -244,7 +244,7 @@ const Ninfoplastia = ({ goBack }) => {
                                 src="/logo-icon.png"
                                 alt="Equipe Natuclinic"
                                 className="w-full h-full object-cover p-2"
-                                onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=Natuclinic&background=4C261A&color=fff"; }}
+                                onError={(e) => { e.target.src = "/images/blog-images/avatar-natuclinic-blog.jpg"; }}
                             />
                         </div>
 

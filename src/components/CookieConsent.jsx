@@ -74,7 +74,7 @@ const CookieConsent = () => {
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 100, opacity: 0 }}
-                    className="fixed bottom-6 left-6 right-6 md:left-auto md:right-10 md:max-w-xs z-[100] font-sans"
+                    className="fixed bottom-[110px] md:bottom-32 left-6 right-6 md:left-auto md:right-10 md:max-w-xs z-[100] font-sans"
                 >
                     <div className="bg-white rounded-[1.5rem] border border-natu-brown/5 overflow-hidden p-6 flex flex-col gap-5">
                         {!showPreferences ? (

@@ -8,6 +8,7 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Routes, Route, useNavigate, useLocation, useParams, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 const Ninfoplastia = React.lazy(() => import('./pages/Ninfoplastia'));
 const Endolaser = React.lazy(() => import('./pages/Endolaser'));
@@ -124,68 +125,70 @@ export default function App() {
     location.pathname !== '/procedimentos/ninfoplastia';
 
   return (
-    <div className="min-h-screen bg-white">
-      <React.Suspense fallback={null}>
-        <main className="relative z-10 bg-white">
-          {!isServicePage && <Navbar />}
-          <Routes>
-            <Route path="/" element={
-              <>
-                <HomeIntro />
-                <HomeManifesto />
-                <ProceduresSection />
-                <CeoSection />
-                <ResultsSection id="results" />
-                <VideoFeedbacks />
-                <ResultsCTA />
-                <ClinicGallery />
-                <StatsSection />
-                <BlogHighlights />
-                <LeadCapture />
-                <QuietCTA />
-              </>
-            } />
+    <HelmetProvider>
+      <div className="min-h-screen bg-white">
+        <React.Suspense fallback={null}>
+          <main className="relative z-10 bg-white">
+            {!isServicePage && <Navbar />}
+            <Routes>
+              <Route path="/" element={
+                <>
+                  <HomeIntro />
+                  <HomeManifesto />
+                  <ProceduresSection />
+                  <CeoSection />
+                  <ResultsSection id="results" />
+                  <VideoFeedbacks />
+                  <ResultsCTA />
+                  <ClinicGallery />
+                  <StatsSection />
+                  <BlogHighlights />
+                  <LeadCapture />
+                  <QuietCTA />
+                </>
+              } />
 
-            <Route path="/procedimentos" element={
-              <div className="pt-48 min-h-screen">
-                <ProceduresSection />
-              </div>
-            } />
+              <Route path="/procedimentos" element={
+                <div className="pt-48 min-h-screen">
+                  <ProceduresSection />
+                </div>
+              } />
 
-            <Route path="/procedimentos/ninfoplastia" element={<Ninfoplastia goBack={() => navigate(-1)} />} />
-            <Route path="/procedimentos/endolaser" element={<Endolaser goBack={() => navigate(-1)} />} />
-            <Route path="/procedimentos/harmonizacao" element={<HarmonizacaoGluteos goBack={() => navigate(-1)} />} />
-            <Route path="/procedimentos/harmonizacao-facial" element={<HarmonizacaoFacial goBack={() => navigate(-1)} />} />
-            <Route path="/procedimentos/nutricao-ortomolecular" element={<NutricaoOrtomolecular goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/ninfoplastia" element={<Ninfoplastia goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/endolaser" element={<Endolaser goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/harmonizacao" element={<HarmonizacaoGluteos goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/harmonizacao-facial" element={<HarmonizacaoFacial goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/nutricao-ortomolecular" element={<NutricaoOrtomolecular goBack={() => navigate(-1)} />} />
 
-            <Route path="/blog" element={<Blog goBack={() => navigate('/')} setCurrentPage={(id) => navigate(`/blog/${id}`)} articles={articles} loading={loading} />} />
-            <Route path="/blog/:id" element={<BlogPostWrapper articles={articles} adConfig={adConfig} loading={loading} />} />
+              <Route path="/blog" element={<Blog goBack={() => navigate('/')} setCurrentPage={(id) => navigate(`/blog/${id}`)} articles={articles} loading={loading} />} />
+              <Route path="/blog/:id" element={<BlogPostWrapper articles={articles} adConfig={adConfig} loading={loading} />} />
 
-            <Route path="/adminblogpost" element={<AdminPost goBack={() => navigate(-1)} />} />
-            <Route path="/politica-de-privacidade" element={<PrivacyPolicy goBack={() => navigate(-1)} />} />
+              <Route path="/adminblogpost" element={<AdminPost goBack={() => navigate(-1)} />} />
+              <Route path="/politica-de-privacidade" element={<PrivacyPolicy goBack={() => navigate(-1)} />} />
 
-            {/* Legacy/Other routes */}
-            <Route path="/blog-post-demo" element={<BlogPostDemo goBack={() => navigate(-1)} />} />
-            <Route path="/blog-post-nutricao" element={<BlogPostNutricao goBack={() => navigate(-1)} />} />
+              {/* Legacy/Other routes */}
+              <Route path="/blog-post-demo" element={<BlogPostDemo goBack={() => navigate(-1)} />} />
+              <Route path="/blog-post-nutricao" element={<BlogPostNutricao goBack={() => navigate(-1)} />} />
 
-            <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
-            <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
+              <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
+              <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
 
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </main>
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </main>
 
-        {!isServicePage && <FooterNew />}
-      </React.Suspense>
+          {!isServicePage && <FooterNew />}
+        </React.Suspense>
 
-      {/* WhatsApp Flutuante - Global */}
-      <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="fixed bottom-10 right-10 bg-whatsapp text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 z-[9999] shadow-lg shadow-[inset_0_0_20px_var(--color-whatsapp-dark)] border border-white/10">
-        <Unicon name="whatsapp" size={38} className="drop-shadow-md" />
-      </a>
+        {/* WhatsApp Flutuante - Global */}
+        <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="fixed bottom-10 right-10 bg-whatsapp text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 z-[9999] shadow-lg shadow-[inset_0_0_20px_var(--color-whatsapp-dark)] border border-white/10">
+          <Unicon name="whatsapp" size={38} className="drop-shadow-md" />
+        </a>
 
-      <SpeedInsights />
-      <CookieConsent />
-    </div>
+        <SpeedInsights />
+        <CookieConsent />
+      </div>
+    </HelmetProvider>
   );
 }
 

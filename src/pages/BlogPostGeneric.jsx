@@ -19,10 +19,11 @@ const NatuButton = ({ children, href, className }) => (
     </a>
 );
 
-const BlogPostGeneric = ({ goBack, post, articles = [], adConfig, setCurrentPage }) => {
+const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurrentPage }) => {
     const tocRef = useRef(null);
     const contentRef = useRef(null);
     const progressBarRef = useRef(null);
+    const containerRef = useRef(null); // Added containerRef
 
     // Reading Progress Logic
     useEffect(() => {
@@ -48,19 +49,11 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig, setCurrentPage
         );
     }, [post?.id]);
 
+    // Removed the original useEffect for dynamic head tags, SEO component will handle it.
     useEffect(() => {
         if (!post) return;
         // Update Title
         document.title = `${post.title || ''} - Blog Natuclinic`;
-
-        // Update Meta Description
-        let metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) {
-            metaDesc = document.createElement('meta');
-            metaDesc.name = "description";
-            document.head.appendChild(metaDesc);
-        }
-        metaDesc.content = post.meta_description || post.meta?.description || post.excerpt || '';
 
         // Update Meta Keywords
         let metaKeywords = document.querySelector('meta[name="keywords"]');
@@ -418,7 +411,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig, setCurrentPage
 
                         <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white/30 shrink-0 relative z-10 transition-transform duration-500 group-hover:scale-105">
                             <img
-                                src={post.author_avatar || "https://ui-avatars.com/api/?name=Equipe+Natuclinic&background=4C261A&color=fff"}
+                                src={post.author_avatar || "/images/blog-images/avatar-natuclinic-blog.jpg"}
                                 alt={post.author_name || "Equipe Natuclinic"}
                                 className="w-full h-full object-cover"
                             />

@@ -3,7 +3,7 @@ import Unicon from './Unicon';
 import { WHATSAPP_LINKS } from '../constants/links';
 
 const LocationCard = ({ title, address, mapSrc, mapLink }) => (
-    <div className="group relative w-full h-[220px] rounded-[1.5rem] overflow-hidden bg-white/5 border border-[#F2F0E9]/10 transition-all duration-500 hover:border-[#F2F0E9]/30">
+    <div className="group relative w-full h-[220px] overflow-hidden bg-white/5 border border-[#F2F0E9]/10 transition-all duration-500 hover:border-[#F2F0E9]/30">
         {/* Map Iframe */}
         <div className="absolute inset-0 z-0 opacity-80 group-hover:opacity-100 transition-opacity duration-700">
             <iframe
