@@ -318,10 +318,17 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                         {typeof ContentComponent === 'function' || (typeof ContentComponent === 'object' && ContentComponent !== null) ? (
                             <ContentComponent />
                         ) : (
-                            <div className="prose max-w-none prose-img:rounded-2xl prose-img:my-6 prose-table:border-collapse prose-table:w-full prose-table:text-left prose-table:my-8 prose-table:border prose-table:border-gray-200 prose-th:bg-gray-50 prose-th:p-4 prose-th:border prose-th:border-gray-200 prose-td:p-4 prose-td:border prose-td:border-gray-200 prose-tr:transition-colors hover:prose-tr:bg-gray-50/50">
+                            <div className="prose max-w-none prose-img:rounded-2xl prose-img:my-6">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkGfm]}
                                     components={{
+                                        table: ({ children }) => (
+                                            <div className="w-full overflow-y-hidden overflow-x-auto my-8 border border-gray-100 rounded-xl">
+                                                <table className="min-w-full border-collapse">
+                                                    {children}
+                                                </table>
+                                            </div>
+                                        ),
                                         img: ({ ...props }) => {
                                             const { node, ...rest } = props;
                                             return (
