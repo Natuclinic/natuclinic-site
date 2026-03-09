@@ -67,38 +67,27 @@ const FeedbackSection = () => {
             <div className="desktop-container">
                 <div
                     ref={cardRef}
-                    className="relative bg-natu-brown rounded-[2.5rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
+                    className="relative flex flex-col items-center gap-12 lg:gap-16 text-center max-w-4xl mx-auto"
                 >
-                    {/* Subtle Background Glows */}
-                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-natu-pink/10 rounded-full blur-[100px] pointer-events-none" />
-                    <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-[100px] pointer-events-none" />
-
-                    {/* Background Texture/Image */}
-                    <img
-                        src="/fundo-card.jpg"
-                        alt=""
-                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                    />
-
                     {/* Left Content Column */}
-                    <div ref={contentRef} className="flex-1 text-center lg:text-left z-10">
+                    <div ref={contentRef} className="flex-1 z-10">
                         <span className="inline-block text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-natu-pink mb-6">
                             O QUE DIZEM
                         </span>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-[#F2F0E9] leading-[1.1] mb-8">
-                            Feedbacks de quem <br className="hidden lg:block" />
-                            <span className="italic whitespace-nowrap">já transformou a vida</span>
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-natu-brown leading-[1.1] mb-8 uppercase tracking-tighter">
+                            Feedbacks de quem <br />
+                            <span className="opacity-40 whitespace-nowrap">já transformou a vida</span>
                         </h2>
-                        <p className="text-[#F2F0E9]/80 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0 font-sans font-light">
+                        <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-8 max-w-2xl mx-auto font-sans font-light">
                             Veja o impacto real dos nossos protocolos através das avaliações no Google Meu Negócio. Nossa maior satisfação é o sorriso de cada paciente.
                         </p>
 
                         {/* Google Rating Badge */}
-                        <div className="flex flex-col items-center lg:items-start gap-4">
-                            <p className="text-[#F2F0E9]/90 text-xs md:text-sm font-bold uppercase tracking-wider">
+                        <div className="flex flex-col items-center gap-4">
+                            <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
                                 Somos a clínica mais avaliada de Taguatinga
                             </p>
-                            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-3 flicker-fix">
+                            <div className="inline-flex items-center gap-3 bg-white border border-gray-100 shadow-sm rounded-full px-5 py-3 flicker-fix">
                                 <img src="/google-icon.png" alt="Google" className="w-6 h-6" />
                                 <div className="flex gap-0.5 text-[#FFB800]">
                                     {Array.from({ length: 5 }).map((_, i) => (
@@ -107,18 +96,18 @@ const FeedbackSection = () => {
                                         </svg>
                                     ))}
                                 </div>
-                                <span className="text-[#F2F0E9] font-bold text-base">5,0</span>
+                                <span className="text-natu-brown font-bold text-base">5,0</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Right Media Column - Maximum size on mobile, balanced on desktop */}
-                    <div ref={imageRef} className="flex-1 w-full z-10 lg:absolute lg:right-4 lg:top-0 lg:bottom-0 lg:w-[48%] flex items-center justify-center p-0 lg:p-10">
+                    {/* Right Media Column - Mobile & Desktop both vertical now */}
+                    <div ref={imageRef} className="w-full max-w-2xl z-10 flex items-center justify-center">
                         <img
                             src="/feedbacks.png"
                             alt="Feedbacks Natuclinic Google"
                             loading="lazy"
-                            className="w-full h-auto max-h-full lg:max-h-[92%] object-contain transition-all duration-700 hover:scale-[1.02]"
+                            className="w-full h-auto object-contain transition-all duration-700 hover:scale-[1.02]"
                             decoding="async"
                         />
                     </div>

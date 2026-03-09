@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from "motion/react";
 import Unicon from '../components/Unicon';
 import { NatuButton } from '../components/Navbar';
+import FeedbackSection from '../components/FeedbackSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +17,7 @@ const FAQItem = ({ question, answer }) => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-start justify-between w-full text-left focus:outline-none group gap-4"
             >
-                <h3 className="font-sans font-black uppercase text-lg md:text-xl text-natu-brown group-hover:text-natu-pink transition-colors leading-[1.2] flex-1" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                <h3 className="font-serif text-lg md:text-xl text-natu-brown group-hover:text-natu-pink transition-colors leading-[1.2] flex-1">
                     {question}
                 </h3>
                 <span className={`text-natu-brown text-2xl transition-transform duration-300 font-sans leading-none shrink-0 ${isOpen ? 'rotate-45' : ''}`}>
@@ -204,8 +205,8 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         {/* Label at the top (Mobile only) */}
                         <div className="absolute top-8 left-0 right-0 z-20 flex justify-center md:hidden">
                             <BlurFade delay={0.2}>
-                                <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 font-sans">
-                                    Ortomolecular em Brasília
+                                <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 font-sans text-center">
+                                    Dr. Julimar Meneses · CRN-DF 21414
                                 </span>
                             </BlurFade>
                         </div>
@@ -214,11 +215,11 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <div className="absolute inset-0 z-10 flex flex-col justify-end items-center md:items-start p-6 pb-10 md:p-20 md:pb-24">
                             <BlurFade delay={0.2} className="hidden md:block">
                                 <span className="block text-xs font-bold uppercase tracking-[0.4em] text-white/80 mb-3 font-sans">
-                                    Ortomolecular em Brasília
+                                    Dr. Julimar Meneses · CRN-DF 21414
                                 </span>
                             </BlurFade>
                             <BlurFade delay={0.4}>
-                                <h1 className="text-4xl md:text-7xl font-sans font-black text-white leading-[0.85] tracking-tighter text-center md:text-left max-w-4xl mx-auto md:mx-0 uppercase" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                <h1 className="text-4xl md:text-7xl font-serif text-white leading-[0.85] tracking-tighter text-center md:text-left max-w-4xl mx-auto md:mx-0 uppercase">
                                     Nutrição <br />
                                     Ortomolecular
                                 </h1>
@@ -232,7 +233,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 <div className="mt-6 flex justify-center md:justify-start w-full md:w-auto">
                                     <NatuButton
                                         onClick={handleWhatsApp}
-                                        className="!bg-black hover:!bg-white hover:!text-black relative overflow-hidden group/shimmer transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                                        className="relative overflow-hidden group/shimmer transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                                     >
                                         <motion.div
                                             className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-[25deg] pointer-events-none"
@@ -326,18 +327,18 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 </span>
                             </BlurFade>
                             <BlurFade delay={0.4}>
-                                <h2 className="text-4xl md:text-5xl font-sans font-black text-[#2D3134] leading-[1] tracking-tighter mb-8 uppercase" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                <h2 className="text-4xl md:text-5xl font-serif text-natu-brown leading-[1] tracking-tighter mb-8 uppercase">
                                     O que é a Nutrição <br /> Ortomolecular?
                                 </h2>
                             </BlurFade>
                             <div className="space-y-6">
                                 <BlurFade delay={0.5}>
-                                    <p className="font-sans text-lg text-gray-700 leading-relaxed font-light">
+                                    <p className="font-sans text-lg text-natu-brown leading-relaxed font-light">
                                         Criada pelo Dr. Linus Pauling, a nutrição ortomolecular foca no <strong className="font-bold text-natu-brown">reequilíbrio químico do organismo</strong>. Ao contrário da nutrição convencional, que foca apenas em macros, nós olhamos para as moléculas.
                                     </p>
                                 </BlurFade>
                                 <BlurFade delay={0.6}>
-                                    <p className="font-sans text-lg text-gray-700 leading-relaxed font-light">
+                                    <p className="font-sans text-lg text-natu-brown leading-relaxed font-light">
                                         Identificamos carências de vitaminas, minerais e aminoácidos, além de combater o estresse oxidativo causado pelos radicais livres. É a ciência de fornecer ao seu corpo os <strong className="font-bold text-natu-brown">elementos exatos</strong> para que ele cure a si mesmo.
                                     </p>
                                 </BlurFade>
@@ -396,8 +397,8 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 <span className="text-[10px] md:text-sm font-bold uppercase tracking-[0.4em] text-[#2D3134]/40 mb-4 block font-sans">
                                     Por que fazer?
                                 </span>
-                                <h2 className="text-3xl md:text-5xl lg:text-5xl font-sans font-black text-[#2D3134] leading-[0.95] tracking-tighter mb-6 uppercase" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                                    Nutrição Ortomolecular <br /> <span className="text-[#2D3134]/40">Resolve:</span>
+                                <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif text-natu-brown leading-[0.95] tracking-tighter mb-6 uppercase">
+                                    Nutrição Ortomolecular <br /> <span className="text-natu-brown/40">Resolve:</span>
                                 </h2>
                                 <p className="font-sans text-base lg:text-lg text-gray-500 leading-relaxed font-light mb-8 max-w-sm">
                                     O desequilíbrio que rouba sua energia, seu humor e a sua vontade de viver.
@@ -452,7 +453,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                                             {/* Text Content (Right Side) */}
                                             <div className="flex flex-col">
-                                                <h4 className="font-sans font-black text-[#2D3134] text-base lg:text-lg mb-0.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                                <h4 className="font-serif text-[#2D3134] text-base lg:text-lg mb-0.5 uppercase tracking-tight leading-tight">
                                                     {item.title}
                                                 </h4>
                                                 <p className="font-sans text-[11px] lg:text-xs text-[#2D3134]/60 font-light leading-snug">
@@ -512,11 +513,11 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-4 font-sans">
                             Conheça o especialista
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-sans font-black text-gray-900 leading-tight tracking-tighter mb-2 uppercase" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                        <h2 className="text-4xl md:text-5xl font-serif text-natu-brown leading-tight tracking-tighter mb-2 uppercase">
                             Dr. Julimar Meneses
                         </h2>
                         <p className="font-sans text-sm font-medium tracking-widest text-gray-400 uppercase mb-6">
-                            Nutricionista · Farmacêutico · Doutor em Naturopatia
+                            Nutricionista · Farmacêutico · Doutor em Naturopatia · CRN-DF 21414
                         </p>
                         <div className="space-y-4 font-sans font-light text-gray-500 leading-relaxed text-base max-w-lg">
                             <p>
@@ -545,14 +546,14 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-[#2D3134]/40 uppercase block mb-6 font-sans">
                                 Nossa Metodologia
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-sans font-black text-[#2D3134] uppercase tracking-tighter leading-[0.9]" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                            <h2 className="text-4xl md:text-6xl font-serif text-natu-brown uppercase tracking-tighter leading-[0.9]">
                                 Pilares do seu <br /> atendimento
                             </h2>
                         </motion.div>
                     </div>
 
                     {/* Grid of Pillars */}
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-20">
                         {[
                             {
                                 title: "Diagnóstico Bioquímico",
@@ -560,8 +561,8 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 bgImage: "/quanto-custa-uma-consulta-com-nutricionista-ortomolecular.webp",
                             },
                             {
-                                title: "Suplementação",
-                                desc: "Fórmulas personalizadas com vitaminas e minerais na dose exata para você.",
+                                title: "Fitoterapia Integrativa",
+                                desc: "Uso de plantas medicinais e fitoterápicos para modular o metabolismo de forma natural.",
                                 bgImage: "/suplementação-natural-natuclinic-ortomolecular-em-brasilia.webp",
                             },
                             {
@@ -570,9 +571,19 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 bgImage: "/nutrição-oncologica-nutricionista-ortomolecular.png",
                             },
                             {
+                                title: "Suplementação",
+                                desc: "Fórmulas personalizadas com vitaminas e minerais na dose exata para você.",
+                                bgImage: "/tratamento-oncologico-nutricional-ortomolecular-Topaz-Gigapixel-escala-2x.jpg",
+                            },
+                            {
+                                title: "Consultas Online",
+                                desc: "Atendimento remoto completo com a mesma profundidade e cuidado da consulta presencial.",
+                                bgImage: "/julimar-naturopata-em-brasilia.webp",
+                            },
+                            {
                                 title: "Alta Performance",
                                 desc: "Monitoramento contínuo para manter sua vitalidade e clareza mental no topo.",
-                                bgImage: "/julimar-naturopata-em-brasilia.webp",
+                                bgImage: "/longevidade-com-nutrição-ortomolecular-emagrecimento-e-performance.jpg",
                             }
                         ].map((item, i) => (
                             <motion.div
@@ -595,7 +606,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                                 {/* Text Content */}
                                 <div className="text-left px-1">
-                                    <h3 className="font-sans font-black text-[#2D3134] text-lg mb-2 tracking-tight uppercase" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                    <h3 className="font-serif text-natu-brown text-lg mb-2 tracking-tight uppercase">
                                         {item.title}
                                     </h3>
                                     <p className="font-sans text-[13px] md:text-sm text-[#2D3134]/60 leading-relaxed font-normal">
@@ -616,9 +627,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-[#2D3134]/40 uppercase block mb-4 font-sans">
                             Áreas de Foco
                         </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sans font-black text-[#2D3134] uppercase tracking-tighter leading-[0.9]"
-                            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-                        >
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-natu-brown uppercase tracking-tighter leading-[0.9]">
                             Especialidades de <br /> Alta Complexidade
                         </h2>
                     </BlurFade>
@@ -633,7 +642,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3 %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
                             <div className="mb-6 text-left relative z-10">
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-black text-[#1d1d1f] uppercase tracking-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-natu-brown uppercase tracking-tight">
                                     Oncologia Nutricional Integrativa
                                 </h3>
                             </div>
@@ -663,7 +672,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3 %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
                             <div className="mb-6 text-left relative z-10">
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-black text-[#1d1d1f] uppercase tracking-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-natu-brown uppercase tracking-tight">
                                     Modulação Intestinal Sistêmica
                                 </h3>
                             </div>
@@ -693,7 +702,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3 %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
                             <div className="mb-6 text-left relative z-10">
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-black text-[#1d1d1f] uppercase tracking-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-natu-brown uppercase tracking-tight">
                                     Alta Performance & Longevidade
                                 </h3>
                             </div>
@@ -726,7 +735,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     <div className="max-w-5xl mx-auto px-6 md:px-12">
                         <div className="text-center mb-12 md:mb-16">
                             <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] text-[#2D3134]/30 uppercase block mb-6 font-sans">Jornada do Paciente</span>
-                            <h2 className="text-4xl md:text-6xl font-sans font-black text-[#2D3134] uppercase tracking-tighter mb-8 leading-[0.9]" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                            <h2 className="text-4xl md:text-6xl font-serif text-natu-brown uppercase tracking-tighter mb-8 leading-[0.9]">
                                 Sua trajetória <br /> para o equilíbrio
                             </h2>
                         </div>
@@ -784,7 +793,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                                         {/* Content on the right */}
                                         <div className="flex-1 pt-2">
-                                            <h3 className="font-sans font-black text-[#2D3134] text-lg md:text-xl mb-2 uppercase tracking-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                            <h3 className="font-serif text-natu-brown text-lg md:text-xl mb-2 uppercase tracking-tight">
                                                 {item.title}
                                             </h3>
                                             <p className="font-sans font-light text-[#2D3134]/70 text-[13px] md:text-sm lg:text-base leading-relaxed max-w-2xl">
@@ -793,6 +802,15 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                         </div>
                                     </motion.div>
                                 ))}
+                            </div>
+
+                            {/* Follow-up Note */}
+                            <div className="mt-12 pt-8 border-t border-gray-50 text-center">
+                                <p className="font-sans text-sm md:text-base text-natu-brown font-bold uppercase tracking-widest flex items-center justify-center gap-3">
+                                    <span className="w-8 h-[1px] bg-natu-brown/20" />
+                                    Todas as consultas dão direito a retorno
+                                    <span className="w-8 h-[1px] bg-natu-brown/20" />
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -807,7 +825,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-natu-brown/40 mb-3 block font-sans">
                             Aplicações
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-[#2D3134] leading-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                        <h2 className="text-3xl md:text-5xl font-serif uppercase text-natu-brown leading-tight">
                             Para quem é indicado?
                         </h2>
                         <p className="mt-4 font-sans font-light text-gray-500 max-w-2xl mx-auto">
@@ -874,7 +892,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
 
                                 <div className="relative z-10 text-center md:text-left">
-                                    <h3 className="text-2xl md:text-4xl font-sans font-black text-white uppercase tracking-tighter leading-tight mb-3" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                                    <h3 className="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter leading-tight mb-3">
                                         Recupere sua <br className="hidden md:block" /> vitalidade celular
                                     </h3>
                                     <p className="text-white/60 font-sans font-light text-sm md:text-lg max-w-sm">
@@ -895,11 +913,14 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     </div>
                 </section>
 
+                {/* 5. Feedback */}
+                <FeedbackSection />
+
                 {/* 6. FAQ */}
                 <section className="py-12 md:py-20">
                     <BlurFade className="text-center mb-12">
                         <span className="text-xs font-bold tracking-widest text-[#2D3134]/50 uppercase block mb-4 font-sans">Dúvidas comuns</span>
-                        <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-[#2D3134]" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Perguntas Frequentes</h2>
+                        <h2 className="text-3xl md:text-5xl font-serif uppercase text-natu-brown">Perguntas Frequentes</h2>
                     </BlurFade>
 
                     <div className="max-w-3xl mx-auto">
@@ -929,48 +950,51 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         />
                     </div>
                 </section>
-
-                {/* 7. Localização - Estilo Premium para Dr. Julimar */}
-                <section className="py-16 md:py-24 bg-white border-t border-gray-100">
-                    <div className="max-w-7xl mx-auto px-6 text-center mb-12">
-                        <BlurFade>
-                            <span className="text-[10px] md:text-sm font-sans font-bold tracking-[0.4em] uppercase text-gray-400 block mb-4">
-                                LOCALIZAÇÃO
-                            </span>
-                            <h2 className="text-4xl md:text-6xl font-sans font-black text-[#00A859] mb-8 uppercase tracking-tighter" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                                Onde me encontrar?
-                            </h2>
-                            <div className="space-y-3">
-                                <p className="text-xl md:text-2xl font-sans font-bold text-gray-700 tracking-tight">
-                                    Dr. Julimar Meneses - Nutricionista Ortomolecular
-                                </p>
-                                <p className="text-lg md:text-xl font-sans font-medium text-gray-500">
-                                    Taguatinga Norte (Setor E Norte), Brasília - DF
-                                </p>
-                                <p className="text-base md:text-lg font-sans text-gray-500 font-light">
-                                    Telefones: <span className="font-bold text-gray-700">(61) 99255-1867</span>
-                                </p>
-                            </div>
-                        </BlurFade>
-                    </div>
-
-                    {/* Google Map Embed - Full Width Style */}
-                    <div className="w-full h-[400px] md:h-[550px] relative overflow-hidden group border-y border-gray-100">
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://maps.google.com/maps?q=Natuclinic%20Taguatinga%20Norte&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                            frameBorder="0"
-                            scrolling="no"
-                            marginHeight="0"
-                            marginWidth="0"
-                            className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000 contrast-[1.05]"
-                            title="Localização Dr. Julimar"
-                            loading="lazy"
-                        ></iframe>
-                    </div>
-                </section>
             </div>
+
+            {/* 7. Localização - Estilo Premium para Dr. Julimar */}
+            <section className="pt-16 md:pt-24 pb-0 bg-white border-t border-gray-100">
+                <div className="max-w-7xl mx-auto px-6 text-center mb-12">
+                    <BlurFade>
+                        <span className="text-[10px] md:text-sm font-sans font-bold tracking-[0.4em] uppercase text-gray-400 block mb-4">
+                            LOCALIZAÇÃO
+                        </span>
+                        <h2 className="text-4xl md:text-6xl font-serif text-natu-brown mb-8 uppercase tracking-tighter">
+                            Onde me encontrar?
+                        </h2>
+                        <div className="space-y-3">
+                            <p className="text-xl md:text-2xl font-sans font-bold text-natu-brown tracking-tight">
+                                Dr. Julimar Meneses - Nutricionista Ortomolecular
+                            </p>
+                            <p className="text-sm font-sans font-bold text-gray-400 uppercase tracking-widest">
+                                CRN-DF 21414
+                            </p>
+                            <p className="text-lg md:text-xl font-sans font-medium text-gray-500">
+                                Taguatinga Norte (Setor E Norte), Brasília - DF
+                            </p>
+                            <p className="text-base md:text-lg font-sans text-gray-500 font-light">
+                                Telefones: <span className="font-bold text-natu-brown">(61) 99255-1867</span> / <span className="font-bold text-natu-brown">(61) 3372-9962</span>
+                            </p>
+                        </div>
+                    </BlurFade>
+                </div>
+
+                {/* Google Map Embed - Full Width Style */}
+                <div className="w-full h-[400px] md:h-[550px] relative overflow-hidden group border-y border-gray-100">
+                    <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://maps.google.com/maps?q=Natuclinic%20Taguatinga%20Norte&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        frameBorder="0"
+                        scrolling="no"
+                        marginHeight="0"
+                        marginWidth="0"
+                        className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000 contrast-[1.05]"
+                        title="Localização Dr. Julimar"
+                        loading="lazy"
+                    ></iframe>
+                </div>
+            </section>
 
         </ServiceLayout >
     );

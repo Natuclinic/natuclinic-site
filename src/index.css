@@ -7,13 +7,13 @@
   --color-whatsapp-dark: #075E54;
   --font-serif: "Playfair Display", serif;
   --font-sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  --font-blog-title: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --font-blog-title: "Playfair Display", serif;
 }
 
 @layer base {
   :root {
-    --font-primary: 'Playfair Display', serif;
-    --font-secondary: 'Helvetica', 'Arial', sans-serif;
+    --font-primary: "Playfair Display", serif;
+    --font-secondary: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     --color-primary: #4C261A;
     --color-accent: #FFC2C2;
     --theme-brown: 14 49% 14%;

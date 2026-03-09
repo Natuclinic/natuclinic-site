@@ -57,7 +57,7 @@ const CeoSection = () => {
                             <div className="space-y-1 mb-6">
                                 <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Nutricionista Ortomolecular • Farmacêutico</p>
                                 <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Doutor em Naturopatia • Biologia Molecular</p>
-                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Oncologista • Fitoterapia • Modulação Intestinal.</p>
+                                <p className="font-sans text-xs uppercase tracking-widest text-natu-brown/60">Oncologista · Fitoterapia · Modulação Intestinal · CRN-DF 21414</p>
                             </div>
                             <p className="font-sans font-light text-gray-500 leading-relaxed text-pretty max-w-sm">
                                 Com uma visão integrativa que une bioquímica e naturopatia, Dr. Julimar lidera protocolos focados na raiz celular das disfunções nutricionais e de saúde, tratando de dentro para fora.
