@@ -71,10 +71,10 @@ const FeedbackSection = () => {
                 >
                     {/* Left Content Column */}
                     <div ref={contentRef} className="flex-1 z-10">
-                        <span className="inline-block text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-natu-pink mb-6">
-                            O QUE DIZEM
+                        <span className="inline-block text-[10px] md:text-xs font-bold tracking-[0.3em] text-natu-pink mb-6">
+                            O que dizem
                         </span>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-natu-brown leading-[1.1] mb-8 uppercase tracking-tighter">
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-natu-brown leading-[1.1] mb-8 tracking-tighter">
                             Feedbacks de quem <br />
                             <span className="opacity-40 whitespace-nowrap">já transformou a vida</span>
                         </h2>

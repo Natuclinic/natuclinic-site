@@ -17,7 +17,7 @@ const FAQItem = ({ question, answer }) => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-start justify-between w-full text-left focus:outline-none group gap-4"
             >
-                <h3 className="font-serif text-lg md:text-xl text-natu-brown group-hover:text-natu-pink transition-colors leading-[1.2] flex-1">
+                <h3 className="font-sans text-lg md:text-xl text-natu-brown group-hover:text-natu-pink transition-colors leading-[1.2] flex-1">
                     {question}
                 </h3>
                 <span className={`text-natu-brown text-2xl transition-transform duration-300 font-sans leading-none shrink-0 ${isOpen ? 'rotate-45' : ''}`}>
@@ -219,7 +219,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 </span>
                             </BlurFade>
                             <BlurFade delay={0.4}>
-                                <h1 className="text-4xl md:text-7xl font-serif text-white leading-[0.85] tracking-tighter text-center md:text-left max-w-4xl mx-auto md:mx-0 uppercase">
+                                <h1 className="text-4xl md:text-7xl font-serif text-white leading-[0.85] tracking-tighter text-center md:text-left max-w-4xl mx-auto md:mx-0">
                                     Nutrição <br />
                                     Ortomolecular
                                 </h1>
@@ -327,7 +327,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 </span>
                             </BlurFade>
                             <BlurFade delay={0.4}>
-                                <h2 className="text-4xl md:text-5xl font-serif text-natu-brown leading-[1] tracking-tighter mb-8 uppercase">
+                                <h2 className="text-4xl md:text-5xl font-serif text-natu-brown leading-[1] tracking-tighter mb-8">
                                     O que é a Nutrição <br /> Ortomolecular?
                                 </h2>
                             </BlurFade>
@@ -397,7 +397,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 <span className="text-[10px] md:text-sm font-bold uppercase tracking-[0.4em] text-[#2D3134]/40 mb-4 block font-sans">
                                     Por que fazer?
                                 </span>
-                                <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif text-natu-brown leading-[0.95] tracking-tighter mb-6 uppercase">
+                                <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif text-natu-brown leading-[0.95] tracking-tighter mb-6">
                                     Nutrição Ortomolecular <br /> <span className="text-natu-brown/40">Resolve:</span>
                                 </h2>
                                 <p className="font-sans text-base lg:text-lg text-gray-500 leading-relaxed font-light mb-8 max-w-sm">
@@ -453,7 +453,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                                             {/* Text Content (Right Side) */}
                                             <div className="flex flex-col">
-                                                <h4 className="font-serif text-[#2D3134] text-base lg:text-lg mb-0.5 uppercase tracking-tight leading-tight">
+                                                <h4 className="font-sans text-[#2D3134] text-base lg:text-lg mb-0.5 tracking-tight leading-tight">
                                                     {item.title}
                                                 </h4>
                                                 <p className="font-sans text-[11px] lg:text-xs text-[#2D3134]/60 font-light leading-snug">
@@ -513,7 +513,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-4 font-sans">
                             Conheça o especialista
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-serif text-natu-brown leading-tight tracking-tighter mb-2 uppercase">
+                        <h2 className="text-4xl md:text-5xl font-serif text-natu-brown leading-tight tracking-tighter mb-2">
                             Dr. Julimar Meneses
                         </h2>
                         <p className="font-sans text-sm font-medium tracking-widest text-gray-400 uppercase mb-6">
@@ -606,7 +606,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                                 {/* Text Content */}
                                 <div className="text-left px-1">
-                                    <h3 className="font-serif text-natu-brown text-lg mb-2 tracking-tight uppercase">
+                                    <h3 className="font-sans text-natu-brown text-lg mb-2 tracking-tight">
                                         {item.title}
                                     </h3>
                                     <p className="font-sans text-[13px] md:text-sm text-[#2D3134]/60 leading-relaxed font-normal">
@@ -627,7 +627,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-[#2D3134]/40 uppercase block mb-4 font-sans">
                             Áreas de Foco
                         </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-natu-brown uppercase tracking-tighter leading-[0.9]">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-natu-brown tracking-tighter leading-[0.9]">
                             Especialidades de <br /> Alta Complexidade
                         </h2>
                     </BlurFade>
@@ -642,7 +642,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3 %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
                             <div className="mb-6 text-left relative z-10">
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-natu-brown uppercase tracking-tight">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-sans text-natu-brown tracking-tight">
                                     Oncologia Nutricional Integrativa
                                 </h3>
                             </div>
@@ -672,7 +672,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3 %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
                             <div className="mb-6 text-left relative z-10">
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-natu-brown uppercase tracking-tight">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-sans text-natu-brown tracking-tight">
                                     Modulação Intestinal Sistêmica
                                 </h3>
                             </div>
@@ -702,7 +702,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3 %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
                             <div className="mb-6 text-left relative z-10">
-                                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-natu-brown uppercase tracking-tight">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-sans text-natu-brown tracking-tight">
                                     Alta Performance & Longevidade
                                 </h3>
                             </div>
@@ -735,7 +735,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     <div className="max-w-5xl mx-auto px-6 md:px-12">
                         <div className="text-center mb-12 md:mb-16">
                             <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] text-[#2D3134]/30 uppercase block mb-6 font-sans">Jornada do Paciente</span>
-                            <h2 className="text-4xl md:text-6xl font-serif text-natu-brown uppercase tracking-tighter mb-8 leading-[0.9]">
+                            <h2 className="text-4xl md:text-6xl font-serif text-natu-brown tracking-tighter mb-8 leading-[0.9]">
                                 Sua trajetória <br /> para o equilíbrio
                             </h2>
                         </div>
@@ -793,7 +793,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                                         {/* Content on the right */}
                                         <div className="flex-1 pt-2">
-                                            <h3 className="font-serif text-natu-brown text-lg md:text-xl mb-2 uppercase tracking-tight">
+                                            <h3 className="font-sans text-natu-brown text-lg md:text-xl mb-2 tracking-tight">
                                                 {item.title}
                                             </h3>
                                             <p className="font-sans font-light text-[#2D3134]/70 text-[13px] md:text-sm lg:text-base leading-relaxed max-w-2xl">
@@ -806,7 +806,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
                             {/* Follow-up Note */}
                             <div className="mt-12 pt-8 border-t border-gray-50 text-center">
-                                <p className="font-sans text-sm md:text-base text-natu-brown font-bold uppercase tracking-widest flex items-center justify-center gap-3">
+                                <p className="font-sans text-sm md:text-base text-natu-brown font-bold tracking-widest flex items-center justify-center gap-3">
                                     <span className="w-8 h-[1px] bg-natu-brown/20" />
                                     Todas as consultas dão direito a retorno
                                     <span className="w-8 h-[1px] bg-natu-brown/20" />
@@ -825,7 +825,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-natu-brown/40 mb-3 block font-sans">
                             Aplicações
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-serif uppercase text-natu-brown leading-tight">
+                        <h2 className="text-3xl md:text-5xl font-serif text-natu-brown leading-tight">
                             Para quem é indicado?
                         </h2>
                         <p className="mt-4 font-sans font-light text-gray-500 max-w-2xl mx-auto">
@@ -892,7 +892,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
 
                                 <div className="relative z-10 text-center md:text-left">
-                                    <h3 className="text-2xl md:text-4xl font-serif text-white uppercase tracking-tighter leading-tight mb-3">
+                                    <h3 className="text-2xl md:text-4xl font-sans text-white tracking-tighter leading-tight mb-3">
                                         Recupere sua <br className="hidden md:block" /> vitalidade celular
                                     </h3>
                                     <p className="text-white/60 font-sans font-light text-sm md:text-lg max-w-sm">
@@ -920,7 +920,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                 <section className="py-12 md:py-20">
                     <BlurFade className="text-center mb-12">
                         <span className="text-xs font-bold tracking-widest text-[#2D3134]/50 uppercase block mb-4 font-sans">Dúvidas comuns</span>
-                        <h2 className="text-3xl md:text-5xl font-serif uppercase text-natu-brown">Perguntas Frequentes</h2>
+                        <h2 className="text-3xl md:text-5xl font-serif text-natu-brown">Perguntas Frequentes</h2>
                     </BlurFade>
 
                     <div className="max-w-3xl mx-auto">
@@ -956,10 +956,10 @@ const NutricaoOrtomolecular = ({ goBack }) => {
             <section className="pt-16 md:pt-24 pb-0 bg-white border-t border-gray-100">
                 <div className="max-w-7xl mx-auto px-6 text-center mb-12">
                     <BlurFade>
-                        <span className="text-[10px] md:text-sm font-sans font-bold tracking-[0.4em] uppercase text-gray-400 block mb-4">
-                            LOCALIZAÇÃO
+                        <span className="text-[10px] md:text-sm font-sans font-bold tracking-[0.4em] text-gray-400 block mb-4">
+                            Localização
                         </span>
-                        <h2 className="text-4xl md:text-6xl font-serif text-natu-brown mb-8 uppercase tracking-tighter">
+                        <h2 className="text-4xl md:text-6xl font-serif text-natu-brown mb-8 tracking-tighter">
                             Onde me encontrar?
                         </h2>
                         <div className="space-y-3">
