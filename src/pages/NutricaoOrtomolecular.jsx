@@ -553,46 +553,51 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     </div>
 
                     {/* Grid of Pillars */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12 md:gap-y-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-white/10">
                         {[
                             {
-                                title: "Diagnóstico Bioquímico",
-                                desc: "Análise profunda de biomarcadores para identificar carências celulares precisas.",
+                                title: "Rastreio Metabólico Individualizado",
+                                desc: "Análise de mais de 60 biomarcadores subclínicos para identificar desequilíbrios antes que se tornem patologias.",
                             },
                             {
-                                title: "Fitoterapia Integrativa",
-                                desc: "Uso de plantas medicinais e fitoterápicos para modular o metabolismo de forma natural.",
+                                title: "Protocolo Clean Label & Nutracêuticos",
+                                desc: "Seleção restrita de compostos de alta pureza e biodisponibilidade, livres de aditivos e metais pesados.",
                             },
                             {
-                                title: "Dieta Funcional",
-                                desc: "Plano alimentar focado em silenciar genes inflamatórios e nutrir células.",
+                                title: "Estratégia Anti-inflamatória Sistêmica",
+                                desc: "Protocolos desenhados para silenciar a inflamação de baixo grau, raiz de sintomas como fadiga e dores crônicas.",
                             },
                             {
-                                title: "Suplementação Personalizada",
-                                desc: "Fórmulas exclusivas com vitaminas e minerais na dose exata para sua necessidade celular.",
+                                title: "Reprogramação Metabólica",
+                                desc: "Intervenção bioquímica para otimizar a queima de gordura, o ganho de massa magra e a regulação hormonal.",
                             },
                             {
-                                title: "Opção de Consulta Online",
-                                desc: "Escolha entre o atendimento em consultório ou a praticidade da consulta remota com o mesmo rigor técnico.",
+                                title: "Apoio Nutricional de Alta Complexidade",
+                                desc: "Suporte especializado para modulação intestinal profunda, oncologia integrativa e doenças autoimunes.",
                             },
                             {
-                                title: "Alta Performance",
-                                desc: "Monitoramento contínuo para manter sua vitalidade e clareza mental no topo da sua capacidade.",
+                                title: "Atendimento Sem Fronteiras",
+                                desc: "A excelência técnica do consultório físico em Brasília disponível via teleconsulta de alta resolução para todo o mundo.",
                             }
                         ].map((item, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="flex flex-col items-start pt-8 border-t border-natu-brown/10"
+                                className="group flex flex-col items-start p-8 md:p-12 border-r border-b border-white/10 bg-natu-brown hover:bg-[#3D1E15] transition-colors duration-500"
                             >
-                                <div className="text-left">
-                                    <h3 className="font-sans text-natu-brown text-lg md:text-xl mb-4 tracking-tight font-bold">
+                                <div className="text-left w-full h-full flex flex-col">
+                                    <div className="mb-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-natu-pink bg-opacity-10">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="font-sans text-white text-lg md:text-xl mb-4 tracking-tight font-bold group-hover:text-natu-pink transition-colors">
                                         {item.title}
                                     </h3>
-                                    <p className="font-sans text-sm md:text-base text-[#2D3134]/60 leading-relaxed font-light">
+                                    <p className="font-sans text-sm md:text-base text-white/70 leading-relaxed font-light">
                                         {item.desc}
                                     </p>
                                 </div>
