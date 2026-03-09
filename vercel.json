@@ -4,6 +4,13 @@
             "memory": 1024
         }
     },
+    "redirects": [
+        {
+            "source": "/blog/nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve",
+            "destination": "/blog/nutricao-ortomolecular-o-que-e",
+            "permanent": true
+        }
+    ],
     "rewrites": [
         {
             "source": "/sitemap.xml",

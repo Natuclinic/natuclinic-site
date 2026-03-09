@@ -82,7 +82,7 @@ export const articles = [
         "slug": "sidebar-ad-global"
     },
     {
-        "id": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve",
+        "id": "nutricao-ortomolecular-o-que-e",
         "title": "Nutrição Ortomolecular, o que é, como funciona e para que serve?",
         "category": "Saúde Integrativa",
         "date": "21 de fev. de 2026",
@@ -94,7 +94,7 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-02-21 11:22:17",
-        "slug": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve"
+        "slug": "nutricao-ortomolecular-o-que-e"
     },
     {
         "id": "como-kris-jenner-rejuvenesceu-aos-69-anos-tratamentos",
