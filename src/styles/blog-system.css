@@ -234,23 +234,8 @@
     font-size: 2.25rem;
     font-weight: 700;
     color: var(--accent-dark);
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
     letter-spacing: -0.02em;
     line-height: 1.2;
-}
-
-.blog-system-wrapper article h2::before {
-    content: '';
-    display: inline-block;
-    width: 2px;
-    height: 1.4rem;
-    background-color: #FFC2C2;
-    border-radius: 1px;
-    opacity: 1;
-    margin-top: 0.5rem;
-    flex-shrink: 0;
 }
 
 .blog-system-wrapper article h3 {
