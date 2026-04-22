@@ -311,42 +311,7 @@ const HarmonizacaoCorporal = () => {
                 </div>
             </section>
 
-            {/* NÉCTAR */}
-            <section className="bg-[#2D1B14] py-24 md:py-36 overflow-hidden noise-bg">
-                <div className="desktop-container">
-                    <Fade>
-                        <p className="text-[10px] uppercase tracking-normal text-white/30 mb-4 text-center">O método</p>
-                        <h2 className="font-sans text-2xl md:text-3xl font-bold uppercase text-center mb-4 text-white">
-                            Conheça o <em className="bg-gradient-to-r from-[#C5A059] to-[#E5C992] bg-clip-text text-transparent not-italic">N.É.C.T.A.R</em>
-                        </h2>
-                        <p className="text-white/40 text-sm text-center mb-16 max-w-md mx-auto">
-                            Cada letra representa um pilar do protocolo Harmone Bee®
-                        </p>
-                    </Fade>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                        {[
-                            { letter: "N", title: "Nutrição personalizada",    desc: "Plano alimentar exclusivo unindo nutrição tradicional e ortomolecular." },
-                            { letter: "É", title: "Équipe especializada",       desc: "Nutricionistas, biomédicas e massoterapeuta pelo seu resultado." },
-                            { letter: "C", title: "Corporal integrado",         desc: "Estética, nutrição e hábitos em um único protocolo coeso." },
-                            { letter: "T", title: "Transformação",              desc: "Energia, autoestima e qualidade de vida além da balança." },
-                            { letter: "A", title: "Acompanhamento",             desc: "Suporte contínuo nos 90 dias, da clínica ao WhatsApp." },
-                            { letter: "R", title: "Resultados duradouros",      desc: "Uma transformação que permanece muito além dos 90 dias." },
-                        ].map((item, i) => (
-                            <Fade key={i} delay={i * 0.07}>
-                                <div className="bg-[#2D1B14] p-8 flex flex-col gap-4 group cursor-default">
-                                    <div style={{ filter: 'drop-shadow(0 0 0px rgba(197,160,89,0))', transition: 'filter 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.filter='drop-shadow(0 0 16px rgba(197,160,89,1))'} onMouseLeave={e => e.currentTarget.style.filter='drop-shadow(0 0 0px rgba(197,160,89,0))'}>
-                                        <div className="w-12 h-[54px] flex items-center justify-center bg-gradient-to-b from-[#C5A059] to-[#8B6A2E]" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}>
-                                            <span className="font-sans font-bold text-lg text-[#2D1B14] leading-none">{item.letter}</span>
-                                        </div>
-                                    </div>
-                                    <h3 className="font-sans font-bold text-xs md:text-sm leading-snug uppercase tracking-wide bg-gradient-to-r from-[#C5A059] to-[#E5C992] bg-clip-text text-transparent break-words">{item.title}</h3>
-                                    <p className="text-white/40 text-xs leading-relaxed">{item.desc}</p>
-                                </div>
-                            </Fade>
-                        ))}
-                    </div>
-                </div>
-            </section>
+
 
             {/* O que inclui */}
             <section className="bg-[#F9F7F5] text-[#2D1B14] py-24 md:py-36">
