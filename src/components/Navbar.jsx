@@ -242,6 +242,13 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             <div className={`fixed inset-0 bg-white transition-all duration-500 md:hidden flex flex-col p-8 overflow-y-auto ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-natu-brown bg-transparent z-[60]"
+                    aria-label="Fechar menu"
+                >
+                    <Unicon name="times" size={18} />
+                </button>
                 <div className="w-full mt-24 flex flex-col gap-12 font-sans">
                     {menuItems.map((item, i) => (
                         <div key={i} className="flex flex-col border-b border-gray-100 last:border-0 pb-6">
