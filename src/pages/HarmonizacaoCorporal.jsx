@@ -260,7 +260,7 @@ const HarmonizacaoCorporal = () => {
 
                         <Fade delay={0.1} className="mix-blend-difference w-full">
                             <h1 className="text-3xl md:text-4xl font-normal leading-[1.1] tracking-tight mb-8 text-white max-w-4xl mx-auto md:mx-0 drop-shadow-2xl">
-                                Seu corpo cansou das dietas. <strong className="font-serif italic bg-gradient-to-r from-[#C5A059] to-[#E5C992] bg-clip-text text-transparent inline-block">A gente também.</strong>
+                                Seu corpo cansou das dietas. <strong className="font-serif italic bg-gradient-to-r from-[#C5A059] to-[#E5C992] bg-clip-text text-transparent inline-block">A gente também.</strong> Alcance seu melhor corpo em 90 dias.
                             </h1>
                             <p className="text-sm md:text-base text-white/70 max-w-xl mb-10 font-light leading-relaxed drop-shadow-lg">
                                 <strong className="bg-gradient-to-r from-[#C5A059] to-[#E5C992] bg-clip-text text-transparent inline-block">Harmone Bee®</strong> é o protocolo de harmonização corporal de 90 dias da Natuclinic em Brasília — une nutrição ortomolecular, detox e estética avançada com acompanhamento diário no WhatsApp. Sem promessa milagrosa. Só método, ciência e cuidado real.
