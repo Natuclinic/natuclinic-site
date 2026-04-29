@@ -626,7 +626,7 @@ const HarmonizacaoCorporal = () => {
                                 Dra. Débora Meneses
                             </h2>
                             <p className="text-white/60 text-sm md:text-base leading-relaxed">
-                                <strong className="text-white">Dra. Débora Meneses</strong> é Biomédica Esteta com formação em Nutrição, à frente da Natuclinic em Taguatinga. Atende mulheres que chegam exaustas de tentativas avulsas — e constrói com cada uma um protocolo que faz sentido pra vida real, não pro Instagram.
+                                <strong className="text-white">Dra. Débora Meneses</strong> é Biomédica Esteta com formação em Nutrição, à frente da Natuclinic em Taguatinga e Planaltina-DF. Atende mulheres que chegam exaustas de tentativas avulsas — e constrói com cada uma um protocolo que faz sentido pra vida real, não pro Instagram.
                             </p>
                             <p className="text-white/60 text-sm md:text-base leading-relaxed">
                                 O <strong className="text-white">Harmone Bee®</strong> é o método dela: une o que funciona da nutrição ortomolecular, do detox clínico e da estética avançada num só caminho. Sem achismo, sem moda passageira. Cada decisão é baseada no seu exame, sua rotina e sua resposta semana a semana.
