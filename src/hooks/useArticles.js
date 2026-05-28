@@ -35,6 +35,7 @@ export const useArticles = () => {
                 setArticles(filteredFallback);
                 setAdConfig((fallbackArticles || []).find(a => a.id === 'sidebar-ad-global'));
             } catch (err) {
+                setError(err);
                 const filteredFallback = (fallbackArticles || []).filter(a => a.id !== 'sidebar-ad-global');
                 setArticles(filteredFallback);
                 setAdConfig((fallbackArticles || []).find(a => a.id === 'sidebar-ad-global'));

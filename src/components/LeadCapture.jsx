@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '../services/supabase';
 import Unicon from './Unicon';
 import Silk from './Silk';
 import { API_URLS } from '../constants/links';
@@ -71,24 +70,7 @@ const LeadCapture = () => {
                 return;
             }
 
-            // Fallback para Supabase se a API do Cloudflare falhar (ex: em ambiente local)
-            console.log('API Cloudflare falhou ou não existe. Tentando Supabase...');
-            const { error } = await supabase
-                .from('leads')
-                .insert([{
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    source: 'newsletter_section'
-                }]);
-
-            if (error) throw error;
-
-            setStatus({
-                type: 'success',
-                message: 'Inscrição realizada com sucesso! Em breve entraremos em contato.'
-            });
-            setFormData({ name: '', email: '', phone: '' });
+            throw new Error('Erro ao enviar. Tente novamente.');
         } catch (error) {
             console.error('Erro ao salvar lead:', error);
             setStatus({

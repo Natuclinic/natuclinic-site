@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { supabase } from '../services/supabase';
+import { API_URLS } from '../constants/links';
 import { motion } from "motion/react";
 import Unicon from '../components/Unicon';
 import Silk from '../components/Silk';
@@ -95,16 +95,17 @@ const GluteoLanding = () => {
         setStatus({ type: '', message: '' });
 
         try {
-            const { error } = await supabase
-                .from('leads')
-                .insert([{
+            const response = await fetch(`${API_URLS.BASE}/leads`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
                     name: formData.name,
                     phone: formData.phone,
+                    email: 'nao@informado.com',
                     source: 'gluteo_landing_final_cta',
-                    email: 'nao@informado.com' // Email is required in LeadCapture, checking if it's required in DB
-                }]);
-
-            if (error) throw error;
+                })
+            });
+            if (!response.ok) throw new Error('Erro ao enviar');
 
             setStatus({ type: 'success', message: 'Agendamento solicitado! Redirecionando para o WhatsApp...' });
 

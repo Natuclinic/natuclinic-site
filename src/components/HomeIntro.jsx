@@ -61,7 +61,6 @@ const HomeIntro = () => {
                         loop
                         muted
                         playsInline
-                        webkitPlaysInline
                         preload="auto"
                         poster="/dna-foto-preload-natuclinic-estetica-e-nutrição-ortomolecular.webp"
                         fetchPriority="high"

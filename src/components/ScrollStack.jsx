@@ -28,6 +28,9 @@ const ScrollStack = ({
     const cardsRef = useRef([]);
     const lastTransformsRef = useRef(new Map());
     const isUpdatingRef = useRef(false);
+    // Cache dos offsets dos cards — atualizado no mount e no resize, nunca no scroll
+    const cardOffsetsRef = useRef([]);
+    const endOffsetRef = useRef(0);
 
     const calculateProgress = useCallback((scrollTop, start, end) => {
         if (scrollTop < start) return 0;
@@ -59,17 +62,25 @@ const ScrollStack = ({
         }
     }, [useWindowScroll]);
 
-    const getElementOffset = useCallback(
-        element => {
-            if (useWindowScroll) {
-                const rect = element.getBoundingClientRect();
+    const measureOffsets = useCallback(() => {
+        const cards = cardsRef.current;
+        if (!cards.length) return;
+        if (useWindowScroll) {
+            // Batch all reads before any writes to avoid layout thrashing
+            cardOffsetsRef.current = cards.map(c => {
+                const rect = c.getBoundingClientRect();
                 return rect.top + window.scrollY;
-            } else {
-                return element.offsetTop;
-            }
-        },
-        [useWindowScroll]
-    );
+            });
+            const endEl = document.querySelector('.scroll-stack-end');
+            endOffsetRef.current = endEl
+                ? endEl.getBoundingClientRect().top + window.scrollY
+                : 0;
+        } else {
+            cardOffsetsRef.current = cards.map(c => c.offsetTop);
+            const endEl = scrollerRef.current?.querySelector('.scroll-stack-end');
+            endOffsetRef.current = endEl ? endEl.offsetTop : 0;
+        }
+    }, [useWindowScroll]);
 
     const updateCardTransforms = useCallback(() => {
         if (!cardsRef.current.length || isUpdatingRef.current) return;
@@ -80,16 +91,13 @@ const ScrollStack = ({
         const stackPositionPx = parsePercentage(stackPosition, containerHeight);
         const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
 
-        const endElement = useWindowScroll
-            ? document.querySelector('.scroll-stack-end')
-            : scrollerRef.current?.querySelector('.scroll-stack-end');
-
-        const endElementTop = endElement ? getElementOffset(endElement) : 0;
+        // Lê do cache — sem getBoundingClientRect no caminho crítico do scroll
+        const endElementTop = endOffsetRef.current;
 
         cardsRef.current.forEach((card, i) => {
             if (!card) return;
 
-            const cardTop = getElementOffset(card);
+            const cardTop = cardOffsetsRef.current[i] ?? 0;
             // Logic for Cards sticking together at start
             const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
             const triggerEnd = cardTop - scaleEndPositionPx;
@@ -103,8 +111,9 @@ const ScrollStack = ({
             let blur = 0;
             if (blurAmount) {
                 let topCardIndex = 0;
+                const offsets = cardOffsetsRef.current;
                 for (let j = 0; j < cardsRef.current.length; j++) {
-                    const jCardTop = getElementOffset(cardsRef.current[j]);
+                    const jCardTop = offsets[j] ?? 0;
                     const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
                     if (scrollTop >= jTriggerStart) {
                         topCardIndex = j;
@@ -161,7 +170,6 @@ const ScrollStack = ({
         calculateProgress,
         parsePercentage,
         getScrollData,
-        getElementOffset
     ]);
 
     const setupLenis = useCallback(() => {
@@ -225,15 +233,21 @@ const ScrollStack = ({
             card.style.transformOrigin = 'top center';
         });
 
+        measureOffsets();
         setupLenis();
         updateCardTransforms();
+
+        // Recalcula offsets quando o layout muda (resize de janela ou imagens carregando)
+        const ro = new ResizeObserver(() => measureOffsets());
+        ro.observe(useWindowScroll ? document.body : scroller);
 
         return () => {
             if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
             if (lenisRef.current) lenisRef.current.destroy();
             lastTransformsRef.current.clear();
+            ro.disconnect();
         };
-    }, [itemDistance, itemStackDistance, useWindowScroll, setupLenis, updateCardTransforms]);
+    }, [itemDistance, itemStackDistance, useWindowScroll, setupLenis, updateCardTransforms, measureOffsets]);
 
     return (
         <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>

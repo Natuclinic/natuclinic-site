@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ErrorBoundary from './components/ErrorBoundary';
 import Unicon from './components/Unicon';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,8 +27,6 @@ const StatsSection = React.lazy(() => import('./components/StatsSection'));
 const ResultsSection = React.lazy(() => import('./components/ResultsSection'));
 const ResultsCTA = React.lazy(() => import('./components/ResultsCTA'));
 const BlurText = React.lazy(() => import('./components/BlurText'));
-const BlogPostDemo = React.lazy(() => import('./pages/BlogPostDemo'));
-const BlogPostNutricao = React.lazy(() => import('./pages/BlogPostNutricao'));
 const BlogPostGeneric = React.lazy(() => import('./pages/BlogPostGeneric'));
 const AdminPost = React.lazy(() => import('./pages/AdminPost'));
 const LeadCapture = React.lazy(() => import('./components/LeadCapture'));
@@ -62,26 +61,15 @@ const useSmoothScroll = () => {
       infinite: false,
     });
 
-    // Request animation frame loop
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    // Sync with ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
+    const tickerFn = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(tickerFn);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      gsap.ticker.remove(tickerFn);
     };
   }, []);
 };
@@ -129,6 +117,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <div className="min-h-screen bg-natu-ivory">
+        <ErrorBoundary>
         <React.Suspense fallback={null}>
           <main className="relative z-10 bg-natu-ivory">
             {!isServicePage && <Navbar />}
@@ -169,9 +158,9 @@ export default function App() {
               <Route path="/adminblogpost" element={<AdminPost goBack={() => navigate(-1)} />} />
               <Route path="/politica-de-privacidade" element={<PrivacyPolicy goBack={() => navigate(-1)} />} />
 
-              {/* Legacy/Other routes */}
-              <Route path="/blog-post-demo" element={<BlogPostDemo goBack={() => navigate(-1)} />} />
-              <Route path="/blog-post-nutricao" element={<BlogPostNutricao goBack={() => navigate(-1)} />} />
+              {/* Legacy routes — 301 no vercel.json, Navigate como fallback client-side */}
+              <Route path="/blog-post-demo" element={<Navigate to="/blog" replace />} />
+              <Route path="/blog-post-nutricao" element={<Navigate to="/blog/nutricao-ortomolecular-o-que-e" replace />} />
 
               <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
               <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
@@ -182,6 +171,7 @@ export default function App() {
 
           {!isServicePage && <FooterNew isStatic={location.pathname.startsWith('/blog')} />}
         </React.Suspense>
+        </ErrorBoundary>
 
         {/* WhatsApp Flutuante - Global */}
         <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="fixed bottom-10 right-10 bg-whatsapp text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 z-[9999] shadow-lg shadow-[inset_0_0_20px_var(--color-whatsapp-dark)] border border-white/10">

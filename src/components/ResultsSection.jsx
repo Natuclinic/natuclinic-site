@@ -216,8 +216,9 @@ const ResultsSection = ({ id }) => {
         return () => clearInterval(autoPlayRef.current);
     }, [isAutoPlaying, baseResults.length, nextSlide]);
 
-    // GSAP Header animation
+    // GSAP Header animation — só registra quando o DOM está montado com dados
     useEffect(() => {
+        if (!sectionRef.current || baseResults.length === 0) return;
         const ctx = gsap.context(() => {
             gsap.from(".results-header", {
                 scrollTrigger: {
@@ -228,7 +229,7 @@ const ResultsSection = ({ id }) => {
             });
         }, sectionRef);
         return () => ctx.revert();
-    }, []);
+    }, [baseResults.length]);
 
     if (baseResults.length === 0) return null;
 

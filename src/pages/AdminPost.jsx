@@ -50,7 +50,8 @@ const AdminPost = ({ goBack }) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if (accessCode === 'natuclinic2026') {
+        const adminCode = import.meta.env.VITE_ADMIN_CODE;
+        if (adminCode && accessCode === adminCode) {
             setIsAuthenticated(true);
         } else {
             alert('Código incorreto');

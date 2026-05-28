@@ -58,7 +58,8 @@ const lucideMapping = {
     "activity": "Activity",
     "heart": "Heart",
     "globe": "Globe",
-    "stethoscope": "Stethoscope"
+    "stethoscope": "Stethoscope",
+    "send": "Send"
 };
 
 const Unicon = ({ name, className = "w-5 h-5", size, color, strokeWidth = 2, animate = true, fill = false }) => {

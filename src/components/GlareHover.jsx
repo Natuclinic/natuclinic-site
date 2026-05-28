@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 const GlareHover = ({
     children,
@@ -8,66 +8,68 @@ const GlareHover = ({
     className = "",
     style = {}
 }) => {
-    const ref = useRef(null);
-    const [rotation, setRotation] = useState({ x: 0, y: 0 });
-    const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
-    const [isHovering, setIsHovering] = useState(false);
+    const containerRef = useRef(null);
+    const innerRef = useRef(null);
+    const glareRef = useRef(null);
+    const rectRef = useRef(null);
+
+    const handleMouseEnter = () => {
+        // Cache rect once on enter — avoids getBoundingClientRect on every mousemove
+        rectRef.current = containerRef.current.getBoundingClientRect();
+
+        if (innerRef.current) {
+            innerRef.current.style.transition = 'transform 0.1s cubic-bezier(0.2, 0, 0.2, 1)';
+        }
+        if (glareRef.current) {
+            glareRef.current.style.opacity = glareOpacity;
+        }
+    };
+
+    const handleMouseLeave = () => {
+        rectRef.current = null;
+
+        if (innerRef.current) {
+            innerRef.current.style.transition = `transform ${transitionDuration}ms ease-out`;
+            innerRef.current.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        }
+        if (glareRef.current) {
+            glareRef.current.style.opacity = 0;
+            glareRef.current.style.transition = `opacity ${transitionDuration}ms`;
+        }
+    };
 
     const handleMouseMove = (e) => {
-        if (!ref.current) return;
+        const rect = rectRef.current;
+        if (!rect || !innerRef.current || !glareRef.current) return;
 
-        const rect = ref.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        // Calculate percent for glare
         const xPercent = (x / rect.width) * 100;
         const yPercent = (y / rect.height) * 100;
 
-        // Calculate rotation
-        // Center is (0,0) rotation.
-        // Max tilt is small, e.g. 2 degrees, to be subtle like the visual style
         const MAX_TILT = 3;
+        const xNorm = (x - rect.width / 2) / (rect.width / 2);
+        const yNorm = (y - rect.height / 2) / (rect.height / 2);
 
-        const xCenter = rect.width / 2;
-        const yCenter = rect.height / 2;
-
-        // Normalize -1 to 1
-        const xNorm = (x - xCenter) / xCenter;
-        const yNorm = (y - yCenter) / yCenter;
-
-        // Tilt math: mov up (y negative) -> rotateX positive. mov right (x positive) -> rotateY positive
-        const rotX = -yNorm * MAX_TILT;
-        const rotY = xNorm * MAX_TILT;
-
-        setRotation({ x: rotX, y: rotY });
-        setGlarePos({ x: xPercent, y: yPercent });
-    };
-
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => {
-        setIsHovering(false);
-        setRotation({ x: 0, y: 0 });
-        // Optional: reset glare to center or leave it
+        // Write directly to DOM — no setState, no re-render
+        innerRef.current.style.transform = `rotateX(${-yNorm * MAX_TILT}deg) rotateY(${xNorm * MAX_TILT}deg)`;
+        glareRef.current.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, ${glareColor}, transparent 60%)`;
     };
 
     return (
         <div
-            ref={ref}
+            ref={containerRef}
             className={className}
-            style={{
-                perspective: '1000px',
-                transformStyle: 'preserve-3d',
-                ...style
-            }}
+            style={{ perspective: '1000px', transformStyle: 'preserve-3d', ...style }}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             <div
+                ref={innerRef}
                 style={{
-                    transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-                    transition: isHovering ? 'transform 0.1s cubic-bezier(0.2, 0, 0.2, 1)' : `transform ${transitionDuration}ms ease-out`,
+                    transform: 'rotateX(0deg) rotateY(0deg)',
                     transformStyle: 'preserve-3d',
                     width: '100%',
                     height: '100%',
@@ -76,21 +78,19 @@ const GlareHover = ({
             >
                 {children}
                 <div
+                    ref={glareRef}
                     style={{
                         position: 'absolute',
                         top: 0,
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, ${glareColor}, transparent 60%)`,
-                        opacity: isHovering ? glareOpacity : 0,
+                        opacity: 0,
                         pointerEvents: 'none',
-                        mixBlendMode: 'soft-light', // soft-light or overlay usually looks best for glare
-                        transition: isHovering ? 'opacity 0.2s' : `opacity ${transitionDuration}ms`,
+                        mixBlendMode: 'soft-light',
+                        transition: `opacity ${transitionDuration}ms`,
                         zIndex: 50,
-                        borderRadius: 'inherit' // Inherits from the child usually if it fills, but here it inherits from this abs div. 
-                        // We need to ensure the parent of this div has radius. 
-                        // In usage, we will put this inside the rounded card or wrap the rounded card.
+                        borderRadius: 'inherit',
                     }}
                 />
             </div>

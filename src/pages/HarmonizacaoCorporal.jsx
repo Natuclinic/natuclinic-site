@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { supabase } from '../services/supabase';
+import { API_URLS } from '../constants/links';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { WHATSAPP_LINKS } from '../constants/links';
 import { gsap } from 'gsap';
@@ -208,13 +208,17 @@ const HarmonizacaoCorporal = () => {
         setLoading(true);
         setStatus({ type: '', message: '' });
         try {
-            const { error } = await supabase.from('leads').insert([{
-                name: formData.name,
-                phone: formData.phone,
-                source: 'Landing_Harmone_BEE',
-                email: 'nao@informado.com'
-            }]);
-            if (error) throw error;
+            const response = await fetch(`${API_URLS.BASE}/leads`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: 'nao@informado.com',
+                    source: 'Landing_Harmone_BEE',
+                })
+            });
+            if (!response.ok) throw new Error('Erro ao enviar');
             setStatus({ type: 'success', message: 'Enviado. Redirecionando para o WhatsApp...' });
             setTimeout(() => {
                 handleWhatsApp();
