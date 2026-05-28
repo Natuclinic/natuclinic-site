@@ -188,9 +188,13 @@ const AdminPost = ({ goBack }) => {
                     <Unicon name="lock" size={48} className="text-natu-brown mx-auto mb-4 opacity-30" />
                     <h2 className="text-xl font-bold text-natu-brown mb-6">Acesso Restrito</h2>
                     <form onSubmit={handleLogin} className="space-y-4">
+                        <label htmlFor="admin-access-code" className="sr-only">Código de Acesso</label>
                         <input
+                            id="admin-access-code"
+                            name="access-code"
                             type="password"
                             placeholder="Código de Acesso"
+                            autoComplete="current-password"
                             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-natu-brown/20 text-center"
                             value={accessCode}
                             onChange={(e) => setAccessCode(e.target.value)}

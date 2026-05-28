@@ -10,23 +10,23 @@ import { WHATSAPP_LINKS } from '../constants/links';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Definido fora do componente para evitar recriação a cada render (causaria perda de foco nos inputs)
+const BlurFade = ({ children, delay = 0, yOffset = 20, className = "" }) => (
+    <motion.div
+        initial={{ opacity: 0, filter: 'blur(10px)', y: yOffset }}
+        whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay, ease: "easeOut" }}
+        className={className}
+    >
+        {children}
+    </motion.div>
+);
+
 const GluteoLanding = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
-
-    // Helper component for blur-in animation
-    const BlurFade = ({ children, delay = 0, yOffset = 20, className = "" }) => (
-        <motion.div
-            initial={{ opacity: 0, filter: 'blur(10px)', y: yOffset }}
-            whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay, ease: "easeOut" }}
-            className={className}
-        >
-            {children}
-        </motion.div>
-    );
 
     const [formData, setFormData] = useState({
         name: '',
