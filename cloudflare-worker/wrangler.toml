@@ -7,8 +7,8 @@ binding = "DB"
 database_name = "natuclinic-db"
 database_id = "96a7cb1e-d219-42a5-914f-f5c19644863d"
 
-# [[r2_buckets]]
-# binding = "IMAGES"
-# bucket_name = "natuclinic-images"
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "natuclinic-images"
 
 [vars]
