@@ -10,6 +10,23 @@ const HarmonizacaoFacial = ({ goBack }) => {
             goBack={goBack}
             coverImage="/harmonizacao-facial.jpg"
             whatsappMessage="Olá! Gostaria de saber mais sobre a Harmonização Facial."
+            seo={{
+                title: "Harmonização Facial em Brasília — Ácido Hialurônico e Botox Natural",
+                description: "Harmonização facial na Natuclinic em Brasília e Taguatinga. Botox, preenchimento labial e contorno facial com resultado natural. Agende sua avaliação.",
+                url: "https://natuclinic.com.br/procedimentos/harmonizacao-facial",
+                canonical: "https://natuclinic.com.br/procedimentos/harmonizacao-facial",
+                keywords: "harmonização facial brasília, botox taguatinga, preenchimento labial, ácido hialurônico",
+                image: "/harmonizacao-facial.jpg",
+                jsonLd: {
+                    "@context": "https://schema.org",
+                    "@type": "MedicalProcedure",
+                    "name": "Harmonização Facial",
+                    "description": "Harmonização facial com ácido hialurônico e bioestimuladores para realçar a beleza natural.",
+                    "url": "https://natuclinic.com.br/procedimentos/harmonizacao-facial",
+                    "procedureType": "Noninvasive",
+                    "performer": { "@type": "MedicalOrganization", "name": "Natuclinic", "url": "https://natuclinic.com.br" }
+                },
+            }}
         >
             {/* 1. Introdução */}
             <section>

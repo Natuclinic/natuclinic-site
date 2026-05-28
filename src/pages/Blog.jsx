@@ -1,5 +1,6 @@
 import React from 'react';
 import Unicon from '../components/Unicon';
+import SEO from '../components/SEO';
 // import { useArticles } from '../hooks/useArticles';
 
 const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
@@ -20,6 +21,13 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
 
     return (
         <div className="pt-24 pb-24 min-h-screen bg-white">
+            <SEO
+                title="Blog de Saúde e Estética — Natuclinic Brasília"
+                description="Artigos sobre nutrição ortomolecular, estética, emagrecimento saudável e bem-estar. Conteúdo produzido pela equipe especialista da Natuclinic em Brasília."
+                url="https://natuclinic.com.br/blog"
+                canonical="https://natuclinic.com.br/blog"
+                keywords="blog saúde brasília, nutrição ortomolecular, estética corporal, emagrecimento saudável"
+            />
             <div className="desktop-container">
                 {/* Header */}
                 <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -27,7 +35,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                         Blog Natuclinic
                     </span>
                     <h1 className="text-5xl md:text-7xl font-sans font-bold text-natu-brown mb-8">
-
+                        Saúde &amp; Estética
                     </h1>
 
                     {/* Search Bar */}

@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Unicon from './Unicon';
+import SEO from './SEO';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ServiceLayout = ({ title, subtitle, children, goBack, coverImage, whatsappMessage, hideHeader }) => {
+const ServiceLayout = ({ title, subtitle, children, goBack, coverImage, whatsappMessage, hideHeader, seo }) => {
     const headerRef = useRef(null);
 
     useEffect(() => {
@@ -24,6 +25,7 @@ const ServiceLayout = ({ title, subtitle, children, goBack, coverImage, whatsapp
 
     return (
         <div className="min-h-screen bg-white text-natu-brown selection:bg-natu-pink/30">
+            {seo && <SEO {...seo} />}
 
 
             {/* Hero Header */}

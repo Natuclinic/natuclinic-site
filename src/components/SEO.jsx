@@ -1,34 +1,46 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const SEO = ({ title, description, image, url, type = 'website', keywords = '' }) => {
-    const siteName = 'Natuclinic - Clínica de Estética em Brasília';
-    const defaultImage = '/logo-icon.png'; // Substitua pelo caminho de uma imagem geral padrão da Natuclinic se preferir
-    const defaultDesc = 'Clínica de Estética e Nutrição Ortomolecular em Brasília e Taguatinga. Especialistas em Rejuvenescimento, Harmonização e Corpo Essencializado.';
+const SITE_NAME = 'Natuclinic - Clínica de Estética em Brasília';
+const SITE_URL = 'https://natuclinic.com.br';
+const DEFAULT_IMAGE = `${SITE_URL}/og-default.jpg`;
+const DEFAULT_DESC = 'Clínica de Estética e Nutrição Ortomolecular em Brasília e Taguatinga. Especialistas em Rejuvenescimento, Harmonização e Corpo Essencializado.';
 
-    const seoTitle = title ? `${title} | ${siteName}` : siteName;
-    const seoDesc = description || defaultDesc;
-    const seoImage = image || defaultImage;
-    const seoUrl = url || 'https://natuclinic.com.br';
+const SEO = ({ title, description, image, url, type = 'website', keywords = '', canonical, jsonLd }) => {
+    const seoTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+    const seoDesc = description || DEFAULT_DESC;
+    const seoImage = image?.startsWith('http') ? image : `${SITE_URL}${image || '/og-default.jpg'}`;
+    const seoUrl = url || SITE_URL;
+    const canonicalUrl = canonical || seoUrl;
 
     return (
         <Helmet>
-            {/* Standard metadata tags */}
             <title>{seoTitle}</title>
             <meta name="description" content={seoDesc} />
             {keywords && <meta name="keywords" content={keywords} />}
+            <link rel="canonical" href={canonicalUrl} />
 
-            {/* Open Graph tags / Facebook / WhatsApp */}
+            {/* Open Graph */}
             <meta property="og:type" content={type} />
             <meta property="og:title" content={seoTitle} />
             <meta property="og:description" content={seoDesc} />
             <meta property="og:image" content={seoImage} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
             <meta property="og:url" content={seoUrl} />
-            <meta property="og:site_name" content={siteName} />
+            <meta property="og:site_name" content={SITE_NAME} />
+            <meta property="og:locale" content="pt_BR" />
 
-            {/* Twitter tags */}
-            <meta name="twitter:creator" content="@natuclinic" />
+            {/* JSON-LD Structured Data */}
+            {jsonLd && (
+                <script type="application/ld+json">
+                    {JSON.stringify(jsonLd)}
+                </script>
+            )}
+
+            {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@natuclinic" />
             <meta name="twitter:title" content={seoTitle} />
             <meta name="twitter:description" content={seoDesc} />
             <meta name="twitter:image" content={seoImage} />

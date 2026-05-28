@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { API_URLS } from '../constants/links';
+import SEO from '../components/SEO';
 import { motion } from "motion/react";
 import Unicon from '../components/Unicon';
 import Silk from '../components/Silk';
@@ -126,6 +127,14 @@ const GluteoLanding = () => {
 
     return (
         <div className="min-h-screen bg-white text-natu-brown overflow-x-hidden selection:bg-natu-pink/30">
+            <SEO
+                title="Glúteos dos Sonhos — Harmonização de Glúteos em Brasília"
+                description="Protocolo exclusivo de harmonização de glúteos com ácido hialurônico na Natuclinic em Brasília. Volume, projeção e contorno natural sem cirurgia. Agende sua avaliação."
+                url="https://natuclinic.com.br/gluteo-dos-sonhos"
+                canonical="https://natuclinic.com.br/gluteo-dos-sonhos"
+                keywords="harmonização glúteos brasília, preenchimento glúteo taguatinga, glúteos dos sonhos, ácido hialurônico glúteo"
+                image="/harmonização de-gluteo/harmonizacao-de-gluteos-dra.jpg"
+            />
 
 
             {/* Hero Section (Cloned from Home style) */}

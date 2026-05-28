@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import Unicon from '../components/Unicon';
 import { WHATSAPP_LINKS } from '../constants/links';
 import '../styles/blog-system.css';
+import SEO from '../components/SEO';
 
 const NatuButton = ({ children, href, className }) => (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`natu-button ${className || ''}`} style={{ padding: '1rem 2rem', fontSize: '12px', letterSpacing: '0.2em' }}>
@@ -101,6 +102,14 @@ const Ninfoplastia = ({ goBack }) => {
 
     return (
         <div className="blog-system-wrapper pt-44 md:pt-48 bg-white min-h-screen">
+            <SEO
+                title="Ninfoplastia Sem Cortes em Brasília — Estética Íntima na Natuclinic"
+                description="Ninfoescultura sem cirurgia em Brasília e Taguatinga. Tratamento não invasivo de estética íntima com resultado imediato. Sem internação, sem cicatrizes. Agende."
+                url="https://natuclinic.com.br/procedimentos/ninfoplastia"
+                canonical="https://natuclinic.com.br/procedimentos/ninfoplastia"
+                keywords="ninfoplastia brasília, ninfoescultura sem cortes, estética íntima taguatinga, labioplastia não cirúrgica"
+                image="/ninfoescultura-ninfoplastia.png"
+            />
             <div
                 ref={progressBarRef}
                 className="fixed top-0 left-0 h-1.5 bg-natu-pink z-[100] transition-all duration-150 ease-out"
