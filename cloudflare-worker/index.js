@@ -216,7 +216,20 @@ export default {
 
 // Helper function to send email via Resend
 async function sendEmailWithResend(lead, env) {
-    const apiKey = env.RESEND_API_KEY || "re_NMJvqVN9_Nm3rzeiQHwahanDdQTtLEoMv";
+    const apiKey = env.RESEND_API_KEY;
+    if (!apiKey) {
+        console.warn("RESEND_API_KEY não configurada. Email não enviado.");
+        return;
+    }
+
+    const sourceLabels = {
+        'newsletter_section': 'Newsletter — Home',
+        'gluteo_landing_final_cta': 'Landing Glúteos dos Sonhos',
+        'Landing_Harmone_BEE': 'Landing Harmonização Corporal',
+        'website': 'Site',
+    };
+    const sourceLabel = sourceLabels[lead.source] || lead.source;
+    const whatsappLink = `https://wa.me/${lead.phone.replace(/\D/g, '')}`;
 
     try {
         const response = await fetch('https://api.resend.com/emails', {
@@ -228,21 +241,42 @@ async function sendEmailWithResend(lead, env) {
             body: JSON.stringify({
                 from: 'Natuclinic Leads <onboarding@resend.dev>',
                 to: ['marketingnatuclinic@gmail.com'],
-                subject: `🚀 Novo Lead: ${lead.name}`,
+                subject: `Novo lead: ${lead.name} — ${sourceLabel}`,
                 html: `
-                    <div style="font-family: sans-serif; padding: 20px; color: #4C261A; border: 1px solid #F2F0E9; border-radius: 12px; max-width: 600px;">
-                        <h2 style="margin-top: 0; color: #4C261A; border-bottom: 2px solid #F2F0E9; padding-bottom: 10px;">Novo Lead Recebido! 🚀</h2>
-                        <div style="padding: 15px 0;">
-                            <p style="margin: 10px 0;"><strong>Nome:</strong> <span style="color: #333;">${lead.name}</span></p>
-                            <p style="margin: 10px 0;"><strong>E-mail:</strong> <span style="color: #333;">${lead.email}</span></p>
-                            <p style="margin: 10px 0;"><strong>WhatsApp:</strong> <span style="color: #333;">${lead.phone}</span></p>
-                            <p style="margin: 10px 0;"><strong>Origem:</strong> <span style="color: #333;">${lead.source}</span></p>
+                    <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #e8e2dc; border-radius: 12px; overflow: hidden;">
+                        <div style="background: #4C261A; padding: 24px 32px;">
+                            <p style="margin: 0; color: #FFC2C2; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;">Natuclinic</p>
+                            <h1 style="margin: 6px 0 0; color: #fff; font-size: 20px;">Novo Lead Recebido</h1>
                         </div>
-                        <div style="background-color: #F2F0E9; padding: 15px; border-radius: 8px; margin-top: 10px;">
-                            <p style="margin: 0; font-size: 14px;"><strong>Dica:</strong> Entre em contato com o lead em menos de 15 minutos para aumentar as chances de conversão.</p>
+                        <div style="padding: 28px 32px;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 10px 0; color: #888; font-size: 13px; width: 100px;">Nome</td>
+                                    <td style="padding: 10px 0; color: #1a1a1a; font-size: 14px; font-weight: 600;">${lead.name}</td>
+                                </tr>
+                                <tr style="border-top: 1px solid #f0ebe5;">
+                                    <td style="padding: 10px 0; color: #888; font-size: 13px;">WhatsApp</td>
+                                    <td style="padding: 10px 0;">
+                                        <a href="${whatsappLink}" style="color: #25D366; font-size: 14px; font-weight: 600; text-decoration: none;">${lead.phone} — Abrir conversa</a>
+                                    </td>
+                                </tr>
+                                ${lead.email !== 'nao@informado.com' ? `
+                                <tr style="border-top: 1px solid #f0ebe5;">
+                                    <td style="padding: 10px 0; color: #888; font-size: 13px;">E-mail</td>
+                                    <td style="padding: 10px 0; color: #1a1a1a; font-size: 14px;">${lead.email}</td>
+                                </tr>` : ''}
+                                <tr style="border-top: 1px solid #f0ebe5;">
+                                    <td style="padding: 10px 0; color: #888; font-size: 13px;">Interesse</td>
+                                    <td style="padding: 10px 0; color: #4C261A; font-size: 14px; font-weight: 600;">${sourceLabel}</td>
+                                </tr>
+                            </table>
+                            <div style="background: #fdf8f5; border-left: 3px solid #FFC2C2; padding: 14px 16px; margin-top: 20px; border-radius: 0 6px 6px 0;">
+                                <p style="margin: 0; font-size: 13px; color: #4C261A;">Entre em contato em até <strong>15 minutos</strong> para maximizar a chance de conversão.</p>
+                            </div>
                         </div>
-                        <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0 15px 0;">
-                        <p style="font-size: 10px; color: #999; text-align: center;">Notificação Automática Sistema Natuclinic</p>
+                        <div style="padding: 16px 32px; background: #faf7f5; border-top: 1px solid #e8e2dc;">
+                            <p style="margin: 0; font-size: 11px; color: #bbb; text-align: center;">Notificação automática — Natuclinic CRM</p>
+                        </div>
                     </div>
                 `
             })
