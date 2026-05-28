@@ -1,16 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
+    target: 'esnext',
+    minify: 'esbuild',
+    cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks: {
           'three-vendor': ['three', '@react-three/fiber'],
           'animation-vendor': ['gsap', 'motion', 'lenis'],
-          'react-vendor': ['react', 'react-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'markdown-vendor': ['react-markdown', 'rehype-raw', 'remark-gfm'],
         }
       }
     }

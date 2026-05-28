@@ -334,6 +334,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                     muted={isMuted}
                                     loop
                                     playsInline
+                                    preload="none"
                                     onClick={(e) => {
                                         const video = e.target;
                                         if (video.paused) video.play();

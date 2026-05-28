@@ -39,10 +39,10 @@ import { useArticles } from './hooks/useArticles';
 
 import Navbar from './components/Navbar';
 import HomeIntro from './components/HomeIntro';
-import HomeManifesto from './components/HomeManifesto';
-import ProceduresSection from './components/ProceduresSection';
-import QuietCTA from './components/QuietCTA';
-import CookieConsent from './components/CookieConsent';
+const HomeManifesto = React.lazy(() => import('./components/HomeManifesto'));
+const ProceduresSection = React.lazy(() => import('./components/ProceduresSection'));
+const QuietCTA = React.lazy(() => import('./components/QuietCTA'));
+const CookieConsent = React.lazy(() => import('./components/CookieConsent'));
 
 
 import Lenis from 'lenis';
