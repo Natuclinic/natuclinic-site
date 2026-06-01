@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useArticles } from '../hooks/useArticles';
 import Unicon from './Unicon';
@@ -7,140 +7,239 @@ import { gsap } from 'gsap';
 const BlogHighlights = () => {
     const { articles, loading } = useArticles();
     const navigate = useNavigate();
-    const containerRef = useRef(null);
-    const isDragging = useRef(false);
-    const startX = useRef(0);
-    const startScroll = useRef(0);
+    const scrollContainerRef = useRef(null);
+    const sectionRef = useRef(null);
+    const itemRefs = useRef({});
+    const [activeIndex, setActiveIndex] = React.useState(0);
 
-    const scroll = useCallback((direction) => {
-        const el = containerRef.current;
-        if (!el) return;
-        const card = el.querySelector('[data-card]');
-        const cardWidth = card ? card.offsetWidth + 24 : el.offsetWidth / 3;
-        gsap.to(el, {
-            scrollLeft: el.scrollLeft + (direction === 'next' ? cardWidth : -cardWidth),
-            duration: 0.7,
-            ease: 'power2.inOut'
-        });
-    }, []);
+    // Drag state
+    const [isDown, setIsDown] = React.useState(false);
+    const [startX, setStartX] = React.useState(0);
+    const [scrollLeftState, setScrollLeftState] = React.useState(0);
+    const [isDragging, setIsDragging] = React.useState(false);
 
-    const onMouseDown = (e) => {
-        isDragging.current = false;
-        startX.current = e.pageX;
-        startScroll.current = containerRef.current.scrollLeft;
-        window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseup', onMouseUp);
+    const handleScroll = () => {
+        if (!scrollContainerRef.current) return;
+        const container = scrollContainerRef.current;
+        const scrollPosition = container.scrollLeft;
+        const itemWidth = container.offsetWidth * 0.85;
+        const index = Math.round(scrollPosition / itemWidth);
+        if (index !== activeIndex) setActiveIndex(index);
     };
 
-    const onMouseMove = useCallback((e) => {
-        const dx = e.pageX - startX.current;
-        if (Math.abs(dx) > 5) isDragging.current = true;
-        if (isDragging.current) {
-            containerRef.current.scrollLeft = startScroll.current - dx;
+    const scrollTo = (index) => {
+        if (itemRefs.current[index]) {
+            itemRefs.current[index].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+            setActiveIndex(index);
         }
-    }, []);
+    };
 
-    const onMouseUp = useCallback(() => {
-        window.removeEventListener('mousemove', onMouseMove);
-        window.removeEventListener('mouseup', onMouseUp);
-        setTimeout(() => { isDragging.current = false; }, 50);
-    }, [onMouseMove]);
+    // Mouse & Touch Drag Logic
+    const handleMouseDown = (e) => {
+        setIsDown(true);
+        const pageX = e.pageX || e.touches?.[0].pageX;
+        setStartX(pageX - scrollContainerRef.current.offsetLeft);
+        setScrollLeftState(scrollContainerRef.current.scrollLeft);
+        setIsDragging(false);
+    };
+
+    const handleMouseUp = () => {
+        if (!isDown) return;
+        setIsDown(false);
+        if (isDragging) {
+            snapToCenter();
+        }
+    };
+
+    const snapToCenter = () => {
+        if (window.innerWidth >= 1024) return;
+        const container = scrollContainerRef.current;
+        const centerPoint = container.scrollLeft + (window.innerWidth / 2);
+
+        let closestIndex = 0;
+        let minDistance = Infinity;
+
+        highlightArticles.forEach((_, index) => {
+            const item = itemRefs.current[index];
+            if (item) {
+                const itemCenter = item.offsetLeft + (item.offsetWidth / 2);
+                const distance = Math.abs(centerPoint - itemCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = index;
+                }
+            }
+        });
+
+        // Use existing handleItemClick to center
+        handleItemClick(highlightArticles[closestIndex].id, closestIndex);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDown) return;
+        if (e.cancelable) e.preventDefault();
+
+        const pageX = e.pageX || e.touches?.[0].pageX;
+        const x = pageX - scrollContainerRef.current.offsetLeft;
+        const walk = (x - startX) * 1.8;
+
+        gsap.to(scrollContainerRef.current, {
+            scrollLeft: scrollLeftState - walk,
+            duration: 0.8,
+            ease: "expo.out",
+            overwrite: "auto"
+        });
+
+        setIsDragging(true);
+    };
+
+    const scroll = (direction) => {
+        if (!scrollContainerRef.current) return;
+        const container = scrollContainerRef.current;
+        const scrollAmount = container.offsetWidth * 0.8;
+
+        gsap.to(container, {
+            scrollLeft: direction === 'next' ? container.scrollLeft + scrollAmount : container.scrollLeft - scrollAmount,
+            duration: 1,
+            ease: "power2.inOut"
+        });
+    };
+
+    const handleItemClick = (id, index) => {
+        if (isDragging) return; // Prevent click if dragging
+
+        if (window.innerWidth < 1024) {
+            if (activeIndex !== index) {
+                // Smooth center on mobile
+                gsap.to(scrollContainerRef.current, {
+                    scrollLeft: itemRefs.current[index].offsetLeft - (window.innerWidth * 0.075),
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+                setActiveIndex(index);
+            } else {
+                navigate(`/blog/${id}`);
+            }
+        } else {
+            navigate(`/blog/${id}`);
+        }
+    };
 
     if (loading || !articles.length) return null;
 
     const highlightArticles = articles.slice(0, 6);
 
     return (
-        <section className="py-12 md:py-24 bg-white overflow-hidden select-none border-t border-black/5">
+        <section ref={sectionRef} className="py-12 md:py-24 bg-white overflow-hidden select-none border-t border-black/5">
             <div className="desktop-container">
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
 
-                    {/* Sidebar esquerda */}
-                    <div className="w-full lg:w-[26%] flex flex-col justify-center lg:min-h-[400px] space-y-6 lg:space-y-8 flex-shrink-0">
+                    {/* Left Sidebar: Title & Controls */}
+                    <div className="w-full lg:w-[30%] flex flex-col justify-center lg:min-h-[400px] space-y-6 lg:space-y-8">
                         <h2 className="text-4xl md:text-5xl font-sans font-bold text-natu-brown leading-[1.1] tracking-tight">
-                            Fique por dentro<br />das novidades
+                            Fique por dentro <br />
+                            <span>das novidades</span>
                         </h2>
 
-                        {/* Setas — desktop */}
+                        {/* Navigation Arrows - Desktop Only */}
                         <div className="hidden lg:flex gap-3">
                             <button
                                 onClick={() => scroll('prev')}
                                 className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all active:scale-95"
-                                aria-label="Artigo anterior"
                             >
-                                <Unicon name="arrow-left" size={16} animate={false} />
+                                <Unicon name="arrow-left" size={16} />
                             </button>
                             <button
                                 onClick={() => scroll('next')}
                                 className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all active:scale-95"
-                                aria-label="Próximo artigo"
                             >
-                                <Unicon name="arrow-right" size={16} animate={false} />
+                                <Unicon name="arrow-right" size={16} />
                             </button>
                         </div>
 
+                        {/* CTA Button */}
                         <button
                             onClick={() => navigate('/blog')}
                             className="w-fit px-8 py-4 bg-natu-brown text-[#F2F0E9] rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-black transition-all duration-300 flex items-center gap-3"
                         >
                             IR PARA O BLOG
-                            <Unicon name="arrow-right" size={14} animate={false} />
+                            <Unicon name="arrow-right" size={14} />
                         </button>
                     </div>
 
-                    {/* Carrossel */}
-                    <div className="w-full lg:flex-1 overflow-hidden">
+                    {/* Right Side: Carousel Container */}
+                    <div className="w-full lg:w-[70%] relative">
                         <div
-                            ref={containerRef}
-                            onMouseDown={onMouseDown}
-                            className="flex gap-6 overflow-x-auto no-scrollbar pb-4 cursor-grab active:cursor-grabbing"
-                            style={{ scrollbarWidth: 'none' }}
+                            ref={scrollContainerRef}
+                            onScroll={handleScroll}
+                            onMouseDown={handleMouseDown}
+                            onMouseLeave={handleMouseUp}
+                            onMouseUp={handleMouseUp}
+                            onMouseMove={handleMouseMove}
+                            onTouchStart={handleMouseDown}
+                            onTouchMove={handleMouseMove}
+                            onTouchEnd={handleMouseUp}
+                            className={`flex gap-6 lg:gap-8 overflow-x-auto pb-8 no-scrollbar px-[7.5%] lg:px-0 
+                                    ${isDown ? 'cursor-grabbing' : 'lg:cursor-grab'}`}
+                            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
-                            {highlightArticles.map((article) => (
+                            {highlightArticles.map((article, index) => (
                                 <div
                                     key={article.id}
-                                    data-card
-                                    className="min-w-[80vw] sm:min-w-[300px] lg:min-w-[300px] flex-shrink-0 flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer"
-                                    onClick={() => { if (!isDragging.current) navigate(`/blog/${article.id}`); }}
+                                    ref={el => itemRefs.current[index] = el}
+                                    className={`min-w-[85%] md:min-w-[360px] flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer transition-all duration-500
+                                        ${window.innerWidth < 1024 && activeIndex !== index ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}
+                                    `}
+                                    onClick={() => handleItemClick(article.id, index)}
                                 >
-                                    <div className="aspect-[4/3] overflow-hidden border-b border-natu-brown/5">
+                                    {/* Card Image */}
+                                    <div className="aspect-[4/3] overflow-hidden relative border-b border-natu-brown/5 pointer-events-none">
                                         <img
                                             src={article.image}
                                             alt={article.title}
                                             draggable="false"
                                             loading="lazy"
-                                            decoding="async"
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out select-none"
                                         />
                                     </div>
+
+                                    {/* Card Content */}
                                     <div className="p-6 flex flex-col flex-grow">
-                                        <h3 className="text-base font-sans font-bold text-black leading-snug mb-3 group-hover:text-natu-brown transition-colors line-clamp-3">
+                                        <h3 className="text-xl font-sans font-bold text-black leading-snug mb-3 group-hover:text-natu-brown transition-colors">
                                             {article.title}
                                         </h3>
-                                        <p className="text-[13px] font-sans font-light text-natu-brown/60 line-clamp-2 mb-6 leading-relaxed">
+
+                                        <p className="text-[13px] font-sans font-light text-natu-brown/60 line-clamp-2 mb-8 leading-relaxed">
                                             {article.excerpt}
                                         </p>
+
                                         <div className="mt-auto flex items-center gap-1 text-gray-400 text-[10px] font-bold uppercase tracking-widest group-hover:text-natu-brown transition-colors">
                                             <span>Leia aqui</span>
-                                            <Unicon name="arrow-right" size={10} animate={false} />
+                                            <Unicon name="arrow-right" size={10} className="mt-0.5" />
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        {/* Setas — mobile */}
-                        <div className="flex justify-center gap-3 mt-4 lg:hidden">
-                            <button onClick={() => scroll('prev')} className="w-9 h-9 rounded-full bg-black/5 flex items-center justify-center text-natu-brown">
-                                <Unicon name="arrow-left" size={14} animate={false} />
-                            </button>
-                            <button onClick={() => scroll('next')} className="w-9 h-9 rounded-full bg-black/5 flex items-center justify-center text-natu-brown">
-                                <Unicon name="arrow-right" size={14} animate={false} />
-                            </button>
+                        {/* Mobile Navigation Dots */}
+                        <div className="flex justify-center gap-2 mt-4 lg:hidden">
+                            {highlightArticles.map((_, index) => (
+                                <button
+                                    key={`dot-${index}`}
+                                    onClick={() => scrollTo(index)}
+                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${activeIndex === index ? 'w-8 bg-natu-pink' : 'bg-natu-brown/20'}`}
+                                    aria-label={`Ver artigo ${index + 1}`}
+                                />
+                            ))}
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </section>
     );
