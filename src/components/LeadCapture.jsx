@@ -86,18 +86,18 @@ const LeadCapture = () => {
         <section className="relative py-12 md:py-20 bg-[#1a0e09] overflow-hidden">
 
             <div className="desktop-container relative z-10">
-                <div className="bg-white/3 p-8 md:p-16 border border-white/8 rounded-[2.5rem] relative overflow-hidden">
+                <div className="lg:w-3/4 bg-white/3 p-8 md:p-16 border border-white/8 rounded-[2.5rem] relative overflow-hidden">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left Side: Copy */}
                         <div className="text-left">
-                            <span className="text-natu-pink font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
+                            <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
                                 Lista VIP Natuclinic
                             </span>
-                            <h2 className="text-4xl md:text-5xl font-serif text-[#F2F0E9] leading-tight mb-6">
+                            <h2 className="text-4xl md:text-5xl font-sans font-bold text-[#F2F0E9] leading-tight mb-6">
                                 Comece sua mudança hoje
                             </h2>
-                            <p className="text-lg font-sans font-light text-[#F2F0E9]/70 leading-relaxed mb-8">
+                            <p className="text-base font-sans font-light text-[#F2F0E9]/60 leading-relaxed mb-8">
                                 Faça parte da nossa comunidade e receba dicas de autocuidado, saúde e beleza feitas com carinho pela nossa equipe para você.
                             </p>
 
