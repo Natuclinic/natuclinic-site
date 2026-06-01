@@ -60,7 +60,7 @@ const LeadCapture = () => {
             <div className="grid lg:grid-cols-2 min-h-[560px]">
 
                 {/* Esquerda — Formulário */}
-                <div className="flex items-center py-16 px-8 md:px-16 lg:px-20">
+                <div className="flex items-center py-16 px-12 md:px-24 lg:px-32">
                     <div className="w-full max-w-lg">
                         <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
                             Lista VIP Natuclinic
@@ -87,30 +87,30 @@ const LeadCapture = () => {
                                 </button>
                             </div>
                         ) : (
-                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <form onSubmit={handleSubmit} className="space-y-2.5">
                                 <div className="relative group">
-                                    <Unicon name="user" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
+                                    <Unicon name="user" className="absolute left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={14} />
                                     <input required type="text" name="name" value={formData.name} onChange={handleChange}
                                         placeholder="Seu nome completo"
-                                        className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
+                                        className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-sm text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
                                     />
                                 </div>
                                 <div className="relative group">
-                                    <Unicon name="envelope" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
+                                    <Unicon name="envelope" className="absolute left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={14} />
                                     <input required type="email" name="email" value={formData.email} onChange={handleChange}
                                         placeholder="E-mail principal"
-                                        className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
+                                        className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-sm text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
                                     />
                                 </div>
                                 <div className="relative group">
-                                    <Unicon name="phone" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
+                                    <Unicon name="phone" className="absolute left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={14} />
                                     <input required type="tel" name="phone" value={formData.phone} onChange={handleChange}
                                         placeholder="WhatsApp (com DDD)"
-                                        className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
+                                        className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-sm text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
                                     />
                                 </div>
                                 <button type="submit" disabled={loading}
-                                    className="w-full bg-[#F2F0E9] text-natu-brown py-5 rounded-2xl font-bold uppercase tracking-[0.3em] text-[10px] hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-center items-center gap-4 group"
+                                    className="w-full bg-[#F2F0E9] text-natu-brown py-3.5 rounded-xl font-bold uppercase tracking-[0.25em] text-[10px] hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-center items-center gap-3 group"
                                 >
                                     {loading ? (
                                         <Unicon name="spinner" className="animate-spin" size={18} />
