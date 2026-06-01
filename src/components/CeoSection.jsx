@@ -64,7 +64,7 @@ const CeoSection = () => {
                         <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-3">
                             Corpo Clínico
                         </span>
-                        <h2 className="font-serif italic text-5xl md:text-6xl text-natu-brown leading-tight">
+                        <h2 className="font-sans font-bold text-5xl md:text-6xl text-natu-brown leading-tight">
                             Quem cuida<br />de você
                         </h2>
                     </div>
@@ -99,7 +99,7 @@ const CeoSection = () => {
 
                             {/* Texto */}
                             <div className="px-1">
-                                <h3 className="font-serif italic text-3xl md:text-4xl text-natu-brown mb-4 leading-tight">
+                                <h3 className="font-sans font-bold text-3xl md:text-4xl text-natu-brown mb-4 leading-tight">
                                     {s.name}
                                 </h3>
 
