@@ -127,9 +127,9 @@ export default function App() {
                   <HomeIntro />
                   <ProceduresSection />
                   <CeoSection />
+                  <ResultsCTA />
                   <ResultsSection id="results" />
                   <VideoFeedbacks />
-                  <ResultsCTA />
                   <ClinicGallery />
                   <BlogHighlights />
                   <LeadCapture />
