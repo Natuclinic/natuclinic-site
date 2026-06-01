@@ -183,16 +183,15 @@ const BlogHighlights = () => {
                             onTouchStart={handleMouseDown}
                             onTouchMove={handleMouseMove}
                             onTouchEnd={handleMouseUp}
-                            className={`grid lg:grid-cols-3 gap-6 lg:gap-6
-                                    flex lg:flex-none overflow-x-auto lg:overflow-visible pb-8 lg:pb-0 no-scrollbar px-[7.5%] lg:px-0
-                                    ${isDown ? 'cursor-grabbing' : 'lg:cursor-default'}`}
+                            className={`flex gap-6 overflow-x-auto pb-8 no-scrollbar px-[7.5%] lg:px-0
+                                    ${isDown ? 'cursor-grabbing' : 'cursor-grab'}`}
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
-                            {highlightArticles.slice(0, 3).map((article, index) => (
+                            {highlightArticles.map((article, index) => (
                                 <div
                                     key={article.id}
                                     ref={el => itemRefs.current[index] = el}
-                                    className={`min-w-[85%] lg:min-w-0 flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer transition-all duration-500`}
+                                    className="min-w-[85%] lg:min-w-[calc(33.333%-1rem)] flex-shrink-0 flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer transition-all duration-500"
                                     onClick={() => handleItemClick(article.id, index)}
                                 >
                                     {/* Card Image */}
