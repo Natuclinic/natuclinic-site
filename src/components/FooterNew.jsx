@@ -1,227 +1,151 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Unicon from './Unicon';
 import { WHATSAPP_LINKS } from '../constants/links';
 
-const LocationCard = ({ title, address, mapSrc, mapLink }) => (
-    <div className="group relative w-full h-[180px] overflow-hidden bg-white/5 border border-[#F2F0E9]/10 transition-all duration-500 hover:border-[#F2F0E9]/30">
-        {/* Map Iframe */}
-        <div className="absolute inset-0 z-0 opacity-80 group-hover:opacity-100 transition-opacity duration-700">
-            <iframe
-                width="100%"
-                height="100%"
-                id="gmap_canvas"
-                src={mapSrc}
-                frameBorder="0"
-                scrolling="no"
-                marginHeight="0"
-                marginWidth="0"
-                className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 invert-[0.1] group-hover:invert-0"
-                title={title}
-                loading="lazy"
-            ></iframe>
-        </div>
+const columns = [
+    {
+        title: 'Procedimentos',
+        links: [
+            { label: 'Ninfoplastia Sem Cortes', path: '/procedimentos/ninfoplastia' },
+            { label: 'Endolaser', path: '/procedimentos/endolaser' },
+            { label: 'Harmonização Facial', path: '/procedimentos/harmonizacao-facial' },
+            { label: 'Harmonização Corporal', path: '/procedimentos/harmonizacao-corporal' },
+            { label: 'Harmonização de Glúteos', path: '/gluteo-dos-sonhos' },
+            { label: 'Nutrição Ortomolecular', path: '/procedimentos/nutricao-ortomolecular' },
+        ],
+    },
+    {
+        title: 'Especialidades',
+        links: [
+            { label: 'Soroterapia', href: WHATSAPP_LINKS.MSG_SOROTERAPIA },
+            { label: 'Ozonioterapia', href: WHATSAPP_LINKS.MSG_OZONIO },
+            { label: 'Emagrecimento Saudável', href: WHATSAPP_LINKS.MSG_EMAGRECIMENTO },
+            { label: 'Suplementação', href: WHATSAPP_LINKS.MSG_SUPLEMENTACAO },
+            { label: 'Bioestimuladores', href: WHATSAPP_LINKS.PROCEDURES },
+        ],
+    },
+    {
+        title: 'Clínica',
+        links: [
+            { label: 'Sobre a Natuclinic', path: '/' },
+            { label: 'Blog de Saúde', path: '/blog' },
+            { label: 'Contato via WhatsApp', href: WHATSAPP_LINKS.GENERAL },
+            { label: 'Unidade Taguatinga', href: 'https://www.google.com/maps?q=Natuclinic+Taguatinga+Norte' },
+            { label: 'Unidade Planaltina', href: 'https://www.google.com/maps/place/Natuclinic+Planaltina' },
+        ],
+    },
+    {
+        title: 'Legal',
+        links: [
+            { label: 'Política de Privacidade', path: '/politica-de-privacidade' },
+            { label: 'Termos de Uso', path: '/politica-de-privacidade' },
+            { label: 'LGPD', path: '/politica-de-privacidade' },
+        ],
+    },
+];
 
-        {/* Floating Info Card - Compact */}
-        <div className="absolute bottom-3 left-3 right-3 bg-[#4C261A]/90 backdrop-blur-md p-4 rounded-2xl border border-[#F2F0E9]/20 transition-transform duration-500 group-hover:-translate-y-1">
-            <div className="flex justify-between items-center">
-                <div>
-                    <h3 className="font-sans font-bold text-lg text-[#F2F0E9] mb-1">{title}</h3>
-                    <div className="flex items-center gap-2 text-[#F2F0E9]/70 font-sans text-[10px]">
-                        <Unicon name="map-marker" size={12} />
-                        <p className="truncate max-w-[150px]">{address}</p>
-                    </div>
-                </div>
-                <a
-                    href={mapLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F2F0E9] text-[#4C261A] hover:scale-110 transition-transform"
-                >
-                    <Unicon name="arrow-up-right" size={14} />
-                </a>
-            </div>
-        </div>
-    </div>
-);
+const socials = [
+    { icon: 'instagram', href: 'https://www.instagram.com/instituto.natuclinic/', label: 'Instagram' },
+    { icon: 'facebook', href: 'https://web.facebook.com/InstitutoNatuclinic', label: 'Facebook' },
+    { icon: 'youtube', href: 'https://www.youtube.com/@Instituto.Natuclinic', label: 'YouTube' },
+    { icon: 'linkedin', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7140785863470333952/', label: 'LinkedIn' },
+];
 
-import { useNavigate } from 'react-router-dom';
-
-const FooterNew = ({ isStatic = false }) => {
-    const footerRef = useRef(null);
-    const [footerHeight, setFooterHeight] = useState(0);
+const FooterNew = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const updateHeight = () => {
-            if (footerRef.current) {
-                setFooterHeight(footerRef.current.offsetHeight);
-            }
-        };
-        updateHeight();
-        const resizeObserver = new ResizeObserver(() => updateHeight());
-        if (footerRef.current) resizeObserver.observe(footerRef.current);
-        window.addEventListener('resize', updateHeight);
-        return () => {
-            window.removeEventListener('resize', updateHeight);
-            resizeObserver.disconnect();
-        };
-    }, []);
-
-    const footerConfig = {
-        description: "Referência em Naturopatia e Estética Integral no DF. Integrando ciência, saúde e autoestima.",
-        socials: [
-            { icon: "instagram", href: "https://www.instagram.com/instituto.natuclinic/" },
-            { icon: "facebook", href: "https://web.facebook.com/InstitutoNatuclinic?_rdc=1&_rdr#" },
-            { icon: "linkedin", href: "https://www.linkedin.com/feed/update/urn:li:activity:7140785863470333952/" },
-            { icon: "youtube", href: "https://www.youtube.com/@Instituto.Natuclinic" },
-        ],
-        columns: [
-            {
-                title: "Procedimentos",
-                links: [
-                    { label: "Ninfoplastia", href: WHATSAPP_LINKS.MSG_NINFO },
-                    { label: "Harmonização Corporal", href: WHATSAPP_LINKS.MSG_CORPORAL },
-                    { label: "Harmonização de Glúteos", path: "/gluteo-dos-sonhos" },
-                    { label: "Nutrição Ortomolecular", path: "/procedimentos/nutricao-ortomolecular" },
-                    { label: "Terapia Injetável", href: WHATSAPP_LINKS.MSG_SOROTERAPIA },
-                ],
-            },
-            {
-                title: "Institucional",
-                links: [
-                    { label: "A Clínica", path: "/" },
-                    { label: "Corpo Clínico", path: "/" },
-                    { label: "Blog", path: "/blog" },
-                    { label: "Política de Privacidade", path: "/politica-de-privacidade" },
-                    { label: "Contato", href: WHATSAPP_LINKS.GENERAL },
-                ],
-            },
-        ],
-    };
-
     return (
-        <>
-            {!isStatic && <div style={{ height: footerHeight }} className="hidden lg:block w-full relative z-0 pointer-events-none" />}
+        <footer className="bg-[#1a0e09] text-[#F2F0E9] font-sans">
 
-            <footer
-                ref={footerRef}
-                className={`bg-[#4C261A] text-[#F2F0E9] pt-10 pb-5 font-sans relative w-full z-0 overflow-hidden ${!isStatic ? 'lg:fixed lg:bottom-0 lg:left-0' : ''}`}
-            >
-                {/* Decoration */}
+            {/* Main grid */}
+            <div className="desktop-container py-16">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
 
-                <div className="desktop-container relative z-10 flex flex-col gap-6">
-
-                    {/* MAPS & INFO GRID */}
-                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-
-                        {/* LEFT: Maps Cluster */}
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 mb-2 opacity-80">
-                                <Unicon name="map-marker" size={14} className="text-[#F2F0E9]" />
-                                <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase">Nossas Unidades</span>
-                            </div>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <LocationCard
-                                    title="Taguatinga"
-                                    address="Qne 01 Lote 17/20 Loja 02 Taguatinga Norte"
-                                    mapLink="https://www.google.com/maps?client=firefox-b-d&hs=u9bU&sca_esv=4fee371841179941&output=search&q=Taguatinga+Natuclinic"
-                                    mapSrc="https://maps.google.com/maps?q=Natuclinic%20Taguatinga%20Norte&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                                />
-                                <LocationCard
-                                    title="Planaltina"
-                                    address="Módulo C lote 2 loja 3/4 - Planaltina"
-                                    mapLink="https://www.google.com/maps/place/Natuclinic+Est%C3%A9tica+e+Nutri%C3%A7%C3%A3o+Ortomolecular+-+Clinica+de+Est%C3%A9tica+e+Nutri%C3%A7%C3%A3o+em+Planaltina+-+DF"
-                                    mapSrc="https://maps.google.com/maps?q=Natuclinic%20Est%C3%A9tica%20e%20Nutri%C3%A7%C3%A3o%20Ortomolecular%20Planaltina&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                                />
-                            </div>
+                    {/* Brand column */}
+                    <div className="col-span-2 md:col-span-3 lg:col-span-1">
+                        <button onClick={() => navigate('/')} className="block mb-5 bg-transparent border-0 p-0">
+                            <img
+                                src="/logo-natuclinic.png"
+                                alt="Natuclinic"
+                                className="h-10 w-auto object-contain brightness-0 invert opacity-90"
+                            />
+                        </button>
+                        <p className="text-[#F2F0E9]/50 text-xs leading-relaxed font-light mb-6 max-w-[220px]">
+                            Referência em estética integral e nutrição ortomolecular em Brasília e Taguatinga.
+                        </p>
+                        <div className="flex gap-2.5">
+                            {socials.map(({ icon, href, label }) => (
+                                <a
+                                    key={icon}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={label}
+                                    className="w-8 h-8 rounded-full border border-[#F2F0E9]/15 flex items-center justify-center text-[#F2F0E9]/60 hover:text-[#F2F0E9] hover:border-[#F2F0E9]/40 transition-all duration-200"
+                                >
+                                    <Unicon name={icon} size={14} animate={false} />
+                                </a>
+                            ))}
                         </div>
+                    </div>
 
-                        {/* RIGHT: Links & Brand Compact */}
-                        <div className="flex flex-col md:flex-row justify-between gap-8 h-full">
-
-                            <div className="max-w-[180px]">
-                                <div className="mb-6 cursor-pointer" onClick={() => navigate('/')}>
-                                    <img
-                                        src="/logo-natuclinic.png"
-                                        alt="Natuclinic"
-                                        className="h-12 md:h-14 w-auto object-contain transition-all hover:scale-105 brightness-0 invert"
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                        }}
-                                    />
-                                </div>
-                                <p className="text-[#F2F0E9]/60 leading-snug text-xs font-light mb-6">
-                                    {footerConfig.description}
-                                </p>
-                                <div className="flex gap-2">
-                                    {footerConfig.socials.map(({ icon, href }, idx) => (
-                                        <a
-                                            key={idx}
-                                            href={href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-8 h-8 rounded-full border border-[#F2F0E9]/20 flex items-center justify-center text-[#F2F0E9] hover:bg-[#F2F0E9] hover:text-[#4C261A] transition-all"
-                                        >
-                                            <Unicon name={icon} className="w-3.5 h-3.5" />
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Links Columns */}
-                            <div className="flex gap-8 md:gap-12">
-                                {footerConfig.columns.map((col, idx) => (
-                                    <div key={idx}>
-                                        <h3 className="text-xs font-sans font-bold uppercase tracking-tight mb-4 text-[#F2F0E9]">{col.title}</h3>
-                                        <ul className="space-y-2">
-                                            {col.links.map((link, i) => (
-                                                <li key={i}>
-                                                    {link.path ? (
-                                                        <button
-                                                            onClick={() => navigate(link.path)}
-                                                            className="text-xs text-[#F2F0E9]/60 hover:text-[#F2F0E9] transition-colors flex items-center gap-1 group bg-transparent border-0 p-0"
-                                                        >
-                                                            {link.label}
-                                                        </button>
-                                                    ) : (
-                                                        <a
-                                                            href={link.href}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="text-xs text-[#F2F0E9]/60 hover:text-[#F2F0E9] transition-colors flex items-center gap-1 group"
-                                                        >
-                                                            {link.label}
-                                                        </a>
-                                                    )}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                    {/* Link columns */}
+                    {columns.map((col) => (
+                        <div key={col.title}>
+                            <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#F2F0E9]/40 mb-4">
+                                {col.title}
+                            </h3>
+                            <ul className="space-y-2.5">
+                                {col.links.map((link) => (
+                                    <li key={link.label}>
+                                        {link.path ? (
+                                            <button
+                                                onClick={() => navigate(link.path)}
+                                                className="text-xs text-[#F2F0E9]/60 hover:text-[#F2F0E9] transition-colors bg-transparent border-0 p-0 text-left"
+                                            >
+                                                {link.label}
+                                            </button>
+                                        ) : (
+                                            <a
+                                                href={link.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-xs text-[#F2F0E9]/60 hover:text-[#F2F0E9] transition-colors"
+                                            >
+                                                {link.label}
+                                            </a>
+                                        )}
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
-
-                    </div>
-
-                    <div className="pt-6 border-t border-[#F2F0E9]/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-[#F2F0E9]/30 uppercase tracking-[0.1em] font-medium">
-                        <p>© {new Date().getFullYear()} Natuclinic. Todos os direitos reservados.</p>
-                        <div className="flex items-center gap-1">
-                            <span>Feito com</span>
-                            <span className="text-red-500 animate-pulse text-base">❤️</span>
-                            <a
-                                href="https://www.instagram.com/gone.assessoria"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="transition-all hover:opacity-80"
-                            >
-                                <img src="/gone-logo.svg" alt="Gone Assessoria" className="h-4 w-auto object-contain opacity-30" />
-                            </a>
-                        </div>
-                    </div>
+                    ))}
 
                 </div>
-            </footer >
-        </>
+            </div>
+
+            {/* Bottom bar */}
+            <div className="border-t border-[#F2F0E9]/8">
+                <div className="desktop-container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-[10px] text-[#F2F0E9]/30 tracking-wide">
+                        © {new Date().getFullYear()} Natuclinic. Todos os direitos reservados.
+                    </p>
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#F2F0E9]/30">
+                        <span>Desenvolvido por</span>
+                        <a
+                            href="https://www.instagram.com/gone.assessoria"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:opacity-60 transition-opacity"
+                        >
+                            <img src="/gone-logo.svg" alt="Gone Assessoria" className="h-3.5 w-auto opacity-30" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
     );
 };
 

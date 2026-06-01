@@ -169,7 +169,7 @@ export default function App() {
             </Routes>
           </main>
 
-          {!isServicePage && <FooterNew isStatic={location.pathname.startsWith('/blog')} />}
+          {!isServicePage && <FooterNew />}
         </React.Suspense>
         </ErrorBoundary>
 
