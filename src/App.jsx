@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import ErrorBoundary from './components/ErrorBoundary';
 import Unicon from './components/Unicon';
 import { gsap } from 'gsap';
