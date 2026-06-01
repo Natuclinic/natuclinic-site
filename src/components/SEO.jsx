@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SITE_NAME = 'Natuclinic - Clínica de Estética em Brasília';
-const SITE_URL = 'https://natuclinic.com.br';
+const SITE_URL = 'https://www.natuclinic.com.br';
 const DEFAULT_IMAGE = `${SITE_URL}/og-default.jpg`;
 const DEFAULT_DESC = 'Clínica de Estética e Nutrição Ortomolecular em Brasília e Taguatinga. Especialistas em Rejuvenescimento, Harmonização e Corpo Essencializado.';
 

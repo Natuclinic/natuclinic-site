@@ -240,8 +240,8 @@ const NutricaoOrtomolecular = ({ goBack }) => {
             seo={{
                 title: "Nutrição Ortomolecular em Brasília — Dr. Julimar Meneses",
                 description: "Nutrição ortomolecular em Brasília com Dr. Julimar Meneses na Natuclinic. Tratamento para emagrecimento, performance, modulação intestinal e longevidade. Agende sua consulta.",
-                url: "https://natuclinic.com.br/procedimentos/nutricao-ortomolecular",
-                canonical: "https://natuclinic.com.br/procedimentos/nutricao-ortomolecular",
+                url: "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
+                canonical: "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
                 keywords: "nutrição ortomolecular brasília, nutricionista ortomolecular taguatinga, Dr Julimar Meneses, emagrecimento ortomolecular",
                 image: "/julimar-naturopata-em-brasilia.webp",
                 jsonLd: {
@@ -249,7 +249,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     "@type": "MedicalProcedure",
                     "name": "Nutrição Ortomolecular",
                     "description": "Consulta de nutrição ortomolecular para emagrecimento, performance e modulação intestinal em Brasília.",
-                    "url": "https://natuclinic.com.br/procedimentos/nutricao-ortomolecular",
+                    "url": "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
                     "procedureType": "Noninvasive",
                     "performer": {
                         "@type": "Physician",

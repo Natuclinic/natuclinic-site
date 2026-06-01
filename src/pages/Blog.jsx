@@ -24,8 +24,8 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
             <SEO
                 title="Blog de Saúde e Estética — Natuclinic Brasília"
                 description="Artigos sobre nutrição ortomolecular, estética, emagrecimento saudável e bem-estar. Conteúdo produzido pela equipe especialista da Natuclinic em Brasília."
-                url="https://natuclinic.com.br/blog"
-                canonical="https://natuclinic.com.br/blog"
+                url="https://www.natuclinic.com.br/blog"
+                canonical="https://www.natuclinic.com.br/blog"
                 keywords="blog saúde brasília, nutrição ortomolecular, estética corporal, emagrecimento saudável"
             />
             <div className="desktop-container">

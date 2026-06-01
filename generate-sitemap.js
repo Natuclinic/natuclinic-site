@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // --- CONFIGURATION ---
-const DOMAIN = 'https://natuclinic.com.br';
+const DOMAIN = 'https://www.natuclinic.com.br';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ARTICLES_PATH = path.join(__dirname, 'src', 'data', 'articles.jsx');
 const OUTPUT_FILE = path.join(__dirname, 'public', 'sitemap.xml');

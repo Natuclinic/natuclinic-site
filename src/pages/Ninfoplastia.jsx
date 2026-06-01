@@ -105,8 +105,8 @@ const Ninfoplastia = ({ goBack }) => {
             <SEO
                 title="Ninfoplastia Sem Cortes em Brasília — Estética Íntima na Natuclinic"
                 description="Ninfoescultura sem cirurgia em Brasília e Taguatinga. Tratamento não invasivo de estética íntima com resultado imediato. Sem internação, sem cicatrizes. Agende."
-                url="https://natuclinic.com.br/procedimentos/ninfoplastia"
-                canonical="https://natuclinic.com.br/procedimentos/ninfoplastia"
+                url="https://www.natuclinic.com.br/procedimentos/ninfoplastia"
+                canonical="https://www.natuclinic.com.br/procedimentos/ninfoplastia"
                 keywords="ninfoplastia brasília, ninfoescultura sem cortes, estética íntima taguatinga, labioplastia não cirúrgica"
                 image="/ninfoescultura-ninfoplastia.png"
             />

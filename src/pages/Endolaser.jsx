@@ -13,8 +13,8 @@ const Endolaser = ({ goBack }) => {
             seo={{
                 title: "Endolaser em Brasília — Tratamento de Flacidez e Contorno Corporal",
                 description: "Endolaser na Natuclinic: tecnologia de laser para tratar flacidez, celulite e contorno corporal em Brasília e Taguatinga. Resultados visíveis sem cirurgia.",
-                url: "https://natuclinic.com.br/procedimentos/endolaser",
-                canonical: "https://natuclinic.com.br/procedimentos/endolaser",
+                url: "https://www.natuclinic.com.br/procedimentos/endolaser",
+                canonical: "https://www.natuclinic.com.br/procedimentos/endolaser",
                 keywords: "endolaser brasília, tratamento flacidez, laser corporal taguatinga, contorno corporal",
                 image: "/harmonizacao-corporal.jpg",
                 jsonLd: {
@@ -22,10 +22,10 @@ const Endolaser = ({ goBack }) => {
                     "@type": "MedicalProcedure",
                     "name": "Endolaser",
                     "description": "Tratamento a laser para flacidez e contorno corporal sem cirurgia.",
-                    "url": "https://natuclinic.com.br/procedimentos/endolaser",
+                    "url": "https://www.natuclinic.com.br/procedimentos/endolaser",
                     "procedureType": "Noninvasive",
                     "followup": "Consulta de acompanhamento recomendada.",
-                    "performer": { "@type": "MedicalOrganization", "name": "Natuclinic", "url": "https://natuclinic.com.br" }
+                    "performer": { "@type": "MedicalOrganization", "name": "Natuclinic", "url": "https://www.natuclinic.com.br" }
                 },
             }}
         >

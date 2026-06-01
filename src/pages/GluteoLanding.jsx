@@ -130,8 +130,8 @@ const GluteoLanding = () => {
             <SEO
                 title="Glúteos dos Sonhos — Harmonização de Glúteos em Brasília"
                 description="Protocolo exclusivo de harmonização de glúteos com ácido hialurônico na Natuclinic em Brasília. Volume, projeção e contorno natural sem cirurgia. Agende sua avaliação."
-                url="https://natuclinic.com.br/gluteo-dos-sonhos"
-                canonical="https://natuclinic.com.br/gluteo-dos-sonhos"
+                url="https://www.natuclinic.com.br/gluteo-dos-sonhos"
+                canonical="https://www.natuclinic.com.br/gluteo-dos-sonhos"
                 keywords="harmonização glúteos brasília, preenchimento glúteo taguatinga, glúteos dos sonhos, ácido hialurônico glúteo"
                 image="/harmonização de-gluteo/harmonizacao-de-gluteos-dra.jpg"
             />

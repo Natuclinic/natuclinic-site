@@ -57,8 +57,8 @@ export default async function handler(request) {
 
         const title = esc(article.title);
         const description = esc(article.meta_description || article.excerpt || '');
-        const image = article.image?.startsWith('http') ? article.image : `https://natuclinic.com.br${article.image || '/og-default.jpg'}`;
-        const canonicalUrl = `https://natuclinic.com.br/blog/${article.slug || article.id}`;
+        const image = article.image?.startsWith('http') ? article.image : `https://www.natuclinic.com.br${article.image || '/og-default.jpg'}`;
+        const canonicalUrl = `https://www.natuclinic.com.br/blog/${article.slug || article.id}`;
         const author = esc(article.author_name || 'Equipe Natuclinic');
         const date = esc(article.date || '');
 
@@ -73,7 +73,7 @@ export default async function handler(request) {
             description: article.meta_description || article.excerpt,
             image, datePublished: article.date,
             author: { '@type': 'Person', name: article.author_name || 'Equipe Natuclinic' },
-            publisher: { '@type': 'Organization', name: 'Natuclinic', url: 'https://natuclinic.com.br' },
+            publisher: { '@type': 'Organization', name: 'Natuclinic', url: 'https://www.natuclinic.com.br' },
             url: canonicalUrl, mainEntityOfPage: canonicalUrl
         });
 
@@ -98,7 +98,7 @@ export default async function handler(request) {
   <script type="application/ld+json">${jsonLd}</script>
 </head>
 <body>
-  <header><a href="https://natuclinic.com.br">Natuclinic — Estética e Nutrição Ortomolecular em Brasília</a></header>
+  <header><a href="https://www.natuclinic.com.br">Natuclinic — Estética e Nutrição Ortomolecular em Brasília</a></header>
   <main>
     <article>
       <h1>${title}</h1>
@@ -106,7 +106,7 @@ export default async function handler(request) {
       <p>Por ${author} · ${date}</p>
       ${paragraphs}
     </article>
-    <nav><a href="https://natuclinic.com.br/blog">← Voltar ao Blog</a></nav>
+    <nav><a href="https://www.natuclinic.com.br/blog">← Voltar ao Blog</a></nav>
   </main>
 </body>
 </html>`;

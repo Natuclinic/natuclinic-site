@@ -237,7 +237,7 @@ const HarmonizacaoCorporal = () => {
             <SEO
                 title="Harmone Bee® — Harmonização Corporal em 90 Dias"
                 description="O protocolo Harmone Bee® une nutrição ortomolecular, procedimentos estéticos e acompanhamento intensivo para transformar seu corpo em 90 dias. Natuclinic, Brasília."
-                url="https://natuclinic.com.br/procedimentos/harmonizacao-corporal"
+                url="https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal"
                 keywords="harmonização corporal, harmone bee, protocolo emagrecimento, nutrição ortomolecular, estética corporal Brasília, natuclinic"
                 image="/og-harmonizacao-corporal.jpg"
             />
