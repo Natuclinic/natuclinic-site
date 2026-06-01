@@ -58,16 +58,15 @@ const LeadCapture = () => {
     return (
         <section className="relative bg-[#1a0e09] overflow-hidden min-h-[560px] flex items-center">
 
-            {/* Imagem direita — posição absoluta na metade direita */}
-            <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
+            {/* Imagem direita */}
+            <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:flex items-center justify-center">
                 <img
-                    src="/sala-dra-debora.jpg"
-                    alt="Natuclinic — clínica de estética em Brasília"
-                    className="w-full h-full object-cover"
+                    src="/mensagem grupovip.webp"
+                    alt="Grupo VIP Natuclinic"
+                    className="h-full w-full object-contain object-center p-8"
                     loading="lazy"
                     decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#1a0e09] via-[#1a0e09]/30 to-transparent" />
             </div>
 
             {/* Conteúdo alinhado ao desktop-container (mesmo da navbar) */}
