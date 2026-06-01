@@ -100,7 +100,7 @@ const BlogHighlights = () => {
                                 <div
                                     key={article.id}
                                     data-card
-                                    className="min-w-[80vw] sm:min-w-[340px] lg:min-w-[calc(33.33%_-_1rem)] flex-shrink-0 flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer"
+                                    className="min-w-[80vw] sm:min-w-[300px] lg:min-w-[300px] flex-shrink-0 flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer"
                                     onClick={() => { if (!isDragging.current) navigate(`/blog/${article.id}`); }}
                                 >
                                     <div className="aspect-[4/3] overflow-hidden border-b border-natu-brown/5">
