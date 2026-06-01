@@ -32,7 +32,7 @@ const columns = [
             { label: 'Blog de Saúde', path: '/blog' },
             { label: 'Contato via WhatsApp', href: WHATSAPP_LINKS.GENERAL },
             { label: 'Unidade Taguatinga', href: 'https://www.google.com/maps?q=Natuclinic+Taguatinga+Norte' },
-            { label: 'Unidade Planaltina', href: 'https://www.google.com/maps/place/Natuclinic+Planaltina' },
+            { label: 'Unidade Planaltina', href: 'https://www.google.com/maps/place/Natuclinic+Est%C3%A9tica+e+Nutri%C3%A7%C3%A3o+Ortomolecular+-+Clinica+de+Est%C3%A9tica+e+Nutri%C3%A7%C3%A3o+em+Planaltina+-+DF/@-15.6186241,-47.678705,1306m/data=!3m2!1e3!4b1!4m6!3m5!1s0x935a6d03d3f5d4bb:0xe39128bd2284686e!8m2!3d-15.6186293!4d-47.6738341!16s%2Fg%2F11v0t52jk3' },
         ],
     },
     {
