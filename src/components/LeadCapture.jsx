@@ -56,12 +56,24 @@ const LeadCapture = () => {
     };
 
     return (
-        <section className="relative bg-[#1a0e09] overflow-hidden">
-            <div className="grid lg:grid-cols-2 min-h-[560px]">
+        <section className="relative bg-[#1a0e09] overflow-hidden min-h-[560px] flex items-center">
 
-                {/* Esquerda — Formulário */}
-                <div className="flex items-center py-16 px-5 md:px-20">
-                    <div className="w-full max-w-lg">
+            {/* Imagem direita — posição absoluta na metade direita */}
+            <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
+                <img
+                    src="/sala-dra-debora.jpg"
+                    alt="Natuclinic — clínica de estética em Brasília"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#1a0e09] via-[#1a0e09]/30 to-transparent" />
+            </div>
+
+            {/* Conteúdo alinhado ao desktop-container (mesmo da navbar) */}
+            <div className="desktop-container relative z-10 py-16 w-full">
+                <div className="lg:w-1/2">
+                    <div className="max-w-lg">
                         <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
                             Lista VIP Natuclinic
                         </span>
@@ -136,19 +148,6 @@ const LeadCapture = () => {
                         )}
                     </div>
                 </div>
-
-                {/* Direita — Imagem */}
-                <div className="relative hidden lg:block">
-                    <img
-                        src="/sala-dra-debora.jpg"
-                        alt="Natuclinic — clínica de estética em Brasília"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#1a0e09] via-[#1a0e09]/20 to-transparent" />
-                </div>
-
             </div>
         </section>
     );
