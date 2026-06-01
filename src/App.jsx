@@ -125,7 +125,6 @@ export default function App() {
               <Route path="/" element={
                 <>
                   <HomeIntro />
-                  <HomeManifesto />
                   <ProceduresSection />
                   <CeoSection />
                   <ResultsSection id="results" />
