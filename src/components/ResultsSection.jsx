@@ -240,13 +240,18 @@ const ResultsSection = ({ id }) => {
     return (
         <section id={id} ref={sectionRef} className="py-12 md:py-20 bg-natu-ivory border-t border-black/5 overflow-hidden">
             <div className="desktop-container">
-                <div className="text-center mb-16 results-header">
-                    <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
-                        Resultados Reais
-                    </span>
-                    <h2 className="font-serif text-4xl md:text-7xl text-natu-brown mb-6">
-                        Veja a <span className="italic">transformação</span>
-                    </h2>
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16 results-header">
+                    <div>
+                        <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-3">
+                            Resultados Reais
+                        </span>
+                        <h2 className="font-sans font-bold text-4xl md:text-6xl text-natu-brown leading-tight tracking-tight">
+                            Veja a transformação
+                        </h2>
+                    </div>
+                    <p className="max-w-xs font-sans font-light text-natu-brown/50 text-sm leading-relaxed md:text-right">
+                        Antes e depois reais de pacientes da Natuclinic em Brasília.
+                    </p>
                 </div>
 
                 <div className="results-slider relative">
