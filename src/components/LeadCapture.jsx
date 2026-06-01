@@ -77,7 +77,7 @@ const LeadCapture = () => {
                         <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
                             Lista VIP Natuclinic
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-sans font-bold text-[#F2F0E9] leading-tight mb-5">
+                        <h2 className="text-4xl md:text-5xl font-sans font-bold text-[#F2F0E9] leading-tight mb-5 text-balance">
                             Comece sua mudança hoje
                         </h2>
                         <p className="text-base font-sans font-light text-[#F2F0E9]/50 leading-relaxed mb-10">
