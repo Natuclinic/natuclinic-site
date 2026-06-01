@@ -171,8 +171,8 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
                                 O que nossos pacientes dizem
                             </span>
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-serif text-natu-brown">
-                            Depoimentos que <span className="italic">inspiram</span>
+                        <h2 className="text-3xl md:text-5xl font-sans font-bold text-natu-brown tracking-tight">
+                            Depoimentos que inspiram
                         </h2>
                     </div>
                 )}
