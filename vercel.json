@@ -57,6 +57,10 @@
             "destination": "/api/sitemap"
         },
         {
+            "source": "/blog/:slug",
+            "destination": "/api/prerender"
+        },
+        {
             "source": "/(.*)",
             "destination": "/"
         }
