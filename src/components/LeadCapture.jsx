@@ -83,11 +83,10 @@ const LeadCapture = () => {
     };
 
     return (
-        <section className="relative py-12 md:py-20 bg-natu-brown overflow-hidden">
-
+        <section className="relative py-12 md:py-20 bg-[#1a0e09] overflow-hidden">
 
             <div className="desktop-container relative z-10">
-                <div className="bg-natu-brown p-8 md:p-16 border border-white/10 rounded-[2.5rem] relative overflow-hidden">
+                <div className="bg-white/3 p-8 md:p-16 border border-white/8 rounded-[2.5rem] relative overflow-hidden">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left Side: Copy */}
