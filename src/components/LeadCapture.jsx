@@ -1,32 +1,23 @@
 import React, { useState } from 'react';
 import Unicon from './Unicon';
-import Silk from './Silk';
 import { API_URLS } from '../constants/links';
 
 const LeadCapture = () => {
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: ''
-    });
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
+    const validateEmail = (email) =>
+        String(email).toLowerCase().match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
 
     const validatePhone = (phone) => {
-        // Aceita formatos: (61) 99999-9999, 61999999999, +55 61 999999999
         const cleaned = phone.replace(/\D/g, '');
         return cleaned.length >= 10 && cleaned.length <= 11;
     };
@@ -35,48 +26,30 @@ const LeadCapture = () => {
         e.preventDefault();
         setStatus({ type: '', message: '' });
 
-        // Validações
         if (!validateEmail(formData.email)) {
             setStatus({ type: 'error', message: 'Por favor, insira um e-mail válido.' });
             return;
         }
-
         if (!validatePhone(formData.phone)) {
             setStatus({ type: 'error', message: 'Por favor, insira um número de WhatsApp válido (com DDD).' });
             return;
         }
 
         setLoading(true);
-
         try {
-            // Tenta enviar para a API do Cloudflare Workers primeiro
-            const cfResponse = await fetch(`${API_URLS.BASE}/leads`, {
+            const res = await fetch(`${API_URLS.BASE}/leads`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    source: 'newsletter_section'
-                })
+                body: JSON.stringify({ ...formData, source: 'newsletter_section' })
             });
-
-            if (cfResponse.ok) {
-                setStatus({
-                    type: 'success',
-                    message: 'Inscrição realizada com sucesso! Em breve entraremos em contato.'
-                });
+            if (res.ok) {
+                setStatus({ type: 'success', message: 'Inscrição realizada! Em breve entraremos em contato.' });
                 setFormData({ name: '', email: '', phone: '' });
-                return;
+            } else {
+                throw new Error();
             }
-
-            throw new Error('Erro ao enviar. Tente novamente.');
-        } catch (error) {
-            console.error('Erro ao salvar lead:', error);
-            setStatus({
-                type: 'error',
-                message: 'Ocorreu um erro ao processar sua solicitação. Tente novamente.'
-            });
+        } catch {
+            setStatus({ type: 'error', message: 'Ocorreu um erro. Tente novamente.' });
         } finally {
             setLoading(false);
         }
@@ -84,14 +57,11 @@ const LeadCapture = () => {
 
     return (
         <section className="relative bg-[#1a0e09] overflow-hidden">
-
             <div className="grid lg:grid-cols-2 min-h-[560px]">
 
-                {/* Left — Form card */}
+                {/* Esquerda — Formulário */}
                 <div className="flex items-center py-16 px-8 md:px-16 lg:px-20">
                     <div className="w-full max-w-lg">
-
-                        {/* Copy */}
                         <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
                             Lista VIP Natuclinic
                         </span>
@@ -102,95 +72,72 @@ const LeadCapture = () => {
                             Faça parte da nossa comunidade e receba dicas de autocuidado, saúde e beleza feitas com carinho pela nossa equipe para você.
                         </p>
 
-                        {/* Form area below */}
-                        <div className="relative">
-
-                        {/* Right Side: Form */}
-                        <div className="relative">
-                            {status.type === 'success' ? (
-                                <div className="text-center p-10 bg-white/10 rounded-xl border border-white/20 animate-in zoom-in duration-500">
-                                    <div className="w-16 h-16 bg-natu-pink rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <Unicon name="check-circle" className="text-white w-8 h-8" />
-                                    </div>
-                                    <h3 className="text-2xl font-serif text-[#F2F0E9] mb-4">Bem-vindo(a)!</h3>
-                                    <p className="text-[#F2F0E9]/70 font-sans">{status.message}</p>
-                                    <button
-                                        onClick={() => setStatus({ type: '', message: '' })}
-                                        className="mt-8 text-[10px] uppercase font-bold tracking-widest text-[#F2F0E9]/40 hover:text-natu-pink transition-colors"
-                                    >
-                                        Cadastrar outro contato
-                                    </button>
+                        {status.type === 'success' ? (
+                            <div className="text-center p-10 bg-white/10 rounded-xl border border-white/20 animate-in zoom-in duration-500">
+                                <div className="w-16 h-16 bg-natu-pink rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <Unicon name="check-circle" className="text-white w-8 h-8" />
                                 </div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-5 flex flex-col">
-                                    <div className="relative group">
-                                        <Unicon name="user" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
-                                        <input
-                                            required
-                                            type="text"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            placeholder="Seu nome completo"
-                                            className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
-                                        />
-                                    </div>
-
-                                    <div className="relative group">
-                                        <Unicon name="envelope" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
-                                        <input
-                                            required
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            placeholder="E-mail principal"
-                                            className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
-                                        />
-                                    </div>
-
-                                    <div className="relative group">
-                                        <Unicon name="phone" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
-                                        <input
-                                            required
-                                            type="tel"
-                                            name="phone"
-                                            value={formData.phone}
-                                            onChange={handleChange}
-                                            placeholder="WhatsApp (com DDD)"
-                                            className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
-                                        />
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        disabled={loading}
-                                        className="w-full bg-[#F2F0E9] text-natu-brown py-5 rounded-2xl font-bold uppercase tracking-[0.3em] text-[10px] hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-center items-center gap-4 group"
-                                    >
-                                        {loading ? (
-                                            <Unicon name="spinner" className="animate-spin" size={18} />
-                                        ) : (
-                                            <>
-                                                Quero fazer parte
-                                                <Unicon name="send" size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                            </>
-                                        )}
-                                    </button>
-
-                                    <p className="text-[10px] md:text-xs text-[#F2F0E9]/40 font-sans leading-relaxed text-center px-4">
-                                        Declaro que conheço a <button onClick={() => window.location.href = '/politica-de-privacidade'} className="underline hover:text-natu-pink transition-colors bg-transparent border-0 p-0 text-inherit cursor-pointer">Política de Privacidade</button> e autorizo a utilização das minhas informações pela Natuclinic.
-                                    </p>
-
-                                    {status.type === 'error' && (
-                                        <p className="text-red-400 text-xs text-center mt-2 font-sans font-medium">{status.message}</p>
+                                <h3 className="text-2xl font-sans font-bold text-[#F2F0E9] mb-4">Bem-vindo(a)!</h3>
+                                <p className="text-[#F2F0E9]/70 font-sans">{status.message}</p>
+                                <button
+                                    onClick={() => setStatus({ type: '', message: '' })}
+                                    className="mt-8 text-[10px] uppercase font-bold tracking-widest text-[#F2F0E9]/40 hover:text-natu-pink transition-colors"
+                                >
+                                    Cadastrar outro contato
+                                </button>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div className="relative group">
+                                    <Unicon name="user" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
+                                    <input required type="text" name="name" value={formData.name} onChange={handleChange}
+                                        placeholder="Seu nome completo"
+                                        className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
+                                    />
+                                </div>
+                                <div className="relative group">
+                                    <Unicon name="envelope" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
+                                    <input required type="email" name="email" value={formData.email} onChange={handleChange}
+                                        placeholder="E-mail principal"
+                                        className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
+                                    />
+                                </div>
+                                <div className="relative group">
+                                    <Unicon name="phone" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F2F0E9]/30 group-focus-within:text-natu-pink transition-colors" size={16} />
+                                    <input required type="tel" name="phone" value={formData.phone} onChange={handleChange}
+                                        placeholder="WhatsApp (com DDD)"
+                                        className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-[#F2F0E9] font-sans placeholder:text-[#F2F0E9]/20 focus:outline-none focus:ring-2 focus:ring-natu-pink/20 focus:bg-white/10 transition-all"
+                                    />
+                                </div>
+                                <button type="submit" disabled={loading}
+                                    className="w-full bg-[#F2F0E9] text-natu-brown py-5 rounded-2xl font-bold uppercase tracking-[0.3em] text-[10px] hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-center items-center gap-4 group"
+                                >
+                                    {loading ? (
+                                        <Unicon name="spinner" className="animate-spin" size={18} />
+                                    ) : (
+                                        <>
+                                            Quero fazer parte
+                                            <Unicon name="send" size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                        </>
                                     )}
-                                </form>
-                            )}
-                        </div>
+                                </button>
+                                <p className="text-[10px] text-[#F2F0E9]/40 font-sans leading-relaxed text-center px-4">
+                                    Declaro que conheço a{' '}
+                                    <button type="button" onClick={() => window.location.href = '/politica-de-privacidade'}
+                                        className="underline hover:text-natu-pink transition-colors bg-transparent border-0 p-0 text-inherit cursor-pointer">
+                                        Política de Privacidade
+                                    </button>{' '}
+                                    e autorizo a utilização das minhas informações pela Natuclinic.
+                                </p>
+                                {status.type === 'error' && (
+                                    <p className="text-red-400 text-xs text-center font-sans font-medium">{status.message}</p>
+                                )}
+                            </form>
+                        )}
                     </div>
                 </div>
 
-                {/* Right — Image */}
+                {/* Direita — Imagem */}
                 <div className="relative hidden lg:block">
                     <img
                         src="/sala-dra-debora.jpg"
