@@ -60,7 +60,7 @@ const LeadCapture = () => {
             <div className="grid lg:grid-cols-2 min-h-[560px]">
 
                 {/* Esquerda — Formulário */}
-                <div className="flex items-center py-16 px-12 md:px-24 lg:px-32">
+                <div className="flex items-center py-16 px-5 md:px-20">
                     <div className="w-full max-w-lg">
                         <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
                             Lista VIP Natuclinic
