@@ -36,7 +36,12 @@ async function generateSitemap() {
             if (slugMatches) {
                 const slugs = slugMatches.map(m => m.match(/"slug":\s*"([^"]+)"/)[1]);
                 slugs.forEach(slug => {
-                    if (slug !== 'sidebar-ad-global') { // Skip internal config
+                    // Filtra slugs inválidos: internos, muito curtos, começando com traço, ou com caracteres especiais
+                    const isValid = slug !== 'sidebar-ad-global'
+                        && slug.length >= 5
+                        && !slug.startsWith('-')
+                        && /^[a-z0-9-]+$/.test(slug); // só letras minúsculas, números e traços
+                    if (isValid) {
                         urls.push(`/blog/${slug}`);
                     }
                 });
