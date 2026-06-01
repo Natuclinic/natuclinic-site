@@ -83,25 +83,27 @@ const LeadCapture = () => {
     };
 
     return (
-        <section className="relative py-12 md:py-20 bg-[#1a0e09] overflow-hidden">
+        <section className="relative bg-[#1a0e09] overflow-hidden">
 
-            <div className="desktop-container relative z-10">
-                <div className="lg:w-3/4 bg-white/3 p-8 md:p-16 border border-white/8 rounded-[2.5rem] relative overflow-hidden">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 min-h-[560px]">
 
-                        {/* Left Side: Copy */}
-                        <div className="text-left">
-                            <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
-                                Lista VIP Natuclinic
-                            </span>
-                            <h2 className="text-4xl md:text-5xl font-sans font-bold text-[#F2F0E9] leading-tight mb-6">
-                                Comece sua mudança hoje
-                            </h2>
-                            <p className="text-base font-sans font-light text-[#F2F0E9]/60 leading-relaxed mb-8">
-                                Faça parte da nossa comunidade e receba dicas de autocuidado, saúde e beleza feitas com carinho pela nossa equipe para você.
-                            </p>
+                {/* Left — Form card */}
+                <div className="flex items-center py-16 px-8 md:px-16 lg:px-20">
+                    <div className="w-full max-w-lg">
 
-                        </div>
+                        {/* Copy */}
+                        <span className="text-natu-pink font-sans font-bold tracking-[0.3em] uppercase text-[10px] block mb-4">
+                            Lista VIP Natuclinic
+                        </span>
+                        <h2 className="text-4xl md:text-5xl font-sans font-bold text-[#F2F0E9] leading-tight mb-5">
+                            Comece sua mudança hoje
+                        </h2>
+                        <p className="text-base font-sans font-light text-[#F2F0E9]/50 leading-relaxed mb-10">
+                            Faça parte da nossa comunidade e receba dicas de autocuidado, saúde e beleza feitas com carinho pela nossa equipe para você.
+                        </p>
+
+                        {/* Form area below */}
+                        <div className="relative">
 
                         {/* Right Side: Form */}
                         <div className="relative">
@@ -187,6 +189,19 @@ const LeadCapture = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Right — Image */}
+                <div className="relative hidden lg:block">
+                    <img
+                        src="/sala-dra-debora.jpg"
+                        alt="Natuclinic — clínica de estética em Brasília"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#1a0e09] via-[#1a0e09]/20 to-transparent" />
+                </div>
+
             </div>
         </section>
     );
