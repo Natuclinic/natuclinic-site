@@ -3,89 +3,79 @@ import { gsap } from 'gsap';
 
 const Silk = React.lazy(() => import('./Silk'));
 
+const items = [
+    { id: "01", title: "Um olhar atento sobre você", text: "Cada protocolo nasce de uma escuta cuidadosa. Não padronizamos você; respeitamos sua história." },
+    { id: "02", title: "O cuidado que te abraça por inteiro", text: "Unimos nutrição, estética e bem-estar para que você se sinta completa." },
+    { id: "03", title: "Equilíbrio que vem de dentro", text: "Beleza é o brilho de um corpo em harmonia. Cuidamos da sua saúde para que você brilhe." },
+];
+
 const HomeManifesto = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Headline Animation
-            gsap.from(".manifesto-headline span", {
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 80%",
-                },
-                opacity: 0,
-                y: 24,
-                filter: "blur(10px)",
-                duration: 2.5,
-                ease: "power3.out",
-                stagger: 0.2,
+            gsap.from(".manifesto-headline", {
+                scrollTrigger: { trigger: containerRef.current, start: "top 80%" },
+                opacity: 0, y: 30, filter: "blur(8px)",
+                duration: 1.8, ease: "power3.out",
             });
-
-            // Method Items Animation
             gsap.from(".method-item", {
-                scrollTrigger: {
-                    trigger: ".method-item",
-                    start: "top 85%",
-                },
-                opacity: 0,
-                y: 32,
-                filter: "blur(10px)",
-                duration: 2.5,
-                ease: "power3.out",
-                stagger: 0.18,
+                scrollTrigger: { trigger: ".method-item", start: "top 85%" },
+                opacity: 0, y: 24, filter: "blur(6px)",
+                duration: 1.6, ease: "power3.out", stagger: 0.15,
             });
         }, containerRef);
-
         return () => ctx.revert();
     }, []);
 
     return (
-        <section id="clinica" ref={containerRef} className="py-24 bg-natu-ivory relative overflow-hidden">
+        <section id="clinica" ref={containerRef} className="relative overflow-hidden bg-[#1a0e09]">
+
+            {/* Silk background */}
             <div className="absolute inset-0 z-0">
                 <React.Suspense fallback={null}>
-                    <Silk
-                        speed={5.2}
-                        scale={0.8}
-                        color="#37261c"
-                        noiseIntensity={1.5}
-                        rotation={0}
-                    />
+                    <Silk speed={5.2} scale={0.8} color="#37261c" noiseIntensity={1.5} rotation={0} />
                 </React.Suspense>
             </div>
-            {/* Subtle Organic Gradient Background */}
-            <div className="pointer-events-none absolute -right-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_#6E4A3C_0%,_transparent_70%)] opacity-20 blur-3xl mix-blend-multiply z-0"></div>
 
-            <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 lg:grid lg:grid-cols-12 lg:gap-x-16 relative z-10">
-                {/* HEADLINE */}
-                <div className="lg:col-span-6 manifesto-headline">
-                    <span className="block mb-6 text-xs tracking-[0.3em] uppercase text-[#F2F0E9]/60 font-sans font-bold">
-                        Metodologia Natuclinic
-                    </span>
+            {/* Glow */}
+            <div className="pointer-events-none absolute -right-40 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_#6E4A3C_0%,_transparent_70%)] opacity-25 blur-3xl z-0" />
 
-                    <h2 className="font-serif text-4xl leading-tight text-[#F2F0E9] sm:text-5xl lg:text-7xl">
-                        <span className="block opacity-90">não tratamos sintomas,</span>
-                        <span className="block mt-4 font-medium">tratamos pessoas</span>
-                    </h2>
-                </div>
+            <div className="desktop-container relative z-10 py-24 md:py-36">
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-                {/* METODOLOGIA */}
-                <div className="mt-20 space-y-16 lg:col-span-5 lg:mt-0 lg:ml-auto">
-                    {[
-                        { id: "01", title: "Um olhar atento sobre você", text: "Cada protocolo nasce de uma escuta cuidadosa. Não padronizamos você; respeitamos sua história." },
-                        { id: "02", title: "O cuidado que te abraça por inteiro", text: "Unimos nutrição, estética e bem-estar para que você se sinta completa." },
-                        { id: "03", title: "Equilíbrio que vem de dentro", text: "Beleza é o brilho de um corpo em harmonia. Cuidamos da sua saúde para que você brilhe." }
-                    ].map((item, idx) => (
-                        <div key={idx} className="method-item relative pl-6 border-l border-[#F2F0E9]/20 lg:pl-0 lg:border-l-0">
-                            <span className="block mb-4 font-serif text-2xl text-[#F2F0E9]/30">{item.id}</span>
-                            <h3 className="mb-3 font-serif text-xl text-[#F2F0E9]">
-                                {item.title}
-                            </h3>
-                            <p className="max-w-[42ch] text-sm leading-relaxed text-[#F2F0E9]/80 font-sans font-light text-pretty">
-                                {item.text}
-                            </p>
-                        </div>
-                    ))}
+                    {/* Esquerda — Headline */}
+                    <div className="manifesto-headline">
+                        <span className="block mb-6 text-[10px] tracking-[0.35em] uppercase text-[#F2F0E9]/40 font-sans font-bold">
+                            Metodologia Natuclinic
+                        </span>
+                        <h2 className="font-sans font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.0] tracking-tight text-[#F2F0E9]">
+                            não tratamos<br />
+                            <span className="text-natu-pink">sintomas,</span><br />
+                            tratamos<br />
+                            pessoas
+                        </h2>
+                    </div>
+
+                    {/* Direita — Itens */}
+                    <div className="space-y-0 divide-y divide-[#F2F0E9]/10">
+                        {items.map((item) => (
+                            <div key={item.id} className="method-item py-8 flex gap-6 items-start group">
+                                <span className="font-sans font-bold text-[11px] tracking-widest text-natu-pink/60 mt-1 flex-shrink-0 w-6">
+                                    {item.id}
+                                </span>
+                                <div>
+                                    <h3 className="font-sans font-bold text-lg text-[#F2F0E9] mb-2 leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="font-sans font-light text-sm leading-relaxed text-[#F2F0E9]/50 text-pretty">
+                                        {item.text}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
             </div>
         </section>

@@ -132,7 +132,6 @@ export default function App() {
                   <VideoFeedbacks />
                   <ResultsCTA />
                   <ClinicGallery />
-                  <StatsSection />
                   <BlogHighlights />
                   <LeadCapture />
                 </>
