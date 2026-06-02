@@ -165,12 +165,7 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
             <div className="desktop-container">
                 {showTitle && (
                     <div className="mb-10 space-y-2 text-center lg:text-left">
-                        <div className="flex items-center justify-center lg:justify-start gap-2 text-natu-brown/40">
-                            <Unicon name="video" size={12} />
-                            <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.3em] uppercase block">
-                                O que nossos pacientes dizem
-                            </span>
-                        </div>
+
                         <h2 className="text-3xl md:text-5xl font-sans font-bold text-natu-brown tracking-tight">
                             Depoimentos que inspiram
                         </h2>

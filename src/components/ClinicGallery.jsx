@@ -149,11 +149,9 @@ const ClinicGallery = () => {
 
             <div className="desktop-container relative z-10">
                 <div className="mb-16 text-center">
-                    <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
-                        Nosso Espaço
-                    </span>
                     <h2 className="font-sans text-2xl md:text-5xl text-natu-brown font-bold">
-                        Naturalmente acolhedor                    </h2>
+                        Um espaço feito pra você
+                    </h2>
                 </div>
 
                 <div

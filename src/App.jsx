@@ -56,12 +56,10 @@ const useSmoothScroll = () => {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
+      smoothTouch: false,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
       infinite: false,
     });
-
-    lenis.on('scroll', ScrollTrigger.update);
 
     const tickerFn = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tickerFn);

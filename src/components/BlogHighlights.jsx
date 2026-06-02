@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useArticles } from '../hooks/useArticles';
 import Unicon from './Unicon';
@@ -18,11 +18,22 @@ const BlogHighlights = () => {
     const [scrollLeftState, setScrollLeftState] = React.useState(0);
     const [isDragging, setIsDragging] = React.useState(false);
 
+    useEffect(() => {
+        const el = scrollContainerRef.current;
+        if (!el) return;
+        const onTouchMove = (e) => {
+            if (!isDown) return;
+            if (e.cancelable) e.preventDefault();
+        };
+        el.addEventListener('touchmove', onTouchMove, { passive: false });
+        return () => el.removeEventListener('touchmove', onTouchMove);
+    }, [isDown]);
+
     const handleScroll = () => {
         if (!scrollContainerRef.current) return;
         const container = scrollContainerRef.current;
         const scrollPosition = container.scrollLeft;
-        const itemWidth = container.offsetWidth * 0.85;
+        const itemWidth = container.offsetWidth * 0.92;
         const index = Math.round(scrollPosition / itemWidth);
         if (index !== activeIndex) setActiveIndex(index);
     };
@@ -47,41 +58,46 @@ const BlogHighlights = () => {
         setIsDragging(false);
     };
 
-    const handleMouseUp = () => {
-        if (!isDown) return;
-        setIsDown(false);
-        if (isDragging) {
-            snapToCenter();
-        }
-    };
-
     const snapToCenter = () => {
         if (window.innerWidth >= 1024) return;
         const container = scrollContainerRef.current;
-        const centerPoint = container.scrollLeft + (window.innerWidth / 2);
+        if (!container) return;
+
+        const centerPoint = container.scrollLeft + container.offsetWidth / 2;
 
         let closestIndex = 0;
         let minDistance = Infinity;
 
-        highlightArticles.forEach((_, index) => {
-            const item = itemRefs.current[index];
-            if (item) {
-                const itemCenter = item.offsetLeft + (item.offsetWidth / 2);
-                const distance = Math.abs(centerPoint - itemCenter);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestIndex = index;
-                }
+        Object.entries(itemRefs.current).forEach(([idx, item]) => {
+            if (!item) return;
+            const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+            const distance = Math.abs(centerPoint - itemCenter);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = Number(idx);
             }
         });
 
-        // Use existing handleItemClick to center
-        handleItemClick(highlightArticles[closestIndex].id, closestIndex);
+        const target = itemRefs.current[closestIndex];
+        if (!target) return;
+
+        gsap.to(container, {
+            scrollLeft: target.offsetLeft - (container.offsetWidth - target.offsetWidth) / 2,
+            duration: 0.5,
+            ease: 'power2.out',
+            overwrite: 'auto',
+        });
+        setActiveIndex(closestIndex);
+    };
+
+    const handleMouseUp = () => {
+        if (!isDown) return;
+        setIsDown(false);
+        snapToCenter();
     };
 
     const handleMouseMove = (e) => {
         if (!isDown) return;
-        if (e.cancelable) e.preventDefault();
 
         const pageX = e.pageX || e.touches?.[0].pageX;
         const x = pageX - scrollContainerRef.current.offsetLeft;
@@ -116,7 +132,7 @@ const BlogHighlights = () => {
             if (activeIndex !== index) {
                 // Smooth center on mobile
                 gsap.to(scrollContainerRef.current, {
-                    scrollLeft: itemRefs.current[index].offsetLeft - (window.innerWidth * 0.075),
+                    scrollLeft: itemRefs.current[index].offsetLeft - (window.innerWidth * 0.04),
                     duration: 0.6,
                     ease: "power2.out"
                 });
@@ -183,7 +199,7 @@ const BlogHighlights = () => {
                             onTouchStart={handleMouseDown}
                             onTouchMove={handleMouseMove}
                             onTouchEnd={handleMouseUp}
-                            className={`flex gap-6 lg:gap-8 overflow-x-auto pb-8 no-scrollbar px-[7.5%] lg:px-0 
+                            className={`flex gap-6 lg:gap-8 overflow-x-auto pb-8 no-scrollbar px-[4%] lg:px-0
                                     ${isDown ? 'cursor-grabbing' : 'lg:cursor-grab'}`}
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
@@ -191,7 +207,7 @@ const BlogHighlights = () => {
                                 <div
                                     key={article.id}
                                     ref={el => itemRefs.current[index] = el}
-                                    className={`min-w-[85%] md:min-w-[360px] flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer transition-all duration-500
+                                    className={`min-w-[92%] md:min-w-[360px] flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer transition-all duration-500
                                         ${window.innerWidth < 1024 && activeIndex !== index ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}
                                     `}
                                     onClick={() => handleItemClick(article.id, index)}
