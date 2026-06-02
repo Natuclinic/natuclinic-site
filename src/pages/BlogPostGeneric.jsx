@@ -489,11 +489,11 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                         {/* Overlay escuro para contraste */}
                         <div className="absolute inset-0 bg-natu-brown/70 rounded-3xl z-0" />
 
-                        <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white/30 shrink-0 relative z-10 transition-transform duration-500 group-hover:scale-105">
+                        <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white/30 shrink-0 relative z-10 transition-transform duration-500 group-hover:scale-105 bg-white flex items-center justify-center p-5">
                             <img
-                                src={post.author_avatar || "/images/blog-images/avatar-natuclinic-blog.jpg"}
-                                alt={post.author_name || "Equipe Natuclinic"}
-                                className="w-full h-full object-cover"
+                                src="/logo-svg.svg"
+                                alt="Natuclinic"
+                                className="w-full h-full object-contain"
                             />
                         </div>
 
@@ -545,9 +545,9 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                             href="https://wa.me/5561992551867?text=Olá! Desejo resultados reais. Gostaria de agendar uma avaliação."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative z-10 px-10 py-6 bg-natu-brown text-white rounded-full font-normal text-base hover:scale-105 transition-all flex items-center gap-6"
+                            className="relative z-10 px-8 py-5 bg-natu-brown text-white rounded-full font-normal text-base hover:scale-105 transition-all flex items-center gap-4 whitespace-nowrap"
                         >
-                            <Unicon name="whatsapp" size={56} />
+                            <Unicon name="whatsapp" size={28} />
                             Agendar minha avaliação
                         </a>
                     </div>

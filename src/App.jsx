@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ErrorBoundary from './components/ErrorBoundary';
 import Unicon from './components/Unicon';
 import { gsap } from 'gsap';
@@ -49,6 +49,7 @@ import Lenis from 'lenis';
 
 // Initialize Lenis global smooth scroll
 const useSmoothScroll = () => {
+  const lenisRef = useRef(null);
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -60,6 +61,7 @@ const useSmoothScroll = () => {
       wheelMultiplier: 1,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     const tickerFn = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tickerFn);
@@ -67,9 +69,11 @@ const useSmoothScroll = () => {
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
       gsap.ticker.remove(tickerFn);
     };
   }, []);
+  return lenisRef;
 };
 
 export function cn(...inputs) {
@@ -97,7 +101,7 @@ const BlogPostWrapper = ({ articles, adConfig, loading }) => {
 };
 
 export default function App() {
-  useSmoothScroll();
+  const lenisRef = useSmoothScroll();
   const { articles, adConfig, loading } = useArticles();
   const location = useLocation();
   const navigate = useNavigate();
@@ -105,6 +109,13 @@ export default function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
+
+  const [showScrollTop, setShowScrollTop] = React.useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const isServicePage = location.pathname.startsWith('/procedimentos/') &&
     location.pathname !== '/procedimentos' &&
@@ -168,10 +179,21 @@ export default function App() {
         </React.Suspense>
         </ErrorBoundary>
 
-        {/* WhatsApp Flutuante - Global */}
-        <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="fixed bottom-10 right-10 bg-whatsapp text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 z-[9999] shadow-lg shadow-[inset_0_0_20px_var(--color-whatsapp-dark)] border border-white/10">
-          <Unicon name="whatsapp" size={38} className="drop-shadow-md" />
-        </a>
+        {/* Botões flutuantes */}
+        <div className="fixed bottom-10 right-10 flex flex-col items-center gap-3 z-[9999]">
+          <button
+            onClick={() => lenisRef.current?.scrollTo(0)}
+            aria-label="Voltar ao topo"
+            className={`bg-white text-natu-brown w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-md ring-2 ring-inset ring-natu-brown/40 ${showScrollTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 19V5M5 12l7-7 7 7"/>
+            </svg>
+          </button>
+          <a href="https://wa.me/5561992551867?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Natuclinic%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" aria-label="Falar com Natuclinic Taguatinga" className="bg-whatsapp text-white w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 shadow-lg shadow-[inset_0_0_20px_var(--color-whatsapp-dark)] border border-white/10">
+            <Unicon name="whatsapp" size={38} className="drop-shadow-md" />
+          </a>
+        </div>
 
         <SpeedInsights />
         <CookieConsent />

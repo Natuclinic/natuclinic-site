@@ -7,8 +7,14 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
     const [searchTerm, setSearchTerm] = React.useState('');
     const [visibleCount, setVisibleCount] = React.useState(6);
 
-    // Carregamento silencioso para evitar telas em branco
     const safeArticles = articles || [];
+
+    const categories = React.useMemo(() => {
+        const seen = new Set();
+        return safeArticles
+            .map(a => a.category)
+            .filter(c => c && !seen.has(c) && seen.add(c));
+    }, [safeArticles]);
 
     const filteredArticles = safeArticles.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -17,10 +23,10 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
 
     const featuredPost = filteredArticles[0];
     const otherPosts = filteredArticles.slice(1);
-    const visiblePosts = otherPosts.slice(0, visibleCount - 1);
+    const visiblePosts = otherPosts.slice(0, visibleCount);
 
     return (
-        <div className="pt-24 pb-24 min-h-screen bg-white">
+        <div className="pt-36 pb-24 min-h-screen bg-white">
             <SEO
                 title="Blog de Saúde e Estética — Natuclinic Brasília"
                 description="Artigos sobre nutrição ortomolecular, estética, emagrecimento saudável e bem-estar. Conteúdo produzido pela equipe especialista da Natuclinic em Brasília."
@@ -29,58 +35,103 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                 keywords="blog saúde brasília, nutrição ortomolecular, estética corporal, emagrecimento saudável"
             />
             <div className="desktop-container">
-                {/* Header */}
-                <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                    <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
-                        Blog Natuclinic
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-sans font-bold text-natu-brown mb-8">
-                        Saúde &amp; Estética
-                    </h1>
 
-                    {/* Search Bar */}
-                    <div className="max-w-xl mx-auto relative group">
-                        <input
-                            type="text"
-                            placeholder="Buscar artigos..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-full font-sans text-sm focus:outline-none focus:ring-2 focus:ring-natu-brown/20 focus:bg-white transition-all"
-                        />
-                        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-natu-brown/30">
-                            <Unicon name="search" size={18} />
+                {/* Header — título + busca na mesma linha */}
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                    <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-natu-brown/10">
+                        <h1 className="text-4xl md:text-6xl font-sans font-bold text-natu-brown leading-none tracking-tight">
+                            Saúde &amp; Estética
+                        </h1>
+
+                        <div className="lg:w-72 flex-shrink-0">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Buscar artigos..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-full font-sans text-sm focus:outline-none focus:ring-2 focus:ring-natu-brown/20 focus:bg-white transition-all"
+                                />
+                                <div className="absolute right-5 top-1/2 -translate-y-1/2 text-natu-brown/30">
+                                    <Unicon name="search" size={16} />
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    {/* Filtros de categoria */}
+                    {categories.length > 0 && (
+                        <div className="flex flex-wrap gap-2 pt-5 pb-12">
+                            <button
+                                onClick={() => setSearchTerm('')}
+                                className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-200 ${
+                                    !searchTerm
+                                        ? 'bg-natu-brown text-white border-natu-brown'
+                                        : 'border-natu-brown/20 text-natu-brown/50 hover:border-natu-brown/50 hover:text-natu-brown'
+                                }`}
+                            >
+                                Todos
+                            </button>
+                            {categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setSearchTerm(searchTerm === cat ? '' : cat)}
+                                    className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-200 ${
+                                        searchTerm === cat
+                                            ? 'bg-natu-brown text-white border-natu-brown'
+                                            : 'border-natu-brown/20 text-natu-brown/50 hover:border-natu-brown/50 hover:text-natu-brown'
+                                    }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                {/* Featured Post */}
+                {/* Featured Post — editorial */}
                 {featuredPost && !searchTerm && (
                     <article
                         onClick={() => setCurrentPage(featuredPost.slug || featuredPost.id)}
-                        className="group cursor-pointer grid lg:grid-cols-2 gap-0 mb-20 bg-gray-50 rounded-xl overflow-hidden max-w-5xl mx-auto lg:h-[450px]"
+                        className="group cursor-pointer grid lg:grid-cols-[3fr_2fr] mb-20 rounded-2xl overflow-hidden lg:h-[480px]"
                     >
-                        <div className="aspect-video lg:aspect-auto overflow-hidden h-full">
+                        {/* Imagem */}
+                        <div className="aspect-[16/9] lg:aspect-auto overflow-hidden">
                             <img
                                 src={featuredPost.image}
                                 alt={featuredPost.title}
-                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                             />
                         </div>
-                        <div className="p-8 md:p-10 flex flex-col justify-center">
-                            <div className="flex items-center gap-4 text-xs font-sans tracking-wider text-natu-brown/60 mb-6">
-                                <span className="uppercase text-natu-pink font-bold">Destaque • {featuredPost.category}</span>
-                                <span>•</span>
-                                <span>{featuredPost.date}</span>
-                            </div>
-                            <h2 className="blog-title text-[22px] md:text-[28px] text-black mb-4 group-hover:text-natu-pink transition-colors leading-[1.2]">
-                                {featuredPost.title}
-                            </h2>
-                            <p className="font-sans font-light text-gray-500 mb-6 text-base leading-relaxed line-clamp-3">
-                                {featuredPost.excerpt}
-                            </p>
+
+                        {/* Texto — cream bg */}
+                        <div className="bg-[#F7F3EE] p-8 lg:p-10 flex flex-col justify-between">
                             <div>
-                                <span className="inline-flex items-center gap-2 px-6 py-2.5 border border-black rounded-full text-[11px] font-bold uppercase tracking-[0.1em] text-black group-hover:bg-black group-hover:text-white transition-all duration-300">
-                                    Ler Artigo Completo <Unicon name="arrow-right" size={14} />
+                                <div className="flex items-center gap-3 mb-6">
+                                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-natu-pink">
+                                        Destaque
+                                    </span>
+                                    <span className="w-1 h-1 rounded-full bg-natu-brown/20" />
+                                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-natu-brown/40">
+                                        {featuredPost.category}
+                                    </span>
+                                </div>
+
+                                <h2 className="text-2xl lg:text-[28px] font-sans font-bold text-natu-brown leading-[1.2] mb-5">
+                                    {featuredPost.title}
+                                </h2>
+
+                                <p className="font-sans font-light text-natu-brown/60 text-sm leading-relaxed line-clamp-4">
+                                    {featuredPost.excerpt}
+                                </p>
+                            </div>
+
+                            <div className="mt-10 flex items-center justify-between">
+                                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-natu-brown/30">
+                                    {featuredPost.date}
+                                </span>
+                                <span className="inline-flex items-center gap-2 px-6 py-3 bg-natu-brown text-white rounded-full text-[10px] font-bold uppercase tracking-[0.15em] group-hover:bg-black transition-colors duration-300">
+                                    Ler artigo <Unicon name="arrow-right" size={12} />
                                 </span>
                             </div>
                         </div>
@@ -96,7 +147,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
 
                 {/* Posts Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                    {(searchTerm ? filteredArticles : visiblePosts).map((post, i) => (
+                    {(searchTerm ? filteredArticles.slice(0, visibleCount) : visiblePosts).map((post, i) => (
                         <article
                             key={i}
                             onClick={() => setCurrentPage(post.slug || post.id)}
@@ -113,7 +164,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                             </div>
 
                             <div className="flex flex-col flex-grow px-2">
-                                <div className="flex items-center gap-4 text-[10px] font-sans tracking-[0.2em] font-bold text-natu-brown/40 mb-4 uppercase">
+                                <div className="flex items-center gap-3 text-[11px] font-sans tracking-normal font-bold text-natu-brown/40 mb-4">
                                     <span className="text-natu-pink">{post.category}</span>
                                     <span>•</span>
                                     <span>{post.date}</span>
@@ -138,7 +189,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                 </div>
 
                 {/* Load More Button */}
-                {!searchTerm && otherPosts.length > visibleCount - 1 && (
+                {(searchTerm ? filteredArticles.length : otherPosts.length) > visibleCount && (
                     <div className="mt-24 text-center">
                         <button
                             onClick={() => setVisibleCount(prev => prev + 6)}
