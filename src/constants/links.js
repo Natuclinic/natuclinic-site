@@ -35,6 +35,8 @@ export const WHATSAPP_LINKS = {
     MSG_SOROTERAPIA: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Tenho interesse na Soroterapia (Soro da Beleza/Imunidade).")}`,
     MSG_OZONIO: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de informações sobre os benefícios da Ozonioterapia.")}`,
     MSG_SUPLEMENTACAO: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de uma avaliação para Suplementação Personalizada.")}`,
+    MSG_SAUDE_MULHER: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de informações sobre os protocolos de Saúde da Mulher e Estética Íntima na Natuclinic.")}`,
+    MSG_TRICOLOGIA: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de uma avaliação para Tricologia Capilar e Tratamento de Queda na Natuclinic.")}`,
 };
 
 export const API_URLS = {

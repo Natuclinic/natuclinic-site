@@ -6,7 +6,7 @@ const SITE_URL = 'https://www.natuclinic.com.br';
 const DEFAULT_IMAGE = `${SITE_URL}/og-default.jpg`;
 const DEFAULT_DESC = 'Clínica de Estética e Nutrição Ortomolecular em Brasília e Taguatinga. Especialistas em Rejuvenescimento, Harmonização e Corpo Essencializado.';
 
-const SEO = ({ title, description, image, url, type = 'website', keywords = '', canonical, jsonLd }) => {
+const SEO = ({ title, description, image, url, type = 'website', keywords = '', canonical, jsonLd, jsonLdList }) => {
     const seoTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     const seoDesc = description || DEFAULT_DESC;
     const seoImage = image?.startsWith('http') ? image : `${SITE_URL}${image || '/og-default.jpg'}`;
@@ -37,6 +37,11 @@ const SEO = ({ title, description, image, url, type = 'website', keywords = '', 
                     {JSON.stringify(jsonLd)}
                 </script>
             )}
+            {jsonLdList && jsonLdList.map((schema, i) => (
+                <script key={i} type="application/ld+json">
+                    {JSON.stringify(schema)}
+                </script>
+            ))}
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Unicon from './Unicon';
 import { WHATSAPP_LINKS } from '../constants/links';
@@ -42,7 +42,17 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
     const [hoveredItem, setHoveredItem] = useState(null);
+    const closeTimer = useRef(null);
     const navigate = useNavigate();
+
+    const handleMenuEnter = (i) => {
+        if (closeTimer.current) clearTimeout(closeTimer.current);
+        setHoveredItem(i);
+    };
+
+    const handleMenuLeave = () => {
+        closeTimer.current = setTimeout(() => setHoveredItem(null), 120);
+    };
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -68,6 +78,7 @@ const Navbar = () => {
                         title: 'Saúde',
                         links: [
                             { label: 'Nutrição Ortomolecular', path: '/procedimentos/nutricao-ortomolecular' },
+                            { label: 'Saúde da Mulher', path: '/procedimentos/ninfoplastia' },
                             { label: 'Soroterapia', href: WHATSAPP_LINKS.MSG_SOROTERAPIA },
                             { label: 'Ozonioterapia', href: WHATSAPP_LINKS.MSG_OZONIO },
                             { label: 'Eletroestimulação', href: WHATSAPP_LINKS.GENERAL },
@@ -163,14 +174,14 @@ const Navbar = () => {
                     {menuItems.map((item, i) => (
                         <div
                             key={i}
-                            className="group/nav py-8 flex items-center"
-                            onMouseEnter={() => setHoveredItem(i)}
-                            onMouseLeave={() => setHoveredItem(null)}
+                            className="py-8 flex items-center"
+                            onMouseEnter={() => handleMenuEnter(i)}
+                            onMouseLeave={handleMenuLeave}
                         >
                             {item.megaMenu ? (
                                 <button className="text-[13px] tracking-widest font-medium text-natu-brown bg-transparent border-0 p-0 cursor-pointer relative flex items-center gap-1 font-sans">
                                     {item.label}
-                                    <span className="text-[11px] transition-transform duration-300 group-hover/nav:-rotate-180 font-sans">⌵</span>
+                                    <span className={`text-[11px] transition-transform duration-300 font-sans ${hoveredItem === i ? '-rotate-180' : ''}`}>⌵</span>
                                 </button>
                             ) : item.path ? (
                                 <button onClick={() => handleNavigation(item.path)} className="text-[13px] tracking-widest font-medium bg-transparent border-0 p-0 text-natu-brown cursor-pointer relative font-sans">
@@ -184,10 +195,14 @@ const Navbar = () => {
 
                             {/* Mega Menu Dropdown */}
                             {item.megaMenu && (
-                                <div className="absolute top-full left-0 w-full pt-0 opacity-0 -translate-y-4 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-500 ease-out z-[60]">
-                                    <div className="relative group/menu">
+                                <div
+                                    className={`absolute top-full left-0 w-full pt-0 transition-all duration-300 ease-out z-[60] ${hoveredItem === i ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
+                                    onMouseEnter={() => handleMenuEnter(i)}
+                                    onMouseLeave={handleMenuLeave}
+                                >
+                                    <div className="relative">
                                         {/* Invisible Bridge */}
-                                        <div className="absolute -top-12 left-0 w-full h-12 bg-transparent" />
+                                        <div className="absolute -top-12 left-0 w-full h-12 bg-transparent pointer-events-none" />
 
                                         <div className="bg-[#ffffff] rounded-b-[40px] overflow-hidden border border-gray-100">
                                             <div className="max-w-7xl mx-auto px-12 py-16 flex flex-col gap-12">

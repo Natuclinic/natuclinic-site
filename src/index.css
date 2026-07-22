@@ -329,6 +329,12 @@ html.lenis {
 }
 
 @layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+
   @keyframes enter {
     from {
       opacity: var(--tw-enter-opacity, 1);

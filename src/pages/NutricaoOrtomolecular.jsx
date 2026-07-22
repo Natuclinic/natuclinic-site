@@ -238,22 +238,24 @@ const NutricaoOrtomolecular = ({ goBack }) => {
             hideHeader={true}
             whatsappMessage="Olá! Gostaria de agendar uma consulta de Nutrição Ortomolecular na Natuclinic."
             seo={{
-                title: "Nutrição Ortomolecular em Brasília — Dr. Julimar Meneses",
-                description: "Nutrição ortomolecular em Brasília com Dr. Julimar Meneses na Natuclinic. Tratamento para emagrecimento, performance, modulação intestinal e longevidade. Agende sua consulta.",
+                title: "Nutrição Ortomolecular em Brasília — Dr. Julimar Meneses | Naturopatia e Nutrição Funcional",
+                description: "Nutrição ortomolecular, naturopatia e nutrição funcional em Brasília com Dr. Julimar Meneses na Natuclinic. Abordagem baseada em biologia molecular, modulação intestinal e longevidade. Agende sua consulta.",
                 url: "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
                 canonical: "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
-                keywords: "nutrição ortomolecular brasília, nutricionista ortomolecular taguatinga, Dr Julimar Meneses, emagrecimento ortomolecular",
+                keywords: "nutrição ortomolecular brasília, naturopatia brasília, nutrição funcional taguatinga, biologia molecular nutrição, nutricionista ortomolecular taguatinga, Dr Julimar Meneses naturopata, emagrecimento ortomolecular, nutrição funcional brasília df",
                 image: "/julimar-naturopata-em-brasilia.webp",
                 jsonLd: {
                     "@context": "https://schema.org",
                     "@type": "MedicalProcedure",
                     "name": "Nutrição Ortomolecular",
-                    "description": "Consulta de nutrição ortomolecular para emagrecimento, performance e modulação intestinal em Brasília.",
+                    "description": "Consulta de nutrição ortomolecular, naturopatia e nutrição funcional baseada em biologia molecular para emagrecimento, performance, modulação intestinal e longevidade em Brasília.",
                     "url": "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
                     "procedureType": "Noninvasive",
                     "performer": {
-                        "@type": "Physician",
+                        "@type": "Person",
                         "name": "Dr. Julimar Meneses",
+                        "jobTitle": "Nutricionista Ortomolecular",
+                        "hasCredential": { "@type": "EducationalOccupationalCredential", "credentialCategory": "CRN-DF 21414" },
                         "worksFor": { "@type": "MedicalOrganization", "name": "Natuclinic" }
                     }
                 },
@@ -430,6 +432,34 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                 </div>
             </section>
 
+            {/* Callout Pós-Bariátrico */}
+            <section className="bg-[#FFF8F6] border-y border-natu-brown/10">
+                <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
+                    <BlurFade>
+                        <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                            <div className="flex-1 text-center md:text-left">
+                                <span className="text-[10px] font-bold tracking-[0.12em] text-natu-brown/50 font-sans block mb-2">PARA QUEM FEZ CIRURGIA BARIÁTRICA</span>
+                                <h2 className="text-2xl md:text-3xl font-serif text-natu-brown leading-tight tracking-tight mb-3">
+                                    Reposição de vitaminas com protocolo individualizado
+                                </h2>
+                                <p className="font-sans font-light text-gray-500 text-base leading-relaxed max-w-2xl">
+                                    Após a bariátrica, a absorção de vitaminas e minerais essenciais fica comprometida. Na Natuclinic, o Dr. Julimar avalia sua bioquímica e monta um protocolo de reposição ortomolecular sob medida — evitando deficiências, fadiga, queda de cabelo e perda de massa muscular.
+                                </p>
+                                <button
+                                    onClick={handleWhatsApp}
+                                    className="mt-5 inline-flex items-center gap-2 bg-natu-brown text-white font-sans text-[12px] font-bold tracking-wide px-6 py-3 rounded-lg hover:brightness-110 transition-all"
+                                >
+                                    Quero meu protocolo
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </BlurFade>
+                </div>
+            </section>
+
             {/* 3. Identificação dos Sintomas (A "Dor") */}
             <section className="py-12 lg:py-16 bg-white overflow-hidden relative">
 
@@ -603,7 +633,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
 
 
 
-            <section className="bg-white py-12 md:py-20 overflow-hidden relative">
+            <section className="bg-[#F9F7F5] py-12 md:py-20 overflow-hidden relative">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                     {/* Title and Pillars (Decoupled from card) */}
                     <div className="text-center mb-16 md:mb-20">
@@ -623,63 +653,134 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                     </div>
 
                     {/* Grid of Pillars */}
-                    <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                            {[
-                                {
-                                    title: "Um mergulho profundo na sua saúde",
-                                    desc: "Uma investigação detalhada para descobrir exatamente o que você precisa para se sentir em sua melhor forma hoje.",
-                                    icon: "microscope"
-                                },
-                                {
-                                    title: "O melhor que a natureza oferece",
-                                    desc: "Utilizamos nutrientes selecionados e puros, garantindo que você receba o máximo cuidado, sem aditivos desnecessários.",
-                                    icon: "leaf"
-                                },
-                                {
-                                    title: "Viver sem o peso das dores",
-                                    desc: "Silencia o mal-estar e recupera o conforto que você merece, tratando o corpo para que ele se sinta leve novamente.",
-                                    icon: "zap-off"
-                                },
-                                {
-                                    title: "Desperte seu metabolismo",
-                                    desc: "Ajustamos seu equilíbrio interno para que seu corpo aprenda a queimar gordura de forma natural e com mais energia.",
-                                    icon: "zap"
-                                },
-                                {
-                                    title: "Cuidado acolhedor e integrativo",
-                                    desc: "Acompanhamento próximo para quem busca apoio em momentos sensíveis, como modulação intestinal e equilíbrio imunológico.",
-                                    icon: "heart"
-                                },
-                                {
-                                    title: "De Brasília para onde você estiver",
-                                    desc: "O mesmo carinho e excelência da Natuclinic disponíveis para você em qualquer lugar, através de nossas teleconsultas.",
-                                    icon: "globe"
-                                }
-                            ].map((item, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true, margin: "-50px" }}
-                                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="group flex flex-col items-start p-8 md:p-12 border-r border-b border-white/10 bg-natu-brown hover:bg-[#3D1E15] transition-colors duration-500"
-                                >
-                                    <div className="text-left w-full h-full flex flex-col">
-                                        <div className="mb-10">
-                                            <Unicon name={item.icon} size={54} color="#D4B2A7" className="text-natu-pink bg-white/5 p-5 w-24 h-24 rounded-full" />
-                                        </div>
-                                        <h3 className="font-sans text-white text-lg md:text-xl mb-4 tracking-tight font-bold group-hover:text-natu-pink transition-colors">
-                                            {item.title}
-                                        </h3>
-                                        <p className="font-sans text-sm md:text-base text-white/70 leading-relaxed font-light">
-                                            {item.desc}
-                                        </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[
+                            {
+                                title: "Um mergulho profundo na sua saúde",
+                                desc: "Uma investigação detalhada para descobrir exatamente o que você precisa para se sentir em sua melhor forma hoje.",
+                                icon: "microscope",
+                                bgImage: "/images/approach_card_one.png",
+                                className: "bg-[#4C261A] text-white",
+                                iconBg: "bg-[#5D372B]",
+                                iconColor: "#D4B2A7",
+                                titleColor: "text-[#D4B2A7]",
+                                lineColor: "bg-[#D4B2A7]",
+                                descColor: "text-white/80",
+                                gradientClass: "from-[#4C261A] via-[#4C261A]/90 to-transparent"
+                            },
+                            {
+                                title: "O melhor que a natureza oferece",
+                                desc: "Utilizamos nutrientes selecionados e puros, garantindo que você receba o máximo cuidado, sem aditivos desnecessários.",
+                                icon: "leaf",
+                                bgImage: "/images/approach_card_two.png",
+                                className: "bg-[#FAF7F2] text-[#4C261A]",
+                                iconBg: "bg-[#85987B]",
+                                iconColor: "#FFFFFF",
+                                titleColor: "text-[#4C261A]",
+                                lineColor: "bg-[#85987B]",
+                                descColor: "text-[#4C261A]/80",
+                                gradientClass: "from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent"
+                            },
+                            {
+                                title: "Viver sem o peso das dores",
+                                desc: "Silencia o mal-estar e recupera o conforto que você merece, tratando o corpo para que ele se sinta leve novamente.",
+                                icon: "zap-off",
+                                bgImage: "/images/approach_card_three.png",
+                                className: "bg-[#FAF7F2] text-[#4C261A]",
+                                iconBg: "bg-[#E4C3B2]",
+                                iconColor: "#FFFFFF",
+                                titleColor: "text-[#4C261A]",
+                                lineColor: "bg-[#C6A18D]",
+                                descColor: "text-[#4C261A]/80",
+                                gradientClass: "from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent"
+                            },
+                            {
+                                title: "Desperte seu metabolismo",
+                                desc: "Ajustamos seu equilíbrio interno para que seu corpo aprenda a queimar gordura de forma natural e com mais energia.",
+                                icon: "zap",
+                                bgImage: "/images/approach_card_four.png",
+                                className: "bg-[#FAF7F2] text-[#4C261A]",
+                                iconBg: "bg-[#85987B]",
+                                iconColor: "#FFFFFF",
+                                titleColor: "text-[#4C261A]",
+                                lineColor: null,
+                                descColor: "text-[#4C261A]/80",
+                                gradientClass: "from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent"
+                            },
+                            {
+                                title: "Cuidado acolhedor e integrativo",
+                                desc: "Acompanhamento próximo para quem busca apoio em momentos sensíveis, como modulação intestinal e equilíbrio imunológico.",
+                                icon: "heart",
+                                bgImage: "/images/approach_card_five.png",
+                                className: "bg-[#FAF7F2] text-[#4C261A]",
+                                iconBg: "bg-[#E4C3B2]",
+                                iconColor: "#FFFFFF",
+                                titleColor: "text-[#4C261A]",
+                                lineColor: null,
+                                descColor: "text-[#4C261A]/80",
+                                gradientClass: "from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent"
+                            },
+                            {
+                                title: "De Brasília para onde você estiver",
+                                desc: "O mesmo carinho e excelência da Natuclinic disponíveis para você em qualquer lugar, através de nossas teleconsultas.",
+                                icon: "map-marker",
+                                bgImage: "/images/approach_card_six_light.png",
+                                className: "bg-[#FAF7F2] text-[#4C261A]",
+                                iconBg: "bg-[#C5A880]",
+                                iconColor: "#FFFFFF",
+                                titleColor: "text-[#4C261A]",
+                                lineColor: "bg-[#C5A880]",
+                                descColor: "text-[#4C261A]/80",
+                                gradientClass: "from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent"
+                            }
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.1 }}
+                                className={`group relative flex flex-col p-5 md:p-6 min-h-[250px] md:min-h-[225px] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 ${item.className}`}
+                            >
+                                {/* Background Image */}
+                                {item.bgImage && (
+                                    <div className="absolute inset-0 select-none pointer-events-none z-0">
+                                        <div 
+                                            className="absolute top-0 right-0 bottom-0 w-full md:w-[60%] bg-cover bg-right bg-no-repeat transition-transform duration-750 group-hover:scale-[1.03]"
+                                            style={{ backgroundImage: `url(${item.bgImage})` }}
+                                        />
+                                        {/* Horizontal gradient fade (unified for both mobile and desktop) */}
+                                        <div className={`absolute inset-0 bg-gradient-to-r ${item.gradientClass}`} />
                                     </div>
-                                </motion.div>
-                            ))}
-                        </div>
+                                )}
+
+                                {/* Card content container with restricted width for negative space */}
+                                <div className="relative z-10 flex flex-col w-full max-w-[78%] md:max-w-[62%] lg:max-w-[58%]">
+                                    {/* Icon Circle */}
+                                    <div className={`mb-3 flex items-center justify-center w-9 h-9 rounded-full ${item.iconBg}`}>
+                                        <Unicon name={item.icon} size={16} color={item.iconColor} animate={false} />
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className={`font-serif text-lg md:text-xl tracking-tight leading-tight mb-1.5 ${item.titleColor}`}>
+                                        {item.title}
+                                    </h3>
+
+                                    {/* Horizontal Divider Line */}
+                                    {item.lineColor && (
+                                        <div className={`w-8 h-[1px] mb-3 ${item.lineColor}`} />
+                                    )}
+
+                                    {/* Description */}
+                                    <p className={`font-sans text-xs md:text-[13px] leading-relaxed font-light ${item.descColor}`}>
+                                        {item.desc}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
+
+
                 </div>
             </section>
 

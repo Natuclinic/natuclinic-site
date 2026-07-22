@@ -69,11 +69,11 @@ const ProceduresSection = () => {
         { title: "Harmonização Corporal", category: "Estética Corporal", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/procedimentos/harmonizacao-corporal" },
         { title: "Harmonização de Glúteos", category: "Estética Corporal", imageUrl: "/harmonizacao-de-gluteo.jpg", theme: "var(--theme-pink)", path: "/gluteo-dos-sonhos" },
         { title: "Harmonização Facial", category: "Estética Facial", imageUrl: "/harmonizacao-facial.jpg", theme: "var(--theme-brown)", href: WHATSAPP_LINKS.MSG_FACIAL },
-        { title: "Terapia Injetável", category: "Soroterapia & Nutrição", imageUrl: "/soroterapia-terapia-injetavel-vitaminas-e-aminoacidos.png", theme: "var(--theme-pink)", href: WHATSAPP_LINKS.MSG_SOROTERAPIA },
+        { title: "Terapia Injetável", category: "Soroterapia & Nutrição", imageUrl: "/soroterapia-terapia-injetavel-vitaminas-e-aminoacidos.png?v=2", theme: "var(--theme-pink)", path: "/procedimentos/soroterapia" },
     ];
 
     return (
-        <section className="py-16 md:py-20 bg-natu-ivory" id="procedimentos-section">
+        <section className="pt-16 md:pt-20 pb-4 md:pb-6 bg-natu-ivory" id="procedimentos-section">
             <div className="desktop-container">
                 <div className="mb-12 md:mb-16 flex flex-col items-start text-left">
                     <span className="text-natu-brown/60 font-medium text-[10px] uppercase tracking-wider">Estética e Nutrição Ortomolecular</span>
@@ -107,11 +107,86 @@ const ProceduresSection = () => {
                         />
                     ))}
                 </div>
+
             </div>
         </section>
     );
 };
 
+const BariátricaBanner = () => (
+    <section className="bg-natu-ivory pt-2 pb-12 overflow-hidden">
+        <div className="desktop-container">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto w-full">
+                {/* Banner 1: Tricologia Capilar */}
+                <a
+                    href={WHATSAPP_LINKS.MSG_TRICOLOGIA}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative flex flex-row items-stretch rounded-2xl bg-natu-brown overflow-hidden no-underline transition-all duration-300 hover:brightness-110 min-h-[220px] md:min-h-[240px] w-full"
+                >
+                    {/* Background Image from Desktop */}
+                    <img
+                        src="/images/tricologia-capilar-bg.jpg"
+                        alt="Tricologia Capilar"
+                        className="absolute inset-0 w-full h-full object-cover object-top opacity-80 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#4C261A] via-[#4C261A]/80 to-transparent pointer-events-none" />
+
+                    {/* Text side */}
+                    <div className="relative z-10 flex flex-col justify-center px-6 md:px-12 py-6 md:py-10 w-full md:w-[70%] text-white">
+                        <span className="block text-[9px] md:text-[10px] font-bold tracking-[0.08em] md:tracking-[0.12em] text-white/70 font-sans mb-2 md:mb-4 uppercase">
+                            TRICOLOGIA CAPILAR EM TAGUATINGA-DF / PLANALTINA-DF
+                        </span>
+                        <h3 className="font-sans font-black text-white text-xl md:text-3xl leading-tight tracking-tight mb-2 md:mb-3">
+                            TRICOLOGIA CAPILAR &<br />SAÚDE DOS FIOS
+                            <span className="text-natu-pink"> ·</span>
+                        </h3>
+                        <p className="font-sans font-light text-white/90 text-xs md:text-sm leading-relaxed mb-4 md:mb-6 max-w-md">
+                            Tratamento integrativo contra queda de cabelo, calvície e fortalecimento folicular de dentro para fora.
+                        </p>
+                        <div className="mt-2 md:mt-4 flex items-center justify-between bg-natu-brown/40 backdrop-blur-md border border-white/30 rounded-lg px-4 py-3 md:px-5 md:py-4 transition-all duration-300 group-hover:bg-natu-brown/60 group-hover:border-white/50 flicker-fix">
+                            <span className="text-[9px] md:text-[10px] font-bold font-sans uppercase">Saber Mais</span>
+                            <Unicon name="arrow-right" className="h-3.5 w-3.5 md:h-4 md:w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
+                    </div>
+                </a>
+
+                {/* Banner 2: Saúde da Mulher */}
+                <Link
+                    to="/procedimentos/saude-da-mulher"
+                    className="group relative flex flex-row items-stretch rounded-2xl bg-[#3D1E15] overflow-hidden no-underline transition-all duration-300 hover:brightness-110 min-h-[220px] md:min-h-[240px] w-full"
+                >
+                    {/* Background Image from Desktop */}
+                    <img
+                        src="/images/saude-da-mulher-bg.jpg"
+                        alt="Saúde da Mulher"
+                        className="absolute inset-0 w-full h-[calc(100%+400px)] object-cover object-top opacity-80 group-hover:scale-105 transition-transform duration-700 pointer-events-none -translate-y-[400px]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#3D1E15] via-[#3D1E15]/80 to-transparent pointer-events-none" />
+
+                    {/* Text side */}
+                    <div className="relative z-10 flex flex-col justify-center px-6 md:px-12 py-6 md:py-10 w-full md:w-[70%] text-white">
+                        <span className="block text-[9px] md:text-[10px] font-bold tracking-[0.08em] md:tracking-[0.12em] text-white/70 font-sans mb-2 md:mb-4 uppercase">
+                            SAÚDE DA MULHER EM TAGUATINGA-DF / PLANALTINA-DF
+                        </span>
+                        <h3 className="font-sans font-black text-white text-xl md:text-3xl leading-tight tracking-tight mb-2 md:mb-3">
+                            SAÚDE DA MULHER &<br />GINECOLOGIA INTEGRATIVA
+                            <span className="text-natu-pink"> ·</span>
+                        </h3>
+                        <p className="font-sans font-light text-white/90 text-xs md:text-sm leading-relaxed mb-4 md:mb-6 max-w-md">
+                            Cuidado íntimo, equilíbrio hormonal e estética feminina sem cortes com máxima privacidade.
+                        </p>
+                        <div className="mt-2 md:mt-4 flex items-center justify-between bg-[#3D1E15]/40 backdrop-blur-md border border-white/30 rounded-lg px-4 py-3 md:px-5 md:py-4 transition-all duration-300 group-hover:bg-[#3D1E15]/60 group-hover:border-white/50 flicker-fix">
+                            <span className="text-[9px] md:text-[10px] font-bold font-sans uppercase">Saber Mais</span>
+                            <Unicon name="arrow-right" className="h-3.5 w-3.5 md:h-4 md:w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
+                    </div>
+                </Link>
+            </div>
+        </div>
+    </section>
+);
+
 export default ProceduresSection;
-export { ProcedureCard };
+export { ProcedureCard, BariátricaBanner };
 

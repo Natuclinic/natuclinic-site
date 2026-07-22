@@ -12,6 +12,7 @@ import { Routes, Route, useNavigate, useLocation, useParams, Navigate } from 're
 import { HelmetProvider } from 'react-helmet-async';
 
 const Ninfoplastia = React.lazy(() => import('./pages/Ninfoplastia'));
+const SaudeDaMulher = React.lazy(() => import('./pages/SaudeDaMulher'));
 const Endolaser = React.lazy(() => import('./pages/Endolaser'));
 const HarmonizacaoGluteos = React.lazy(() => import('./pages/HarmonizacaoGluteos'));
 const HarmonizacaoFacial = React.lazy(() => import('./pages/HarmonizacaoFacial'));
@@ -35,14 +36,20 @@ const BlogHighlights = React.lazy(() => import('./components/BlogHighlights'));
 const VideoFeedbacks = React.lazy(() => import('./components/VideoFeedbacks'));
 const GluteoLanding = React.lazy(() => import('./pages/GluteoLanding'));
 const Contato = React.lazy(() => import('./pages/Contato'));
+const Soroterapia = React.lazy(() => import('./pages/Soroterapia'));
+const Sobre = React.lazy(() => import('./pages/Sobre'));
 import { useArticles } from './hooks/useArticles';
 
 import Navbar from './components/Navbar';
 import HomeIntro from './components/HomeIntro';
+import SEO from './components/SEO';
 const HomeManifesto = React.lazy(() => import('./components/HomeManifesto'));
 const ProceduresSection = React.lazy(() => import('./components/ProceduresSection'));
+const BariátricaBanner = React.lazy(() => import('./components/ProceduresSection').then(m => ({ default: m.BariátricaBanner })));
 const QuietCTA = React.lazy(() => import('./components/QuietCTA'));
 const CookieConsent = React.lazy(() => import('./components/CookieConsent'));
+const FaqSection = React.lazy(() => import('./components/FaqSection'));
+const ClinicSpaces = React.lazy(() => import('./components/ClinicSpaces'));
 
 
 import Lenis from 'lenis';
@@ -121,7 +128,9 @@ export default function App() {
     location.pathname !== '/procedimentos' &&
     location.pathname !== '/procedimentos/nutricao-ortomolecular' &&
     location.pathname !== '/procedimentos/ninfoplastia' &&
-    location.pathname !== '/procedimentos/harmonizacao-corporal';
+    location.pathname !== '/procedimentos/saude-da-mulher' &&
+    location.pathname !== '/procedimentos/harmonizacao-corporal' &&
+    location.pathname !== '/procedimentos/soroterapia';
 
   return (
     <HelmetProvider>
@@ -133,14 +142,25 @@ export default function App() {
             <Routes>
               <Route path="/" element={
                 <>
+                  <SEO
+                    title="Natuclinic — Estética e Nutrição Ortomolecular em Brasília e Taguatinga"
+                    description="Clínica especializada em nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes, endolaser e estética corporal em Brasília e Taguatinga. Agende sua avaliação."
+                    url="https://www.natuclinic.com.br"
+                    canonical="https://www.natuclinic.com.br"
+                    keywords="clínica estética brasília, nutrição ortomolecular taguatinga, harmonização facial brasília, ninfoplastia sem cortes, endolaser brasília, natuclinic"
+                    image="/og-default.jpg"
+                  />
                   <HomeIntro />
                   <ProceduresSection />
-                  <CeoSection />
+                  <BariátricaBanner />
                   <ResultsCTA />
                   <ResultsSection id="results" />
+                  <CeoSection />
                   <VideoFeedbacks />
+                  <ClinicSpaces />
                   <ClinicGallery />
                   <BlogHighlights />
+                  <FaqSection />
                   <LeadCapture />
                 </>
               } />
@@ -152,6 +172,7 @@ export default function App() {
               } />
 
               <Route path="/procedimentos/ninfoplastia" element={<Ninfoplastia goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/saude-da-mulher" element={<SaudeDaMulher goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/endolaser" element={<Endolaser goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/harmonizacao" element={<HarmonizacaoGluteos goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/harmonizacao-facial" element={<HarmonizacaoFacial goBack={() => navigate(-1)} />} />
@@ -169,6 +190,8 @@ export default function App() {
               <Route path="/blog-post-nutricao" element={<Navigate to="/blog/nutricao-ortomolecular-o-que-e" replace />} />
 
               <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
+              <Route path="/sobre" element={<Sobre />} />
+              <Route path="/procedimentos/soroterapia" element={<Soroterapia goBack={() => navigate(-1)} />} />
               <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
 
               <Route path="*" element={<Navigate to="/" />} />

@@ -10,92 +10,53 @@ const ParametricBackground = () => {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
 
-        const defaults = {
-            lineCount: 25,
-            amplitude: 80,
-            speed: 10,
-            opacity: 80
-        };
+        const LINE_COUNT = 15;
+        const AMPLITUDE = 80;
+        const STEP = 10;
+        const INTERVAL = 1000 / 30; // 30fps cap
 
-        let width, height;
-        let tick = 0;
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetMouseX = 0;
-        let targetMouseY = 0;
+        let width, height, tick = 0, rafId, lastTime = 0;
 
         const resize = () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = canvas.parentElement.offsetHeight;
         };
 
-        const handleMouseMove = (e) => {
-            targetMouseX = e.clientX;
-            targetMouseY = e.clientY;
-        };
+        const lerpColor = (r1, g1, b1, r2, g2, b2, t) =>
+            `${Math.round(r1 + (r2 - r1) * t)}, ${Math.round(g1 + (g2 - g1) * t)}, ${Math.round(b1 + (b2 - b1) * t)}`;
 
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', handleMouseMove);
-
-        const lerpColor = (r1, g1, b1, r2, g2, b2, ratio) => {
-            const r = Math.round(r1 + (r2 - r1) * ratio);
-            const g = Math.round(g1 + (g2 - g1) * ratio);
-            const b = Math.round(b1 + (b2 - b1) * ratio);
-            return `${r}, ${g}, ${b}`;
-        };
-
-        const drawLine = (offset, index, total) => {
-            const amp = defaults.amplitude;
-            const opacityVal = defaults.opacity / 100;
-
+        const drawLine = (offset, index) => {
+            const ratio = index / LINE_COUNT;
+            const lineOpacity = 0.8 * (0.3 + 0.7 * (1 - Math.abs(ratio - 0.5) * 2));
             ctx.beginPath();
-            const ratio = index / total;
-            const colorRGB = lerpColor(101, 67, 33, 255, 182, 193, ratio);
-            const lineOpacity = opacityVal * (0.3 + 0.7 * (1 - Math.abs(ratio - 0.5) * 2));
-
-            ctx.strokeStyle = `rgba(${colorRGB}, ${lineOpacity * 0.4})`;
+            ctx.strokeStyle = `rgba(${lerpColor(101, 67, 33, 255, 182, 193, ratio)}, ${lineOpacity * 0.4})`;
             ctx.lineWidth = 1.2;
-
-            for (let x = 0; x <= width; x += 5) {
-                const distToMouse = Math.abs(x - mouseX);
-                const mouseForce = Math.max(0, (600 - distToMouse) / 600);
-                const mouseEffect = (mouseY - height / 2) * mouseForce * 0.3;
-
-                const y = (height / 2) +
-                    Math.sin(x * 0.003 + tick + offset) * amp +
-                    Math.cos(x * 0.008 - tick * 0.5) * (amp * 0.4) +
-                    mouseEffect;
-
-                if (x === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
+            for (let x = 0; x <= width; x += STEP) {
+                const y = (height / 2)
+                    + Math.sin(x * 0.003 + tick + offset) * AMPLITUDE
+                    + Math.cos(x * 0.008 - tick * 0.5) * (AMPLITUDE * 0.4);
+                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
             }
             ctx.stroke();
         };
 
-        const animate = () => {
+        const animate = (now) => {
+            rafId = requestAnimationFrame(animate);
+            if (now - lastTime < INTERVAL) return;
+            lastTime = now;
             ctx.clearRect(0, 0, width, height);
-
-            mouseX += (targetMouseX - mouseX) * 0.05;
-            mouseY += (targetMouseY - mouseY) * 0.05;
-
-            const speedFactor = defaults.speed / 1000;
-            tick += speedFactor;
-
-            const lines = defaults.lineCount;
-            for (let i = 0; i < lines; i++) {
-                drawLine(i * 0.15, i, lines);
-            }
-
-            requestAnimationFrame(animate);
+            tick += 0.01;
+            for (let i = 0; i < LINE_COUNT; i++) drawLine(i * 0.15, i);
         };
 
+        const onResize = () => resize();
+        window.addEventListener('resize', onResize);
         resize();
-        const animationFrameId = requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(animate);
 
         return () => {
-            window.removeEventListener('resize', resize);
-            window.removeEventListener('mousemove', handleMouseMove);
-            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', onResize);
+            cancelAnimationFrame(rafId);
         };
     }, []);
 
