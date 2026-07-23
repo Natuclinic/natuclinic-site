@@ -49,7 +49,6 @@ const BariátricaBanner = React.lazy(() => import('./components/ProceduresSectio
 const QuietCTA = React.lazy(() => import('./components/QuietCTA'));
 const CookieConsent = React.lazy(() => import('./components/CookieConsent'));
 const FaqSection = React.lazy(() => import('./components/FaqSection'));
-const ClinicSpaces = React.lazy(() => import('./components/ClinicSpaces'));
 
 
 import Lenis from 'lenis';
@@ -152,16 +151,15 @@ export default function App() {
                   />
                   <HomeIntro />
                   <ProceduresSection />
-                  <BariátricaBanner />
-                  <ResultsCTA />
                   <ResultsSection id="results" />
                   <CeoSection />
                   <VideoFeedbacks />
-                  <ClinicSpaces />
+                  <BariátricaBanner />
                   <ClinicGallery />
+                  <ResultsCTA />
                   <BlogHighlights />
-                  <FaqSection />
                   <LeadCapture />
+                  <FaqSection />
                 </>
               } />
 

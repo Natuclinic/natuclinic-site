@@ -109,14 +109,20 @@ const ClinicGallery = () => {
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-natu-brown/5 rounded-full blur-3xl" />
 
             <div className="desktop-container relative z-10">
-                <div className="mb-16 text-center">
-                    <h2 className="font-sans text-2xl md:text-5xl text-natu-brown font-bold">
-                        Um espaço feito pra você
+                <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto">
+                    <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
+                        Bem-vindo à Natuclinic
+                    </span>
+                    <h2 className="font-sans text-3xl md:text-5xl text-natu-brown font-bold leading-tight mb-6 text-balance max-w-2xl mx-auto">
+                        Espaços pensados para o seu bem-estar
                     </h2>
+                    <p className="text-sm md:text-base text-natu-brown/70 leading-relaxed font-light text-balance">
+                        Nossas unidades em Taguatinga e Planaltina foram projetadas para entregar uma experiência premium do início ao fim. Ambientes modernos, climatizados e acolhedores, unindo tecnologia de ponta em estética avançada com uma atmosfera de conforto que você não encontra em nenhum outro lugar do Distrito Federal.
+                    </p>
                 </div>
 
                 <div
-                    className="grid grid-cols-4 grid-rows-5 gap-3 md:gap-8 h-[400px] md:h-[800px] mx-auto max-w-5xl"
+                    className="grid grid-cols-4 grid-rows-5 gap-3 md:gap-6 h-[400px] md:h-[660px] lg:h-[700px] mx-auto max-w-5xl"
                 >
                     {/* Div 1: Left Top */}
                     <div className="gallery-item col-start-1 col-span-2 row-span-3 relative overflow-hidden rounded-2xl group cursor-pointer h-full">

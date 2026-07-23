@@ -75,7 +75,7 @@ const FaqSection = () => {
                     {/* Accordion */}
                     <div className="faq-list">
                         {faqs.map((faq, i) => (
-                            <div key={i} className="faq-item bg-white rounded-2xl md:rounded-3xl border border-natu-brown/20 overflow-hidden mb-4 transition-all duration-300">
+                            <div key={i} className="faq-item bg-natu-ivory rounded-2xl md:rounded-3xl border border-natu-brown/20 overflow-hidden mb-4 transition-all duration-300">
                                 <button
                                     onClick={() => setOpen(open === i ? null : i)}
                                     className="w-full flex items-center justify-between p-5 md:p-6 text-left group border-none bg-transparent cursor-pointer"

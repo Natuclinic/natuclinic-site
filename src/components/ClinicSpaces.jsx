@@ -7,8 +7,8 @@ const ClinicSpaces = () => (
                 <div className="w-full lg:w-1/2 flex flex-row gap-3 md:gap-4">
                     <div className="w-1/2 h-[240px] sm:h-[320px] md:h-[450px] overflow-hidden rounded-2xl md:rounded-3xl bg-gray-50 group">
                         <img
-                            src="/images/clinica-de-estetica-natuclinic-brasilia.jpg"
-                            alt="Fachada Natuclinic Taguatinga"
+                            src="/sala-dra-debora.jpg"
+                            alt="Sala Dra Débora - Natuclinic"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale-[20%]"
                             loading="lazy"
                         />

@@ -19,7 +19,7 @@
 @theme {
   --color-natu-brown: #4C261A;
   --color-natu-pink: #FFC2C2;
-  --color-natu-ivory: #F9F7F5;
+  --color-natu-ivory: #FFFFFF;
   --color-whatsapp: #25D366;
   --color-whatsapp-dark: #075E54;
   --font-serif: "Playfair Display", serif;
@@ -47,7 +47,7 @@
   body {
     font-family: var(--font-secondary);
     color: var(--color-primary);
-    background-color: #F9F7F5;
+    background-color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: auto !important;
@@ -242,10 +242,10 @@ html.lenis {
   }
 
   .desktop-container {
-    max-width: 1440px;
+    max-width: 1152px;
     margin: 0 auto;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
   }
 
 

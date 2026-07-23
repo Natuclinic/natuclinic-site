@@ -267,11 +267,11 @@ const SaudeDaMulher = ({ goBack }) => {
                         </p>
 
                         <div className="my-6 sm:my-10 p-6 sm:p-8 md:p-10 bg-[#3D1E15] rounded-2xl relative overflow-hidden not-prose">
-                            <div className="relative z-10">
-                                <h3 className="font-sans font-bold text-base sm:text-2xl md:text-3xl !text-white leading-snug sm:leading-tight mb-3 sm:mb-4 m-0">
+                            <div className="relative z-10 text-center flex flex-col items-center justify-center">
+                                <h3 className="font-sans font-bold text-base sm:text-2xl md:text-3xl !text-white leading-snug sm:leading-tight mb-3 sm:mb-4 m-0 text-center">
                                     Deseja cuidar da sua saúde íntima com máxima privacidade?
                                 </h3>
-                                <p className="font-sans font-light text-xs sm:text-sm md:text-base !text-white/90 leading-relaxed mb-5 sm:mb-6 max-w-xl m-0">
+                                <p className="font-sans font-light text-xs sm:text-sm md:text-base !text-white/90 leading-relaxed mb-5 sm:mb-6 max-w-xl m-0 text-center mx-auto">
                                     Agende uma avaliação personalizada com nossa equipe especializada e descubra os protocolos ideais para você.
                                 </p>
                                 <NatuButton href={WHATSAPP_LINKS.MSG_SAUDE_MULHER}>
