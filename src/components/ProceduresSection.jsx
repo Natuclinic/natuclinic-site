@@ -69,7 +69,7 @@ const ProceduresSection = () => {
         { title: "Harmonização Corporal", category: "Estética Corporal", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/procedimentos/harmonizacao-corporal" },
         { title: "Harmonização de Glúteos", category: "Estética Corporal", imageUrl: "/harmonizacao-de-gluteo.jpg", theme: "var(--theme-pink)", path: "/gluteo-dos-sonhos" },
         { title: "Harmonização Facial", category: "Estética Facial", imageUrl: "/harmonizacao-facial.jpg", theme: "var(--theme-brown)", href: WHATSAPP_LINKS.MSG_FACIAL },
-        { title: "Terapia Injetável", category: "Soroterapia e Nutrição", imageUrl: "/images/soroterapia-terapia-injetavel-vitaminas-e-aminoacidos.png", theme: "var(--theme-brown)", path: "/procedimentos/soroterapia" },
+        { title: "Terapia Injetável", category: "Soroterapia e Nutrição", imageUrl: "/images/soroterapia-terapia-injetavel-vitaminas-e-aminoacidos.png?v=new", theme: "var(--theme-brown)", path: "/procedimentos/soroterapia" },
     ];
 
     return (
