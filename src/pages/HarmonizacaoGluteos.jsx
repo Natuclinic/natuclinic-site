@@ -10,6 +10,27 @@ const HarmonizacaoGluteos = ({ goBack }) => {
             goBack={goBack}
             coverImage="/harmonizacao-de-gluteo.jpg"
             whatsappMessage="Olá! Gostaria de saber mais sobre a Harmonização de Glúteos."
+            seo={{
+                title: "Harmonização de Glúteos em Brasília — Ácido Hialurônico Corporal | Natuclinic",
+                description: "Harmonização de glúteos com ácido hialurônico em Brasília e Taguatinga. Volume, projeção e contorno natural sem cirurgia. Protocolo exclusivo da Natuclinic. Agende sua avaliação.",
+                url: "https://www.natuclinic.com.br/procedimentos/harmonizacao-gluteos",
+                canonical: "https://www.natuclinic.com.br/procedimentos/harmonizacao-gluteos",
+                keywords: "harmonização de glúteos brasília, preenchimento glúteos taguatinga, ácido hialurônico corporal, glúteos sem cirurgia, biomédica esteta brasília, natuclinic",
+                image: "/harmonizacao-de-gluteo.jpg",
+                jsonLd: {
+                    "@context": "https://schema.org",
+                    "@type": "MedicalProcedure",
+                    "name": "Harmonização de Glúteos com Ácido Hialurônico",
+                    "description": "Protocolo exclusivo de harmonização de glúteos com ácido hialurônico para volume, projeção e contorno natural sem cirurgia em Brasília.",
+                    "url": "https://www.natuclinic.com.br/procedimentos/harmonizacao-gluteos",
+                    "procedureType": "Noninvasive",
+                    "performer": {
+                        "@type": "MedicalBusiness",
+                        "name": "Natuclinic",
+                        "address": { "@type": "PostalAddress", "addressLocality": "Brasília", "addressRegion": "DF" }
+                    }
+                }
+            }}
         >
             <section className="md:grid md:grid-cols-12 gap-12 items-center">
                 {/* Lado Esquerdo - Conceito */}

@@ -2,7 +2,7 @@ import React from 'react';
 import Unicon from './Unicon';
 
 const LocationCard = ({ title, address, mapSrc, mapLink }) => (
-    <div className="group relative w-full h-[500px] rounded-[2.5rem] overflow-hidden bg-white border border-natu-brown/5 transition-all duration-500">
+    <div className="group relative w-full h-[500px] rounded-2xl overflow-hidden bg-white border border-natu-brown/5 transition-all duration-500">
         {/* Map Iframe */}
         <div className="absolute inset-0 z-0">
             <iframe
@@ -22,10 +22,10 @@ const LocationCard = ({ title, address, mapSrc, mapLink }) => (
         </div>
 
         {/* Floating Info Card */}
-        <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-3xl border border-white/40 transition-transform duration-500 group-hover:-translate-y-2">
+        <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-white/40 transition-transform duration-500 group-hover:-translate-y-2">
             <div className="flex justify-between items-start">
                 <div>
-                    <h3 className="font-serif text-2xl text-natu-brown mb-2">{title}</h3>
+                    <h3 className="font-sans font-bold text-2xl text-natu-brown mb-2">{title}</h3>
                     <div className="flex items-center gap-2 text-gray-500 font-sans text-sm">
                         <Unicon name="map-marker" size={16} />
                         <p>{address}</p>
@@ -69,7 +69,7 @@ const LocationsSection = () => {
                         title="Unidade Planaltina"
                         address="Módulo C lote 2 loja 3/4 - Planaltina, Brasília - DF"
                         mapLink="https://www.google.com/maps/place/Natuclinic+Est%C3%A9tica+e+Nutri%C3%A7%C3%A3o+Ortomolecular+-+Clinica+de+Est%C3%A9tica+e+Nutri%C3%A7%C3%A3o+em+Planaltina+-+DF"
-                        mapSrc="https://maps.google.com/maps?q=Natuclinic%20Est%C3%A9tica%20e%20Nutri%C3%A7%C3%A3o%20Ortomolecular%20Planaltina&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        mapSrc="https://maps.google.com/maps?q=-15.6186293,-47.6738341&t=&z=16&ie=UTF8&iwloc=&output=embed"
                     />
                 </div>
             </div>

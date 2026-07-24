@@ -9,20 +9,22 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
     const [sliderPosition, setSliderPosition] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
     const containerRef = useRef(null);
+    const hasMovedRef = useRef(false);
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
+        hasMovedRef.current = false;
     };
 
-    const handleMouseUp = (e) => {
-        setIsDragging(false);
+    const handleTouchStart = () => {
+        setIsDragging(true);
+        hasMovedRef.current = false;
     };
-
-    const handleTouchStart = () => setIsDragging(true);
-    const handleTouchEnd = () => setIsDragging(false);
 
     const handleMove = (clientX) => {
         if (!isDragging || !containerRef.current) return;
+
+        hasMovedRef.current = true;
 
         const rect = containerRef.current.getBoundingClientRect();
         const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
@@ -44,6 +46,15 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
         };
     }, []);
 
+    const handleContainerClick = (e) => {
+        if (hasMovedRef.current) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        if (onClick) onClick();
+    };
+
     return (
         <div
             ref={containerRef}
@@ -52,7 +63,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
             onMouseMove={handleMouseMove}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            onClick={onClick}
+            onClick={handleContainerClick}
         >
             {/* After Image (Background) */}
             <img
@@ -77,10 +88,10 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
                 />
             </div>
 
+            {/* Vertical slider line & handle */}
             <div
                 className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize z-20"
                 style={{ left: `${sliderPosition}%` }}
-                onMouseDown={(e) => e.stopPropagation()}
             >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 bg-white/30 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110 flicker-fix shadow-xl">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -142,8 +153,8 @@ const ResultsSection = ({ id }) => {
                     if (res.ok) {
                         detected.push({
                             id: i,
-                            before: beforeSrc,
-                            after: afterSrc,
+                            before: `${beforeSrc}?v=2`,
+                            after: `${afterSrc}?v=2`,
                             alt: `Resultado ${i} - Natuclinic`
                         });
                     }
@@ -243,10 +254,10 @@ const ResultsSection = ({ id }) => {
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16 results-header">
                     <div>
                         <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-3">
-                            Resultados Reais
+                            Galeria de Casos
                         </span>
                         <h2 className="font-sans font-bold text-4xl md:text-6xl text-natu-brown leading-tight tracking-tight">
-                            Veja a transformação
+                            Transformações reais
                         </h2>
                     </div>
                     <p className="max-w-xs font-sans font-light text-natu-brown/50 text-sm leading-relaxed md:text-right">

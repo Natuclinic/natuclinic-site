@@ -61,10 +61,12 @@ const GluteoLanding = () => {
         }
         const structuredData = {
             "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Harmonização de Glúteos dos Sonhos",
-            "serviceType": "Estética Corporal",
-            "provider": {
+            "@type": "MedicalProcedure",
+            "name": "Glúteos dos Sonhos — Harmonização de Glúteos",
+            "procedureType": "Noninvasive",
+            "description": "Protocolo avançado de harmonização de glúteos com ácido hialurônico para volume, projeção e contorno natural sem cirurgia em Brasília.",
+            "url": "https://www.natuclinic.com.br/gluteo-dos-sonhos",
+            "performer": {
                 "@type": "MedicalBusiness",
                 "name": "Natuclinic",
                 "address": {
@@ -72,8 +74,7 @@ const GluteoLanding = () => {
                     "addressLocality": "Brasília",
                     "addressRegion": "DF"
                 }
-            },
-            "description": "Protocolo avançado de harmonização e preenchimento de glúteos com ácido hialurônico para volume e projeção imediata."
+            }
         };
         jsonLdScript.text = JSON.stringify(structuredData);
     }, []);

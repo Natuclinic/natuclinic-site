@@ -6,16 +6,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const specialists = [
     {
-        name: 'Dr. Julimar Meneses',
-        role: 'Saúde & Nutrição',
-        credentials: ['Nutricionista Ortomolecular · Farmacêutico', 'Doutor em Naturopatia · Biologia Molecular', 'Oncologista · Fitoterapia · CRN-DF 21414'],
-        bio: 'Com uma visão integrativa que une bioquímica e naturopatia, Dr. Julimar lidera protocolos focados na raiz celular das disfunções nutricionais e de saúde, tratando de dentro para fora.',
-        image: '/nutricionista-ortomolecular-integrativo-dr-julimar-meneses.jpeg',
-        alt: 'Dr. Julimar Meneses — Nutricionista Ortomolecular em Brasília',
-        facePos: 'object-[50%_20%]',
-        offset: false,
-    },
-    {
         name: 'Dra. Débora Meneses',
         role: 'Estética & Harmonização',
         credentials: ['Biomédica Esteta', 'Especialista em Harmonização Facial'],
@@ -23,7 +13,15 @@ const specialists = [
         image: '/dra-debora.jpg',
         alt: 'Dra. Débora Meneses — Biomédica Esteta em Brasília',
         facePos: 'object-[50%_15%]',
-        offset: true,
+    },
+    {
+        name: 'Dr. Julimar Meneses',
+        role: 'Saúde & Nutrição',
+        credentials: ['Nutricionista Ortomolecular · Farmacêutico', 'Doutor em Naturopatia · Biologia Molecular', 'Oncologista · Fitoterapia · CRN-DF 21414'],
+        bio: 'Com uma visão integrativa que une bioquímica e naturopatia, Dr. Julimar lidera protocolos focados na raiz celular das disfunções nutricionais e de saúde, tratando de dentro para fora.',
+        image: '/nutricionista-ortomolecular-integrativo-dr-julimar-meneses.jpeg',
+        alt: 'Dr. Julimar Meneses — Nutricionista Ortomolecular em Brasília',
+        facePos: 'object-[50%_20%]',
     },
 ];
 
@@ -45,7 +43,7 @@ const CeoSection = () => {
             <div className="desktop-container">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
                     <div>
                         <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
                             Corpo Clínico
@@ -60,56 +58,38 @@ const CeoSection = () => {
                 </div>
 
                 {/* Cards */}
-                <div className="grid md:grid-cols-2 gap-6 items-start">
+                <div className="grid md:grid-cols-2 gap-8 items-start">
                     {specialists.map((s) => (
-                        <div key={s.name} className={`ceo-card group ${s.offset ? 'md:mt-24' : ''}`}>
+                        <div key={s.name} className="ceo-card flex flex-col bg-white rounded-2xl p-8 border border-natu-brown/10">
 
-                            {/* Foto */}
-                            <div className="relative overflow-hidden rounded-2xl aspect-[3/4] md:aspect-[16/9] mb-7 bg-natu-brown/10">
+                            <div className="w-20 h-20 rounded-full overflow-hidden mb-5 ring-1 ring-natu-brown/30 ring-offset-2 ring-offset-white flex-shrink-0">
                                 <img
                                     src={s.image}
                                     alt={s.alt}
                                     loading="lazy"
                                     decoding="async"
-                                    className={`w-full h-full object-cover ${s.facePos} transition-transform duration-[1400ms] group-hover:scale-[1.04]`}
+                                    className={`w-full h-full object-cover ${s.facePos}`}
                                 />
-                                {/* Gradient bottom */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/60 via-transparent to-transparent" />
-
-                                {/* Nome sobre a foto */}
-                                <div className="absolute bottom-0 left-0 right-0 p-6">
-                                    <span className="inline-block bg-natu-pink/20 backdrop-blur-sm border border-white/20 text-white text-[10px] font-sans font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full mb-3">
-                                        {s.role}
-                                    </span>
-                                    <h3 className="font-sans font-bold text-2xl md:text-3xl text-white leading-tight tracking-tight">
-                                        {s.name}
-                                    </h3>
-                                </div>
                             </div>
 
-                            {/* Conteúdo */}
-                            <div>
-                                {/* Linha divisória */}
-                                <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-8 h-px bg-natu-pink" />
-                                    <div className="w-2 h-px bg-natu-pink/40" />
-                                </div>
+                            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-natu-pink block mb-1">
+                                {s.role}
+                            </span>
+                            <h3 className="font-sans font-bold text-2xl md:text-3xl text-natu-brown leading-tight tracking-tight mb-4">
+                                {s.name}
+                            </h3>
 
-                                <div className="space-y-1 mb-5">
-                                    {s.credentials.map((c) => (
-                                        <p key={c} className="font-sans text-[11px] uppercase tracking-widest text-natu-brown/50 font-medium">
-                                            {c}
-                                        </p>
-                                    ))}
-                                </div>
+                            <p className="font-sans font-light text-natu-brown/60 leading-relaxed text-[15px] text-pretty mb-5">
+                                {s.bio}
+                            </p>
 
-                                <p className="font-sans font-light text-natu-brown/60 leading-relaxed text-[15px] text-pretty">
-                                    {s.bio}
-                                </p>
-                            </div>
+                            <p className="font-sans text-[11px] text-natu-brown/35">
+                                {s.credentials.join(' · ')}
+                            </p>
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );

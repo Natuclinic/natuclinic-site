@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Unicon from './Unicon';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const StatsSection = () => {
     const containerRef = useRef(null);
+    const [countStarted, setCountStarted] = useState(false);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -23,6 +24,11 @@ const StatsSection = () => {
                 duration: 1.2,
                 stagger: 0.2,
                 ease: "power3.out"
+            });
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: "top 80%",
+                onEnter: () => setCountStarted(true),
             });
         }, containerRef);
         return () => ctx.revert();
@@ -93,6 +99,7 @@ const StatsSection = () => {
                                                 suffix={stat.suffix || ''}
                                                 separator={stat.separator || '.'}
                                                 duration={2}
+                                                startCounting={countStarted}
                                             />
                                             {stat.icon && <Unicon name="star" className="w-8 h-8 text-natu-pink" />}
                                         </div>

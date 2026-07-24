@@ -109,6 +109,19 @@ const Ninfoplastia = ({ goBack }) => {
                 canonical="https://www.natuclinic.com.br/procedimentos/ninfoplastia"
                 keywords="ninfoplastia brasília, ninfoescultura sem cortes, estética íntima taguatinga, labioplastia não cirúrgica"
                 image="/ninfoescultura-ninfoplastia.png"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "MedicalProcedure",
+                    "name": "Ninfoplastia Sem Cortes — Ninfoescultura",
+                    "description": "Ninfoescultura sem cirurgia em Brasília e Taguatinga. Tratamento não invasivo de estética íntima com resultado imediato, sem internação e sem cicatrizes.",
+                    "url": "https://www.natuclinic.com.br/procedimentos/ninfoplastia",
+                    "procedureType": "Noninvasive",
+                    "performer": {
+                        "@type": "MedicalBusiness",
+                        "name": "Natuclinic",
+                        "address": { "@type": "PostalAddress", "addressLocality": "Brasília", "addressRegion": "DF" }
+                    }
+                }}
             />
             <div
                 ref={progressBarRef}

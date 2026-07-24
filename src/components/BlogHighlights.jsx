@@ -152,11 +152,11 @@ const BlogHighlights = () => {
     return (
         <section ref={sectionRef} className="py-12 md:py-24 bg-white overflow-hidden select-none border-t border-black/5">
             <div className="desktop-container">
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
+                <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
 
                     {/* Left Sidebar: Title & Controls */}
-                    <div className="w-full lg:w-[30%] flex flex-col justify-center lg:min-h-[400px] space-y-6 lg:space-y-8">
-                        <h2 className="text-4xl md:text-5xl font-sans font-bold text-natu-brown leading-[1.1] tracking-tight">
+                    <div className="w-full lg:w-[24%] flex flex-col justify-center lg:min-h-[380px] space-y-6 lg:space-y-8">
+                        <h2 className="text-3xl md:text-4xl lg:text-4xl font-sans font-bold text-natu-brown leading-[1.1] tracking-tight">
                             Fique por dentro <br />
                             <span>das novidades</span>
                         </h2>
@@ -180,7 +180,7 @@ const BlogHighlights = () => {
                         {/* CTA Button */}
                         <button
                             onClick={() => navigate('/blog')}
-                            className="w-fit px-8 py-4 bg-natu-brown text-[#F2F0E9] rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-black transition-all duration-300 flex items-center gap-3"
+                            className="w-fit px-6 py-3.5 bg-natu-brown text-[#F2F0E9] rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-black transition-all duration-300 flex items-center gap-3"
                         >
                             IR PARA O BLOG
                             <Unicon name="arrow-right" size={14} />
@@ -188,7 +188,7 @@ const BlogHighlights = () => {
                     </div>
 
                     {/* Right Side: Carousel Container */}
-                    <div className="w-full lg:w-[70%] relative">
+                    <div className="w-full lg:w-[76%] relative overflow-hidden">
                         <div
                             ref={scrollContainerRef}
                             onScroll={handleScroll}
@@ -199,7 +199,7 @@ const BlogHighlights = () => {
                             onTouchStart={handleMouseDown}
                             onTouchMove={handleMouseMove}
                             onTouchEnd={handleMouseUp}
-                            className={`flex gap-6 lg:gap-8 overflow-x-auto pb-8 no-scrollbar px-[4%] lg:px-0
+                            className={`flex gap-4 lg:gap-5 overflow-x-auto pb-8 no-scrollbar px-[4%] lg:px-0
                                     ${isDown ? 'cursor-grabbing' : 'lg:cursor-grab'}`}
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
@@ -207,7 +207,7 @@ const BlogHighlights = () => {
                                 <div
                                     key={article.id}
                                     ref={el => itemRefs.current[index] = el}
-                                    className={`min-w-[92%] md:min-w-[360px] flex flex-col bg-white rounded-xl border border-natu-brown/5 overflow-hidden group cursor-pointer transition-all duration-500
+                                    className={`min-w-[85%] sm:min-w-[260px] lg:min-w-[240px] xl:min-w-[255px] flex-1 flex flex-col bg-white rounded-xl border border-natu-brown/10 overflow-hidden group cursor-pointer transition-all duration-500
                                         ${window.innerWidth < 1024 && activeIndex !== index ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}
                                     `}
                                     onClick={() => handleItemClick(article.id, index)}
@@ -224,12 +224,12 @@ const BlogHighlights = () => {
                                     </div>
 
                                     {/* Card Content */}
-                                    <div className="p-6 flex flex-col flex-grow">
-                                        <h3 className="text-xl font-sans font-bold text-black leading-snug mb-3 group-hover:text-natu-brown transition-colors">
+                                    <div className="p-5 flex flex-col flex-grow">
+                                        <h3 className="text-base sm:text-lg font-sans font-bold text-black leading-snug mb-2 group-hover:text-natu-brown transition-colors">
                                             {article.title}
                                         </h3>
 
-                                        <p className="text-[13px] font-sans font-light text-natu-brown/60 line-clamp-2 mb-8 leading-relaxed">
+                                        <p className="text-xs font-sans font-light text-natu-brown/60 line-clamp-2 mb-6 leading-relaxed">
                                             {article.excerpt}
                                         </p>
 

@@ -12,8 +12,9 @@ export default defineConfig({
         manualChunks: {
           'three-vendor': ['three', '@react-three/fiber'],
           'animation-vendor': ['gsap', 'motion', 'lenis'],
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
           'markdown-vendor': ['react-markdown', 'rehype-raw', 'remark-gfm'],
+          'spring-vendor': ['@react-spring/web'],
         }
       }
     }

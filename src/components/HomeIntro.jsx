@@ -77,13 +77,18 @@ const HomeIntro = () => {
                             Cuidar de você <br className="hidden md:block" />
                             <span className="italic">está em nosso DNA</span>
                         </h1>
-                        <div className="mt-8 flex justify-center md:justify-start animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 w-full md:w-auto">
-                            <NatuButton onClick={() => {
-                                const element = document.getElementById('results');
-                                if (element) {
-                                    element.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}>Conheça nossos serviços</NatuButton>
+                        <div className="mt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 flex justify-center md:justify-start">
+                            <div className="inline-flex flex-col items-center">
+                                <NatuButton onClick={() => {
+                                    const element = document.getElementById('results');
+                                    if (element) {
+                                        element.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}>Conheça nossos serviços</NatuButton>
+                                <p className="mt-3 text-[11px] font-sans text-natu-brown/50">
+                                    Não aceitamos convênio.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

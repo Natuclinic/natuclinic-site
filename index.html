@@ -45,7 +45,7 @@
   <meta property="og:locale" content="pt_BR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@natuclinic" />
-  <link rel="canonical" href="https://www.natuclinic.com.br" />
+  <!-- canonical é injetado por SEO.jsx em cada página -->
 
   <!-- Preload fontes críticas — elimina FOUT -->
   <link rel="preload" href="/fonts/Suisse-Intl-Medium.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
@@ -114,19 +114,40 @@
         "height": "512"
       },
       "image": "https://www.natuclinic.com.br/natuclinic-reception.jpg",
-      "description": "Clínica especializada em Nutrição Ortomolecular, Ninfoplastia, Endolaser e Harmonização em Brasília e Taguatinga.",
-      "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Setor E Norte",
-          "addressLocality": "Taguatinga",
-          "addressRegion": "DF",
-          "addressCountry": "BR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -15.834, 
-        "longitude": -48.056
-      },
+      "description": "Clínica especializada em Nutrição Ortomolecular, Naturopatia, Ninfoplastia, Endolaser e Harmonização em Brasília e Taguatinga.",
+      "email": "contato@natuclinic.com.br",
+      "location": [
+        {
+          "@type": "MedicalBusiness",
+          "name": "Natuclinic — Unidade Taguatinga",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Qne 01 Lote 17/20 Loja 02",
+            "addressLocality": "Taguatinga Norte",
+            "addressRegion": "DF",
+            "postalCode": "72125-010",
+            "addressCountry": "BR"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": -15.834, "longitude": -48.056 },
+          "telephone": "+5561992551867",
+          "openingHours": "Mo-Fr 08:00-19:00, Sa 08:00-13:00"
+        },
+        {
+          "@type": "MedicalBusiness",
+          "name": "Natuclinic — Unidade Planaltina",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Módulo C lote 2 loja 3/4",
+            "addressLocality": "Planaltina",
+            "addressRegion": "DF",
+            "postalCode": "73380-100",
+            "addressCountry": "BR"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": -15.6186293, "longitude": -47.6738341 },
+          "telephone": "+5561992551867",
+          "openingHours": "Mo-Fr 08:00-19:00, Sa 08:00-13:00"
+        }
+      ],
       "telephone": "+5561992551867",
       "priceRange": "$$",
       "openingHours": "Mo-Fr 08:00-19:00, Sa 08:00-13:00",

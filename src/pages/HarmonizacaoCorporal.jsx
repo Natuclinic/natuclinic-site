@@ -240,6 +240,19 @@ const HarmonizacaoCorporal = () => {
                 url="https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal"
                 keywords="harmonização corporal, harmone bee, protocolo emagrecimento, nutrição ortomolecular, estética corporal Brasília, natuclinic"
                 image="/og-harmonizacao-corporal.jpg"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "MedicalProcedure",
+                    "name": "Harmone Bee® — Harmonização Corporal",
+                    "description": "Protocolo Harmone Bee® que une nutrição ortomolecular, procedimentos estéticos e acompanhamento intensivo para transformar o corpo em 90 dias. Natuclinic, Brasília.",
+                    "url": "https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal",
+                    "procedureType": "Noninvasive",
+                    "performer": {
+                        "@type": "MedicalBusiness",
+                        "name": "Natuclinic",
+                        "address": { "@type": "PostalAddress", "addressLocality": "Brasília", "addressRegion": "DF" }
+                    }
+                }}
             />
 
             {/* Hero */}
