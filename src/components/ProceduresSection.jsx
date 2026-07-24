@@ -132,17 +132,17 @@ const BariátricaBanner = () => (
 
                     {/* Text Content */}
                     <div className="relative z-10 flex flex-col justify-end p-4 md:p-5 text-white h-full">
-                        <span className="block text-[9px] font-normal text-white/70 font-sans mb-1 md:hidden">
+                        <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Saúde Intestinal em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-base md:text-lg lg:text-xl leading-tight mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
                             Reabilitação Intestinal e<br />Saúde Digestiva
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[10px] md:text-[11px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
                             Desintoxicação profunda, reequilíbrio da microbiota e eliminação de toxinas para restaurar a vitalidade.
                         </p>
                         <div className="flex items-center justify-between bg-[#3D1E15]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#3D1E15]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[9px] font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
@@ -165,17 +165,17 @@ const BariátricaBanner = () => (
 
                     {/* Text Content */}
                     <div className="relative z-10 flex flex-col justify-end p-4 md:p-5 text-white h-full">
-                        <span className="block text-[9px] font-normal text-white/70 font-sans mb-1 md:hidden">
+                        <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Diagnóstico Integrativo em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-base md:text-lg lg:text-xl leading-tight mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
                             Bioressonância Quântica e<br />Avaliação Celular
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[10px] md:text-[11px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
                             Mapeamento bioenergético preciso de desequilíbrios, toxinas e carências em tempo real.
                         </p>
                         <div className="flex items-center justify-between bg-[#2C140C]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#2C140C]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[9px] font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
@@ -198,17 +198,17 @@ const BariátricaBanner = () => (
 
                     {/* Text Content */}
                     <div className="relative z-10 flex flex-col justify-end p-4 md:p-5 text-white h-full">
-                        <span className="block text-[9px] font-normal text-white/70 font-sans mb-1 md:hidden">
+                        <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Nutrição Celular em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-base md:text-lg lg:text-xl leading-tight mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
                             Suplementação Personalizada e<br />Nutrição Ortomolecular
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[10px] md:text-[11px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
                             Formulação sob medida de vitaminas, minerais e fitoterápicos de alta pureza para o seu organismo.
                         </p>
                         <div className="flex items-center justify-between bg-[#3D1E15]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#3D1E15]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[9px] font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
@@ -229,17 +229,17 @@ const BariátricaBanner = () => (
 
                     {/* Text Content */}
                     <div className="relative z-10 flex flex-col justify-end p-4 md:p-5 text-white h-full">
-                        <span className="block text-[9px] font-normal text-white/70 font-sans mb-1 md:hidden">
+                        <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Saúde da Mulher em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-base md:text-lg lg:text-xl leading-tight mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
                             Saúde da Mulher e<br />Ginecologia Integrativa
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[10px] md:text-[11px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
                             Cuidado íntimo, equilíbrio hormonal e estética feminina sem cortes com máxima privacidade.
                         </p>
                         <div className="flex items-center justify-between bg-[#4C261A]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#4C261A]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[9px] font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
