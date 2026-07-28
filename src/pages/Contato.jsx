@@ -110,11 +110,11 @@ const Contato = () => {
     return (
         <div ref={containerRef} className="min-h-screen bg-white font-sans">
             <SEO
-                title="Contato — Natuclinic Brasília e Taguatinga | Agende sua Avaliação"
-                description="Entre em contato com a Natuclinic. Duas unidades em Brasília: Taguatinga Norte e Planaltina. Agende sua avaliação em estética ou nutrição ortomolecular pelo WhatsApp."
+                title="Contato e Endereço - Clínica Natuclinic (Taguatinga e Planaltina)"
+                description="Agende sua avaliação na Natuclinic. Unidades em Taguatinga (QNE 01) e Planaltina (Módulo C). Fale conosco pelo WhatsApp e inicie seu tratamento."
                 url="https://www.natuclinic.com.br/contato"
                 canonical="https://www.natuclinic.com.br/contato"
-                keywords="contato natuclinic, clínica estética brasília, agendamento taguatinga, nutrição ortomolecular planaltina, natuclinic endereço"
+                keywords="natuclinic taguatinga endereço, natuclinic planaltina, telefone natuclinic, agendar avaliação estética df"
                 image="/og-default.jpg"
             />
             {/* Minimal Header - Spacing only */}

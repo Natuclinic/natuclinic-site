@@ -103,11 +103,11 @@ const Ninfoplastia = ({ goBack }) => {
     return (
         <div className="blog-system-wrapper pt-44 md:pt-48 bg-white min-h-screen">
             <SEO
-                title="Ninfoplastia Sem Cortes em Brasília — Estética Íntima na Natuclinic"
-                description="Ninfoescultura sem cirurgia em Brasília e Taguatinga. Tratamento não invasivo de estética íntima com resultado imediato. Sem internação, sem cicatrizes. Agende."
+                title="Ninfoplastia Sem Cortes em Brasília (Taguatinga e DF) | Natuclinic"
+                description="Ninfoescultura e estética íntima sem cirurgia em Brasília (Taguatinga/Planaltina). Tratamento a laser não invasivo para flacidez e rejuvenescimento íntimo."
                 url="https://www.natuclinic.com.br/procedimentos/ninfoplastia"
                 canonical="https://www.natuclinic.com.br/procedimentos/ninfoplastia"
-                keywords="ninfoplastia brasília, ninfoescultura sem cortes, estética íntima taguatinga, labioplastia não cirúrgica"
+                keywords="ninfoplastia brasília, cirurgia íntima a laser df, ninfoescultura sem cortes, estética íntima taguatinga, rejuvenescimento íntimo df"
                 image="/ninfoescultura-ninfoplastia.png"
                 jsonLd={{
                     "@context": "https://schema.org",

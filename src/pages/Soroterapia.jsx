@@ -148,11 +148,11 @@ const Soroterapia = ({ goBack }) => {
             hideHeader={true}
             whatsappMessage="Olá! Tenho interesse na Soroterapia (Soro da Beleza/Imunidade)."
             seo={{
-                title: "Soroterapia em Brasília e Taguatinga — Soro de Vitaminas | Natuclinic",
-                description: "Soroterapia intravenosa em Brasília e Taguatinga-DF. Soro da beleza, imunidade, emagrecimento, detox e reposição pós-bariátrica. Protocolo personalizado pelo Dr. Julimar Meneses na Natuclinic.",
+                title: "Soroterapia em Brasília: Soro da Beleza e Imunidade | Natuclinic",
+                description: "Reposição de vitaminas e minerais na veia com a Soroterapia (Soro da Beleza e Soro da Imunidade) em Brasília e Taguatinga. Mais saúde e vitalidade.",
                 url: "https://www.natuclinic.com.br/procedimentos/soroterapia",
                 canonical: "https://www.natuclinic.com.br/procedimentos/soroterapia",
-                keywords: "soroterapia brasília, soroterapia taguatinga, soro de vitaminas brasília, soro da beleza brasília, terapia injetável taguatinga, reposição vitaminas pós bariátrica brasília, soro imunidade brasília, natuclinic soroterapia, tratamento queda de cabelo brasília, queda de cabelo por deficiência vitaminas, fraqueza cansaço vitaminas brasília, soro para cansaço brasília, vitamina intravenosa queda de cabelo, biotina injetável brasília, ferro intravenoso anemia brasília, vitamina b12 injetável brasília, soro para fraqueza brasília, soroterapia planaltina df",
+                keywords: "soroterapia brasília, soro da beleza df, reposição de vitaminas na veia, soro da imunidade taguatinga, terapia endovenosa df",
                 image: "/soroterapia-terapia-injetavel-vitaminas-e-aminoacidos.png",
                 jsonLdList: [
                     {

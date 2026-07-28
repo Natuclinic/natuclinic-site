@@ -92,11 +92,11 @@ const Sobre = () => {
     return (
         <div ref={containerRef} className="pt-36 pb-24 min-h-screen bg-white">
             <SEO
-                title="Sobre a Natuclinic — Clínica de Estética e Nutrição Ortomolecular em Brasília"
-                description="Conheça a Natuclinic: história, equipe, valores e abordagem integrativa que une estética avançada e nutrição ortomolecular em Brasília e Taguatinga."
+                title="Clínica de Estética e Nutrição Ortomolecular em Brasília | Natuclinic"
+                description="Conheça a Natuclinic, referência em Estética Integrativa, Nutrição Ortomolecular e tratamentos a laser em Brasília, Taguatinga e Planaltina."
                 url="https://www.natuclinic.com.br/sobre"
                 canonical="https://www.natuclinic.com.br/sobre"
-                keywords="natuclinic sobre, clínica estética brasília história, Dr. Julimar Meneses naturopata, Dra. Débora Natuclinic, missão visão natuclinic, estética integrativa brasília"
+                keywords="clínica de estética brasília, clínica de estética taguatinga, dr jul mar ortomolecular, natuclinic brasília"
             />
 
             {/* Layout editorial: coluna central de leitura */}

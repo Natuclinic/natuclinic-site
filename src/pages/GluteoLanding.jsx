@@ -129,11 +129,11 @@ const GluteoLanding = () => {
     return (
         <div className="min-h-screen bg-white text-natu-brown overflow-x-hidden selection:bg-natu-pink/30">
             <SEO
-                title="Glúteos dos Sonhos — Harmonização de Glúteos em Brasília"
-                description="Protocolo exclusivo de harmonização de glúteos com ácido hialurônico na Natuclinic em Brasília. Volume, projeção e contorno natural sem cirurgia. Agende sua avaliação."
+                title="Preenchimento e Harmonização de Glúteos em Brasília | Glúteos dos Sonhos"
+                description="Aumente e modele o bumbum sem cirurgia! Conheça o protocolo Glúteos dos Sonhos na Natuclinic (Brasília e Taguatinga). Resultados rápidos e seguros."
                 url="https://www.natuclinic.com.br/gluteo-dos-sonhos"
                 canonical="https://www.natuclinic.com.br/gluteo-dos-sonhos"
-                keywords="harmonização glúteos brasília, preenchimento glúteo taguatinga, glúteos dos sonhos, ácido hialurônico glúteo"
+                keywords="preenchimento de glúteos brasília, harmonização de glúteos df, aumentar bumbum sem cirurgia, estética corporal taguatinga"
                 image="/harmonização de-gluteo/harmonizacao-de-gluteos-dra.jpg"
             />
 
