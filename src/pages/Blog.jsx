@@ -38,10 +38,8 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
 
                 {/* Header — título + busca na mesma linha */}
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                    <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-natu-brown/10">
-                        <h1 className="text-4xl md:text-6xl font-sans font-bold text-natu-brown leading-none tracking-tight">
-                            Saúde &amp; Estética
-                        </h1>
+                    <div className="flex flex-col lg:flex-row lg:items-end justify-end gap-6 pb-8 border-b border-natu-brown/10">
+                        {/* Title removed */}
 
                         <div className="lg:w-72 flex-shrink-0">
                             <div className="relative">
@@ -105,14 +103,14 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                         </div>
 
                         {/* Texto — cream bg */}
-                        <div className="bg-[#F7F3EE] p-8 lg:p-10 flex flex-col justify-between">
+                        <div className="bg-white p-8 lg:p-10 flex flex-col justify-between">
                             <div>
                                 <div className="flex items-center gap-3 mb-6">
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-natu-pink">
+                                    <span className="text-[12px] font-medium text-natu-pink">
                                         Destaque
                                     </span>
                                     <span className="w-1 h-1 rounded-full bg-natu-brown/20" />
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-natu-brown/40">
+                                    <span className="text-[12px] font-medium text-natu-brown/40">
                                         {featuredPost.category}
                                     </span>
                                 </div>
@@ -127,7 +125,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                             </div>
 
                             <div className="mt-10 flex items-center justify-between">
-                                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-natu-brown/30">
+                                <span className="text-[12px] font-sans font-medium text-natu-brown/40">
                                     {featuredPost.date}
                                 </span>
                                 <span className="inline-flex items-center gap-2 px-6 py-3 bg-natu-brown text-white rounded-full text-[10px] font-bold uppercase tracking-[0.15em] group-hover:bg-black transition-colors duration-300">
@@ -140,7 +138,7 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
 
                 {/* Grid Header */}
                 <div className="flex items-center justify-between mb-12 border-b border-gray-100 pb-6">
-                    <h2 className="text-xs font-sans font-bold uppercase tracking-[0.3em] text-natu-brown/40">
+                    <h2 className="text-base font-sans font-medium text-natu-brown/50">
                         {searchTerm ? `Resultados para "${searchTerm}"` : 'Artigos Recentes'}
                     </h2>
                 </div>

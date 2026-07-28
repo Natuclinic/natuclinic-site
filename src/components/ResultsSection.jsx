@@ -5,20 +5,61 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
+const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick, isActive = true }) => {
     const [sliderPosition, setSliderPosition] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
     const containerRef = useRef(null);
     const hasMovedRef = useRef(false);
+    const clipRef = useRef(null);
+    const lineRef = useRef(null);
+    const tlRef = useRef(null);
+
+    // Subtle idle animation to encourage interaction
+    useEffect(() => {
+        if (!isActive) {
+            if (tlRef.current) {
+                tlRef.current.kill();
+                tlRef.current = null;
+            }
+            // Reset to center when not active
+            setSliderPosition(50);
+            if (clipRef.current) clipRef.current.style.clipPath = `inset(0 50% 0 0)`;
+            if (lineRef.current) lineRef.current.style.left = `50%`;
+            return;
+        }
+
+        if (hasMovedRef.current) return;
+
+        const obj = { pos: 50 };
+        tlRef.current = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 1 });
+        
+        const updateDOM = () => {
+            if (clipRef.current) clipRef.current.style.clipPath = `inset(0 ${100 - obj.pos}% 0 0)`;
+            if (lineRef.current) lineRef.current.style.left = `${obj.pos}%`;
+        };
+
+        // Premium "flick and settle" curve
+        tlRef.current.to(obj, { pos: 55, duration: 0.8, ease: "power2.out", onUpdate: updateDOM })
+                     .to(obj, { pos: 50, duration: 2.0, ease: "elastic.out(1, 0.6)", onUpdate: updateDOM });
+
+        return () => {
+            if (tlRef.current) {
+                tlRef.current.kill();
+                tlRef.current = null;
+            }
+        };
+    }, [isActive]);
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
         hasMovedRef.current = false;
+        if (tlRef.current) tlRef.current.kill();
     };
 
     const handleTouchStart = () => {
         setIsDragging(true);
         hasMovedRef.current = false;
+        if (tlRef.current) tlRef.current.kill();
     };
 
     const handleMove = (clientX) => {
@@ -76,6 +117,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
 
             {/* Before Image (Foreground with Clip Path) */}
             <div
+                ref={clipRef}
                 className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
                 style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
@@ -90,6 +132,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, altText, onClick }) => {
 
             {/* Vertical slider line & handle */}
             <div
+                ref={lineRef}
                 className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize z-20"
                 style={{ left: `${sliderPosition}%` }}
             >
@@ -257,11 +300,11 @@ const ResultsSection = ({ id }) => {
                             Galeria de Casos
                         </span>
                         <h2 className="font-sans font-bold text-4xl md:text-6xl text-natu-brown leading-tight tracking-tight">
-                            Transformações reais
+                            Resultados de quem já passou por aqui.
                         </h2>
                     </div>
                     <p className="max-w-xs font-sans font-light text-natu-brown/50 text-sm leading-relaxed md:text-right">
-                        Antes e depois reais de pacientes da Natuclinic em Brasília.
+                        Resultados de nossos pacientes da Natuclinic em Brasília.
                     </p>
                 </div>
 
@@ -282,6 +325,7 @@ const ResultsSection = ({ id }) => {
                                     afterImage={result.after}
                                     altText={result.alt}
                                     onClick={() => centerOnIndex(index)}
+                                    isActive={index === currentIndex}
                                 />
                             </div>
                         ))}

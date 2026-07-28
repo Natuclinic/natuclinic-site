@@ -116,11 +116,17 @@ const ProceduresSection = () => {
 const BariátricaBanner = () => (
     <section className="bg-natu-ivory pt-10 md:pt-14 pb-8 md:pb-10 overflow-hidden">
         <div className="desktop-container">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 max-w-[720px] mx-auto w-full">
+            <div className="mb-8 md:mb-12 flex flex-col items-start">
+                <span className="text-natu-brown/60 font-medium text-[10px] uppercase tracking-wider mb-3">Saúde Integrativa em Brasília</span>
+                <h2 className="text-3xl md:text-4xl font-sans font-bold tracking-tight text-natu-brown leading-tight">
+                    Programas de Cuidado Integrativo e Funcional
+                </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 w-full">
                 {/* Banner 1: Reabilitação Intestinal */}
                 <Link
                     to="/procedimentos/nutricao-ortomolecular"
-                    className="group relative flex flex-col justify-end rounded-xl bg-[#3D1E15] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[4/5] md:aspect-[4/3.5] w-full border border-white/10"
+                    className="group relative flex flex-col justify-end rounded-xl bg-[#3D1E15] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[3/4] w-full border border-white/10"
                 >
                     {/* Background Image */}
                     <img
@@ -135,14 +141,14 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Saúde Intestinal em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Reabilitação Intestinal e<br />Saúde Digestiva
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
                             Desintoxicação profunda, reequilíbrio da microbiota e eliminação de toxinas para restaurar a vitalidade.
                         </p>
                         <div className="flex items-center justify-between bg-[#3D1E15]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#3D1E15]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
@@ -153,11 +159,11 @@ const BariátricaBanner = () => (
                     href={WHATSAPP_LINKS.MSG_BIORESSONANCIA}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative flex flex-col justify-end rounded-xl bg-[#2C140C] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[4/5] md:aspect-[4/3.5] w-full border border-white/10"
+                    className="group relative flex flex-col justify-end rounded-xl bg-[#2C140C] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[3/4] w-full border border-white/10"
                 >
                     {/* Background Image */}
                     <img
-                        src="/images/teste-alergias-card.png"
+                        src="/images/bioressonancia-quantica.png"
                         alt="Bioressonância Quântica"
                         className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                     />
@@ -168,14 +174,14 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Diagnóstico Integrativo em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Bioressonância Quântica e<br />Avaliação Celular
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
                             Mapeamento bioenergético preciso de desequilíbrios, toxinas e carências em tempo real.
                         </p>
                         <div className="flex items-center justify-between bg-[#2C140C]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#2C140C]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
@@ -186,7 +192,7 @@ const BariátricaBanner = () => (
                     href={WHATSAPP_LINKS.MSG_SUPLEMENTACAO}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative flex flex-col justify-end rounded-xl bg-[#3D1E15] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[4/5] md:aspect-[4/3.5] w-full border border-white/10"
+                    className="group relative flex flex-col justify-end rounded-xl bg-[#3D1E15] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[3/4] w-full border border-white/10"
                 >
                     {/* Background Image */}
                     <img
@@ -201,14 +207,14 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Nutrição Celular em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Suplementação Personalizada e<br />Nutrição Ortomolecular
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
                             Formulação sob medida de vitaminas, minerais e fitoterápicos de alta pureza para o seu organismo.
                         </p>
                         <div className="flex items-center justify-between bg-[#3D1E15]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#3D1E15]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>
@@ -217,7 +223,7 @@ const BariátricaBanner = () => (
                 {/* Banner 4: Saúde da Mulher */}
                 <Link
                     to="/procedimentos/saude-da-mulher"
-                    className="group relative flex flex-col justify-end rounded-xl bg-[#4C261A] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[4/5] md:aspect-[4/3.5] w-full border border-white/10"
+                    className="group relative flex flex-col justify-end rounded-xl bg-[#4C261A] overflow-hidden no-underline transition-all duration-500 hover:scale-[1.02] aspect-[3/4] w-full border border-white/10"
                 >
                     {/* Background Image */}
                     <img
@@ -232,14 +238,14 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Saúde da Mulher em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-2xl mb-2">
+                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Saúde da Mulher e<br />Ginecologia Integrativa
                         </h3>
-                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-[15px] leading-relaxed mb-4">
+                        <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
                             Cuidado íntimo, equilíbrio hormonal e estética feminina sem cortes com máxima privacidade.
                         </p>
                         <div className="flex items-center justify-between bg-[#4C261A]/40 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 transition-all duration-300 group-hover:bg-[#4C261A]/60 group-hover:border-white/50 flicker-fix">
-                            <span className="text-[11px] md:text-xs font-bold font-sans uppercase">Saber Mais</span>
+                            <span className="text-[11px] md:text-xs font-bold font-sans">Saber Mais</span>
                             <Unicon name="arrow-right" className="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </div>

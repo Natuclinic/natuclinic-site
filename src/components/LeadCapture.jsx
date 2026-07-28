@@ -43,7 +43,7 @@ const LeadCapture = () => {
 
             setStatus({ type: 'success', message: 'Redirecionando para o WhatsApp...' });
             setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
+                window.location.href = whatsappUrl;
                 setLoading(false);
             }, 600);
         } catch {
