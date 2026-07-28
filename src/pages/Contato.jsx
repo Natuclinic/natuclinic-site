@@ -107,15 +107,51 @@ const Contato = () => {
         }
     ];
 
+    const structuredDataList = [
+        {
+            "@context": "https://schema.org",
+            "@type": "MedicalClinic",
+            "name": "Natuclinic Taguatinga",
+            "image": "https://www.natuclinic.com.br/images/clinica-de-estetica-natuclinic-brasilia.jpg",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Qne 01 Lote 17/20 Loja 02, Av. Comercial",
+                "addressLocality": "Taguatinga Norte, Brasília",
+                "addressRegion": "DF",
+                "postalCode": "72125-010",
+                "addressCountry": "BR"
+            },
+            "telephone": UNIT_PHONES.TAGUATINGA,
+            "url": "https://www.natuclinic.com.br/contato"
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "MedicalClinic",
+            "name": "Natuclinic Planaltina",
+            "image": "https://www.natuclinic.com.br/images/melhor-clinica-de-brasilia-df.jpg",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "SH Mte. D'armas Estância 1 Mod C lote 2 loja 3/4",
+                "addressLocality": "Planaltina, Brasília",
+                "addressRegion": "DF",
+                "postalCode": "73380-100",
+                "addressCountry": "BR"
+            },
+            "telephone": UNIT_PHONES.PLANALTINA,
+            "url": "https://www.natuclinic.com.br/contato"
+        }
+    ];
+
     return (
         <div ref={containerRef} className="min-h-screen bg-white font-sans">
             <SEO
-                title="Contato e Endereço - Clínica Natuclinic (Taguatinga e Planaltina)"
-                description="Agende sua avaliação na Natuclinic. Unidades em Taguatinga (QNE 01) e Planaltina (Módulo C). Fale conosco pelo WhatsApp e inicie seu tratamento."
+                title="Clínica Estética em Taguatinga e Planaltina | Agende na Natuclinic"
+                description="Endereços e telefones da Natuclinic. Agende sua avaliação em estética avançada e nutrição ortomolecular em nossas unidades no DF (Taguatinga e Planaltina)."
                 url="https://www.natuclinic.com.br/contato"
                 canonical="https://www.natuclinic.com.br/contato"
-                keywords="natuclinic taguatinga endereço, natuclinic planaltina, telefone natuclinic, agendar avaliação estética df"
+                keywords="contato natuclinic, clínica estética brasília, agendamento taguatinga, nutrição ortomolecular planaltina, natuclinic endereço, telefone clínica estética taguatinga, agendar estética planaltina, endereço natuclinic df, clínica nutrição ortomolecular df"
                 image="/og-default.jpg"
+                jsonLdList={structuredDataList}
             />
             {/* Minimal Header - Spacing only */}
             <div className="pt-32 pb-8 md:pt-40 md:pb-12 contact-header">

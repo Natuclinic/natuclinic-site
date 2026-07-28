@@ -11,11 +11,11 @@ const Endolaser = ({ goBack }) => {
             coverImage="/harmonizacao-corporal.jpg"
             whatsappMessage="Olá! Gostaria de saber mais sobre o protocolo de Endolaser."
             seo={{
-                title: "Endolaser em Brasília: Tratamento para Flacidez e Gordura Localizada",
-                description: "Lifting sem cortes com Endolaser em Brasília e Taguatinga. Tratamento inovador a laser para flacidez facial e corporal, papada e gordura localizada.",
+                title: "Endolaser em Brasília — Tratamento de Flacidez e Contorno Corporal",
+                description: "Endolaser na Natuclinic: tecnologia de laser para tratar flacidez, celulite e contorno corporal em Brasília e Taguatinga. Resultados visíveis sem cirurgia.",
                 url: "https://www.natuclinic.com.br/procedimentos/endolaser",
                 canonical: "https://www.natuclinic.com.br/procedimentos/endolaser",
-                keywords: "endolaser brasília, endolaser taguatinga, tratamento para flacidez df, lifting sem cirurgia, lipo a laser brasília",
+                keywords: "endolaser brasília, tratamento flacidez, laser corporal taguatinga, contorno corporal",
                 image: "/harmonizacao-corporal.jpg",
                 jsonLd: {
                     "@context": "https://schema.org",

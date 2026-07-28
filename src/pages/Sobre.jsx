@@ -89,14 +89,39 @@ const Sobre = () => {
         return () => ctx.revert();
     }, []);
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "Sobre a Natuclinic - Clínica de Estética Integrativa",
+        "url": "https://www.natuclinic.com.br/sobre",
+        "description": "Conheça a Natuclinic: história, equipe, valores e abordagem integrativa que une estética avançada e nutrição ortomolecular em Brasília e Taguatinga.",
+        "publisher": {
+            "@type": "MedicalBusiness",
+            "name": "Natuclinic"
+        },
+        "about": [
+            {
+                "@type": "Person",
+                "name": "Dr. Julimar Meneses",
+                "jobTitle": "Nutricionista Ortomolecular"
+            },
+            {
+                "@type": "Person",
+                "name": "Dra. Débora Meneses",
+                "jobTitle": "Biomédica Esteta"
+            }
+        ]
+    };
+
     return (
         <div ref={containerRef} className="pt-36 pb-24 min-h-screen bg-white">
             <SEO
-                title="Clínica de Estética e Nutrição Ortomolecular em Brasília | Natuclinic"
-                description="Conheça a Natuclinic, referência em Estética Integrativa, Nutrição Ortomolecular e tratamentos a laser em Brasília, Taguatinga e Planaltina."
+                title="Melhor Clínica de Estética Integrativa de Brasília | Natuclinic"
+                description="Conheça a Natuclinic: Clínica especializada em Estética Avançada e Nutrição Ortomolecular em Brasília e Taguatinga. Agende sua avaliação."
                 url="https://www.natuclinic.com.br/sobre"
                 canonical="https://www.natuclinic.com.br/sobre"
-                keywords="clínica de estética brasília, clínica de estética taguatinga, dr jul mar ortomolecular, natuclinic brasília"
+                keywords="natuclinic sobre, clínica estética brasília história, Dr. Julimar Meneses naturopata, Dra. Débora Natuclinic, missão visão natuclinic, estética integrativa brasília, clínica de estética brasília, clínica integrativa taguatinga, nutricionista ortomolecular df, biomédica esteta brasília, estética avançada df"
+                jsonLd={structuredData}
             />
 
             {/* Layout editorial: coluna central de leitura */}

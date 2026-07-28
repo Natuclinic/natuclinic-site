@@ -152,11 +152,11 @@ const SaudeDaMulher = ({ goBack }) => {
     return (
         <div className="blog-system-wrapper pt-44 md:pt-48 bg-white min-h-screen">
             <SEO
-                title="Clínica de Saúde da Mulher e Estética Integrativa em Brasília"
-                description="Cuidados integrativos para a saúde da mulher, menopausa, modulação e estética avançada na Natuclinic. Clínicas em Taguatinga e Planaltina."
+                title="Saúde da Mulher & Ginecologia Integrativa em Brasília — Natuclinic"
+                description="Ginecologia integrativa, estética íntima não cirúrgica, modulação hormonal e bem-estar feminino em Taguatinga e Planaltina-DF. Agende sua avaliação em ambiente sigiloso."
                 url="https://www.natuclinic.com.br/procedimentos/saude-da-mulher"
                 canonical="https://www.natuclinic.com.br/procedimentos/saude-da-mulher"
-                keywords="clínica de saúde da mulher brasília, menopausa tratamento df, estética íntima feminina, medicina integrativa taguatinga"
+                keywords="saúde da mulher brasília, ginecologia integrativa taguatinga, estética íntima não cirúrgica, rejuvenescimento vaginal brasília, secura vaginal tratamento, equilíbrio hormonal feminino df, natuclinic"
                 image="/images/saude-da-mulher-bg.jpg"
                 jsonLd={{
                     "@context": "https://schema.org",

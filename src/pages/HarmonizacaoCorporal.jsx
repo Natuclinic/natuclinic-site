@@ -235,10 +235,10 @@ const HarmonizacaoCorporal = () => {
     return (
         <div className="bg-white text-[#4C261A] font-sans overflow-x-hidden harmonizacao-page">
             <SEO
-                title="Clínica de Estética Corporal em Brasília | Protocolo Harmone Bee®"
-                description="Protocolo exclusivo de Harmonização Corporal (Harmone Bee®) em Brasília. Combinação de estética avançada e nutrição em 90 dias para transformar seu corpo."
+                title="Harmone Bee® — Harmonização Corporal em 90 Dias"
+                description="O protocolo Harmone Bee® une nutrição ortomolecular, procedimentos estéticos e acompanhamento intensivo para transformar seu corpo em 90 dias. Natuclinic, Brasília."
                 url="https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal"
-                keywords="estética corporal brasília, harmonização corporal taguatinga, protocolo de emagrecimento df, tratamento para gordura localizada brasília"
+                keywords="harmonização corporal, harmone bee, protocolo emagrecimento, nutrição ortomolecular, estética corporal Brasília, natuclinic"
                 image="/og-harmonizacao-corporal.jpg"
                 jsonLd={{
                     "@context": "https://schema.org",

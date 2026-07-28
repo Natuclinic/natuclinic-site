@@ -34,50 +34,23 @@ const GluteoLanding = () => {
         phone: ''
     });
 
-    useEffect(() => {
-        document.title = "Glúteos dos Sonhos - Harmonização de Glúteos em Brasília | Natuclinic";
-
-        let metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) {
-            metaDesc = document.createElement('meta');
-            metaDesc.name = "description";
-            document.head.appendChild(metaDesc);
-        }
-        metaDesc.content = "Conquiste o glúteo dos sonhos com nosso protocolo exclusivo de harmonização com ácido hialurônico em Brasília. Volume, projeção e contorno natural sem cirurgia. Agende sua avaliação!";
-
-        let metaKeywords = document.querySelector('meta[name="keywords"]');
-        if (!metaKeywords) {
-            metaKeywords = document.createElement('meta');
-            metaKeywords.name = "keywords";
-            document.head.appendChild(metaKeywords);
-        }
-        metaKeywords.content = "harmonização de glúteos brasília, preenchimento de glúteos df, glúteos dos sonhos natuclinic, ácido hialurônico corporal, biomédica esteta brasília, estética corporal taguatinga";
-
-        let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
-        if (!jsonLdScript) {
-            jsonLdScript = document.createElement('script');
-            jsonLdScript.type = "application/ld+json";
-            document.head.appendChild(jsonLdScript);
-        }
-        const structuredData = {
-            "@context": "https://schema.org",
-            "@type": "MedicalProcedure",
-            "name": "Glúteos dos Sonhos — Harmonização de Glúteos",
-            "procedureType": "Noninvasive",
-            "description": "Protocolo avançado de harmonização de glúteos com ácido hialurônico para volume, projeção e contorno natural sem cirurgia em Brasília.",
-            "url": "https://www.natuclinic.com.br/gluteo-dos-sonhos",
-            "performer": {
-                "@type": "MedicalBusiness",
-                "name": "Natuclinic",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Brasília",
-                    "addressRegion": "DF"
-                }
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "MedicalProcedure",
+        "name": "Glúteos dos Sonhos — Harmonização de Glúteos",
+        "procedureType": "Noninvasive",
+        "description": "Protocolo avançado de harmonização de glúteos com ácido hialurônico para volume, projeção e contorno natural sem cirurgia em Brasília.",
+        "url": "https://www.natuclinic.com.br/gluteo-dos-sonhos",
+        "performer": {
+            "@type": "MedicalBusiness",
+            "name": "Natuclinic",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Brasília",
+                "addressRegion": "DF"
             }
-        };
-        jsonLdScript.text = JSON.stringify(structuredData);
-    }, []);
+        }
+    };
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent(`Olá! Meu nome é ${formData.name || 'interessado(a)'}. Vim pela página dos Glúteos dos Sonhos e gostaria de agendar uma consulta.`);
@@ -129,12 +102,13 @@ const GluteoLanding = () => {
     return (
         <div className="min-h-screen bg-white text-natu-brown overflow-x-hidden selection:bg-natu-pink/30">
             <SEO
-                title="Preenchimento e Harmonização de Glúteos em Brasília | Glúteos dos Sonhos"
-                description="Aumente e modele o bumbum sem cirurgia! Conheça o protocolo Glúteos dos Sonhos na Natuclinic (Brasília e Taguatinga). Resultados rápidos e seguros."
+                title="Aumentar Glúteos Sem Cirurgia em Brasília — Protocolo Exclusivo"
+                description="Conquiste volume, projeção e contorno com a Harmonização de Glúteos (Ácido Hialurônico) na Natuclinic Taguatinga. Resultado imediato e natural."
                 url="https://www.natuclinic.com.br/gluteo-dos-sonhos"
                 canonical="https://www.natuclinic.com.br/gluteo-dos-sonhos"
-                keywords="preenchimento de glúteos brasília, harmonização de glúteos df, aumentar bumbum sem cirurgia, estética corporal taguatinga"
+                keywords="harmonização de glúteos brasília, preenchimento de glúteos df, glúteos dos sonhos natuclinic, ácido hialurônico corporal, biomédica esteta brasília, estética corporal taguatinga, aumentar glúteos sem cirurgia, preenchimento de bumbum brasília, harmonização de glúteos taguatinga, ácido hialurônico glúteo df"
                 image="/harmonização de-gluteo/harmonizacao-de-gluteos-dra.jpg"
+                jsonLd={structuredData}
             />
 
 
