@@ -108,9 +108,9 @@ const ClinicGallery = () => {
             <div className="absolute top-20 left-10 w-64 h-64 bg-natu-pink/10 rounded-full blur-3xl" />
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-natu-brown/5 rounded-full blur-3xl" />
 
-            <div className="desktop-container relative z-10">
+            <div className="desktop-container-fluid relative z-10">
                 <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto">
-                    <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
+                    <span className="sr-only">
                         Bem-vindo à Natuclinic
                     </span>
                     <h2 className="font-sans text-3xl md:text-5xl text-natu-brown font-bold leading-tight mb-6 text-balance max-w-2xl mx-auto">

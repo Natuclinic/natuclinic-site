@@ -46,7 +46,7 @@ const ResultsCTA = () => {
             <div
                 ref={containerRef}
                 onClick={handleWhatsApp}
-                className="desktop-container pointer-events-auto"
+                className="desktop-container-fluid pointer-events-auto"
             >
                 <div className="bg-natu-brown rounded-[2rem] p-12 md:p-16 relative overflow-hidden cursor-pointer group hover:scale-[1.01] transition-transform duration-500 [backface-visibility:hidden] [transform:translate3d(0,0,0)]">
                     {/* Decorative Background Elements */}

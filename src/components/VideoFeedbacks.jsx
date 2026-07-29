@@ -162,7 +162,7 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
 
     return (
         <section className={`overflow-hidden ${bgColor} ${pyClass}`}>
-            <div className="desktop-container">
+            <div className="desktop-container-fluid">
                 {showTitle && (
                     <div className="mb-10 space-y-2 text-center lg:text-left">
 

@@ -40,12 +40,12 @@ const CeoSection = () => {
 
     return (
         <section id="especialistas" ref={containerRef} className="py-20 md:py-32 bg-natu-ivory overflow-hidden">
-            <div className="desktop-container">
+            <div className="desktop-container-fluid">
 
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
                     <div>
-                        <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
+                        <span className="sr-only">
                             Corpo Clínico
                         </span>
                         <h2 className="font-sans font-bold text-5xl md:text-6xl text-natu-brown leading-[1.05] tracking-tight">

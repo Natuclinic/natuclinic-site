@@ -293,18 +293,18 @@ const ResultsSection = ({ id }) => {
 
     return (
         <section id={id} ref={sectionRef} className="py-12 md:py-20 bg-natu-ivory border-t border-black/5 overflow-hidden">
-            <div className="desktop-container">
+            <div className="desktop-container-fluid">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16 results-header">
                     <div>
-                        <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-3">
+                        <span className="sr-only">
                             Galeria de Casos
                         </span>
-                        <h2 className="font-sans font-bold text-4xl md:text-6xl text-natu-brown leading-tight tracking-tight">
-                            Resultados de quem já passou por aqui.
+                        <h2 className="font-sans font-bold text-4xl md:text-6xl text-natu-brown leading-tight tracking-tight text-balance">
+                            Resultados de quem já passou por&nbsp;aqui.
                         </h2>
                     </div>
-                    <p className="max-w-xs font-sans font-light text-natu-brown/50 text-sm leading-relaxed md:text-right">
-                        Resultados de nossos pacientes da Natuclinic em Brasília.
+                    <p className="max-w-xs font-sans font-light text-natu-brown/50 text-sm leading-relaxed md:text-right text-pretty">
+                        Resultados de nossos pacientes da Natuclinic em&nbsp;Brasília.
                     </p>
                 </div>
 

@@ -59,12 +59,12 @@ const FaqSection = () => {
 
     return (
         <section ref={containerRef} className="py-20 md:py-32 bg-natu-ivory border-t border-natu-brown/10">
-            <div className="desktop-container">
+            <div className="desktop-container-fluid">
                 <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
 
                     {/* Header */}
                     <div className="faq-header">
-                        <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/50 block mb-4">
+                        <span className="sr-only">
                             Dúvidas Frequentes
                         </span>
                         <h2 className="font-sans font-bold text-4xl md:text-5xl text-[#3D1E15] leading-tight tracking-tight">

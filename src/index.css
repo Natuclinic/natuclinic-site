@@ -248,6 +248,31 @@ html.lenis {
     padding-right: 3.5rem;
   }
 
+  .desktop-container-fluid {
+    width: 100%;
+    max-width: 1536px;
+    margin: 0 auto;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .bleed-right {
+    margin-right: -1.25rem;
+    padding-right: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .bleed-right {
+      margin-right: -4%;
+      padding-right: 4%;
+    }
+  }
+  @media (min-width: 1536px) {
+    .bleed-right {
+      margin-right: calc(-50vw + 706.56px);
+      padding-right: calc(50vw - 706.56px);
+    }
+  }
+
 
   .font-serif {
     font-family: var(--font-primary);
@@ -307,6 +332,10 @@ html.lenis {
 
 @media (max-width: 768px) {
   .desktop-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .desktop-container-fluid {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }

@@ -27,7 +27,7 @@ const ProcedureCard = ({ imageUrl, title, category, path, href, themeColor }) =>
                 <span className="text-[9px] font-normal text-white/70 mb-1.5 font-sans md:hidden">
                     {category}
                 </span>
-                <h3 className="text-3xl font-serif leading-tight">{title}</h3>
+                <h3 className="text-3xl font-sans font-bold leading-tight">{title}</h3>
                 <div className="mt-8 flex items-center justify-between bg-natu-ivory/10 backdrop-blur-md border border-white/20 rounded-lg px-5 py-4 transition-all duration-300 group-hover:bg-natu-ivory/20 group-hover:border-white/40 flicker-fix">
                     <span className="text-[10px] font-bold font-sans">Saber Mais</span>
                     <Unicon name="arrow-right" className="h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
@@ -64,7 +64,7 @@ const ProcedureCard = ({ imageUrl, title, category, path, href, themeColor }) =>
 const ProceduresSection = () => {
     const navigate = useNavigate();
     const procedimentos = [
-        { title: "Nutrição Ortomolecular", category: "Saúde Celular", imageUrl: "/emagrecimento-saudavel.jpg", theme: "var(--theme-brown)", path: "/procedimentos/nutricao-ortomolecular" },
+        { title: "Nutrição Ortomolecular", category: "Saúde Celular", imageUrl: "/medida-nutricao-ortomolecular.jpg", theme: "var(--theme-brown)", path: "/procedimentos/nutricao-ortomolecular" },
         { title: "Ninfoplastia Sem Cortes", category: "Estética Íntima", imageUrl: "/ninfoplastia.jpeg", theme: "var(--theme-pink)", href: WHATSAPP_LINKS.MSG_NINFO },
         { title: "Harmonização Corporal", category: "Estética Corporal", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/procedimentos/harmonizacao-corporal" },
         { title: "Harmonização de Glúteos", category: "Estética Corporal", imageUrl: "/harmonizacao-de-gluteo.jpg", theme: "var(--theme-pink)", path: "/gluteo-dos-sonhos" },
@@ -115,7 +115,7 @@ const ProceduresSection = () => {
 
 const BariátricaBanner = () => (
     <section className="bg-natu-ivory pt-10 md:pt-14 pb-8 md:pb-10 overflow-hidden">
-        <div className="desktop-container">
+        <div className="desktop-container-fluid">
             <div className="mb-8 md:mb-12 flex flex-col items-start">
                 <span className="text-natu-brown/60 font-medium text-[10px] uppercase tracking-wider mb-3">Saúde Integrativa em Brasília</span>
                 <h2 className="text-3xl md:text-4xl font-sans font-bold tracking-tight text-natu-brown leading-tight">
@@ -141,7 +141,7 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Saúde Intestinal em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
+                        <h3 className="font-sans font-bold text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Reabilitação Intestinal e<br />Saúde Digestiva
                         </h3>
                         <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
@@ -163,7 +163,7 @@ const BariátricaBanner = () => (
                 >
                     {/* Background Image */}
                     <img
-                        src="/images/bioressonancia-quantica.png"
+                        src="/bioressonancia-quantica-novo.jpeg"
                         alt="Bioressonância Quântica"
                         className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                     />
@@ -174,7 +174,7 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Diagnóstico Integrativo em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
+                        <h3 className="font-sans font-bold text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Bioressonância Quântica e<br />Avaliação Celular
                         </h3>
                         <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
@@ -196,7 +196,7 @@ const BariátricaBanner = () => (
                 >
                     {/* Background Image */}
                     <img
-                        src="/suplementação-natural-natuclinic-ortomolecular-em-brasilia.webp"
+                        src="/medida-nutricao-ortomolecular.jpg"
                         alt="Suplementação Personalizada Ortomolecular"
                         className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                     />
@@ -207,7 +207,7 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Nutrição Celular em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
+                        <h3 className="font-sans font-bold text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Suplementação Personalizada e<br />Nutrição Ortomolecular
                         </h3>
                         <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">
@@ -238,7 +238,7 @@ const BariátricaBanner = () => (
                         <span className="block text-[10px] sm:text-[11px] font-normal text-white/70 font-sans mb-1 md:hidden">
                             Saúde da Mulher em Taguatinga-DF / Planaltina-DF
                         </span>
-                        <h3 className="font-serif font-normal text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
+                        <h3 className="font-sans font-bold text-white text-[1.35rem] leading-[1.15] md:text-xl lg:text-[1.05rem] lg:leading-snug mb-2">
                             Saúde da Mulher e<br />Ginecologia Integrativa
                         </h3>
                         <p className="font-sans font-light text-white/90 text-[13px] md:text-sm lg:text-xs leading-relaxed mb-4">

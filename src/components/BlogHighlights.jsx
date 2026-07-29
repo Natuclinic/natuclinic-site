@@ -151,7 +151,7 @@ const BlogHighlights = () => {
 
     return (
         <section ref={sectionRef} className="py-12 md:py-24 bg-white overflow-hidden select-none">
-            <div className="desktop-container">
+            <div className="desktop-container-fluid">
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center lg:items-stretch">
 
                     {/* Left Sidebar: Title & Controls */}
@@ -183,7 +183,7 @@ const BlogHighlights = () => {
                             onTouchStart={handleMouseDown}
                             onTouchMove={handleMouseMove}
                             onTouchEnd={handleMouseUp}
-                            className={`flex gap-4 lg:gap-5 overflow-x-auto pb-4 no-scrollbar px-[4%] lg:px-0
+                            className={`flex gap-4 lg:gap-5 overflow-x-auto pb-4 no-scrollbar pl-[1.25rem] md:pl-[4%] lg:pl-0 bleed-right
                                     ${isDown ? 'cursor-grabbing' : 'lg:cursor-grab'}`}
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >

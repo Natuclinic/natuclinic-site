@@ -53,23 +53,35 @@ const LeadCapture = () => {
     };
 
     return (
-        <section className="relative py-16 md:py-24 bg-gradient-to-br from-[#4C261A] via-[#3D1E15] to-[#25130D] text-white overflow-hidden">
-            {/* Background Glow Overlay */}
-            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-natu-pink/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#4C261A]/40 rounded-full blur-3xl pointer-events-none" />
+        <section className="w-full py-0 md:py-16 flex justify-center bg-white md:bg-transparent">
+            <div className="relative w-full md:w-[95%] max-w-[1600px] text-white overflow-hidden md:rounded-[2.5rem] bg-natu-brown flex flex-col md:block">
+                
+                {/* Image: In flow on mobile, absolute background on desktop */}
+                <div className="relative w-full h-[350px] md:h-auto md:absolute md:inset-0 z-0">
+                    <img 
+                        src="/images/Mulher_com_roupa_202604201420.jpeg_2K_202607281626.jpeg"
+                        alt="Natuclinic"
+                        className="w-full h-full object-cover object-center"
+                    />
+                    {/* Dark Overlay for Readability (Desktop only) */}
+                    <div className="hidden md:block absolute inset-0 bg-black/40 pointer-events-none" />
+                </div>
 
-            <div className="desktop-container relative z-10">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+                {/* Background Glow Overlay (Desktop only) */}
+                <div className="hidden md:block absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-natu-pink/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-                    {/* Lado Esquerdo — Headline e Benefícios */}
-                    <div className="w-full lg:w-[55%] flex flex-col items-start text-left">
-                        <div className="inline-flex items-center gap-1.5 text-white/80 text-xs font-sans font-medium mb-4">
-                            <Unicon name="map-marker" size={14} className="text-emerald-400" />
-                            Natuclinic · Brasília
+                <div className="desktop-container-fluid relative z-10 py-10 md:py-20 lg:py-32">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+
+                        {/* Lado Esquerdo — Headline e Benefícios */}
+                        <div className="w-full lg:w-[55%] flex flex-col items-start text-left mt-2 md:mt-0">
+                        <div className="inline-flex items-center gap-1.5 text-white/90 text-sm font-sans font-medium mb-4">
+                            <Unicon name="map-marker" size={14} className="text-[#FFC2C2]" />
+                            Natuclinic em Brasília-DF
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-normal text-white leading-[1.1] mb-5">
-                            Cansada de tentar de tudo e não ver resultados?
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-sans font-bold tracking-tight text-white leading-[1.1] mb-5 text-balance">
+                            Cansada de tentar de tudo e não ver&nbsp;resultados?
                         </h2>
 
                         <p className="font-sans font-light text-white/80 text-sm md:text-base leading-relaxed mb-8 max-w-xl">
@@ -155,6 +167,7 @@ const LeadCapture = () => {
                     </div>
 
                 </div>
+            </div>
             </div>
         </section>
     );
