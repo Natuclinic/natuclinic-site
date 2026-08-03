@@ -34,6 +34,7 @@ const LeadCapture = React.lazy(() => import('./components/LeadCapture'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const BlogHighlights = React.lazy(() => import('./components/BlogHighlights'));
 const VideoFeedbacks = React.lazy(() => import('./components/VideoFeedbacks'));
+const GoogleReviews = React.lazy(() => import('./components/GoogleReviews'));
 const GluteoLanding = React.lazy(() => import('./pages/GluteoLanding'));
 const Contato = React.lazy(() => import('./pages/Contato'));
 const Soroterapia = React.lazy(() => import('./pages/Soroterapia'));
@@ -154,6 +155,7 @@ export default function App() {
                   <ResultsSection id="results" />
                   <CeoSection />
                   <VideoFeedbacks />
+                  <GoogleReviews />
                   <BariátricaBanner />
                   <ClinicGallery />
                   <ResultsCTA />

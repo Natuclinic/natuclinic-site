@@ -65,6 +65,8 @@ const LeadCapture = () => {
                     />
                     {/* Dark Overlay for Readability (Desktop only) */}
                     <div className="hidden md:block absolute inset-0 bg-black/40 pointer-events-none" />
+                    {/* Brown Gradient for blending (Mobile only) */}
+                    <div className="md:hidden absolute inset-0 bg-gradient-to-t from-natu-brown via-natu-brown/50 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Background Glow Overlay (Desktop only) */}
