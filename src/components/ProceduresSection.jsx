@@ -9,7 +9,8 @@ const ProcedureCard = ({ imageUrl, title, category, path, href, themeColor, desc
 
     const Content = () => (
         <div
-            className="relative block w-full h-full rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 ease-in-out group-hover:scale-[1.02]"
+            className="relative block w-full h-full rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 ease-in-out group-hover:scale-[1.02] [transform:translateZ(0)] [will-change:transform]"
+            style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
         >
             <img
                 src={imageUrl}

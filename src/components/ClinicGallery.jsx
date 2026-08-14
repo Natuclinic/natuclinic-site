@@ -125,7 +125,7 @@ const ClinicGallery = () => {
                     className="grid grid-cols-4 grid-rows-5 gap-3 md:gap-6 h-[400px] md:h-[660px] lg:h-[700px] mx-auto max-w-5xl"
                 >
                     {/* Div 1: Left Top */}
-                    <div className="gallery-item col-start-1 col-span-2 row-span-3 relative overflow-hidden rounded-2xl group cursor-pointer h-full">
+                    <div className="gallery-item col-start-1 col-span-2 row-span-3 relative overflow-hidden rounded-2xl group cursor-pointer h-full [transform:translateZ(0)] [will-change:transform]" style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                         <img
                             src="/espaco-1.jpg"
                             alt="Recepção Natuclinic"
@@ -135,7 +135,7 @@ const ClinicGallery = () => {
                     </div>
 
                     {/* Div 2: Left Bottom */}
-                    <div className="gallery-item col-start-1 col-span-2 row-start-4 row-span-2 relative overflow-hidden rounded-2xl group cursor-pointer h-full">
+                    <div className="gallery-item col-start-1 col-span-2 row-start-4 row-span-2 relative overflow-hidden rounded-2xl group cursor-pointer h-full [transform:translateZ(0)] [will-change:transform]" style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                         <img
                             src="/espaco-2.jpg"
                             alt="Sala de Procedimentos"
@@ -145,7 +145,7 @@ const ClinicGallery = () => {
                     </div>
 
                     {/* Div 3: Right Tall */}
-                    <div className="gallery-item col-start-3 col-span-2 row-span-5 relative overflow-hidden rounded-2xl group cursor-pointer h-full">
+                    <div className="gallery-item col-start-3 col-span-2 row-span-5 relative overflow-hidden rounded-2xl group cursor-pointer h-full [transform:translateZ(0)] [will-change:transform]" style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
                         <img
                             src="/sala-dra-debora.jpg"
                             alt="Estética Avançada"
