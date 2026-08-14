@@ -54,14 +54,7 @@
     /* Lenis handles this */
   }
 
-  /* Force hardware acceleration for scrolling layers */
-  .main-content,
-  section,
-  .desktop-container {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
+  /* Removed aggressive hardware acceleration that causes Safari glitches */
 }
 
 /* Optimization for Lenis Smooth Scroll */

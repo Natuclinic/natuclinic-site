@@ -33,7 +33,7 @@ const ProcedureCard = ({ imageUrl, title, category, path, href, themeColor, desc
                         {description}
                     </p>
                 )}
-                <div className="mt-8 flex items-center justify-center bg-natu-ivory/10 backdrop-blur-md border border-white/20 rounded-lg px-5 py-4 transition-all duration-300 group-hover:bg-natu-ivory group-hover:text-natu-brown group-hover:border-natu-ivory">
+                <div className="mt-8 flex items-center justify-center bg-natu-ivory/20 md:bg-natu-ivory/10 md:backdrop-blur-md border border-white/20 rounded-lg px-5 py-4 transition-all duration-300 group-hover:bg-natu-ivory group-hover:text-natu-brown group-hover:border-natu-ivory">
                     <span className="text-sm font-semibold font-sans">Saber Mais</span>
                 </div>
             </div>
