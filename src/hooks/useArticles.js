@@ -2,10 +2,29 @@ import { useState, useEffect, useRef } from 'react';
 import { articles as fallbackArticles } from '../data/articles.jsx';
 import { API_URLS } from '../constants/links';
 
+const processData = (sourceData) => {
+    const isAd = (a) => a.category === 'Internal_Ad' && a.id !== 'ad-settings';
+    const justArticles = sourceData.filter(a => a.category !== 'Internal_Ad' && a.id !== 'ad-settings');
+    
+    const adsObj = sourceData.filter(isAd).reduce((acc, ad) => {
+        const placement = ad.slug;
+        if (!acc[placement]) acc[placement] = [];
+        acc[placement].push(ad);
+        return acc;
+    }, {});
+
+    const settingsItem = sourceData.find(a => a.id === 'ad-settings');
+    const rotationInterval = settingsItem && settingsItem.content ? parseInt(settingsItem.content, 10) : 5000;
+
+    return { justArticles, adsObj, adSettings: { rotationInterval } };
+};
+
+const initialProcessed = processData(fallbackArticles || []);
+
 export const useArticles = () => {
-    const [articles, setArticles] = useState([]);
-    const [adConfig, setAdConfig] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [articles, setArticles] = useState(initialProcessed.justArticles);
+    const [adConfig, setAdConfig] = useState({ ads: initialProcessed.adsObj, settings: initialProcessed.adSettings });
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const fetchedRef = useRef(false);
@@ -22,7 +41,6 @@ export const useArticles = () => {
                     const isAd = (a) => a.category === 'Internal_Ad' && a.id !== 'ad-settings';
                     const justArticles = sourceData.filter(a => a.category !== 'Internal_Ad' && a.id !== 'ad-settings');
                     
-                    // Group ads by slug (placement)
                     const adsObj = sourceData.filter(isAd).reduce((acc, ad) => {
                         const placement = ad.slug;
                         if (!acc[placement]) acc[placement] = [];
@@ -30,7 +48,6 @@ export const useArticles = () => {
                         return acc;
                     }, {});
 
-                    // Extract ad-settings
                     const settingsItem = sourceData.find(a => a.id === 'ad-settings');
                     const rotationInterval = settingsItem && settingsItem.content ? parseInt(settingsItem.content, 10) : 5000;
 
