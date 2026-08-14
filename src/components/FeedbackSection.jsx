@@ -106,9 +106,7 @@ const FeedbackSection = () => {
                         <img
                             src="/feedbacks.png"
                             alt="Feedbacks Natuclinic Google"
-                            loading="lazy"
                             className="w-full h-auto object-contain transition-all duration-700 hover:scale-[1.02]"
-                            decoding="async"
                         />
                     </div>
                 </div>

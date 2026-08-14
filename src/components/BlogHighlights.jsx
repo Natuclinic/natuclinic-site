@@ -191,7 +191,6 @@ const BlogHighlights = () => {
                                     <img
                                         src={article.image}
                                         alt={article.title}
-                                        loading="lazy"
                                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/95 via-natu-brown/40 to-transparent pointer-events-none"></div>
@@ -242,7 +241,6 @@ const BlogHighlights = () => {
                                         src={article.image}
                                         alt={article.title}
                                         draggable="false"
-                                        loading="lazy"
                                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out select-none"
                                     />
                                     

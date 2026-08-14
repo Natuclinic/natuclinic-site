@@ -10,7 +10,6 @@ const ClinicSpaces = () => (
                             src="/sala-dra-debora.jpg"
                             alt="Sala Dra Débora - Natuclinic"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale-[20%]"
-                            loading="lazy"
                         />
                     </div>
                     <div className="w-1/2 h-[240px] sm:h-[320px] md:h-[450px] overflow-hidden rounded-2xl md:rounded-3xl bg-gray-50 group mt-6 sm:mt-12">
@@ -18,7 +17,6 @@ const ClinicSpaces = () => (
                             src="/images/melhor-clinica-de-brasilia-df.jpg"
                             alt="Recepção Natuclinic"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale-[20%]"
-                            loading="lazy"
                         />
                     </div>
                 </div>
