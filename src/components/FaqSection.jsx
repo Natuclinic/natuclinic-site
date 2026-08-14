@@ -67,8 +67,8 @@ const FaqSection = () => {
                         <span className="sr-only">
                             Dúvidas Frequentes
                         </span>
-                        <h2 className="font-sans font-bold text-4xl md:text-5xl text-[#3D1E15] leading-tight tracking-tight">
-                            Perguntas<br />frequentes
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95]">
+                            Perguntas frequentes
                         </h2>
                     </div>
 

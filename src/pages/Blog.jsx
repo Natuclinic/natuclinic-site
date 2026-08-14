@@ -1,13 +1,15 @@
 import React from 'react';
 import Unicon from '../components/Unicon';
 import SEO from '../components/SEO';
+import CarouselAd from '../components/CarouselAd';
 // import { useArticles } from '../hooks/useArticles';
 
-const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
+const Blog = ({ goBack, setCurrentPage, articles, adConfig, loading }) => {
     const [searchTerm, setSearchTerm] = React.useState('');
-    const [visibleCount, setVisibleCount] = React.useState(6);
+    const [page, setPage] = React.useState(1);
+    const POSTS_PER_PAGE = 6;
 
-    const safeArticles = articles || [];
+    const safeArticles = (articles || []).filter(post => post.category !== 'Internal_Config');
 
     const categories = React.useMemo(() => {
         const seen = new Set();
@@ -21,9 +23,13 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
         post.category.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const featuredPost = filteredArticles[0];
-    const otherPosts = filteredArticles.slice(1);
-    const visiblePosts = otherPosts.slice(0, visibleCount);
+    const totalPages = Math.ceil(filteredArticles.length / POSTS_PER_PAGE);
+    const startIndex = (page - 1) * POSTS_PER_PAGE;
+    const visiblePosts = filteredArticles.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
+    React.useEffect(() => {
+        setPage(1);
+    }, [searchTerm]);
 
     return (
         <div className="pt-36 pb-24 min-h-screen bg-white">
@@ -56,154 +62,139 @@ const Blog = ({ goBack, setCurrentPage, articles, loading }) => {
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Filtros de categoria */}
-                    {categories.length > 0 && (
-                        <div className="flex flex-wrap gap-2 pt-5 pb-12">
-                            <button
-                                onClick={() => setSearchTerm('')}
-                                className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-200 ${
-                                    !searchTerm
-                                        ? 'bg-natu-brown text-white border-natu-brown'
-                                        : 'border-natu-brown/20 text-natu-brown/50 hover:border-natu-brown/50 hover:text-natu-brown'
-                                }`}
-                            >
-                                Todos
-                            </button>
-                            {categories.map(cat => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setSearchTerm(searchTerm === cat ? '' : cat)}
-                                    className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-200 ${
-                                        searchTerm === cat
-                                            ? 'bg-natu-brown text-white border-natu-brown'
-                                            : 'border-natu-brown/20 text-natu-brown/50 hover:border-natu-brown/50 hover:text-natu-brown'
-                                    }`}
-                                >
-                                    {cat}
-                                </button>
+                {/* Espaço para Anúncio Principal (Topo) */}
+                {adConfig?.ads && adConfig.ads['ad-blog-top'] && adConfig.ads['ad-blog-top'].length > 0 && (
+                    <div className="w-full rounded-2xl mt-8 mb-12 animate-in fade-in duration-700">
+                        <CarouselAd ads={adConfig.ads['ad-blog-top']} rotationInterval={adConfig.settings?.rotationInterval} className="rounded-2xl" layout="horizontal" />
+                    </div>
+                )}
+
+                {/* Main 12-col Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+                    {/* Left Column - Articles */}
+                    <div className="lg:col-span-8 flex flex-col">
+                        <div className="flex flex-col">
+                            {visiblePosts.map((post, i) => (
+                                <React.Fragment key={i}>
+                                    {i > 0 && <hr className="border-gray-100 my-8" />}
+                                    <article
+                                        onClick={() => setCurrentPage(post.slug || post.id)}
+                                        className="group cursor-pointer flex flex-col sm:flex-row gap-6 lg:gap-8 animate-in fade-in zoom-in duration-700 items-start transition-colors pt-2"
+                                        style={{ animationDelay: `${i * 50}ms` }}
+                                    >
+                                        <div className="w-full sm:w-[40%] aspect-[4/3] overflow-hidden rounded-xl relative shrink-0">
+                                            <img
+                                                src={post.image}
+                                                alt={post.title}
+                                                loading="lazy"
+                                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        </div>
+                                        
+                                        <div className="w-full sm:w-[60%] flex flex-col py-1">
+                                            <h3 className="blog-title text-xl lg:text-2xl text-natu-brown mb-3 group-hover:text-natu-pink transition-colors leading-tight font-bold">
+                                                {post.title}
+                                            </h3>
+                                            
+                                            {post.excerpt && (
+                                                <p className="font-sans font-light text-gray-500 line-clamp-3 text-[13px] leading-relaxed mb-4">
+                                                    {post.excerpt}
+                                                </p>
+                                            )}
+                                            
+                                            <div className="flex items-center gap-1.5 text-[11px] font-sans text-gray-400 mt-auto">
+                                                <span>{post.date}</span>
+                                                <span>•</span>
+                                                <span>Em {post.category}</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </React.Fragment>
                             ))}
                         </div>
-                    )}
-                </div>
 
-                {/* Featured Post — editorial */}
-                {featuredPost && !searchTerm && (
-                    <article
-                        onClick={() => setCurrentPage(featuredPost.slug || featuredPost.id)}
-                        className="group cursor-pointer grid lg:grid-cols-[3fr_2fr] mb-20 rounded-2xl overflow-hidden lg:h-[480px]"
-                    >
-                        {/* Imagem */}
-                        <div className="aspect-[16/9] lg:aspect-auto overflow-hidden">
-                            <img
-                                src={featuredPost.image}
-                                alt={featuredPost.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                            />
-                        </div>
-
-                        {/* Texto — cream bg */}
-                        <div className="bg-white p-8 lg:p-10 flex flex-col justify-between">
-                            <div>
-                                <div className="flex items-center gap-3 mb-6">
-                                    <span className="text-[12px] font-medium text-natu-pink">
-                                        Destaque
-                                    </span>
-                                    <span className="w-1 h-1 rounded-full bg-natu-brown/20" />
-                                    <span className="text-[12px] font-medium text-natu-brown/40">
-                                        {featuredPost.category}
-                                    </span>
-                                </div>
-
-                                <h2 className="text-2xl lg:text-[28px] font-sans font-bold text-natu-brown leading-[1.2] mb-5">
-                                    {featuredPost.title}
-                                </h2>
-
-                                <p className="font-sans font-light text-natu-brown/60 text-sm leading-relaxed line-clamp-4">
-                                    {featuredPost.excerpt}
-                                </p>
+                        {/* Pagination UI */}
+                        {totalPages > 1 && (
+                            <div className="mt-16 flex items-center justify-center gap-2">
+                                <button 
+                                    onClick={() => {
+                                        setPage(prev => Math.max(1, prev - 1));
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    }}
+                                    disabled={page === 1}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 text-gray-500 hover:border-natu-brown hover:text-natu-brown transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                                >
+                                    <Unicon name="angle-left" size={20} />
+                                </button>
+                                
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                                    <button
+                                        key={p}
+                                        onClick={() => {
+                                            setPage(p);
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }}
+                                        className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold transition-all ${page === p ? 'bg-natu-brown text-white' : 'border border-gray-200 text-gray-500 hover:border-natu-brown hover:text-natu-brown'}`}
+                                    >
+                                        {p}
+                                    </button>
+                                ))}
+                                
+                                <button 
+                                    onClick={() => {
+                                        setPage(prev => Math.min(totalPages, prev + 1));
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    }}
+                                    disabled={page === totalPages}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 text-gray-500 hover:border-natu-brown hover:text-natu-brown transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                                >
+                                    <Unicon name="angle-right" size={20} />
+                                </button>
                             </div>
+                        )}
 
-                            <div className="mt-10 flex items-center justify-between">
-                                <span className="text-[12px] font-sans font-medium text-natu-brown/40">
-                                    {featuredPost.date}
-                                </span>
-                                <span className="inline-flex items-center gap-2 px-6 py-3 bg-natu-brown text-white rounded-full text-[10px] font-bold uppercase tracking-[0.15em] group-hover:bg-black transition-colors duration-300">
-                                    Ler artigo <Unicon name="arrow-right" size={12} />
-                                </span>
+                        {/* No Results */}
+                        {filteredArticles.length === 0 && (
+                            <div className="py-20 text-center border-t border-gray-100 mt-8">
+                                <p className="text-gray-400 font-sans italic text-lg">Nenhum artigo encontrado com esses termos.</p>
                             </div>
-                        </div>
-                    </article>
-                )}
-
-                {/* Grid Header */}
-                <div className="flex items-center justify-between mb-12 border-b border-gray-100 pb-6">
-                    <h2 className="text-base font-sans font-medium text-natu-brown/50">
-                        {searchTerm ? `Resultados para "${searchTerm}"` : 'Artigos Recentes'}
-                    </h2>
-                </div>
-
-                {/* Posts Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                    {(searchTerm ? filteredArticles.slice(0, visibleCount) : visiblePosts).map((post, i) => (
-                        <article
-                            key={i}
-                            onClick={() => setCurrentPage(post.slug || post.id)}
-                            className="group cursor-pointer flex flex-col h-full animate-in fade-in zoom-in duration-700"
-                            style={{ animationDelay: `${i * 100}ms` }}
-                        >
-                            <div className="aspect-video overflow-hidden rounded-xl mb-8 relative">
-                                <img
-                                    src={post.image}
-                                    alt={post.title}
-                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            </div>
-
-                            <div className="flex flex-col flex-grow px-2">
-                                <div className="flex items-center gap-3 text-[11px] font-sans tracking-normal font-bold text-natu-brown/40 mb-4">
-                                    <span className="text-natu-pink">{post.category}</span>
-                                    <span>•</span>
-                                    <span>{post.date}</span>
-                                </div>
-
-                                <h3 className="blog-title text-2xl text-black mb-4 group-hover:text-natu-pink transition-colors leading-tight">
-                                    {post.title}
-                                </h3>
-
-                                <p className="font-sans font-light text-gray-500 mb-8 flex-grow line-clamp-3 text-sm leading-relaxed">
-                                    {post.excerpt}
-                                </p>
-
-                                <div className="mt-auto">
-                                    <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-natu-brown group-hover:gap-4 transition-all border-b border-natu-brown/20 pb-1">
-                                        Ler Artigo <Unicon name="arrow-right" size={12} />
-                                    </span>
-                                </div>
-                            </div>
-                        </article>
-                    ))}
-                </div>
-
-                {/* Load More Button */}
-                {(searchTerm ? filteredArticles.length : otherPosts.length) > visibleCount && (
-                    <div className="mt-24 text-center">
-                        <button
-                            onClick={() => setVisibleCount(prev => prev + 6)}
-                            className="px-10 py-4 bg-white border-2 border-natu-brown text-natu-brown rounded-full font-sans font-bold uppercase text-[10px] tracking-[0.3em] hover:bg-natu-brown hover:text-white transition-all duration-500"
-                        >
-                            Ver Mais Artigos
-                        </button>
+                        )}
                     </div>
-                )}
 
-                {/* No Results */}
-                {filteredArticles.length === 0 && (
-                    <div className="py-20 text-center">
-                        <p className="text-gray-400 font-sans italic text-lg">Nenhum artigo encontrado com esses termos.</p>
+                    {/* Right Column - Sidebar */}
+                    <div className="lg:col-span-4 flex flex-col gap-10">
+                        {/* Espaço Publicitário Lateral */}
+                        {adConfig?.ads && adConfig.ads['ad-blog-sidebar'] && adConfig.ads['ad-blog-sidebar'].length > 0 && (
+                            <div className="mt-8 animate-in fade-in duration-700 w-full">
+                                <CarouselAd ads={adConfig.ads['ad-blog-sidebar']} rotationInterval={adConfig.settings?.rotationInterval} className="rounded-2xl border border-gray-100" />
+                            </div>
+                        )}
+
+                        {/* Mais Lidas Widget */}
+                        <div className="bg-white rounded-2xl p-6 lg:p-8 border border-natu-brown/10">
+                            <h3 className="font-sans font-bold text-natu-brown text-lg mb-6">Mais lidas</h3>
+                            <div className="flex flex-col">
+                                {[...safeArticles].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 4).map((post, idx) => (
+                                    <div 
+                                        key={idx} 
+                                        onClick={() => setCurrentPage(post.slug || post.id)}
+                                        className="flex items-start gap-4 py-4 cursor-pointer group border-b border-natu-brown/10 last:border-0 last:pb-0 first:pt-0"
+                                    >
+                                        <span className="text-3xl font-sans font-light text-natu-brown/20 group-hover:text-natu-pink transition-colors">
+                                            {idx + 1}
+                                        </span>
+                                        <h4 className="font-sans font-bold text-natu-brown text-[13px] leading-snug group-hover:text-natu-pink transition-colors pt-1.5">
+                                            {post.title}
+                                        </h4>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );

@@ -53,8 +53,8 @@ const LeadCapture = () => {
     };
 
     return (
-        <section className="w-full py-0 md:py-16 flex justify-center bg-white md:bg-transparent">
-            <div className="relative w-full md:w-[95%] max-w-[1600px] text-white overflow-hidden md:rounded-[2.5rem] bg-natu-brown flex flex-col md:block">
+        <section className="w-full py-0 md:py-16 flex justify-center bg-white md:bg-transparent px-4 sm:px-6 lg:px-8">
+            <div className="relative w-full max-w-6xl text-white overflow-hidden md:rounded-2xl bg-natu-brown flex flex-col md:block mx-auto">
                 
                 {/* Image: In flow on mobile, absolute background on desktop */}
                 <div className="relative w-full h-[350px] md:h-auto md:absolute md:inset-0 z-0">
@@ -72,8 +72,8 @@ const LeadCapture = () => {
                 {/* Background Glow Overlay (Desktop only) */}
                 <div className="hidden md:block absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-natu-pink/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-                <div className="desktop-container-fluid relative z-10 py-10 md:py-20 lg:py-32">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+                <div className="desktop-container-fluid relative z-10 py-8 md:py-12 lg:py-16">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
 
                         {/* Lado Esquerdo — Headline e Benefícios */}
                         <div className="w-full lg:w-[55%] flex flex-col items-start text-left mt-2 md:mt-0">
@@ -82,11 +82,11 @@ const LeadCapture = () => {
                             Natuclinic em Brasília-DF
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-sans font-bold tracking-tight text-white leading-[1.1] mb-5 text-balance">
-                            Cansada de tentar de tudo e não ver&nbsp;resultados?
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-white leading-[0.95] mb-4">
+                            Cansada de tentar de tudo e não ver resultados?
                         </h2>
 
-                        <p className="font-sans font-light text-white/80 text-sm md:text-base leading-relaxed mb-8 max-w-xl">
+                        <p className="font-sans font-light text-white/80 text-xs md:text-sm leading-relaxed mb-6 max-w-xl">
                             Gordura localizada, flacidez e celulite não se resolvem com rotinas genéricas. Na Natuclinic, unimos estética de alta tecnologia e nutrição ortomolecular em um protocolo criado sob medida para o seu corpo.
                         </p>
 
@@ -104,12 +104,12 @@ const LeadCapture = () => {
 
                     {/* Lado Direito — Card Formulário Flutuante */}
                     <div className="w-full lg:w-[42%] max-w-md mx-auto lg:mx-0">
-                        <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-2xl text-gray-800 border border-white/20 relative">
-                            <div className="text-center mb-6">
-                                <h3 className="text-2xl font-sans font-bold text-natu-brown mb-2">
+                        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl text-gray-800 border border-white/20 relative">
+                            <div className="text-center mb-5">
+                                <h3 className="text-xl font-sans font-bold text-natu-brown mb-1">
                                     Garanta sua vaga
                                 </h3>
-                                <p className="text-xs font-sans text-gray-500">
+                                <p className="text-[10px] font-sans text-gray-500">
                                     Preencha seus dados e receba atendimento exclusivo
                                 </p>
                             </div>
@@ -123,7 +123,7 @@ const LeadCapture = () => {
                                         value={formData.name}
                                         onChange={handleChange}
                                         placeholder="Nome completo *"
-                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-natu-brown/20 focus:border-natu-brown transition-all font-sans"
+                                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-natu-brown/20 focus:border-natu-brown transition-all font-sans"
                                     />
                                 </div>
 
@@ -135,14 +135,14 @@ const LeadCapture = () => {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         placeholder="WhatsApp *"
-                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-natu-brown/20 focus:border-natu-brown transition-all font-sans"
+                                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-natu-brown/20 focus:border-natu-brown transition-all font-sans"
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full mt-2 bg-[#25D366] hover:bg-[#1EBE5D] active:scale-[0.99] text-white py-4 rounded-xl font-bold font-sans text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group cursor-pointer"
+                                    className="w-full mt-1 bg-[#25D366] hover:bg-[#1EBE5D] active:scale-[0.99] text-white py-3 rounded-lg font-bold font-sans text-[10px] uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group cursor-pointer"
                                 >
                                     {loading ? (
                                         <Unicon name="spinner" className="animate-spin" size={16} />

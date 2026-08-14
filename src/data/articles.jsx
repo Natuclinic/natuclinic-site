@@ -3,7 +3,7 @@ import React from 'react';
 
 // ARQUIVO GERADO AUTOMATICAMENTE - NÃO EDITE DIRETAMENTE
 // Este arquivo serve como fallback de alta performance e SEO para a Vercel.
-// Sincronizado em: 23/07/2026, 17:27:12
+// Sincronizado em: 13/08/2026, 15:22:49
 
 export const articles = [
     {
@@ -19,7 +19,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-05 12:44:52",
-        "slug": "drenagem-linfatica-beneficios-quando-e-indicada"
+        "slug": "drenagem-linfatica-beneficios-quando-e-indicada",
+        "views": 5
     },
     {
         "id": "microagulhamento-o-que-e-quantas-sessoes-para-quem-funciona",
@@ -34,7 +35,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-05 12:44:51",
-        "slug": "microagulhamento-o-que-e-quantas-sessoes-para-quem-funciona"
+        "slug": "microagulhamento-o-que-e-quantas-sessoes-para-quem-funciona",
+        "views": 5
     },
     {
         "id": "toxina-botulinica-mitos-verdades-clinica-segura",
@@ -49,7 +51,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-05 12:44:50",
-        "slug": "toxina-botulinica-mitos-verdades-clinica-segura"
+        "slug": "toxina-botulinica-mitos-verdades-clinica-segura",
+        "views": 3
     },
     {
         "id": "bioestimuladores-de-colageno-indicacoes-resultados",
@@ -64,7 +67,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-05 12:44:50",
-        "slug": "bioestimuladores-de-colageno-indicacoes-resultados"
+        "slug": "bioestimuladores-de-colageno-indicacoes-resultados",
+        "views": 2
     },
     {
         "id": "preenchimento-labial-quanto-dura-como-e-feito",
@@ -79,7 +83,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-05 12:44:49",
-        "slug": "preenchimento-labial-quanto-dura-como-e-feito"
+        "slug": "preenchimento-labial-quanto-dura-como-e-feito",
+        "views": 1
     },
     {
         "id": "limpeza-de-pele-o-que-e-tipos-beneficios",
@@ -94,7 +99,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-05 12:34:13",
-        "slug": "limpeza-de-pele-o-que-e-tipos-beneficios"
+        "slug": "limpeza-de-pele-o-que-e-tipos-beneficios",
+        "views": 3
     },
     {
         "id": "ozonioterapia-capilar-queda-de-cabelo-couro-cabeludo",
@@ -109,7 +115,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-01 13:02:30",
-        "slug": "ozonioterapia-capilar-queda-de-cabelo-couro-cabeludo"
+        "slug": "ozonioterapia-capilar-queda-de-cabelo-couro-cabeludo",
+        "views": 2
     },
     {
         "id": "ozonioterapia-o-que-e-beneficios-e-como-funciona",
@@ -124,7 +131,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-06-01 12:16:48",
-        "slug": "ozonioterapia-o-que-e-beneficios-e-como-funciona"
+        "slug": "ozonioterapia-o-que-e-beneficios-e-como-funciona",
+        "views": 1
     },
     {
         "id": "como-anne-hathaway-parece-nao-ter-envelhecido-em-o-diabo-veste-prada-2--e-como-o-seu-rosto-tambem-pode",
@@ -139,7 +147,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-04-30 12:29:55",
-        "slug": "como-anne-hathaway-parece-nao-ter-envelhecido-em-o-diabo-veste-prada-2--e-como-o-seu-rosto-tambem-pode"
+        "slug": "como-anne-hathaway-parece-nao-ter-envelhecido-em-o-diabo-veste-prada-2--e-como-o-seu-rosto-tambem-pode",
+        "views": 1
     },
     {
         "id": "preenchimento-labial-o-que-e-como-funciona-e-por-que-a-natuclinic-e-a-escolha-certa",
@@ -154,7 +163,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-04-14 13:47:21",
-        "slug": "preenchimento-labial-o-que-e-como-funciona-e-por-que-a-natuclinic-e-a-escolha-certa"
+        "slug": "preenchimento-labial-o-que-e-como-funciona-e-por-que-a-natuclinic-e-a-escolha-certa",
+        "views": 0
     },
     {
         "id": "nutricao-ortomolecualr-o-que-e",
@@ -169,7 +179,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-03-11 11:40:26",
-        "slug": "nutricao-ortomolecualr-o-que-e"
+        "slug": "nutricao-ortomolecualr-o-que-e",
+        "views": 0
     },
     {
         "id": "suplementos-para-pessoas-acima-de-40-anos",
@@ -184,7 +195,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-03-09 12:40:33",
-        "slug": "suplementos-para-pessoas-acima-de-40-anos"
+        "slug": "suplementos-para-pessoas-acima-de-40-anos",
+        "views": 7
     },
     {
         "id": "harmonizacao-corporal-em-brasilia",
@@ -199,7 +211,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-03-06 16:51:18",
-        "slug": "h"
+        "slug": "h",
+        "views": 0
     },
     {
         "id": "tratamento-para-melasma",
@@ -214,7 +227,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "/images/blog-images/avatar-natuclinic-blog.jpg",
         "created_at": "2026-03-06 15:08:09",
-        "slug": "tratamento-para-melasma"
+        "slug": "tratamento-para-melasma",
+        "views": 0
     },
     {
         "id": "criolipolise-vale-a-pena-o-que-ninguem-te-conta-antes-de-fazer",
@@ -229,7 +243,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-03-04 17:02:14",
-        "slug": "criolipolise-vale-a-pena-o-que-ninguem-te-conta-antes-de-fazer"
+        "slug": "criolipolise-vale-a-pena-o-que-ninguem-te-conta-antes-de-fazer",
+        "views": 0
     },
     {
         "id": "o-misterio-de-paris-jim-carrey-foi-clonado-ou-e-a-harmonizacao-facial-do-seculo",
@@ -244,7 +259,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-03-02 12:20:27",
-        "slug": "o-misterio-de-paris-jim-carrey-foi-clonado-ou-e-a-harmonizacao-facial-do-seculo"
+        "slug": "o-misterio-de-paris-jim-carrey-foi-clonado-ou-e-a-harmonizacao-facial-do-seculo",
+        "views": 0
     },
     {
         "id": "sidebar-ad-global",
@@ -259,7 +275,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-02-21 13:50:48",
-        "slug": "sidebar-ad-global"
+        "slug": "sidebar-ad-global",
+        "views": 0
     },
     {
         "id": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve",
@@ -274,7 +291,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-02-21 11:22:17",
-        "slug": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve"
+        "slug": "nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve",
+        "views": 0
     },
     {
         "id": "como-kris-jenner-rejuvenesceu-aos-69-anos-tratamentos",
@@ -289,7 +307,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-02-08T01:54:10.582219+00:00",
-        "slug": "como-kris-jenner-rejuvenesceu-aos-69-anos-tratamentos"
+        "slug": "como-kris-jenner-rejuvenesceu-aos-69-anos-tratamentos",
+        "views": 0
     },
     {
         "id": "endolaser-liftendo-tratamento-flacidez-gordura-localizada",
@@ -304,7 +323,8 @@ export const articles = [
         "author_name": "Equipe Natuclinic",
         "author_avatar": "https://ui-avatars.com/api/?name=Natu+Clinic&background=4C261A&color=fff",
         "created_at": "2026-02-07T22:52:39.530242+00:00",
-        "slug": "endolaser-liftendo-tratamento-flacidez-gordura-localizada"
+        "slug": "endolaser-liftendo-tratamento-flacidez-gordura-localizada",
+        "views": 0
     },
     {
         "id": "-nutrio-ortomolecular-e-naturopatia",
@@ -319,7 +339,8 @@ export const articles = [
         "author_name": "Reny Paes",
         "author_avatar": "https://media.licdn.com/dms/image/v2/C4D03AQGEzqFcjcpZBA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1661693569987?e=1772064000&v=beta&t=njjJkwINpjPZsNhvQIVCZJHARJbcSoRCvcx-lq5PYKU",
         "created_at": "2026-02-04T18:41:19.449381+00:00",
-        "slug": "-nutrio-ortomolecular-e-naturopatia"
+        "slug": "-nutrio-ortomolecular-e-naturopatia",
+        "views": 3
     },
     {
         "id": "-melasma",
@@ -334,7 +355,8 @@ export const articles = [
         "author_name": "Reny Paes",
         "author_avatar": "https://media.licdn.com/dms/image/v2/C4D03AQGEzqFcjcpZBA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1661693569987?e=1772064000&v=beta&t=njjJkwINpjPZsNhvQIVCZJHARJbcSoRCvcx-lq5PYKU",
         "created_at": "2026-02-04T18:40:19.832994+00:00",
-        "slug": "-melasma"
+        "slug": "-melasma",
+        "views": 0
     },
     {
         "id": "harmonizao-de-glteos",
@@ -349,7 +371,8 @@ export const articles = [
         "author_name": "Reny Paes",
         "author_avatar": "https://media.licdn.com/dms/image/v2/C4D03AQGEzqFcjcpZBA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1661693569987?e=1772064000&v=beta&t=njjJkwINpjPZsNhvQIVCZJHARJbcSoRCvcx-lq5PYKU",
         "created_at": "2026-02-04T18:37:37.838239+00:00",
-        "slug": "harmonizao-de-glteos"
+        "slug": "harmonizao-de-glteos",
+        "views": 9
     },
     {
         "id": "endolaser",
@@ -364,7 +387,8 @@ export const articles = [
         "author_name": "Reny Paes",
         "author_avatar": "https://media.licdn.com/dms/image/v2/C4D03AQGEzqFcjcpZBA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1661693569987?e=1772064000&v=beta&t=njjJkwINpjPZsNhvQIVCZJHARJbcSoRCvcx-lq5PYKU",
         "created_at": "2026-02-04T18:09:54.242261+00:00",
-        "slug": "endolaser"
+        "slug": "endolaser",
+        "views": 0
     },
     {
         "id": "ninfoplastia-sem-cortes",
@@ -379,6 +403,7 @@ export const articles = [
         "author_name": "Reny Paes",
         "author_avatar": "https://media.licdn.com/dms/image/v2/C4D03AQGEzqFcjcpZBA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1661693569987?e=1772064000&v=beta&t=njjJkwINpjPZsNhvQIVCZJHARJbcSoRCvcx-lq5PYKU",
         "created_at": "2026-02-04T17:44:28.834205+00:00",
-        "slug": "ninfoplastia-sem-cortes"
+        "slug": "ninfoplastia-sem-cortes",
+        "views": 1
     }
 ];

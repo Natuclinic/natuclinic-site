@@ -152,27 +152,69 @@ const BlogHighlights = () => {
     return (
         <section ref={sectionRef} className="py-12 md:py-24 bg-white overflow-hidden select-none">
             <div className="desktop-container-fluid">
-                <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center lg:items-stretch">
-
-                    {/* Left Sidebar: Title & Controls */}
-                    <div className="w-full lg:w-[24%] flex flex-col justify-center lg:min-h-[400px] space-y-6 lg:space-y-8 pl-4 lg:pl-0">
-                        <h2 className="text-4xl md:text-5xl lg:text-5xl font-sans font-bold text-natu-brown leading-[1.1] tracking-tight">
-                            Fique por <br />
-                            dentro das <br />
-                            novidades
-                        </h2>
+                <div className="flex flex-col gap-12 lg:gap-16">
+                    
+                    {/* Text & Controls (Moved Top) */}
+                    <div className="w-full flex flex-col items-center justify-center text-center space-y-6">
+                        <div>
+                            <span className="text-natu-brown/60 font-medium text-[10px] uppercase tracking-wider block mb-4">
+                                Conheça o melhor procedimento para você
+                            </span>
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold tracking-normal text-natu-brown leading-[1.1] max-w-2xl mx-auto">
+                                Antes de fazer qualquer procedimento, entenda o melhor caminho
+                            </h2>
+                        </div>
 
                         {/* CTA Button */}
                         <button
                             onClick={() => navigate('/blog')}
-                            className="w-fit px-8 py-3.5 bg-natu-brown text-[#F2F0E9] rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-black transition-all duration-300"
+                            className="group flex items-center justify-center gap-3 w-fit mx-auto text-natu-brown font-bold uppercase tracking-widest text-xs hover:opacity-70 transition-all duration-300"
                         >
-                            Ir para o Blog
+                            Descubra mais matérias
+                            <Unicon name="arrow-right" className="w-5 h-5 transform transition-transform group-hover:translate-x-1" />
                         </button>
                     </div>
 
-                    {/* Right Side: Carousel Container */}
-                    <div className="w-full lg:w-[76%] relative flex flex-col">
+                    {/* Right Side: Cards Container */}
+                    <div className="w-full max-w-5xl mx-auto relative flex flex-col">
+                        
+                        {/* DESKTOP LAYOUT (Grid 1 Large, 2 Small) */}
+                        <div className="hidden lg:grid grid-cols-2 grid-rows-2 gap-5 h-[420px] xl:h-[500px]">
+                            {highlightArticles.slice(0, 3).map((article, index) => (
+                                <div
+                                    key={article.id}
+                                    className={`relative rounded-[16px] overflow-hidden group cursor-pointer transition-all duration-500
+                                        ${index === 0 ? 'row-span-2 col-span-1' : 'row-span-1 col-span-1'}
+                                    `}
+                                    onClick={() => navigate(`/blog/${article.id}`)}
+                                >
+                                    <img
+                                        src={article.image}
+                                        alt={article.title}
+                                        loading="lazy"
+                                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/95 via-natu-brown/40 to-transparent pointer-events-none"></div>
+                                    <div className={`absolute inset-x-0 bottom-0 flex flex-col z-10 ${index === 0 ? 'p-8 lg:p-10' : 'p-6'}`}>
+                                        <span className="text-white/90 text-[11px] font-bold mb-1">
+                                            {article.category || 'Blog'}
+                                        </span>
+                                        <h3 className={`font-sans font-bold text-white tracking-tight text-balance
+                                            ${index === 0 ? 'text-3xl xl:text-4xl leading-[1.05] mb-3' : 'text-lg xl:text-xl leading-[1.1] mb-1'}
+                                        `}>
+                                            {article.title}
+                                        </h3>
+                                        {index === 0 && article.excerpt && (
+                                            <p className="text-white/80 text-sm line-clamp-2 mt-1">
+                                                {article.excerpt}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* MOBILE / TABLET LAYOUT (Carousel) */}
                         <div
                             ref={scrollContainerRef}
                             onScroll={handleScroll}
@@ -183,59 +225,37 @@ const BlogHighlights = () => {
                             onTouchStart={handleMouseDown}
                             onTouchMove={handleMouseMove}
                             onTouchEnd={handleMouseUp}
-                            className={`flex gap-4 lg:gap-5 overflow-x-auto pb-4 no-scrollbar pl-[1.25rem] md:pl-[4%] lg:pl-0 bleed-right
-                                    ${isDown ? 'cursor-grabbing' : 'lg:cursor-grab'}`}
+                            className={`flex lg:hidden gap-4 overflow-x-auto pb-4 no-scrollbar -mx-5 px-5 bleed-right
+                                    ${isDown ? 'cursor-grabbing' : ''}`}
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
                             {highlightArticles.map((article, index) => (
                                 <div
                                     key={article.id}
                                     ref={el => itemRefs.current[index] = el}
-                                    className={`min-w-[85%] sm:min-w-[280px] lg:min-w-[280px] xl:min-w-[300px] h-[420px] flex-1 flex flex-col rounded-[20px] overflow-hidden group cursor-pointer transition-all duration-500 relative flex-shrink-0
+                                    className={`min-w-[85%] sm:min-w-[280px] h-[420px] flex-1 flex flex-col rounded-[20px] overflow-hidden group cursor-pointer transition-all duration-500 relative flex-shrink-0
                                         ${window.innerWidth < 1024 && activeIndex !== index ? 'opacity-50 scale-[0.98]' : 'opacity-100 scale-100'}
                                     `}
                                     onClick={() => handleItemClick(article.id, index)}
                                 >
-                                    {/* Card Image Background */}
                                     <img
                                         src={article.image}
                                         alt={article.title}
                                         draggable="false"
                                         loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out select-none"
+                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out select-none"
                                     />
                                     
-                                    {/* Gradient Overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-natu-brown/95 via-natu-brown/40 to-transparent pointer-events-none"></div>
 
-                                    {/* Card Content */}
                                     <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col z-10">
-                                        <span className="text-white text-[10px] uppercase tracking-widest font-bold mb-2">Blog</span>
-                                        <h3 className="text-xl font-sans font-bold text-white leading-tight mb-6">
+                                        <span className="text-white/90 text-[11px] font-bold mb-1">{article.category || 'Blog'}</span>
+                                        <h3 className="text-xl font-sans font-bold text-white leading-[1.1] tracking-tight mb-2 text-balance">
                                             {article.title}
                                         </h3>
-                                        <button className="w-fit px-5 py-2.5 rounded-full border border-white text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center gap-2">
-                                            Leia aqui ↗
-                                        </button>
                                     </div>
                                 </div>
                             ))}
-                        </div>
-
-                        {/* Desktop Navigation Arrows */}
-                        <div className="hidden lg:flex justify-end gap-3 mt-4 pr-[4%] lg:pr-0">
-                            <button
-                                onClick={() => scroll('prev')}
-                                className="w-10 h-10 rounded-full bg-natu-brown flex items-center justify-center text-[#F2F0E9] hover:bg-black transition-all active:scale-95"
-                            >
-                                <Unicon name="arrow-left" size={20} />
-                            </button>
-                            <button
-                                onClick={() => scroll('next')}
-                                className="w-10 h-10 rounded-full bg-natu-brown flex items-center justify-center text-[#F2F0E9] hover:bg-black transition-all active:scale-95"
-                            >
-                                <Unicon name="arrow-right" size={20} />
-                            </button>
                         </div>
 
                         {/* Mobile Navigation Dots */}
@@ -250,6 +270,8 @@ const BlogHighlights = () => {
                             ))}
                         </div>
                     </div>
+
+
                 </div>
 
             </div>

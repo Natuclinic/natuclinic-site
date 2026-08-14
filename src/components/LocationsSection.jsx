@@ -52,7 +52,7 @@ const LocationsSection = () => {
                     <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">
                         Nossas Unidades
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-sans font-bold text-natu-brown">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95]">
                         Escolha a unidade mais próxima de você
                     </h2>
                 </div>

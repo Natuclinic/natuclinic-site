@@ -49,7 +49,7 @@ const HomeManifesto = () => {
                         <span className="block mb-6 text-[10px] tracking-[0.35em] uppercase text-[#F2F0E9]/40 font-sans font-bold">
                             Metodologia Natuclinic
                         </span>
-                        <h2 className="font-sans font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.0] tracking-tight text-[#F2F0E9]">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-[#F2F0E9] leading-[0.95]">
                             não tratamos<br />
                             <span className="text-natu-pink">sintomas,</span><br />
                             tratamos<br />

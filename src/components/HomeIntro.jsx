@@ -14,18 +14,13 @@ const HomeIntro = () => {
         if (video) {
             video.defaultMuted = true;
             video.muted = true;
-
-            // Try playing after a short delay to ensure the browser is ready
-            const playVideo = () => {
-                video.play().catch(error => {
-                    console.log("Video autoplay blocked or failed:", error);
+            
+            // Simplest autoplay trigger
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay failed:", error);
                 });
-            };
-
-            if (video.readyState >= 3) {
-                playVideo();
-            } else {
-                video.addEventListener('canplay', playVideo, { once: true });
             }
         }
 
@@ -40,8 +35,6 @@ const HomeIntro = () => {
                     scrub: true
                 }
             });
-
-
         }, containerRef);
         return () => ctx.revert();
     }, []);
@@ -56,26 +49,31 @@ const HomeIntro = () => {
                     <video
                         ref={bgRef}
                         className="absolute inset-0 w-full h-full object-cover scale-105 pointer-events-none"
-                        src="/dna-video.mp4"
                         autoPlay
                         loop
                         muted
                         playsInline
                         preload="auto"
                         poster="/dna-foto-preload-natuclinic-estetica-e-nutrição-ortomolecular.webp"
-                        fetchPriority="high"
                         disableRemotePlayback
                         disablePictureInPicture
-                    />
+                    >
+                        <source src="/dna-video.mp4" type="video/mp4" />
+                    </video>
 
                     {/* Content positioned bottom-left inside the card */}
                     <div className="absolute inset-0 z-10 flex flex-col justify-center md:justify-end items-center md:items-start p-6 pb-0 md:p-20 md:pb-24">
                         {/* Hidden SEO Header */}
                         <h2 className="sr-only">Natuclinic: Clínica de Estética e Nutrição Ortomolecular em Brasília e Taguatinga</h2>
 
-                        <h1 className="text-4xl md:text-7xl font-serif text-natu-brown leading-[0.95] tracking-tight animate-in fade-in zoom-in duration-1000 text-center md:text-left max-w-2xl mx-auto md:mx-0">
+                        <div className="mb-4 animate-in fade-in zoom-in duration-1000 text-center md:text-left">
+                            <span className="text-natu-brown/60 font-medium text-[10px] uppercase tracking-wider">
+                                Clínica Natuclinic em Brasília
+                            </span>
+                        </div>
+                        <h1 className="text-3xl md:text-5xl lg:text-[64px] font-['Helvetica',_Arial,_sans-serif] font-bold text-natu-brown leading-[0.85] tracking-tighter animate-in fade-in zoom-in duration-1000 text-center md:text-left max-w-2xl mx-auto md:mx-0">
                             Cuidar de você <br className="hidden md:block" />
-                            <span className="italic">está em nosso DNA</span>
+                            <span>está em nosso DNA</span>
                         </h1>
                         <div className="mt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 flex justify-center md:justify-start">
                             <div className="inline-flex flex-col items-center">

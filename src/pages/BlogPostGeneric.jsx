@@ -7,6 +7,7 @@ import '../styles/blog-system.css';
 import Unicon from '../components/Unicon';
 import { gsap } from 'gsap';
 import { Helmet } from 'react-helmet-async';
+import CarouselAd from '../components/CarouselAd';
 
 const NatuButton = ({ children, href, className }) => (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`natu-button ${className || ''}`} style={{ padding: '1rem 2rem', fontSize: '12px', letterSpacing: '0.2em' }}>
@@ -137,7 +138,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
         if (!post || !contentRef.current || !tocRef.current) return;
 
         const article = contentRef.current;
-        const headings = Array.from(article.querySelectorAll('h2, h3'));
+        const headings = Array.from(article.querySelectorAll('h2'));
 
         // Only show TOC if there are headings
         if (headings.length === 0) {
@@ -206,8 +207,76 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
 
     const ContentComponent = post.content;
 
+    const isEstetica = post.tags?.some(tag => tag.toLowerCase().includes('estética')) || post.category?.toLowerCase().includes('estética');
+    const isSaude = post.tags?.some(tag => tag.toLowerCase().includes('saúde')) || post.category?.toLowerCase().includes('saúde');
+
+    let authorCardInfo = null;
+    if (isEstetica) {
+        authorCardInfo = {
+            name: 'Dra. Débora Meneses',
+            role: 'Biomédica Esteta',
+            credentials: 'CRBM-DF',
+            image: '/dra-debora.jpg',
+            whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação de Estética Avançada.",
+            text: 'O primeiro passo é uma avaliação estética detalhada e individualizada que entende o seu caso.',
+            footer: 'Você fala direto com a Natuclinic • Brasília'
+        };
+    } else if (isSaude) {
+        authorCardInfo = {
+            name: 'Dr. Julimar Meneses',
+            role: 'Nutricionista Ortomolecular',
+            credentials: 'CRN-DF 21414',
+            image: '/nutricionista-ortomolecular-integrativo-dr-julimar-meneses.jpeg',
+            whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação Nutricional.",
+            text: 'O primeiro passo é uma avaliação médica e nutricional que entende o seu metabolismo.',
+            footer: 'Você fala direto com a Natuclinic • Brasília'
+        };
+    } else {
+        authorCardInfo = {
+            name: 'Equipe Natuclinic',
+            role: 'Especialistas',
+            credentials: 'Brasília - DF',
+            image: '/logo-svg.svg',
+            whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação.",
+            text: 'O primeiro passo é uma avaliação personalizada que entende o seu caso.',
+            footer: 'Você fala direto com a Natuclinic • Brasília'
+        };
+    }
+
+    const authorCardRender = (
+        <div className="author-cta-card bg-white p-4 md:p-5 rounded-2xl flex flex-col items-center text-center border border-gray-200 mb-8 max-w-sm mx-auto relative overflow-hidden mt-8 w-full">
+            <div className="flex flex-col md:flex-row items-center gap-3 mb-3">
+                <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-200 shrink-0">
+                    <img src={authorCardInfo.image} alt={authorCardInfo.name} className="w-full h-full object-cover object-top" />
+                </div>
+                <div className="md:text-left text-left w-full">
+                    <h4 className="font-bold text-natu-brown text-[15px] leading-tight mb-0.5">{authorCardInfo.name}</h4>
+                    <p className="text-gray-500 text-[11px] font-medium leading-tight">{authorCardInfo.role} • {authorCardInfo.credentials}</p>
+                </div>
+            </div>
+
+            <p className="text-gray-700 text-[13px] mb-4 leading-relaxed font-sans w-full text-left">
+                {authorCardInfo.text}
+            </p>
+
+            <a 
+                href={authorCardInfo.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#187a41] hover:bg-[#125c31] text-white font-bold font-sans py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors mb-3 text-[14px]"
+            >
+                <Unicon name="whatsapp" size={18} />
+                Agendar avaliação
+            </a>
+
+            <p className="text-[10px] text-gray-400 font-medium font-sans w-full">
+                {authorCardInfo.footer}
+            </p>
+        </div>
+    );
+
     return (
-        <div className="blog-system-wrapper pt-28 md:pt-32">
+        <div className="blog-system-wrapper pt-28 md:pt-32 pb-20 md:pb-32">
             {/* Reading Progress Bar */}
             <div
                 ref={progressBarRef}
@@ -221,12 +290,12 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                 <aside className="related-articles-sidebar hidden xl:block">
                     <div className="sticky top-32 space-y-12">
                         <div>
-                            <h3 className="font-serif text-xl text-natu-brown mb-8 flex items-center justify-between">
+                            <h3 className="font-sans font-bold text-xl text-natu-brown mb-8 flex items-center justify-between">
                                 Leia também
                             </h3>
                             <div className="space-y-8">
                                 {articles
-                                    .filter(a => a.id !== post.id)
+                                    .filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category === post.category)
                                     .slice(0, 3)
                                     .map(related => (
                                         <div
@@ -247,112 +316,106 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                                 <span className="text-[10px] text-natu-brown/40 font-medium lowercase">
                                                     {related.date}
                                                 </span>
-                                                <div className="flex items-center gap-1 text-natu-pink text-[10px] font-bold uppercase tracking-wider mt-1">
-                                                    Ler mais <Unicon name="arrow-right" size={12} className="group-hover:translate-x-1 transition-transform" />
-                                                </div>
                                             </div>
                                         </div>
                                     ))}
                             </div>
                         </div>
 
-                        <div className="pt-8 border-t border-natu-brown/5">
-                            <h3 className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-natu-brown/40 mb-6">Tags</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {['Natuclinic', post.category, 'Saúde Celular'].map((tag, idx) => (
-                                    <span key={idx} className="px-3 py-1.5 bg-[#F9F7F5] border border-natu-brown/5 rounded-md font-sans text-[9px] font-bold uppercase tracking-wider text-natu-brown/60 hover:bg-natu-brown hover:text-white transition-all cursor-pointer">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
+
                     </div>
                 </aside>
 
                 <aside className="blog-sidebar-right hidden lg:block">
                     <div className="sticky top-32 space-y-4">
                         <div ref={tocRef}></div>
+                        
+                        {/* Dynamic Author CTA Card (Desktop) */}
+                        {authorCardRender}
 
-                        {/* Sidebar Ad (3:4 Proportion) */}
-                        {adConfig && adConfig.content === 'active' && adConfig.image && (
-                            <div className="animate-in fade-in duration-1000">
-                                <a
-                                    href={adConfig.excerpt || '#'}
-                                    target={adConfig.excerpt?.startsWith('http') ? '_blank' : '_self'}
-                                    rel="noopener noreferrer"
-                                    className="block group relative"
-                                >
-                                    <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-natu-brown/5 bg-gray-50 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:border-natu-pink/20">
-                                        <img
-                                            src={adConfig.image}
-                                            alt="Anúncio"
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-natu-brown/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    </div>
-                                </a>
+                        {/* Espaço para anúncio lateral global */}
+                        {adConfig?.ads && adConfig.ads['sidebar-ad-global'] && adConfig.ads['sidebar-ad-global'].length > 0 && (
+                            <div className="mt-8 animate-in fade-in duration-700 w-full">
+                                <CarouselAd ads={adConfig.ads['sidebar-ad-global']} rotationInterval={adConfig.settings?.rotationInterval} className="rounded-2xl border border-natu-brown/10 aspect-[3/4]" />
                             </div>
                         )}
                     </div>
                 </aside>
 
                 <header id="pre" className="relative mb-0 blog-header-content">
-                    {/* Breadcrumbs / Directory */}
-                    <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-natu-brown/30 mb-6">
-                        <span className="hover:text-natu-brown cursor-pointer transition-colors" onClick={() => goBack()}>Blog</span>
-                        <span>&gt;</span>
-                        <span className="text-natu-brown/50">{post.title} | Natuclinic</span>
-                    </div>
+                    {/* Breadcrumbs Removed */}
 
-                    <div className="w-full h-[1px] bg-natu-brown/5 mb-10"></div>
-
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] md:text-xs font-sans tracking-[0.2em] text-natu-brown/60 mb-4 uppercase font-bold">
+                    <div className="hidden flex-wrap items-center gap-x-4 gap-y-2 text-[10px] md:text-xs font-sans tracking-[0.2em] text-natu-brown/60 mb-4 uppercase font-bold">
                         <span className="text-natu-pink">{post.category}</span>
                         <span className="w-1 h-1 bg-natu-brown/20 rounded-full"></span>
                         <span>{post.date}</span>
                     </div>
 
-                    <h1 className="blog-title fluid mt-1 mb-0 text-natu-brown leading-[1.1] tracking-tight">
+                    <h1 className="blog-title fluid mt-1 mb-0 text-natu-brown leading-[1.1] tracking-tight font-bold">
                         {post.title}
                     </h1>
 
-                    <div className="mt-12 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-natu-brown/5 pt-8">
-                        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-                            <div className="flex items-center gap-3">
-                                <Unicon name="clock" size={14} className="text-natu-pink" />
-                                <span className="text-[10px] uppercase tracking-[0.2em] text-natu-brown/40 font-bold">5 min de leitura</span>
-                            </div>
+                    <div className="mt-8">
+                        {post.excerpt && (
+                            <p className="font-sans font-normal text-gray-600 text-base md:text-lg mb-6 leading-relaxed">
+                                {post.excerpt}
+                            </p>
+                        )}
+                        <p className="text-gray-500 font-sans text-sm md:text-base">
+                            Por <span className="font-bold text-[#187a41]">{authorCardInfo.name}</span>, {authorCardInfo.credentials}
+                        </p>
+                        <p className="text-gray-400 font-sans text-sm mt-1 mb-8">
+                            {post.date}
+                        </p>
+                    </div>
 
-                            <div className="flex items-center gap-2">
-                                <span className="text-[10px] uppercase tracking-widest text-natu-brown/30 font-bold">Por:</span>
-                                <span className="text-[10px] uppercase tracking-widest text-natu-brown font-bold border-b border-natu-brown/10 pb-0.5">
-                                    {post.author_name || "Equipe Natuclinic"}
-                                </span>
-                            </div>
-
-                            <div className="hidden sm:block h-4 w-[1px] bg-natu-brown/5"></div>
-
-                            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-natu-brown/30">
-                                <span>Publicado:</span>
-                                <span className="text-natu-brown/50">{post.date}</span>
-                            </div>
-                        </div>
-
-                        {/* Social Icons Aligned Right */}
-                        <div className="flex items-center gap-5 text-natu-brown/40">
-                            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="hover:text-natu-pink transition-colors">
-                                <Unicon name="linkedin" size={16} />
-                            </a>
-                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="hover:text-natu-pink transition-colors">
-                                <Unicon name="facebook" size={16} />
-                            </a>
-                            <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="hover:text-natu-pink transition-colors">
-                                <Unicon name="twitter" size={16} />
-                            </a>
-                            <a href={`https://wa.me/?text=${post.title}%20${window.location.href}`} target="_blank" rel="noopener noreferrer" className="hover:text-natu-pink transition-colors">
-                                <Unicon name="whatsapp" size={22} />
-                            </a>
-                        </div>
+                    <div className="flex items-center gap-3 mt-8 mb-10 w-full" aria-label="Compartilhar artigo">
+                        <a 
+                            className="flex-1 h-12 md:h-14 bg-gray-50 hover:bg-gray-100 rounded-xl flex items-center justify-center transition-colors border border-gray-100" 
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href.split('?')[0] + "?utm_source=facebook&utm_medium=share_button&utm_campaign=blog")}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            aria-label="Compartilhar no Facebook"
+                        >
+                            <svg className="w-5 h-5 text-[#1877F2]" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+                                <path d="M24 12.073C24 5.446 18.627.073 12 .073S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"></path>
+                            </svg>
+                            <span className="sr-only">Compartilhar no Facebook</span>
+                        </a>
+                        <a 
+                            className="flex-1 h-12 md:h-14 bg-gray-50 hover:bg-gray-100 rounded-xl flex items-center justify-center transition-colors border border-gray-100" 
+                            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href.split('?')[0] + "?utm_source=whatsapp&utm_medium=share_button&utm_campaign=blog")}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            aria-label="Compartilhar no WhatsApp"
+                        >
+                            <svg className="w-5 h-5 text-[#25D366]" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.296-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.889-9.884 2.64.001 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.887 9.884M20.52 3.449C18.258 1.186 15.25.001 12.056 0 5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.946L.057 24l6.305-1.654a11.892 11.892 0 0 0 5.683 1.448h.005c6.557 0 11.892-5.335 11.895-11.893A11.821 11.821 0 0 0 20.52 3.449Z"></path>
+                            </svg>
+                            <span className="sr-only">Compartilhar no WhatsApp</span>
+                        </a>
+                        <button 
+                            className="flex-1 h-12 md:h-14 bg-gray-50 hover:bg-gray-100 rounded-xl flex items-center justify-center transition-colors border border-gray-100" 
+                            type="button" 
+                            onClick={() => {
+                                if (navigator.share) {
+                                    navigator.share({
+                                        title: post.title,
+                                        url: window.location.href.split('?')[0] + "?utm_source=native_share&utm_medium=share_button&utm_campaign=blog",
+                                    }).catch(console.error);
+                                }
+                            }}
+                            aria-label="Compartilhar"
+                        >
+                            <svg className="w-5 h-5 text-gray-600" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <path d="m8.59 13.51 6.83 3.98"></path>
+                                <path d="m15.41 6.51-6.82 3.98"></path>
+                            </svg>
+                            <span className="sr-only">Compartilhar</span>
+                        </button>
                     </div>
                 </header>
 
@@ -376,6 +439,15 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                         summary: ({ children, ...props }) => (
                                             <summary {...props}>{children}</summary>
                                         ),
+                                        img: ({ ...props }) => {
+                                            const { node, ...rest } = props;
+                                            return (
+                                                <img
+                                                    className="w-full h-auto rounded-2xl mt-[10px] mb-8 shadow-sm"
+                                                    {...rest}
+                                                />
+                                            );
+                                        },
                                         table: ({ children }) => (
                                             <div className="table-responsive-wrapper">
                                                 <table className="min-w-full border-collapse">
@@ -400,15 +472,6 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                                 </a>
                                             );
                                         },
-                                        img: ({ ...props }) => {
-                                            const { node, ...rest } = props;
-                                            return (
-                                                <img
-                                                    className="w-full aspect-video object-cover rounded-2xl mt-[10px] mb-8 border border-gray-100"
-                                                    {...rest}
-                                                />
-                                            );
-                                        },
                                     }}
                                 >
                                     {String(ContentComponent || '')}
@@ -418,35 +481,43 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                     </article>
                 </main>
 
-                <footer className="article-footer pt-4 mt-4">
-                    {/* Mobile/Tablet Related Posts (shown when sidebar is hidden) */}
-                    <div className="xl:hidden mt-12 pt-12 border-t border-gray-100">
-                        {/* Mobile Ad (3:4 Proportion) */}
-                        {adConfig && adConfig.content === 'active' && adConfig.image && (
-                            <div className="mb-16 animate-in fade-in duration-1000">
-                                <a
-                                    href={adConfig.excerpt || '#'}
-                                    target={adConfig.excerpt?.startsWith('http') ? '_blank' : '_self'}
-                                    rel="noopener noreferrer"
-                                    className="block group relative"
-                                >
-                                    <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-natu-brown/5 bg-gray-50 shadow-sm transition-all duration-500">
-                                        <img
-                                            src={adConfig.image}
-                                            alt="Anúncio"
-                                            className="w-full h-full object-cover transition-transform duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-natu-brown/5"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        )}
+                <footer className="article-footer pt-4 mt-12 border-t border-natu-brown/5">
+                    
+                    {/* Organic Tags Section */}
+                    <div className="tags-section flex flex-wrap gap-2 mb-10">
+                        {['Natuclinic', post.category, 'Procedimentos', 'Tecnologias', 'Saúde Celular'].map((tag, idx) => (
+                            <span key={idx} className="px-4 py-2 bg-gray-50 border border-gray-100 rounded-full font-sans text-[10px] font-bold uppercase tracking-widest text-natu-brown/60 hover:bg-natu-brown hover:text-white transition-all cursor-pointer">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
 
-                        <h3 className="blog-title text-2xl text-natu-brown mb-10">Leia também</h3>
-                        <div className="grid md:grid-cols-2 gap-8">
+                    {/* New CTA Block */}
+                    <div className="bg-natu-brown p-8 md:p-10 rounded-2xl text-white mb-12 shadow-sm">
+                        <h3 className="font-sans text-2xl md:text-3xl font-bold mb-4 leading-tight text-white tracking-tight max-w-md">
+                            Quer entender se esse cuidado faz sentido para você?
+                        </h3>
+                        <p className="font-sans text-white/90 text-[15px] font-medium leading-relaxed mb-8 max-w-sm">
+                            A avaliação médica é o caminho para decidir com segurança, contexto e acompanhamento.
+                        </p>
+                        <a
+                            href="https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full md:w-max bg-white text-natu-brown py-3.5 px-8 rounded-full font-sans font-bold flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors text-[15px]"
+                        >
+                            <Unicon name="whatsapp" size={22} />
+                            Agendar avaliação
+                        </a>
+                    </div>
+
+                    {/* "Veja também" Section (Vertical List) */}
+                    <div className="mb-16">
+                        <h3 className="font-sans font-bold text-xl text-natu-brown mb-6">Veja também</h3>
+                        <div className="flex flex-col gap-5 md:grid md:grid-cols-2 md:gap-8">
                             {articles
-                                .filter(a => a.id !== post.id)
-                                .slice(0, 4)
+                                .filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category === post.category)
+                                .slice(0, 6)
                                 .map(related => (
                                     <div
                                         key={related.id}
@@ -454,102 +525,17 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                             setCurrentPage(related.slug || related.id);
                                             window.scrollTo(0, 0);
                                         }}
-                                        className="group cursor-pointer space-y-4"
+                                        className="group cursor-pointer flex items-center gap-4"
                                     >
-                                        <div className="aspect-[16/9] rounded-2xl overflow-hidden">
+                                        <div className="w-28 h-20 md:w-32 md:h-24 rounded-lg overflow-hidden shrink-0 border border-natu-brown/5">
                                             <img src={related.image} alt={related.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                         </div>
-                                        <div>
-                                            <span className="text-[10px] text-natu-pink font-bold uppercase tracking-widest">{related.category}</span>
-                                            <h4 className="blog-title text-lg text-natu-brown group-hover:text-natu-pink transition-colors mt-2 leading-tight">
-                                                {related.title}
-                                            </h4>
-                                        </div>
+                                        <h4 className="font-sans font-normal text-natu-brown text-[15px] md:text-[16px] leading-snug group-hover:text-natu-pink transition-colors">
+                                            {related.title}
+                                        </h4>
                                     </div>
                                 ))}
                         </div>
-                    </div>
-
-                    {/* Natuclinic Protocol CTA */}
-                    <div className="flex justify-center mt-8 md:mt-12 mb-8 px-4">
-                        <NatuButton href="https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma consulta.">
-                            <span className="text-center">Falar com Especialista</span>
-                        </NatuButton>
-                    </div>
-
-                    {/* Enhanced Author Card — Escrito por movido para dentro */}
-                    <div
-                        className="author-card p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center gap-8 md:gap-10 mb-8 relative overflow-hidden group"
-                        style={{
-                            backgroundImage: 'url(/background-card.svg)',
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                        }}
-                    >
-                        {/* Overlay escuro para contraste */}
-                        <div className="absolute inset-0 bg-natu-brown/70 rounded-3xl z-0" />
-
-                        <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white/30 shrink-0 relative z-10 transition-transform duration-500 group-hover:scale-105 bg-white flex items-center justify-center p-5">
-                            <img
-                                src="/logo-svg.svg"
-                                alt="Natuclinic"
-                                className="w-full h-full object-contain"
-                            />
-                        </div>
-
-                        <div className="flex flex-col flex-grow text-left relative z-10">
-                            {/* "Escrito por" agora dentro do card */}
-                            <span className="font-sans font-bold text-white/60 text-[10px] uppercase tracking-[0.3em] mb-1 flex items-center justify-start gap-2">
-                                Escrito por
-                                <span className="w-6 h-[1px] bg-white/30 inline-block" />
-                            </span>
-                            <h4 className="blog-title text-3xl text-white mb-1">
-                                {post.author_name || "Equipe Natuclinic"}
-                            </h4>
-                            <p className="text-white/60 text-xs uppercase tracking-widest font-sans font-bold mb-6">Equipe de Especialistas Natuclinic</p>
-                            <div className="flex items-center justify-start gap-4">
-                                <span className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
-                                    <Unicon name="envelope" size={16} />
-                                </span>
-                                <span className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full cursor-pointer hover:bg-white hover:text-natu-brown transition-all border border-white/20">
-                                    <Unicon name="link" size={16} />
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {/* Organic Tags Section */}
-                    <div className="tags-section flex flex-wrap gap-3 mb-8">
-                        {['Natuclinic', post.category, 'Procedimentos', 'Tecnologias', 'Saúde Celular'].map((tag, idx) => (
-                            <span key={idx} className="px-6 py-2 bg-white border border-natu-brown/10 rounded-full font-sans text-[10px] font-bold uppercase tracking-widest text-natu-brown/60 hover:bg-natu-brown hover:text-white hover:border-natu-brown transition-all cursor-pointer">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    <hr className="my-8 border-natu-brown/5" />
-
-                    <div className="waitlist-form bg-[#F2F0E9] text-natu-brown p-8 md:p-16 rounded-3xl relative overflow-hidden text-left flex flex-col md:flex-row items-center justify-between gap-10">
-                        {/* Shimmer effect for premium feel */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-natu-brown/0 via-natu-brown/5 to-natu-brown/0 -translate-x-full animate-[shimmer_3s_infinite]"></div>
-
-                        <div className="relative z-10 max-w-lg">
-                            <h3 className="font-serif text-4xl mb-4 text-natu-brown">E se esses resultados fossem seus?</h3>
-                            <p className="font-sans font-light text-natu-brown/70 text-lg">
-                                Agende sua consulta e inicie sua jornada de transformação com nossa equipe.
-                            </p>
-                        </div>
-
-                        <a
-                            href="https://wa.me/5561992551867?text=Olá! Desejo resultados reais. Gostaria de agendar uma avaliação."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative z-10 px-8 py-5 bg-natu-brown text-white rounded-full font-normal text-base hover:scale-105 transition-all flex items-center gap-4 whitespace-nowrap"
-                        >
-                            <Unicon name="whatsapp" size={28} />
-                            Agendar minha avaliação
-                        </a>
                     </div>
 
                 </footer>

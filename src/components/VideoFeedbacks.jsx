@@ -162,11 +162,11 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
 
     return (
         <section className={`overflow-hidden ${bgColor} ${pyClass}`}>
-            <div className="desktop-container-fluid">
+            <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 {showTitle && (
-                    <div className="mb-10 space-y-2 text-center lg:text-left">
+                    <div className="mb-6 space-y-2 text-center lg:text-left">
 
-                        <h2 className="text-3xl md:text-5xl font-sans font-bold text-natu-brown tracking-tight">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95]">
                             Depoimentos que inspiram
                         </h2>
                     </div>
@@ -201,12 +201,12 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
                                     key={f.id}
                                     ref={el => itemRefs.current[f.id] = el}
                                     className={`flex flex-col shrink-0 lg:shrink transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] snap-center
-                                        ${isActive ? 'lg:flex-[2.5] w-[85%] lg:w-full opacity-100' : 'lg:flex-[1] w-[85%] lg:w-full opacity-40 lg:opacity-40 hover:opacity-100'}`}
+                                        ${isActive ? (isPlaying ? 'w-[180px] lg:w-[225px] flex-none opacity-100' : 'lg:flex-[2.5] w-[85%] lg:w-full opacity-100') : 'lg:flex-[1] w-[85%] lg:w-full opacity-40 lg:opacity-40 hover:opacity-100'}`}
                                     onClick={() => handleToggle(f.id)}
                                 >
                                     {/* Video Container */}
                                     <div
-                                        className={`relative w-full h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden bg-gray-100 cursor-pointer transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
+                                        className={`relative w-full h-[320px] lg:h-[400px] rounded-2xl overflow-hidden bg-gray-100 cursor-pointer transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
                                             ${isActive ? '' : 'opacity-80 scale-[0.98] lg:scale-100'}
                                         `}
                                     >
@@ -242,37 +242,13 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
                                             </div>
                                         )}
 
-                                        {/* Minimalist Expand Button (Bottom Left) */}
-                                        {isActive && (
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    // Pause card video
-                                                    const video = videoRefs.current[activeId];
-                                                    if (video) {
-                                                        video.pause();
-                                                        setIsPlaying(false);
-                                                    }
-                                                    setModalIsPlaying(true);
-                                                    setIsFullscreen(true);
-                                                }}
-                                                className="absolute bottom-6 left-6 p-2 text-white/60 hover:text-white transition-all hover:scale-125 z-20 hidden lg:block"
-                                                title="Expandir vídeo"
-                                            >
-                                                <img
-                                                    src="/expand-natuclinic-icon-svg.svg"
-                                                    className="w-5 h-5 brightness-0 invert opacity-80"
-                                                    alt="Expandir"
-                                                    loading="lazy"
-                                                />
-                                            </button>
-                                        )}
+
                                     </div>
 
                                     {/* Text content BELOW the video container */}
-                                    <div className={`mt-6 lg:mt-8 space-y-4 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-100 
+                                    <div className={`mt-4 lg:mt-5 space-y-3 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-100 
                                         ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 lg:opacity-0 translate-y-4 pointer-events-none h-0 lg:h-auto overflow-hidden'}`}>
-                                        <h3 className="text-base md:text-lg font-sans font-bold text-black opacity-80 leading-snug max-w-sm text-left">
+                                        <h3 className="text-sm md:text-base font-sans font-bold text-black opacity-80 leading-snug max-w-sm text-left">
                                             {f.result}
                                         </h3>
 

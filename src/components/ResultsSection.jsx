@@ -299,7 +299,7 @@ const ResultsSection = ({ id }) => {
                         <span className="sr-only">
                             Galeria de Casos
                         </span>
-                        <h2 className="font-sans font-bold text-4xl md:text-6xl text-natu-brown leading-tight tracking-tight text-balance">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95]">
                             Resultados de quem já passou por&nbsp;aqui.
                         </h2>
                     </div>

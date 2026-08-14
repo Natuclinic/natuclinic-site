@@ -18,27 +18,53 @@ export const useArticles = () => {
             try {
                 setLoading(true);
 
-                // Tenta buscar da API do Cloudflare Workers
+                const processData = (sourceData) => {
+                    const isAd = (a) => a.category === 'Internal_Ad' && a.id !== 'ad-settings';
+                    const justArticles = sourceData.filter(a => a.category !== 'Internal_Ad' && a.id !== 'ad-settings');
+                    
+                    // Group ads by slug (placement)
+                    const adsObj = sourceData.filter(isAd).reduce((acc, ad) => {
+                        const placement = ad.slug;
+                        if (!acc[placement]) acc[placement] = [];
+                        acc[placement].push(ad);
+                        return acc;
+                    }, {});
+
+                    // Extract ad-settings
+                    const settingsItem = sourceData.find(a => a.id === 'ad-settings');
+                    const rotationInterval = settingsItem && settingsItem.content ? parseInt(settingsItem.content, 10) : 5000;
+
+                    return { justArticles, adsObj, adSettings: { rotationInterval } };
+                };
+
                 const response = await fetch(`${API_URLS.BASE}/articles`);
 
                 if (response.ok) {
                     const data = await response.json();
                     if (data && data.length > 0) {
-                        setArticles(data.filter(a => a.id !== 'sidebar-ad-global'));
-                        setAdConfig(data.find(a => a.id === 'sidebar-ad-global'));
+                        const mergedData = data.map(apiArticle => {
+                            const fallbackMatch = (fallbackArticles || []).find(f => f.id === apiArticle.id);
+                            return {
+                                ...apiArticle,
+                                views: fallbackMatch?.views || 0
+                            };
+                        });
+                        
+                        const { justArticles, adsObj, adSettings } = processData(mergedData);
+                        setArticles(justArticles);
+                        setAdConfig({ ads: adsObj, settings: adSettings });
                         return;
                     }
                 }
 
-                // Se falhar ou estiver vazio, usa o fallback local
-                const filteredFallback = (fallbackArticles || []).filter(a => a.id !== 'sidebar-ad-global');
-                setArticles(filteredFallback);
-                setAdConfig((fallbackArticles || []).find(a => a.id === 'sidebar-ad-global'));
+                const { justArticles, adsObj, adSettings } = processData(fallbackArticles || []);
+                setArticles(justArticles);
+                setAdConfig({ ads: adsObj, settings: adSettings });
             } catch (err) {
                 setError(err);
-                const filteredFallback = (fallbackArticles || []).filter(a => a.id !== 'sidebar-ad-global');
-                setArticles(filteredFallback);
-                setAdConfig((fallbackArticles || []).find(a => a.id === 'sidebar-ad-global'));
+                const { justArticles, adsObj, adSettings } = processData(fallbackArticles || []);
+                setArticles(justArticles);
+                setAdConfig({ ads: adsObj, settings: adSettings });
             } finally {
                 setLoading(false);
             }

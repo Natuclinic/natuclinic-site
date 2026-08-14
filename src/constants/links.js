@@ -39,6 +39,7 @@ export const WHATSAPP_LINKS = {
     MSG_TRICOLOGIA: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de uma avaliação para Tricologia Capilar e Tratamento de Queda na Natuclinic.")}`,
     MSG_ALERGIAS: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de agendar uma avaliação para o Teste de Alergias e Intolerâncias Alimentares na Natuclinic.")}`,
     MSG_BIORESSONANCIA: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de informações sobre a Bioressonância Quântica e Análise Integrativa na Natuclinic.")}`,
+    MSG_HIPRO: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Gostaria de saber mais sobre o ultrassom HIPRO e agendar uma avaliação.")}`,
 };
 
 export const API_URLS = {

@@ -65,7 +65,7 @@ const ReviewCard = ({ review }) => {
   const isLong = review.text.length > 300; // Aproximadamente 10 linhas de texto nesse layout
 
   return (
-    <div className="bg-white rounded-3xl p-8 border border-gray-200 w-[280px] md:w-[320px] min-h-[420px] flex-shrink-0 snap-start flex flex-col">
+    <div className="bg-white rounded-3xl p-8 border border-gray-200 w-[280px] md:w-[320px] min-h-[420px] flex-shrink-0 snap-start flex flex-col antialiased">
       <div className="flex flex-col items-start gap-4 mb-6">
         <div className="flex items-center gap-3 w-full">
           <div className="w-12 h-12 rounded-full bg-natu-brown/10 flex items-center justify-center text-natu-brown font-bold text-xl uppercase shrink-0">
@@ -84,7 +84,7 @@ const ReviewCard = ({ review }) => {
       </div>
       
       <div className="flex-grow flex flex-col">
-        <p className={`text-sm text-gray-600 leading-relaxed ${!isExpanded ? 'line-clamp-[10]' : ''}`}>
+        <p className={`text-sm font-light text-gray-600 leading-relaxed tracking-wide ${!isExpanded ? 'line-clamp-[10]' : ''}`}>
           "{review.text}"
         </p>
         {isLong && (
@@ -146,9 +146,8 @@ const GoogleReviews = () => {
             <a href="https://share.google/YAwph5RkZ8DJZUFMK" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
               <img src="/google-logo-new-history-png-9.png" alt="Google Logo" className="h-8 mb-4 object-contain" />
             </a>
-            <h2 className="text-3xl md:text-4xl font-bold text-natu-brown leading-tight">
-              A satisfação de quem <br className="hidden md:block" />
-              <span>já viveu a experiência</span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95]">
+              A satisfação de quem já viveu a experiência
             </h2>
           </div>
         </div>

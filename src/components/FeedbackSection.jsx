@@ -74,7 +74,7 @@ const FeedbackSection = () => {
                         <span className="inline-block text-[10px] md:text-xs font-bold tracking-[0.3em] text-natu-pink mb-6">
                             O que dizem
                         </span>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-natu-brown leading-[1.1] mb-8 tracking-tighter">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95] mb-8">
                             Feedbacks de quem <br />
                             <span className="opacity-40 whitespace-nowrap">já transformou a vida</span>
                         </h2>

@@ -1,123 +1,109 @@
 import React from 'react';
-import ServiceLayout from '../components/ServiceLayout';
-import { ImageComparisonSlider } from '../components/ImageComparisonSlider';
+import BlogPostGeneric from './BlogPostGeneric';
+import { useNavigate } from 'react-router-dom';
+import { useArticles } from '../hooks/useArticles';
 
 const Endolaser = ({ goBack }) => {
+    const navigate = useNavigate();
+    const { articles } = useArticles();
+
+    const post = {
+        id: "endolaser",
+        title: "Endolaser em Brasília: Laser Subdérmico para Flacidez, Papada e Contorno",
+        image: "/images/blog-images/Blog-image-endolaser.jpg",
+        author_name: "Natuclinic",
+        excerpt: "Conheça o Endolaser (Laserlipólise 1470nm) na Natuclinic. Tratamento inovador para flacidez, papada, jowl e gordura localizada em Brasília e Taguatinga.",
+        content: `
+O Cenário
+## Você fez tudo certo. Mas algo ainda incomoda.
+
+Seja com canetas emagrecedoras, cirurgia bariátrica ou após a gestação, o resultado na balança veio. Mas, ao se olhar no espelho, a flacidez, a **papada** e aquele contorno (jowl) que parece não “assentar” persistem.
+
+> **Isso não é falha sua. É uma resposta fisiológica. O corpo emagrece, mas a pele e o tecido de sustentação nem sempre acompanham esse ritmo.**
+
+<br/>
+
+A Solução Tecnológica
+## O que é o Endolaser (Laser Subdérmico)?
+
+O **Endolaser**, também conhecido como Laserlipólise ou *Endolift*, é uma tecnologia minimamente invasiva que utiliza uma fibra óptica ultrafina introduzida sob a pele (na hipoderme superficial). Na Natuclinic (Brasília e Taguatinga), utilizamos a tecnologia de laser com comprimento de onda específico (1470nm) que foca na fototermólise seletiva. 
+
+O que isso significa? A energia do laser tem atração dupla: **água e gordura**. O resultado é o derretimento da gordura localizada (lipólise) e a **contração imediata da pele** (retração cutânea) com forte estímulo de novo colágeno.
+
+### Benefícios Exclusivos do Endolaser
+* **Ação Dupla:** Elimina gordura e trata a flacidez na mesma sessão.
+* **Retração de Pele (Skin Tightening):** Estímulo intenso de colágeno novo e contração imediata das fibras existentes.
+* **Minimamente Invasivo:** Realizado com anestesia local tumescente, sem necessidade de centro cirúrgico ou anestesia geral.
+* **Resultados Duradouros:** A gordura destruída não retorna àquelas células, e o colágeno continua sendo produzido por meses.
+
+---
+
+## Para quem é especialmente indicado?
+
+**Rosto, Papada e Jowl (Contorno da Mandíbula)**
+Ideal para redefinir o contorno facial, eliminar o "queixo duplo" e tratar a flacidez do pescoço, devolvendo o aspecto jovem ao rosto.
+
+**Pós-Emagrecimento e Pós-Bariátrica**
+Pessoas que usaram canetas emagrecedoras (como Ozempic/Mounjaro) e notaram flacidez abdominal ou corporal resistente.
+
+**Pós-Gestação**
+Mulheres buscando recuperar a firmeza abdominal e tratar a diástase associada à flacidez cutânea.
+
+**Gordura Resistente (Flancos, Braços e Interno de Coxa)**
+Para quem tem áreas de gordura localizada que não desaparecem nem com dieta e treino, precisando de definição inteligente.
+
+---
+
+## O Diferencial Natuclinic em Brasília e Taguatinga
+
+Nós não tratamos apenas a flacidez de forma isolada. Avaliamos a sua saúde metabólica e nutricional para garantir que o seu tecido tenha **capacidade real de regeneração**. Combinamos o Endolaser com protocolos injetáveis e ortomoleculares quando necessário, entregando resultados superiores.
+
+---
+
+<details>
+<summary>O que é o Endolaser e como ele é diferente de outros tratamentos?</summary>
+<div className="faq-content">
+O Endolaser (Laser Subdérmico) introduz uma fibra óptica diretamente sob a pele. Diferente de ultrassom ou radiofrequência externa, a energia age <em>dentro</em> do tecido, derretendo a gordura e causando uma retração real e profunda da pele na mesma sessão.
+</div>
+</details>
+
+<details>
+<summary>O Endolaser dói? Precisa de anestesia?</summary>
+<div className="faq-content">
+O procedimento é super tolerável. Utilizamos <strong>anestesia local tumescente</strong> na área tratada, o que torna o processo praticamente indolor. Você fica acordado e confortável durante toda a sessão. Não há necessidade de anestesia geral.
+</div>
+</details>
+
+<details>
+<summary>Qual a diferença entre Endolaser e Endolift?</summary>
+<div className="faq-content">
+<em>Endolift®</em> é o nome comercial de um equipamento/marca específica pioneira nessa técnica na Itália. <em>Endolaser</em> ou <em>Laser Subdérmico</em> é o nome do procedimento (a tecnologia a laser por fibra óptica). O princípio de ação (lipólise e retração cutânea via laser de diodo) é exatamente o mesmo.
+</div>
+</details>
+
+<details>
+<summary>Quantas sessões são necessárias?</summary>
+<div className="faq-content">
+Na imensa maioria dos casos de papada, contorno facial e áreas corporais localizadas, <strong>apenas 1 sessão</strong> é necessária para atingir o resultado esperado. O resultado final se consolida entre 3 a 6 meses.
+</div>
+</details>
+
+<details>
+<summary>Qual o tempo de recuperação (downtime)?</summary>
+<div className="faq-content">
+A recuperação é rápida. Há inchaço (edema) nos primeiros dias e, dependendo da área, o uso de malha compressiva pode ser indicado por 15 a 30 dias. A maioria dos pacientes retorna às suas atividades de trabalho normais em 24 a 48 horas.
+</div>
+</details>
+`
+    };
+
     return (
-        <ServiceLayout
-            title="Endolaser"
-            subtitle="Quando o emagrecimento acontece, mas o corpo não acompanha. Um estímulo profundo onde você realmente precisa."
-            goBack={goBack}
-            coverImage="/harmonizacao-corporal.jpg"
-            whatsappMessage="Olá! Gostaria de saber mais sobre o protocolo de Endolaser."
-            seo={{
-                title: "Endolaser em Brasília — Tratamento de Flacidez e Contorno Corporal",
-                description: "Endolaser na Natuclinic: tecnologia de laser para tratar flacidez, celulite e contorno corporal em Brasília e Taguatinga. Resultados visíveis sem cirurgia.",
-                url: "https://www.natuclinic.com.br/procedimentos/endolaser",
-                canonical: "https://www.natuclinic.com.br/procedimentos/endolaser",
-                keywords: "endolaser brasília, tratamento flacidez, laser corporal taguatinga, contorno corporal",
-                image: "/harmonizacao-corporal.jpg",
-                jsonLd: {
-                    "@context": "https://schema.org",
-                    "@type": "MedicalProcedure",
-                    "name": "Endolaser",
-                    "description": "Tratamento a laser para flacidez e contorno corporal sem cirurgia.",
-                    "url": "https://www.natuclinic.com.br/procedimentos/endolaser",
-                    "procedureType": "Noninvasive",
-                    "followup": "Consulta de acompanhamento recomendada.",
-                    "performer": { "@type": "MedicalOrganization", "name": "Natuclinic", "url": "https://www.natuclinic.com.br" }
-                },
-            }}
-        >
-            {/* 1. Contexto - O Dilema da Flacidez */}
-            <section>
-                <span className="text-xs font-bold tracking-widest text-natu-brown/50 uppercase block mb-4">O Cenário</span>
-                <h3 className="text-2xl font-serif italic mb-6 text-natu-brown">Você fez tudo certo. Mas algo ainda incomoda.</h3>
-                <p className="font-sans font-light leading-relaxed text-lg text-gray-600 mb-6 text-pretty">
-                    Seja com canetas emagrecedoras, cirurgia bariátrica ou após a gestação, o resultado na balança veio. Mas, ao se olhar no espelho, a flacidez e aquele contorno que parece não “assentar” persistem.
-                </p>
-                <div className="bg-[#FFF5F5] p-6 rounded-2xl border-l-2 border-natu-pink">
-                    <p className="font-sans font-medium text-natu-brown text-pretty">
-                        Isso não é falha sua. É uma resposta fisiológica. O corpo emagrece, mas a pele e o tecido de sustentação nem sempre acompanham esse ritmo.
-                    </p>
-                </div>
-            </section>
-
-            {/* Before/After Comparison */}
-            <section>
-                <span className="text-xs font-bold tracking-widest text-natu-brown/50 uppercase block mb-4 text-center">Resultados Reais</span>
-                <div className="w-full h-[400px] md:h-[600px] rounded-2xl overflow-hidden">
-                    <ImageComparisonSlider
-                        leftImage="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2000"
-                        rightImage="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2000"
-                        altLeft="Antes do tratamento"
-                        altRight="Depois do tratamento"
-                    />
-                </div>
-                <p className="text-center text-xs text-gray-400 mt-4 font-sans">Arraste o controle para comparar</p>
-            </section>
-
-            {/* 2. O que é Endolaser */}
-            <section>
-                <span className="text-xs font-bold tracking-widest text-natu-brown/50 uppercase block mb-4">A Solução</span>
-                <h3 className="text-2xl font-serif italic mb-6 text-natu-brown">Endolaser: Estímulo profundo</h3>
-                <p className="font-sans font-light leading-relaxed text-lg text-gray-600 mb-8 text-pretty">
-                    O Endolaser é um procedimento de estética avançada que atua de dentro para fora. Diferente de tratamentos superficiais, ele utiliza energia laser aplicada internamente para promover:
-                </p>
-                <ul className="grid sm:grid-cols-2 gap-4">
-                    {[
-                        'Estímulo intenso de colágeno novo',
-                        'Contração imediata das fibras existentes',
-                        'Melhora da firmeza e textura',
-                        'Remodelação do contorno corporal',
-                        'Resultados naturais e progressivos'
-                    ].map((item, i) => (
-                        <li key={i} className="flex gap-3 text-natu-brown/80 font-sans font-light">
-                            <span className="text-natu-pink">•</span> {item}
-                        </li>
-                    ))}
-                </ul>
-            </section>
-
-            <div className="p-8 md:p-12 bg-natu-brown/5 rounded-2xl">
-                <h3 className="text-xl font-serif text-natu-brown mb-4">Definição Corporal: Esculpir com inteligência</h3>
-                <p className="font-sans font-light text-gray-600 leading-relaxed max-w-2xl text-pretty">
-                    Para quem já emagreceu e tem aqueles pequenos acúmulos que não saem com treino (barriga inferior, flancos, interno de coxa), o Endolaser atua na quebra controlada de gordura enquanto retrai a pele.
-                    <br /><br />
-                    <span className="font-medium">O objetivo não é "secar". É definir.</span>
-                </p>
-            </div>
-
-            {/* 3. Indicações */}
-            <section>
-                <h3 className="text-2xl font-serif italic mb-8 text-natu-brown">Para quem é especialmente indicado?</h3>
-                <div className="space-y-6">
-                    {[
-                        { title: "Pós-Emagrecimento", desc: "Pessoas que usaram canetas emagrecedoras e notaram flacidez." },
-                        { title: "Pós-Bariátrica", desc: "Desejo de melhorar a qualidade da pele e definir áreas específicas." },
-                        { title: "Pós-Gestação", desc: "Mulheres buscando recuperar a firmeza abdominal." },
-                        { title: "Gordura Resistente", desc: "Quem tem baixo percentual de gordura, mas falta definição." }
-                    ].map((item, i) => (
-                        <div key={i} className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 border-b border-gray-100 pb-4 last:border-0">
-                            <span className="font-serif text-xl text-natu-brown whitespace-nowrap">{item.title}</span>
-                            <span className="font-sans font-light text-gray-500 text-sm md:text-base">{item.desc}</span>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* 4. Diferencial */}
-            <section className="text-center max-w-2xl mx-auto">
-                <h3 className="text-2xl font-serif italic mb-6 text-natu-brown">O Diferencial Natuclinic</h3>
-                <p className="font-sans font-light leading-relaxed text-gray-600 mb-8 text-pretty">
-                    Nós não tratamos apenas a flacidez. Tratamos o corpo que desenvolveu essas alterações. Avaliamos saúde metabólica, nutricional e hormonal para garantir que o tecido tenha <strong className="text-natu-brown font-medium">capacidade real de regeneração</strong>.
-                </p>
-                <div className="inline-block px-6 py-2 border border-natu-brown/20 rounded-full text-natu-brown text-sm tracking-widest uppercase font-sans">
-                    Estética com base científica
-                </div>
-            </section>
-
-        </ServiceLayout>
+        <BlogPostGeneric 
+            goBack={goBack || (() => navigate(-1))} 
+            post={post} 
+            articles={articles} 
+            setCurrentPage={(id) => navigate(`/blog/${id}`)} 
+        />
     );
 };
 

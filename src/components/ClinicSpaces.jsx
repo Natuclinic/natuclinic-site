@@ -25,7 +25,7 @@ const ClinicSpaces = () => (
 
                 <div className="w-full lg:w-1/2 flex flex-col font-sans text-natu-brown text-left">
                     <span className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-natu-brown/40 block mb-4">Bem-vindo</span>
-                    <h2 className="font-sans font-bold text-3xl md:text-4xl text-natu-brown leading-tight tracking-tight mb-8">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95] mb-8">
                         Espaços pensados para seu bem-estar
                     </h2>
                     <p className="text-sm md:text-base opacity-60 leading-relaxed font-light">

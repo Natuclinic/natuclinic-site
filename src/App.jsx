@@ -18,6 +18,7 @@ const HarmonizacaoGluteos = React.lazy(() => import('./pages/HarmonizacaoGluteos
 const HarmonizacaoFacial = React.lazy(() => import('./pages/HarmonizacaoFacial'));
 const HarmonizacaoCorporal = React.lazy(() => import('./pages/HarmonizacaoCorporal'));
 const NutricaoOrtomolecular = React.lazy(() => import('./pages/NutricaoOrtomolecular'));
+const Hipro = React.lazy(() => import('./pages/Hipro'));
 const Blog = React.lazy(() => import('./pages/Blog'));
 const CeoSection = React.lazy(() => import('./components/CeoSection'));
 const FooterNew = React.lazy(() => import('./components/FooterNew'));
@@ -46,7 +47,6 @@ import HomeIntro from './components/HomeIntro';
 import SEO from './components/SEO';
 const HomeManifesto = React.lazy(() => import('./components/HomeManifesto'));
 const ProceduresSection = React.lazy(() => import('./components/ProceduresSection'));
-const BariátricaBanner = React.lazy(() => import('./components/ProceduresSection').then(m => ({ default: m.BariátricaBanner })));
 const QuietCTA = React.lazy(() => import('./components/QuietCTA'));
 const CookieConsent = React.lazy(() => import('./components/CookieConsent'));
 const FaqSection = React.lazy(() => import('./components/FaqSection'));
@@ -118,8 +118,16 @@ export default function App() {
   }, [location.pathname]);
 
   const [showScrollTop, setShowScrollTop] = React.useState(false);
+  const [scrollProgress, setScrollProgress] = React.useState(0);
+  
   useEffect(() => {
-    const onScroll = () => setShowScrollTop(window.scrollY > 400);
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+      setScrollProgress(progress);
+      setShowScrollTop(scrollTop > 400);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -130,7 +138,11 @@ export default function App() {
     location.pathname !== '/procedimentos/ninfoplastia' &&
     location.pathname !== '/procedimentos/saude-da-mulher' &&
     location.pathname !== '/procedimentos/harmonizacao-corporal' &&
-    location.pathname !== '/procedimentos/soroterapia';
+    location.pathname !== '/procedimentos/soroterapia' &&
+    location.pathname !== '/procedimentos/hipro' &&
+    location.pathname !== '/procedimentos/endolaser' &&
+    location.pathname !== '/procedimentos/harmonizacao' &&
+    location.pathname !== '/procedimentos/harmonizacao-facial';
 
   return (
     <HelmetProvider>
@@ -153,14 +165,12 @@ export default function App() {
                   <HomeIntro />
                   <ProceduresSection />
                   <ResultsSection id="results" />
+                  <BlogHighlights />
                   <CeoSection />
                   <VideoFeedbacks />
                   <GoogleReviews />
-                  <BariátricaBanner />
                   <ClinicGallery />
                   <ResultsCTA />
-                  <BlogHighlights />
-                  <LeadCapture />
                   <FaqSection />
                 </>
               } />
@@ -178,8 +188,9 @@ export default function App() {
               <Route path="/procedimentos/harmonizacao-facial" element={<HarmonizacaoFacial goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/harmonizacao-corporal" element={<HarmonizacaoCorporal />} />
               <Route path="/procedimentos/nutricao-ortomolecular" element={<NutricaoOrtomolecular goBack={() => navigate(-1)} />} />
+              <Route path="/procedimentos/hipro" element={<Hipro goBack={() => navigate(-1)} />} />
 
-              <Route path="/blog" element={<Blog goBack={() => navigate('/')} setCurrentPage={(id) => navigate(`/blog/${id}`)} articles={articles} loading={loading} />} />
+              <Route path="/blog" element={<Blog goBack={() => navigate('/')} setCurrentPage={(id) => navigate(`/blog/${id}`)} articles={articles} adConfig={adConfig} loading={loading} />} />
               <Route path="/blog/:id" element={<BlogPostWrapper articles={articles} adConfig={adConfig} loading={loading} />} />
 
               <Route path="/adminblogpost" element={<AdminPost goBack={() => navigate(-1)} />} />
@@ -207,9 +218,40 @@ export default function App() {
           <button
             onClick={() => lenisRef.current?.scrollTo(0)}
             aria-label="Voltar ao topo"
-            className={`bg-white text-natu-brown w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-md ring-2 ring-inset ring-natu-brown/40 ${showScrollTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+            className={`relative w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-md ${showScrollTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            {/* SVG Progress Circle */}
+            <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 48 48">
+              <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#4C261A" />
+                  <stop offset="50%" stopColor="#c29681" />
+                  <stop offset="100%" stopColor="#FFC2C2" />
+                </linearGradient>
+              </defs>
+              <circle
+                cx="24"
+                cy="24"
+                r="22"
+                fill="white"
+                stroke="rgba(76, 38, 26, 0.1)"
+                strokeWidth="2"
+              />
+              <circle
+                cx="24"
+                cy="24"
+                r="22"
+                fill="none"
+                stroke="url(#progressGradient)"
+                strokeWidth="2.5"
+                strokeDasharray="138.2"
+                strokeDashoffset={138.2 - (scrollProgress * 138.2)}
+                strokeLinecap="round"
+                className="transition-all duration-[50ms] ease-linear"
+              />
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-natu-brown relative z-10">
               <path d="M12 19V5M5 12l7-7 7 7"/>
             </svg>
           </button>

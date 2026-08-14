@@ -113,7 +113,7 @@ const ClinicGallery = () => {
                     <span className="sr-only">
                         Bem-vindo à Natuclinic
                     </span>
-                    <h2 className="font-sans text-3xl md:text-5xl text-natu-brown font-bold leading-tight mb-6 text-balance max-w-2xl mx-auto">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95] mb-6 max-w-2xl mx-auto">
                         Espaços pensados para o seu bem-estar
                     </h2>
                     <p className="text-sm md:text-base text-natu-brown/70 leading-relaxed font-light text-balance">
