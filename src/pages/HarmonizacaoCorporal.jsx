@@ -256,7 +256,7 @@ const HarmonizacaoCorporal = () => {
             />
 
             {/* Hero */}
-            <section className="relative min-h-[calc(100vh-128px)] mt-32 flex flex-col justify-end overflow-hidden pb-12 md:pb-20">
+            <section className="relative isolate min-h-[calc(100vh-128px)] mt-32 flex flex-col justify-end overflow-hidden pb-12 md:pb-20">
                 {/* Background Image - No effects as requested */}
                 <div className="absolute inset-0 -z-10 overflow-hidden bg-[#4C261A]">
                     <img
