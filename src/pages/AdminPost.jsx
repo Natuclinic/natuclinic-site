@@ -251,10 +251,10 @@ const AdminPost = ({ goBack }) => {
 
     return (
         <div className="pt-32 pb-20 min-h-screen bg-gray-50 px-4">
-            <div className="container max-w-4xl mx-auto p-4 md:p-10 bg-white rounded-3xl border border-gray-100">
+            <div className="container max-w-7xl mx-auto p-4 md:p-10 bg-white rounded-3xl border border-gray-100">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-3xl font-serif text-natu-brown">
+                        <h1 className="text-3xl font-sans font-bold text-natu-brown">
                             {view === 'list' ? 'Gerenciar Blog' :
                                 view === 'leads' ? 'Leads / Contatos' :
                                 view === 'ads-list' ? 'Gerenciar Campanhas' :
@@ -734,7 +734,7 @@ const AdminPost = ({ goBack }) => {
                                             name="title"
                                             value={formData.title}
                                             onChange={handleChange}
-                                            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none transition-all font-serif text-xl"
+                                            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-brown/10 outline-none transition-all font-sans font-bold text-natu-brown text-xl"
                                             placeholder="Ex: Tudo sobre Endolaser"
                                         />
                                     </div>
