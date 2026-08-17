@@ -3,7 +3,7 @@ import Unicon from '../components/Unicon';
 import ImageUpload from '../components/ImageUpload';
 import BlogPostGeneric from './BlogPostGeneric';
 import MediaGalleryModal from '../components/MediaGalleryModal';
-import MarkdownToolbar from '../components/MarkdownToolbar';
+import MDEditor from '@uiw/react-md-editor';
 
 const AdminPost = ({ goBack }) => {
     const [accessCode, setAccessCode] = useState('');
@@ -806,31 +806,33 @@ const AdminPost = ({ goBack }) => {
                                 </div>
 
                                 <div>
-                                    <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center justify-between mb-4">
                                         <div className="flex flex-col">
                                             <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">Conteúdo (Markdown)</label>
                                             <p className="text-[9px] text-natu-brown/40 mt-1 uppercase font-bold tracking-wider">
                                                 💡 FAQ Premium: Use <code className="bg-gray-100 px-1">&lt;details&gt;&lt;summary&gt;Pergunta?&lt;/summary&gt;Resposta&lt;/details&gt;</code>
                                             </p>
                                         </div>
-                                        <span className="text-[9px] bg-natu-pink/10 text-natu-pink px-2 py-0.5 rounded font-bold">EDITOR ATIVO</span>
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsGalleryOpen(true)}
+                                            className="flex items-center gap-2 px-4 py-2 bg-natu-pink/10 text-natu-pink hover:bg-natu-pink hover:text-white rounded-xl transition-colors text-xs font-bold uppercase tracking-widest"
+                                        >
+                                            <Unicon name="image" size={16} />
+                                            <span>Adicionar Mídia</span>
+                                        </button>
                                     </div>
-                                    <MarkdownToolbar 
-                                        textAreaRef={textAreaRef}
-                                        content={formData.content}
-                                        setContent={(newContent) => setFormData(prev => ({ ...prev, content: newContent }))}
-                                        onOpenGallery={() => setIsGalleryOpen(true)}
-                                    />
-                                    <textarea
-                                        ref={textAreaRef}
-                                        required
-                                        name="content"
-                                        value={formData.content}
-                                        onChange={handleChange}
-                                        rows="12"
-                                        className="w-full p-6 bg-white border border-gray-200 rounded-b-2xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-sm leading-relaxed"
-                                        placeholder="# Título\n\nSeu texto aqui...\n\n![Imagem](link-da-imagem)"
-                                    />
+                                    <div data-color-mode="light" className="border border-gray-200 rounded-2xl overflow-hidden">
+                                        <MDEditor
+                                            value={formData.content}
+                                            onChange={(val) => setFormData(prev => ({ ...prev, content: val }))}
+                                            height={500}
+                                            textareaProps={{
+                                                placeholder: "# Título\n\nSeu texto aqui...",
+                                                id: "md-editor-textarea"
+                                            }}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
@@ -895,17 +897,22 @@ const AdminPost = ({ goBack }) => {
                 onClose={() => setIsGalleryOpen(false)} 
                 articles={articles} 
                 onSelectImage={(url, alt) => {
-                    const textarea = textAreaRef.current;
-                    if (!textarea) return;
-                    const start = textarea.selectionStart;
-                    const end = textarea.selectionEnd;
+                    const textarea = document.getElementById('md-editor-textarea');
                     const markdown = `![${alt}](${url})`;
-                    const newText = formData.content.substring(0, start) + markdown + formData.content.substring(end);
-                    setFormData(prev => ({ ...prev, content: newText }));
-                    setTimeout(() => {
-                        textarea.focus();
-                        textarea.setSelectionRange(start + markdown.length, start + markdown.length);
-                    }, 0);
+
+                    if (textarea) {
+                        const start = textarea.selectionStart;
+                        const end = textarea.selectionEnd;
+                        const newText = formData.content.substring(0, start) + markdown + formData.content.substring(end);
+                        setFormData(prev => ({ ...prev, content: newText }));
+                        setTimeout(() => {
+                            textarea.focus();
+                            textarea.setSelectionRange(start + markdown.length, start + markdown.length);
+                        }, 0);
+                    } else {
+                        // Fallback if textarea not found
+                        setFormData(prev => ({ ...prev, content: prev.content + '\n' + markdown }));
+                    }
                 }} 
             />
         </div>
