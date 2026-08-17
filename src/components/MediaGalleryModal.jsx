@@ -14,11 +14,23 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
 
         setIsDeleting(true);
         try {
-            const urlObj = new URL(url);
-            const pathParts = urlObj.pathname.split('/');
-            const filename = pathParts[pathParts.length - 1];
+            let filename = '';
             
-            if (!filename) throw new Error("Não foi possível identificar o nome do arquivo.");
+            // Tenta fazer parse como URL absoluta (ex: https://dominio.com/images/nome.jpg)
+            try {
+                const urlObj = new URL(url);
+                const pathParts = urlObj.pathname.split('/');
+                filename = pathParts[pathParts.length - 1];
+            } catch (e) {
+                // Se não for URL válida (ex: "x" ou "/images/nome.jpg"), tenta pegar a última parte separada por barra
+                const pathParts = url.split('/');
+                filename = pathParts[pathParts.length - 1];
+            }
+            
+            if (!filename || filename === url) {
+                // Se filename for igual ao url e não tem '/', provavelmente não é um arquivo do nosso servidor
+                throw new Error("O link desta imagem é inválido ou ela não está hospedada no servidor da clínica.");
+            }
 
             const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/images/${filename}`, {
                 method: 'DELETE'
