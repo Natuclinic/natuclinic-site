@@ -5,6 +5,35 @@ import ImageUpload from './ImageUpload';
 const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
     const [view, setView] = useState('gallery'); // 'gallery' or 'upload'
     const [searchTerm, setSearchTerm] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const handleDelete = async (e, url) => {
+        e.stopPropagation();
+        const confirmDelete = window.confirm('ATENÇÃO: Apagar esta imagem a removerá do servidor permanentemente. Ela ficará quebrada no site se ainda estiver no texto de algum artigo. Tem certeza?');
+        if (!confirmDelete) return;
+
+        setIsDeleting(true);
+        try {
+            const urlObj = new URL(url);
+            const pathParts = urlObj.pathname.split('/');
+            const filename = pathParts[pathParts.length - 1];
+            
+            if (!filename) throw new Error("Não foi possível identificar o nome do arquivo.");
+
+            const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/images/${filename}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) throw new Error('Falha ao apagar imagem');
+
+            alert('Imagem apagada do servidor! Lembre-se de remover a imagem do texto do artigo se ela ainda estiver lá.');
+        } catch (error) {
+            console.error(error);
+            alert('Erro ao apagar imagem: ' + error.message);
+        } finally {
+            setIsDeleting(false);
+        }
+    };
 
     // Extract all unique images from articles
     const images = useMemo(() => {
@@ -135,6 +164,17 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
                                             <Unicon name="plus-circle" size={32} className="text-white mb-2" />
                                             <span className="text-[10px] font-bold text-white uppercase tracking-widest text-center">Inserir no Post</span>
                                         </div>
+
+                                        {/* Delete Button */}
+                                        <button
+                                            type="button"
+                                            onClick={(e) => handleDelete(e, img.url)}
+                                            disabled={isDeleting}
+                                            className="absolute top-2 right-2 p-2 bg-red-500/80 text-white rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-600 transition-all z-10 disabled:opacity-50"
+                                            title="Apagar imagem do servidor"
+                                        >
+                                            <Unicon name={isDeleting ? 'spinner' : 'trash'} size={14} className={isDeleting ? 'animate-spin' : ''} />
+                                        </button>
                                     </div>
                                 ))}
                             </div>

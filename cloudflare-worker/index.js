@@ -153,9 +153,21 @@ export default {
         }
 
         // Serve Images from R2: GET /images/:filename
+        // Delete Images from R2: DELETE /images/:filename
         if (url.pathname.startsWith("/images/")) {
             try {
                 const filename = url.pathname.split('/')[2];
+                if (!filename) throw new Error("Filename missing");
+
+                if (request.method === "DELETE") {
+                    if (!env.IMAGES) throw new Error("R2 bucket (IMAGES) not bound!");
+                    await env.IMAGES.delete(filename);
+                    return new Response(JSON.stringify({ success: true }), {
+                        headers: { ...corsHeaders, "Content-Type": "application/json" }
+                    });
+                }
+
+                // Default to GET
                 const object = await env.IMAGES.get(filename);
 
                 if (object === null) {
@@ -171,7 +183,7 @@ export default {
                     headers,
                 });
             } catch (e) {
-                return new Response(e.message, { status: 500, headers: corsHeaders });
+                return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: corsHeaders });
             }
         }
 
