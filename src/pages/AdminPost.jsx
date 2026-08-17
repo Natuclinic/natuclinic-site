@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Unicon from '../components/Unicon';
 import ImageUpload from '../components/ImageUpload';
 import BlogPostGeneric from './BlogPostGeneric';
+import MediaGalleryModal from '../components/MediaGalleryModal';
+import MarkdownToolbar from '../components/MarkdownToolbar';
 
 const AdminPost = ({ goBack }) => {
     const [accessCode, setAccessCode] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
-    const [view, setView] = useState('list'); // 'list', 'edit', 'create', 'ad-config'
+    const [view, setView] = useState('list'); // 'list', 'edit', 'create', 'ad-config', 'settings'
     const [articles, setArticles] = useState([]);
     const [editingId, setEditingId] = useState(null);
+    
+    // Novas variáveis de estado
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [submitAction, setSubmitAction] = useState('publish');
+    const textAreaRef = useRef(null);
+    const articlesPerPage = 10;
+
 
     const initialForm = {
         id: '',
@@ -78,9 +89,15 @@ const AdminPost = ({ goBack }) => {
 
     const triggerDeployHook = async () => {
         try {
-            await fetch('https://api.vercel.com/v1/integrations/deploy/prj_cBqi949okdukHX34r5MAnvD5fHcx/OPesSy3UMD', {
-                method: 'POST'
-            });
+            const hookSetting = articles.find(a => a.id === 'deploy-settings');
+            const hookUrl = (hookSetting && hookSetting.content !== 'undefined') ? hookSetting.content : import.meta.env.VITE_VERCEL_HOOK;
+            
+            if (!hookUrl || hookUrl === 'undefined' || hookUrl.trim() === '') {
+                console.warn('Nenhum Deploy Hook configurado.');
+                return;
+            }
+
+            await fetch(hookUrl, { method: 'POST' });
             console.log('Deploy hook triggered successfully');
         } catch (err) {
             console.error('Failed to trigger deploy hook:', err);
@@ -99,10 +116,25 @@ const AdminPost = ({ goBack }) => {
                 ? 'https://natuclinic-api.fabriccioarts.workers.dev/articles'
                 : `https://natuclinic-api.fabriccioarts.workers.dev/articles/${encodeURIComponent(editingId)}`;
 
+            const payload = { ...formData };
+            
+            // Handle Drafts for articles
+            if (!view.startsWith('ad-config')) {
+                if (submitAction === 'draft') {
+                    if (!payload.category.startsWith('Draft_')) {
+                        payload.category = `Draft_${payload.category}`;
+                    }
+                } else if (submitAction === 'publish') {
+                    if (payload.category.startsWith('Draft_')) {
+                        payload.category = payload.category.replace('Draft_', '');
+                    }
+                }
+            }
+
             const response = await fetch(url, {
                 method: method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             });
 
             if (!response.ok) {
@@ -237,6 +269,12 @@ const AdminPost = ({ goBack }) => {
                         {view === 'list' || view === 'leads' ? (
                             <div className="flex flex-wrap gap-2 justify-end">
                                 <button
+                                    onClick={() => setView('settings')}
+                                    className="bg-gray-200 text-gray-700 px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-gray-300 transition-all font-sans"
+                                >
+                                    <Unicon name="setting" size={14} /> Configurações
+                                </button>
+                                <button
                                     onClick={() => setView('leads')}
                                     className="bg-blue-600 text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
                                 >
@@ -261,6 +299,7 @@ const AdminPost = ({ goBack }) => {
                                     <Unicon name="image" size={14} /> Banners
                                 </button>
                             </div>
+
                         ) : view === 'preview' ? (
                             <button
                                 onClick={() => setView(editingId ? 'edit' : 'create')}
@@ -409,48 +448,144 @@ const AdminPost = ({ goBack }) => {
                             </table>
                         </div>
                     </div>
+                ) : view === 'settings' ? (
+                    <div className="overflow-hidden bg-white border border-gray-100 rounded-3xl p-6">
+                        <div className="mb-6 flex items-center gap-3 text-natu-brown">
+                            <Unicon name="setting" size={24} />
+                            <div>
+                                <h2 className="font-bold text-lg">Configurações do Sistema</h2>
+                                <p className="text-xs text-gray-500">Ajustes globais e integrações.</p>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6 max-w-xl">
+                            <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6">
+                                <h3 className="font-bold text-sm text-natu-brown mb-2 flex items-center gap-2">
+                                    <Unicon name="server" size={16} /> Vercel Deploy Hook
+                                </h3>
+                                <p className="text-xs text-gray-500 mb-4">
+                                    Cole a URL do seu Deploy Hook da Vercel. Isso permite que o site se atualize sozinho automaticamente quando você salvar ou apagar um artigo.
+                                </p>
+                                
+                                <div className="flex items-center gap-2">
+                                    <input 
+                                        type="text" 
+                                        placeholder="https://api.vercel.com/v1/integrations/deploy/..."
+                                        className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-natu-pink/20 outline-none text-xs font-mono"
+                                        defaultValue={articles.find(a => a.id === 'deploy-settings')?.content || ''}
+                                        onBlur={async (e) => {
+                                            const url = e.target.value;
+                                            try {
+                                                await fetch('https://natuclinic-api.fabriccioarts.workers.dev/articles/deploy-settings', {
+                                                    method: 'PUT',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({ id: 'deploy-settings', category: 'Internal_Config', content: url, title: 'Deploy', slug: 'deploy', excerpt: 'webhook' })
+                                                });
+                                                alert('Webhook Vercel salvo!');
+                                            } catch (error) {}
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ) : view === 'list' ? (
                     <div className="overflow-hidden">
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                            <div className="relative w-full sm:w-64">
+                                <Unicon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Buscar artigo..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-natu-pink/20 outline-none"
+                                />
+                            </div>
+                        </div>
+                        
                         {loading && articles.length === 0 ? (
                             <div className="py-20 text-center text-gray-400">Carregando artigos...</div>
                         ) : articles.length === 0 ? (
                             <div className="py-20 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-3xl">Nenhum artigo encontrado.</div>
                         ) : (
                             <div className="grid gap-4">
-                                {articles.filter(a => a.category !== 'Internal_Ad' && a.category !== 'Internal_Config' && a.id !== '/preenchimento-acido-hialuronico/').map(article => (
-                                    <div key={article.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-50 rounded-2xl hover:border-natu-brown/20 transition-all group">
-                                        <div className="flex items-center gap-4 w-full md:w-auto">
-                                            <div className="w-16 h-12 rounded-lg overflow-hidden bg-gray-200 shrink-0">
-                                                <img src={article.image} alt="" className="w-full h-full object-cover" />
-                                            </div>
-                                            <div className="overflow-hidden">
-                                                <h3 className="font-bold text-natu-brown text-sm truncate max-w-xs">
-                                                    {article.title}
-                                                </h3>
-                                                <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-                                                    {article.category} • {article.date}
-                                                </p>
-                                            </div>
-                                        </div>
+                                {(() => {
+                                    const listArticles = articles.filter(a => a.category !== 'Internal_Ad' && a.category !== 'Internal_Config' && a.id !== '/preenchimento-acido-hialuronico/');
+                                    const filtered = listArticles.filter(a => (a.title || '').toLowerCase().includes(searchTerm.toLowerCase()));
+                                    const totalPages = Math.ceil(filtered.length / articlesPerPage) || 1;
+                                    const paginated = filtered.slice((currentPage - 1) * articlesPerPage, currentPage * articlesPerPage);
+                                    
+                                    if (filtered.length === 0) return <div className="py-10 text-center text-gray-400">Nenhum artigo corresponde à busca.</div>;
 
-                                        <div className="flex gap-2 mt-4 md:mt-0 w-full md:w-auto">
-                                            <button
-                                                onClick={() => startEdit(article)}
-                                                className="flex-1 md:flex-none p-3 bg-white border border-gray-200 rounded-xl text-gray-600 hover:text-natu-brown hover:border-natu-brown transition-all"
-                                                title="Editar"
-                                            >
-                                                <Unicon name="edit" size={16} />
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(article.id)}
-                                                className="flex-1 md:flex-none p-3 bg-white border border-gray-200 rounded-xl text-gray-400 hover:text-red-500 hover:border-red-100 transition-all"
-                                                title="Apagar"
-                                            >
-                                                <Unicon name="trash" size={16} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))}
+                                    return (
+                                        <>
+                                            {paginated.map(article => {
+                                                const isDraft = (article.category || '').startsWith('Draft_');
+                                                const displayCategory = isDraft ? article.category.replace('Draft_', '') : article.category;
+                                                return (
+                                                    <div key={article.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-50 rounded-2xl hover:border-natu-brown/20 transition-all group border border-transparent">
+                                                        <div className="flex items-center gap-4 w-full md:w-auto">
+                                                            <div className="w-16 h-12 rounded-lg overflow-hidden bg-gray-200 shrink-0 relative">
+                                                                <img src={article.image} alt="" className="w-full h-full object-cover" />
+                                                                {isDraft && <div className="absolute inset-0 bg-orange-500/20 mix-blend-multiply"></div>}
+                                                            </div>
+                                                            <div className="overflow-hidden">
+                                                                <div className="flex items-center gap-2">
+                                                                    <h3 className="font-bold text-natu-brown text-sm truncate max-w-xs">
+                                                                        {article.title}
+                                                                    </h3>
+                                                                    {isDraft && <span className="bg-orange-100 text-orange-600 px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest">Rascunho</span>}
+                                                                </div>
+                                                                <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">
+                                                                    {displayCategory} • {article.date}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex gap-2 mt-4 md:mt-0 w-full md:w-auto">
+                                                            <button
+                                                                onClick={() => startEdit(article)}
+                                                                className="flex-1 md:flex-none p-3 bg-white border border-gray-200 rounded-xl text-gray-600 hover:text-natu-brown hover:border-natu-brown transition-all"
+                                                                title="Editar"
+                                                            >
+                                                                <Unicon name="edit" size={16} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleDelete(article.id)}
+                                                                className="flex-1 md:flex-none p-3 bg-white border border-gray-200 rounded-xl text-gray-400 hover:text-red-500 hover:border-red-100 transition-all"
+                                                                title="Apagar"
+                                                            >
+                                                                <Unicon name="trash" size={16} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                            
+                                            {/* Pagination Controls */}
+                                            {totalPages > 1 && (
+                                                <div className="flex justify-center items-center gap-4 mt-6">
+                                                    <button 
+                                                        disabled={currentPage === 1}
+                                                        onClick={() => setCurrentPage(prev => prev - 1)}
+                                                        className="p-2 text-gray-500 hover:text-natu-brown disabled:opacity-30 transition-colors"
+                                                    >
+                                                        <Unicon name="angle-left" size={24} />
+                                                    </button>
+                                                    <span className="text-xs font-bold text-gray-400">Página {currentPage} de {totalPages}</span>
+                                                    <button 
+                                                        disabled={currentPage === totalPages}
+                                                        onClick={() => setCurrentPage(prev => prev + 1)}
+                                                        className="p-2 text-gray-500 hover:text-natu-brown disabled:opacity-30 transition-colors"
+                                                    >
+                                                        <Unicon name="angle-right" size={24} />
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </>
+                                    );
+                                })()}
                             </div>
                         )}
                     </div>
@@ -680,13 +815,20 @@ const AdminPost = ({ goBack }) => {
                                         </div>
                                         <span className="text-[9px] bg-natu-pink/10 text-natu-pink px-2 py-0.5 rounded font-bold">EDITOR ATIVO</span>
                                     </div>
+                                    <MarkdownToolbar 
+                                        textAreaRef={textAreaRef}
+                                        content={formData.content}
+                                        setContent={(newContent) => setFormData(prev => ({ ...prev, content: newContent }))}
+                                        onOpenGallery={() => setIsGalleryOpen(true)}
+                                    />
                                     <textarea
+                                        ref={textAreaRef}
                                         required
                                         name="content"
                                         value={formData.content}
                                         onChange={handleChange}
                                         rows="12"
-                                        className="w-full p-6 bg-white border border-gray-200 rounded-2xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-sm leading-relaxed"
+                                        className="w-full p-6 bg-white border border-gray-200 rounded-b-2xl focus:ring-2 focus:ring-natu-brown/10 outline-none font-mono text-sm leading-relaxed"
                                         placeholder="# Título\n\nSeu texto aqui...\n\n![Imagem](link-da-imagem)"
                                     />
                                 </div>
@@ -718,21 +860,54 @@ const AdminPost = ({ goBack }) => {
                             </>
                         )}
 
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className={`w-full py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-3 ${view === 'edit' || view.startsWith('ad-config') ? 'bg-natu-pink text-white' : 'bg-natu-brown text-white'}`}
-                        >
-                            {loading ? <Unicon name="spinner" className="animate-spin" size={16} /> : (
-                                <>
-                                    {view.startsWith('ad-config') ? 'Salvar Configurações do Anúncio' : view === 'edit' ? 'Atualizar Artigo' : 'Publicar Agora'}
-                                    <Unicon name="check" size={14} />
-                                </>
+                        <div className="flex flex-col md:flex-row gap-4 pt-6 border-t border-gray-100">
+                            {!view.startsWith('ad-config') && (
+                                <button
+                                    type="submit"
+                                    onClick={() => setSubmitAction('draft')}
+                                    disabled={loading}
+                                    className={`flex-1 py-4 rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-2 border-2 border-natu-brown text-natu-brown bg-transparent`}
+                                >
+                                    <Unicon name="file-alt" size={14} />
+                                    Salvar Rascunho
+                                </button>
                             )}
-                        </button>
+                            <button
+                                type="submit"
+                                onClick={() => setSubmitAction('publish')}
+                                disabled={loading}
+                                className={`flex-1 py-4 rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:scale-[1.01] active:scale-95 transition-all flex justify-center items-center gap-2 ${view === 'edit' || view.startsWith('ad-config') ? 'bg-natu-pink text-white' : 'bg-natu-brown text-white'}`}
+                            >
+                                {loading ? <Unicon name="spinner" className="animate-spin" size={16} /> : (
+                                    <>
+                                        <Unicon name="check" size={14} />
+                                        {view.startsWith('ad-config') ? 'Salvar Anúncio' : view === 'edit' ? 'Publicar Atualização' : 'Publicar Agora'}
+                                    </>
+                                )}
+                            </button>
+                        </div>
                     </form>
                 )}
             </div>
+
+            <MediaGalleryModal 
+                isOpen={isGalleryOpen} 
+                onClose={() => setIsGalleryOpen(false)} 
+                articles={articles} 
+                onSelectImage={(url, alt) => {
+                    const textarea = textAreaRef.current;
+                    if (!textarea) return;
+                    const start = textarea.selectionStart;
+                    const end = textarea.selectionEnd;
+                    const markdown = `![${alt}](${url})`;
+                    const newText = formData.content.substring(0, start) + markdown + formData.content.substring(end);
+                    setFormData(prev => ({ ...prev, content: newText }));
+                    setTimeout(() => {
+                        textarea.focus();
+                        textarea.setSelectionRange(start + markdown.length, start + markdown.length);
+                    }, 0);
+                }} 
+            />
         </div>
     );
 };
