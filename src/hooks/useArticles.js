@@ -4,7 +4,7 @@ import { API_URLS } from '../constants/links';
 
 const processData = (sourceData) => {
     const isAd = (a) => a.category === 'Internal_Ad' && a.id !== 'ad-settings';
-    const justArticles = sourceData.filter(a => a.category !== 'Internal_Ad' && a.id !== 'ad-settings');
+    const justArticles = sourceData.filter(a => a.category !== 'Internal_Ad' && a.id !== 'ad-settings' && a.id !== '/preenchimento-acido-hialuronico/');
     
     const adsObj = sourceData.filter(isAd).reduce((acc, ad) => {
         const placement = ad.slug;

@@ -417,7 +417,7 @@ const AdminPost = ({ goBack }) => {
                             <div className="py-20 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-3xl">Nenhum artigo encontrado.</div>
                         ) : (
                             <div className="grid gap-4">
-                                {articles.filter(a => a.category !== 'Internal_Ad' && a.category !== 'Internal_Config').map(article => (
+                                {articles.filter(a => a.category !== 'Internal_Ad' && a.category !== 'Internal_Config' && a.id !== '/preenchimento-acido-hialuronico/').map(article => (
                                     <div key={article.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-50 rounded-2xl hover:border-natu-brown/20 transition-all group">
                                         <div className="flex items-center gap-4 w-full md:w-auto">
                                             <div className="w-16 h-12 rounded-lg overflow-hidden bg-gray-200 shrink-0">
