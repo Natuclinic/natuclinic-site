@@ -7,7 +7,9 @@ import MDEditor from '@uiw/react-md-editor';
 
 const AdminPost = ({ goBack }) => {
     const [accessCode, setAccessCode] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        return localStorage.getItem('natuclinic_admin_auth') === 'true';
+    });
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
     const [view, setView] = useState('list'); // 'list', 'edit', 'create', 'ad-config', 'settings'
@@ -25,6 +27,11 @@ const AdminPost = ({ goBack }) => {
     const textAreaRef = useRef(null);
     const articlesPerPage = 10;
 
+    const handleLogout = () => {
+        localStorage.removeItem('natuclinic_admin_auth');
+        setIsAuthenticated(false);
+        if (goBack) goBack();
+    };
 
     const initialForm = {
         id: '',
@@ -38,16 +45,16 @@ const AdminPost = ({ goBack }) => {
         author_avatar: '/images/blog-images/avatar-natuclinic-blog.jpg',
         meta_description: '',
         meta_keywords: '',
+        slug: '',
+        status: 'published'
     };
 
     const [formData, setFormData] = useState(initialForm);
 
     useEffect(() => {
-        if (isAuthenticated) {
-            fetchArticles();
-            fetchLeads();
-        }
-    }, [isAuthenticated]);
+        fetchArticles();
+        fetchLeads();
+    }, []);
 
     const fetchArticles = async () => {
         setLoading(true);
@@ -101,6 +108,7 @@ const AdminPost = ({ goBack }) => {
         const adminCode = import.meta.env.VITE_ADMIN_CODE;
         if (adminCode && accessCode === adminCode) {
             setIsAuthenticated(true);
+            localStorage.setItem('natuclinic_admin_auth', 'true');
         } else {
             alert('Código incorreto');
         }
@@ -348,7 +356,7 @@ const AdminPost = ({ goBack }) => {
                 {/* Bottom Actions */}
                 <div className="p-4 border-t border-gray-100 shrink-0">
                     <button 
-                        onClick={goBack} 
+                        onClick={handleLogout} 
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg w-full transition-colors text-gray-500 hover:text-red-600 hover:bg-red-50 ${!isSidebarExpanded && 'justify-center'}`}
                         title="Sair do Painel"
                     >
@@ -367,7 +375,7 @@ const AdminPost = ({ goBack }) => {
                     <button onClick={() => setView('ads-list')} className="p-2 text-gray-500"><Unicon name="megaphone" size={20} /></button>
                     <button onClick={() => setIsGalleryOpen(true)} className="p-2 text-gray-500"><Unicon name="image" size={20} /></button>
                     <button onClick={() => setView('settings')} className="p-2 text-gray-500"><Unicon name="setting" size={20} /></button>
-                    <button onClick={goBack} className="p-2 text-red-500"><Unicon name="sign-out-alt" size={20} /></button>
+                    <button onClick={handleLogout} className="p-2 text-red-500"><Unicon name="sign-out-alt" size={20} /></button>
                 </div>
             </div>
 
@@ -424,7 +432,6 @@ const AdminPost = ({ goBack }) => {
                             )}
                         </div>
                     </div>
-                </div>
 
                 {status.message && view !== 'list' && (
                     <div className={`p-4 mb-8 rounded-xl flex items-center gap-3 ${status.type === 'success' ? 'bg-green-50 text-green-800 border border-green-100' : 'bg-red-50 text-red-800 border border-red-100'}`}>
@@ -1010,6 +1017,21 @@ const AdminPost = ({ goBack }) => {
                 isOpen={isGalleryOpen} 
                 onClose={() => setIsGalleryOpen(false)} 
                 articles={articles} 
+                currentFormData={formData}
+                onRefresh={fetchArticles}
+                onRemoveImage={(url) => {
+                    // Escape special characters in url for regex
+                    const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    // Remove ![...](url) from markdown
+                    const regex = new RegExp(`!\\[[^\\]]*\\]\\(${escapedUrl}\\)`, 'g');
+                    const newContent = formData.content.replace(regex, '');
+                    
+                    setFormData(prev => ({
+                        ...prev,
+                        content: newContent,
+                        image: prev.image === url ? '' : prev.image
+                    }));
+                }}
                 onSelectImage={(url, alt) => {
                     const textarea = document.getElementById('md-editor-textarea');
                     const markdown = `![${alt}](${url})`;

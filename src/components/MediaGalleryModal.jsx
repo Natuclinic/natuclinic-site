@@ -2,9 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Unicon from './Unicon';
 import ImageUpload from './ImageUpload';
 
-const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
+const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage, onRefresh, currentFormData, onRemoveImage }) => {
     const [view, setView] = useState('gallery'); // 'gallery' or 'upload'
     const [searchTerm, setSearchTerm] = useState('');
+    const [isRefreshing, setIsRefreshing] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
     const handleDelete = async (e, url) => {
@@ -28,17 +29,39 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
             }
             
             if (!filename || filename === url) {
-                // Se filename for igual ao url e não tem '/', provavelmente não é um arquivo do nosso servidor
+                // Se filename for igual ao url e não tem '/', provavelmente é um erro de digitação como "x" no markdown
+                if (onRemoveImage) {
+                    onRemoveImage(url);
+                    alert('O link inválido foi removido do texto do artigo que você está editando!');
+                    return;
+                }
                 throw new Error("O link desta imagem é inválido ou ela não está hospedada no servidor da clínica.");
             }
 
-            const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/images/${filename}`, {
-                method: 'DELETE'
-            });
+            try {
+                const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/images/${filename}`, {
+                    method: 'DELETE'
+                });
+                
+                // Mesmo se o servidor retornar erro (ex: 404 não encontrado), tentamos remover do texto localmente
+                if (onRemoveImage) {
+                    onRemoveImage(url);
+                }
 
-            if (!response.ok) throw new Error('Falha ao apagar imagem');
-
-            alert('Imagem apagada do servidor! Lembre-se de remover a imagem do texto do artigo se ela ainda estiver lá.');
+                if (!response.ok) {
+                    console.warn('Falha ao apagar do servidor, possivelmente já não existia.');
+                }
+                
+                alert('Imagem apagada do servidor e removida do texto deste artigo (se estivesse nele). Lembre-se de salvar o artigo!');
+            } catch (serverError) {
+                console.error('Erro na requisição de deleção:', serverError);
+                if (onRemoveImage) {
+                    onRemoveImage(url);
+                    alert('Imagem removida do texto do artigo. Erro ao contatar servidor: ' + serverError.message);
+                } else {
+                    throw serverError;
+                }
+            }
         } catch (error) {
             console.error(error);
             alert('Erro ao apagar imagem: ' + error.message);
@@ -52,29 +75,44 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
         const urlSet = new Set();
         const imageList = [];
 
-        if (!articles) return imageList;
-
-        articles.forEach(article => {
+        // Helper function to extract from a post object
+        const extractImages = (post, isCurrent = false) => {
+            if (!post) return;
+            
             // 1. Extract cover image
-            if (article.image && !urlSet.has(article.image)) {
-                urlSet.add(article.image);
-                imageList.push({ url: article.image, alt: article.title || 'Capa', source: 'Capa do Artigo' });
+            if (post.image && !urlSet.has(post.image)) {
+                urlSet.add(post.image);
+                imageList.push({ url: post.image, alt: post.title || 'Capa', source: isCurrent ? 'Editando Agora (Capa)' : 'Capa do Artigo', articleTitle: post.title });
             }
 
             // 2. Extract images from content (Markdown syntax: ![alt](url))
-            if (article.content) {
+            if (post.content) {
                 const regex = /!\[([^\]]*)\]\(([^)]+)\)/g;
                 let match;
-                while ((match = regex.exec(article.content)) !== null) {
+                while ((match = regex.exec(post.content)) !== null) {
                     const alt = match[1];
                     const url = match[2];
                     if (url && !urlSet.has(url)) {
                         urlSet.add(url);
-                        imageList.push({ url, alt: alt || 'Imagem do texto', source: 'Conteúdo do Artigo' });
+                        imageList.push({ url, alt: alt || 'Imagem do texto', source: isCurrent ? 'Editando Agora' : 'Conteúdo do Artigo', articleTitle: post.title });
                     }
                 }
             }
-        });
+        };
+
+        // Extract from currently editing post first (so they appear at the top/are prioritized)
+        if (currentFormData) {
+            extractImages(currentFormData, true);
+        }
+
+        if (articles) {
+            articles.forEach(article => {
+                // Ignore the saved version of the currently edited article so we don't pull deleted images from it
+                if (currentFormData && article.id === currentFormData.id) return;
+                
+                extractImages(article);
+            });
+        }
 
         // Filter by search term
         if (searchTerm) {
@@ -83,7 +121,17 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
         }
 
         return imageList;
-    }, [articles, searchTerm]);
+    }, [articles, currentFormData, searchTerm]);
+
+    const handleRefresh = async () => {
+        if (!onRefresh) return;
+        setIsRefreshing(true);
+        try {
+            await onRefresh();
+        } finally {
+            setIsRefreshing(false);
+        }
+    };
 
     if (!isOpen) return null;
 
@@ -123,15 +171,25 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
                     </div>
 
                     {view === 'gallery' && (
-                        <div className="relative w-full sm:w-64">
-                            <Unicon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input
-                                type="text"
-                                placeholder="Buscar imagem..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-natu-pink/20 outline-none"
-                            />
+                        <div className="flex items-center gap-2 w-full sm:w-auto">
+                            <button
+                                onClick={handleRefresh}
+                                disabled={isRefreshing}
+                                className="h-[38px] w-[38px] flex items-center justify-center shrink-0 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 hover:text-natu-brown hover:bg-white transition-colors disabled:opacity-50"
+                                title="Recarregar imagens"
+                            >
+                                <Unicon name="sync" size={16} className={isRefreshing ? 'animate-spin' : ''} />
+                            </button>
+                            <div className="relative flex-1 sm:w-64">
+                                <Unicon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Buscar imagem..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-natu-pink/20 outline-none"
+                                />
+                            </div>
                         </div>
                     )}
                 </div>
@@ -172,9 +230,14 @@ const MediaGalleryModal = ({ isOpen, onClose, articles, onSelectImage }) => {
                                         <img src={img.url} alt={img.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                                         
                                         {/* Hover Overlay */}
-                                        <div className="absolute inset-0 bg-natu-brown/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4">
+                                        <div className="absolute inset-0 bg-natu-brown/90 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4">
                                             <Unicon name="plus-circle" size={32} className="text-white mb-2" />
-                                            <span className="text-[10px] font-bold text-white uppercase tracking-widest text-center">Inserir no Post</span>
+                                            <span className="text-[10px] font-bold text-white uppercase tracking-widest text-center mb-2">Inserir no Post</span>
+                                            {img.articleTitle && (
+                                                <span className="text-[10px] text-gray-300 text-center leading-tight">
+                                                    Usada em:<br/> <b className="text-white">{img.articleTitle}</b>
+                                                </span>
+                                            )}
                                         </div>
 
                                         {/* Delete Button */}

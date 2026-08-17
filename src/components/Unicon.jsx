@@ -6,7 +6,8 @@ import {
     Check, CheckCircle2, X, Menu, Plus, Minus, Trash2, Pencil, Upload, Image,
     Video, Play, Pause, Maximize2, Loader2, MapPin, Clock, Lock, Star, Tag,
     Link, Share2, Calendar, AlertCircle, ArrowLeftRight, Microscope, Leaf,
-    ZapOff, Zap, Activity, Heart, Globe, Stethoscope, Send, ShieldCheck
+    ZapOff, Zap, Activity, Heart, Globe, Stethoscope, Send, ShieldCheck, RefreshCw,
+    FileText, Users as UsersIcon, Megaphone, Settings, LogOut, Server, Target
 } from 'lucide-react';
 
 const customIcons = {
@@ -64,6 +65,14 @@ const iconComponents = {
     "stethoscope": Stethoscope,
     "send": Send,
     "shield-check": ShieldCheck,
+    "sync": RefreshCw,
+    "file-alt": FileText,
+    "users-alt": UsersIcon,
+    "megaphone": Megaphone,
+    "setting": Settings,
+    "sign-out-alt": LogOut,
+    "server": Server,
+    "bullseye": Target,
 };
 
 const motionProps = {
