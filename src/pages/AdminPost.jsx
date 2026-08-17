@@ -66,9 +66,10 @@ const AdminPost = ({ goBack }) => {
             [name]: value
         }));
 
-        if (name === 'title' && !formData.id && view === 'create') {
+        if (name === 'title' && view === 'create') {
             const slug = value.toLowerCase()
-                .replace(/ /g, '-')
+                .trim()
+                .replace(/\s+/g, '-')
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                 .replace(/[^\w-]+/g, '');
             setFormData(prev => ({ ...prev, id: slug, slug: slug }));
@@ -96,7 +97,7 @@ const AdminPost = ({ goBack }) => {
             const method = (view === 'create' || isAdCreate) ? 'POST' : 'PUT';
             const url = (view === 'create' || isAdCreate)
                 ? 'https://natuclinic-api.fabriccioarts.workers.dev/articles'
-                : `https://natuclinic-api.fabriccioarts.workers.dev/articles/${editingId}`;
+                : `https://natuclinic-api.fabriccioarts.workers.dev/articles/${encodeURIComponent(editingId)}`;
 
             const response = await fetch(url, {
                 method: method,
@@ -135,7 +136,7 @@ const AdminPost = ({ goBack }) => {
 
         setLoading(true);
         try {
-            const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/articles/${id}`, {
+            const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/articles/${encodeURIComponent(id)}`, {
                 method: 'DELETE'
             });
 

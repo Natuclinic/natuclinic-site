@@ -24,7 +24,7 @@ const initialProcessed = processData(fallbackArticles || []);
 export const useArticles = () => {
     const [articles, setArticles] = useState(initialProcessed.justArticles);
     const [adConfig, setAdConfig] = useState({ ads: initialProcessed.adsObj, settings: initialProcessed.adSettings });
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const fetchedRef = useRef(false);
@@ -60,10 +60,10 @@ export const useArticles = () => {
                     const data = await response.json();
                     if (data && data.length > 0) {
                         const mergedData = data.map(apiArticle => {
-                            const fallbackMatch = (fallbackArticles || []).find(f => f.id === apiArticle.id);
+                            const fallbackMatch = (fallbackArticles || []).find(f => f.id === apiArticle.id || f.slug === apiArticle.slug);
                             return {
                                 ...apiArticle,
-                                views: fallbackMatch?.views || 0
+                                views: apiArticle.views !== undefined ? apiArticle.views : (fallbackMatch?.views || 0)
                             };
                         });
                         

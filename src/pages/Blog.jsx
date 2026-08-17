@@ -177,7 +177,11 @@ const Blog = ({ goBack, setCurrentPage, articles, adConfig, loading }) => {
                         <div className="bg-white rounded-2xl p-6 lg:p-8 border border-natu-brown/10">
                             <h3 className="font-sans font-bold text-natu-brown text-lg mb-6">Mais lidas</h3>
                             <div className="flex flex-col">
-                                {[...safeArticles].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 4).map((post, idx) => (
+                                {[...safeArticles].sort((a, b) => {
+                                    const viewsDiff = (b.views || 0) - (a.views || 0);
+                                    if (viewsDiff !== 0) return viewsDiff;
+                                    return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+                                }).slice(0, 4).map((post, idx) => (
                                     <div 
                                         key={idx} 
                                         onClick={() => setCurrentPage(post.slug || post.id)}

@@ -7,9 +7,9 @@ const columns = [
     {
         title: 'Saúde',
         links: [
-            { label: 'Ninfoplastia Sem Cortes', path: '/procedimentos/ninfoplastia' },
+            { label: 'Ninfoplastia Sem Cortes', path: '/blog/ninfoplastia-sem-cortes' },
             { label: 'Endolaser', path: '/procedimentos/endolaser' },
-            { label: 'Harmonização Facial', path: '/procedimentos/harmonizacao-facial' },
+            { label: 'Harmonização Facial', path: '/blog/harmonizacao-facial' },
             { label: 'Harmonização Corporal', path: '/procedimentos/harmonizacao-corporal' },
             { label: 'Harmonização de Glúteos', path: '/gluteo-dos-sonhos' },
             { label: 'Nutrição Ortomolecular', path: '/procedimentos/nutricao-ortomolecular' },
@@ -18,7 +18,7 @@ const columns = [
     {
         title: 'Estética',
         links: [
-            { label: 'Saúde da Mulher', path: '/procedimentos/ninfoplastia' },
+            { label: 'Saúde da Mulher', path: '/blog/saude-da-mulher' },
             { label: 'Soroterapia', href: WHATSAPP_LINKS.MSG_SOROTERAPIA },
             { label: 'Ozonioterapia', href: WHATSAPP_LINKS.MSG_OZONIO },
             { label: 'Emagrecimento Saudável', href: WHATSAPP_LINKS.MSG_EMAGRECIMENTO },

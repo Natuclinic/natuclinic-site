@@ -29,6 +29,50 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
     const progressBarRef = useRef(null);
     const containerRef = useRef(null); // Added containerRef
 
+    const markdownComponents = React.useMemo(() => ({
+        details: ({ children, ...props }) => (
+            <details {...props} className="blog-faq">
+                {children}
+            </details>
+        ),
+        summary: ({ children, ...props }) => (
+            <summary {...props}>{children}</summary>
+        ),
+        img: ({ ...props }) => {
+            const { node, ...rest } = props;
+            return (
+                <img
+                    className="w-full h-auto rounded-2xl mt-[10px] mb-8 shadow-sm"
+                    {...rest}
+                />
+            );
+        },
+        table: ({ children }) => (
+            <div className="table-responsive-wrapper">
+                <table className="min-w-full border-collapse">
+                    {children}
+                </table>
+            </div>
+        ),
+        a: ({ node, children, href, ...props }) => {
+            if (href && href.startsWith('#button:')) {
+                const realHref = href.replace('#button:', '');
+                return (
+                    <span className="flex justify-center my-10 w-full">
+                        <NatuButton href={realHref} className="scale-90 md:scale-100">
+                            {children}
+                        </NatuButton>
+                    </span>
+                );
+            }
+            return (
+                <a href={href} {...props} className="text-natu-pink hover:underline font-medium">
+                    {children}
+                </a>
+            );
+        },
+    }), []);
+
     // Reading Progress Logic
     useEffect(() => {
         const updateProgress = () => {
@@ -67,9 +111,10 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
             document.head.appendChild(metaKeywords);
         }
         // Update JSON-LD Structured Data
-        let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
+        let jsonLdScript = document.getElementById('blog-post-schema');
         if (!jsonLdScript) {
             jsonLdScript = document.createElement('script');
+            jsonLdScript.id = "blog-post-schema";
             jsonLdScript.type = "application/ld+json";
             document.head.appendChild(jsonLdScript);
         }
@@ -215,7 +260,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
         authorCardInfo = {
             name: 'Dra. Débora Meneses',
             role: 'Biomédica Esteta',
-            credentials: 'CRBM-DF',
+            credentials: 'CRBM-DF 26802',
             image: '/dra-debora.jpg',
             whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação de Estética Avançada.",
             text: 'O primeiro passo é uma avaliação estética detalhada e individualizada que entende o seu caso.',
@@ -294,9 +339,14 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                 Leia também
                             </h3>
                             <div className="space-y-8">
-                                {articles
-                                    .filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category === post.category)
-                                    .slice(0, 3)
+                                {(() => {
+                                    const related = articles.filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category === post.category);
+                                    if (related.length < 3) {
+                                        const others = articles.filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category !== post.category);
+                                        related.push(...others.slice(0, 3 - related.length));
+                                    }
+                                    return related.slice(0, 3);
+                                })()
                                     .map(related => (
                                         <div
                                             key={related.id}
@@ -430,49 +480,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                                 <ReactMarkdown
                                     remarkPlugins={[remarkGfm]}
                                     rehypePlugins={[rehypeRaw]}
-                                    components={{
-                                        details: ({ children, ...props }) => (
-                                            <details {...props} className="blog-faq">
-                                                {children}
-                                            </details>
-                                        ),
-                                        summary: ({ children, ...props }) => (
-                                            <summary {...props}>{children}</summary>
-                                        ),
-                                        img: ({ ...props }) => {
-                                            const { node, ...rest } = props;
-                                            return (
-                                                <img
-                                                    className="w-full h-auto rounded-2xl mt-[10px] mb-8 shadow-sm"
-                                                    {...rest}
-                                                />
-                                            );
-                                        },
-                                        table: ({ children }) => (
-                                            <div className="table-responsive-wrapper">
-                                                <table className="min-w-full border-collapse">
-                                                    {children}
-                                                </table>
-                                            </div>
-                                        ),
-                                        a: ({ node, children, href, ...props }) => {
-                                            if (href && href.startsWith('#button:')) {
-                                                const realHref = href.replace('#button:', '');
-                                                return (
-                                                    <span className="flex justify-center my-10 w-full">
-                                                        <NatuButton href={realHref} className="scale-90 md:scale-100">
-                                                            {children}
-                                                        </NatuButton>
-                                                    </span>
-                                                );
-                                            }
-                                            return (
-                                                <a href={href} {...props} className="text-natu-pink hover:underline font-medium">
-                                                    {children}
-                                                </a>
-                                            );
-                                        },
-                                    }}
+                                    components={markdownComponents}
                                 >
                                     {String(ContentComponent || '')}
                                 </ReactMarkdown>
@@ -515,9 +523,14 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                     <div className="mb-16">
                         <h3 className="font-sans font-bold text-xl text-natu-brown mb-6">Veja também</h3>
                         <div className="flex flex-col gap-5 md:grid md:grid-cols-2 md:gap-8">
-                            {articles
-                                .filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category === post.category)
-                                .slice(0, 6)
+                            {(() => {
+                                const related = articles.filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category === post.category);
+                                if (related.length < 6) {
+                                    const others = articles.filter(a => a.id !== post.id && a.category !== 'Internal_Config' && a.category !== post.category);
+                                    related.push(...others.slice(0, 6 - related.length));
+                                }
+                                return related.slice(0, 6);
+                            })()
                                 .map(related => (
                                     <div
                                         key={related.id}

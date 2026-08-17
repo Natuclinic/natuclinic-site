@@ -532,6 +532,8 @@
     background: #fff;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    padding-inline: 1.75rem;
+    padding-bottom: 0;
 }
 
 .blog-system-wrapper details:hover {
@@ -543,10 +545,11 @@
     box-shadow: 0 15px 35px -10px rgba(76, 38, 26, 0.08);
     border-color: rgba(76, 38, 26, 0.2);
     background: #fff;
+    padding-bottom: 2rem;
 }
 
 .blog-system-wrapper summary {
-    padding: 1.5rem 1.75rem;
+    padding: 1.5rem 0;
     list-style: none;
     display: flex;
     align-items: center;
@@ -592,7 +595,7 @@
 .blog-system-wrapper details > p,
 .blog-system-wrapper details > ul,
 .blog-system-wrapper details > ol {
-    padding: 1.5rem 1.75rem 2rem;
+    padding: 1.5rem 0 0;
     color: #666;
     font-size: 1rem;
     line-height: 1.7;

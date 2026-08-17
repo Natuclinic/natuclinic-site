@@ -5,17 +5,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+import { Routes, Route, useNavigate, useLocation, useParams, Navigate } from 'react-router-dom';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Routes, Route, useNavigate, useLocation, useParams, Navigate } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
-const Ninfoplastia = React.lazy(() => import('./pages/Ninfoplastia'));
-const SaudeDaMulher = React.lazy(() => import('./pages/SaudeDaMulher'));
-const Endolaser = React.lazy(() => import('./pages/Endolaser'));
 const HarmonizacaoGluteos = React.lazy(() => import('./pages/HarmonizacaoGluteos'));
-const HarmonizacaoFacial = React.lazy(() => import('./pages/HarmonizacaoFacial'));
 const HarmonizacaoCorporal = React.lazy(() => import('./pages/HarmonizacaoCorporal'));
 const NutricaoOrtomolecular = React.lazy(() => import('./pages/NutricaoOrtomolecular'));
 const Hipro = React.lazy(() => import('./pages/Hipro'));
@@ -92,10 +88,10 @@ const BlogPostWrapper = ({ articles, adConfig, loading }) => {
   const navigate = useNavigate();
 
   // Removido carregamento inicial para navegação instantânea
-  const normalizedId = String(id || '').toLowerCase().replace(/\/$/, '');
+  const normalizedId = String(id || '').toLowerCase().replace(/^\/+|\/+$/g, '');
   const post = articles.find(a => {
-    const aId = String(a.id || '').toLowerCase().replace(/\/$/, '');
-    const aSlug = String(a.slug || '').toLowerCase().replace(/\/$/, '');
+    const aId = String(a.id || '').toLowerCase().replace(/^\/+|\/+$/g, '');
+    const aSlug = String(a.slug || '').toLowerCase().replace(/^\/+|\/+$/g, '');
     return aId === normalizedId || (a.slug && aSlug === normalizedId);
   });
 
@@ -135,17 +131,56 @@ export default function App() {
   const isServicePage = location.pathname.startsWith('/procedimentos/') &&
     location.pathname !== '/procedimentos' &&
     location.pathname !== '/procedimentos/nutricao-ortomolecular' &&
-    location.pathname !== '/procedimentos/ninfoplastia' &&
-    location.pathname !== '/procedimentos/saude-da-mulher' &&
     location.pathname !== '/procedimentos/harmonizacao-corporal' &&
     location.pathname !== '/procedimentos/soroterapia' &&
     location.pathname !== '/procedimentos/hipro' &&
-    location.pathname !== '/procedimentos/endolaser' &&
-    location.pathname !== '/procedimentos/harmonizacao' &&
-    location.pathname !== '/procedimentos/harmonizacao-facial';
+    location.pathname !== '/procedimentos/harmonizacao';
+
+  const globalSchema = {
+    "@context": "https://schema.org",
+    "@type": ["MedicalClinic", "HealthAndBeautyBusiness"],
+    "name": "Natuclinic - Estética e Nutrição Ortomolecular",
+    "image": "https://www.natuclinic.com.br/logo-icon.png",
+    "@id": "https://www.natuclinic.com.br",
+    "url": "https://www.natuclinic.com.br",
+    "telephone": "+5561992551867",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "QND 14 Lote 17",
+      "addressLocality": "Taguatinga",
+      "addressRegion": "DF",
+      "postalCode": "72120-140",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -15.820015,
+      "longitude": -48.064500
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "19:00"
+    },
+    "sameAs": [
+      "https://www.instagram.com/natuclinic.df"
+    ]
+  };
 
   return (
     <HelmetProvider>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(globalSchema)}
+        </script>
+      </Helmet>
       <div className="min-h-screen bg-natu-ivory">
         <ErrorBoundary>
         <React.Suspense fallback={null}>
@@ -181,11 +216,7 @@ export default function App() {
                 </div>
               } />
 
-              <Route path="/procedimentos/ninfoplastia" element={<Ninfoplastia goBack={() => navigate(-1)} />} />
-              <Route path="/procedimentos/saude-da-mulher" element={<SaudeDaMulher goBack={() => navigate(-1)} />} />
-              <Route path="/procedimentos/endolaser" element={<Endolaser goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/harmonizacao" element={<HarmonizacaoGluteos goBack={() => navigate(-1)} />} />
-              <Route path="/procedimentos/harmonizacao-facial" element={<HarmonizacaoFacial goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/harmonizacao-corporal" element={<HarmonizacaoCorporal />} />
               <Route path="/procedimentos/nutricao-ortomolecular" element={<NutricaoOrtomolecular goBack={() => navigate(-1)} />} />
               <Route path="/procedimentos/hipro" element={<Hipro goBack={() => navigate(-1)} />} />

@@ -70,7 +70,7 @@ const ProceduresSection = () => {
     const [showAll, setShowAll] = useState(false);
     const procedimentos = [
         { title: "Nutrição Ortomolecular", category: "Saúde Celular", imageUrl: "/medida-nutricao-ortomolecular.jpg", theme: "var(--theme-brown)", path: "/procedimentos/nutricao-ortomolecular", description: "Equilíbrio de dentro para fora focado na raiz metabólica." },
-        { title: "Ninfoplastia Sem Cortes", category: "Estética Íntima", imageUrl: "/ninfoplastia.jpeg", theme: "var(--theme-brown)", path: "/procedimentos/ninfoplastia", description: "Rejuvenescimento íntimo e funcional sem necessidade de cirurgia." },
+        { title: "Ninfoplastia Sem Cortes", category: "Estética Íntima", imageUrl: "/ninfoplastia.jpeg", theme: "var(--theme-brown)", path: "/blog/ninfoplastia-sem-cortes", description: "Rejuvenescimento íntimo e funcional sem necessidade de cirurgia." },
         { title: "Harmonização Corporal", category: "Estética Corporal", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/procedimentos/harmonizacao-corporal", description: "Protocolos avançados para flacidez, gordura localizada e celulite." },
         { title: "Harmonização de Glúteos", category: "Estética Corporal", imageUrl: "/harmonizacao-de-gluteo.jpg", theme: "var(--theme-brown)", path: "/gluteo-dos-sonhos", description: "Aumento de volume, projeção e firmeza de forma natural." },
         { title: "Harmonização Facial", category: "Estética Facial", imageUrl: "/harmonizacao-facial.jpg", theme: "var(--theme-brown)", path: "/blog/harmonizacao-facial", description: "Realce a beleza dos seus traços com naturalidade e segurança." },
@@ -78,9 +78,9 @@ const ProceduresSection = () => {
         { title: "Reabilitação Intestinal e Saúde Digestiva", category: "Saúde Intestinal", imageUrl: "/tratamento-reabilitação-intestinal-ortomolecular.jpg", theme: "var(--theme-brown)", path: "/procedimentos/nutricao-ortomolecular", description: "Desintoxicação profunda, reequilíbrio da microbiota e eliminação de toxinas." },
         { title: "Bioressonância Quântica e Avaliação Celular", category: "Diagnóstico Integrativo", imageUrl: "/bioressonancia-quantica-novo.jpeg", theme: "var(--theme-brown)", href: WHATSAPP_LINKS.MSG_BIORESSONANCIA, description: "Mapeamento bioenergético preciso de desequilíbrios, toxinas e carências em tempo real." },
         { title: "Suplementação Personalizada e Nutrição Ortomolecular", category: "Nutrição Celular", imageUrl: "/medida-nutricao-ortomolecular.jpg", theme: "var(--theme-brown)", href: WHATSAPP_LINKS.MSG_SUPLEMENTACAO, description: "Formulação sob medida de vitaminas, minerais e fitoterápicos de alta pureza." },
-        { title: "Saúde da Mulher e Ginecologia Integrativa", category: "Saúde da Mulher", imageUrl: "/images/saude-da-mulher-bg.jpg", theme: "var(--theme-brown)", path: "/procedimentos/saude-da-mulher", description: "Cuidado íntimo, equilíbrio hormonal e estética feminina sem cortes." },
+        { title: "Saúde da Mulher e Ginecologia Integrativa", category: "Saúde da Mulher", imageUrl: "/images/saude-da-mulher-bg.jpg", theme: "var(--theme-brown)", path: "/blog/saude-da-mulher", description: "Cuidado íntimo, equilíbrio hormonal e estética feminina sem cortes." },
         { title: "HIPRO: Derretimento Facial", category: "Tratamento de Sustentação", imageUrl: "/instituto-natuclinic-hipro-em-brasilia.png", theme: "var(--theme-brown)", path: "/procedimentos/hipro", description: "Ultrassom focado para tratar flacidez, pálpebra caída e bochecha de buldogue sem cortes." },
-        { title: "Endolaser", category: "Contorno Corporal", imageUrl: "/images/blog-images/Blog-image-endolaser.jpg", theme: "var(--theme-brown)", path: "/procedimentos/endolaser", description: "Tratamento a laser para flacidez e contorno corporal sem cirurgia." },
+        { title: "Endolaser", category: "Contorno Corporal", imageUrl: "/images/blog-images/Blog-image-endolaser.jpg", theme: "var(--theme-brown)", path: "/blog/endolaser", description: "Tratamento a laser para flacidez e contorno corporal sem cirurgia." },
     ];
 
     return (
