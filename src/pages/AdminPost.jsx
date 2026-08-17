@@ -267,36 +267,38 @@ const AdminPost = ({ goBack }) => {
 
                     <div className="flex gap-2">
                         {view === 'list' || view === 'leads' ? (
-                            <div className="flex flex-wrap gap-2 justify-end">
-                                <button
-                                    onClick={() => setView('settings')}
-                                    className="bg-gray-200 text-gray-700 px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-gray-300 transition-all font-sans"
-                                >
-                                    <Unicon name="setting" size={14} /> Configurações
-                                </button>
-                                <button
-                                    onClick={() => setView('leads')}
-                                    className="bg-blue-600 text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
-                                >
-                                    <Unicon name="users-alt" size={14} /> Leads
-                                </button>
-                                <button
-                                    onClick={() => setView('list')}
-                                    className="bg-gray-600 text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
-                                >
-                                    <Unicon name="file-alt" size={14} /> Artigos
-                                </button>
+                            <div className="flex flex-col sm:flex-row items-center gap-4">
+                                <div className="flex flex-wrap bg-gray-50 border border-gray-200 p-1.5 rounded-2xl">
+                                    <button
+                                        onClick={() => setView('list')}
+                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'list' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
+                                    >
+                                        <Unicon name="file-alt" size={14} /> Artigos
+                                    </button>
+                                    <button
+                                        onClick={() => setView('leads')}
+                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'leads' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
+                                    >
+                                        <Unicon name="users-alt" size={14} /> Leads
+                                    </button>
+                                    <button
+                                        onClick={() => setView('ads-list')}
+                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'ads-list' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
+                                    >
+                                        <Unicon name="image" size={14} /> Banners
+                                    </button>
+                                    <button
+                                        onClick={() => setView('settings')}
+                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'settings' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
+                                    >
+                                        <Unicon name="setting" size={14} /> Configurações
+                                    </button>
+                                </div>
                                 <button
                                     onClick={() => { setFormData(initialForm); setView('create'); }}
-                                    className="bg-natu-brown text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
+                                    className="bg-natu-brown text-white px-6 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-[#6c4b3a] transition-all"
                                 >
                                     <Unicon name="plus" size={14} /> Novo Post
-                                </button>
-                                <button
-                                    onClick={() => setView('ads-list')}
-                                    className="bg-natu-pink text-white px-4 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-all font-sans"
-                                >
-                                    <Unicon name="image" size={14} /> Banners
                                 </button>
                             </div>
 
@@ -524,7 +526,7 @@ const AdminPost = ({ goBack }) => {
                                                 const isDraft = (article.category || '').startsWith('Draft_');
                                                 const displayCategory = isDraft ? article.category.replace('Draft_', '') : article.category;
                                                 return (
-                                                    <div key={article.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-50 rounded-2xl hover:border-natu-brown/20 transition-all group border border-transparent">
+                                                    <div key={article.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 hover:border-natu-brown/30 hover:bg-gray-50/50 transition-all duration-300 group">
                                                         <div className="flex items-center gap-4 w-full md:w-auto">
                                                             <div className="w-16 h-12 rounded-lg overflow-hidden bg-gray-200 shrink-0 relative">
                                                                 <img src={article.image} alt="" className="w-full h-full object-cover" />
