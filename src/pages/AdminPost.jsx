@@ -20,6 +20,7 @@ const AdminPost = ({ goBack }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [submitAction, setSubmitAction] = useState('publish');
     const textAreaRef = useRef(null);
     const articlesPerPage = 10;
@@ -285,82 +286,143 @@ const AdminPost = ({ goBack }) => {
     }
 
     return (
-        <div className="pt-32 pb-20 min-h-screen bg-gray-50 px-4">
-            <div className="container max-w-7xl mx-auto p-4 md:p-10 bg-white rounded-3xl border border-gray-100">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                    <div>
-                        <h1 className="text-3xl font-sans font-bold text-natu-brown">
-                            {view === 'list' ? 'Gerenciar Blog' :
-                                view === 'leads' ? 'Leads / Contatos' :
-                                view === 'ads-list' ? 'Gerenciar Campanhas' :
-                                view === 'preview' ? 'Preview do Artigo' :
-                                view === 'edit' ? 'Editar Artigo' :
-                                view.startsWith('ad-config') ? 'Configurar Anúncio' : 'Novo Artigo'}
-                        </h1>
-                        <p className="text-xs text-natu-brown/40 uppercase tracking-widest font-bold mt-1">Painel Administrativo</p>
-                    </div>
+        <div className="flex h-screen bg-gray-50 overflow-hidden font-sans">
+            {/* Sidebar (Desktop) */}
+            <aside className={`flex flex-col bg-white border-r border-gray-200 transition-all duration-300 z-20 shrink-0 hidden md:flex ${isSidebarExpanded ? 'w-64' : 'w-20'}`}>
+                {/* Logo / Toggle */}
+                <div className="h-16 flex items-center justify-between px-6 border-b border-gray-100 shrink-0">
+                    {isSidebarExpanded && <span className="font-bold text-natu-brown text-lg tracking-tight">Natuclinic</span>}
+                    <button 
+                        onClick={() => setIsSidebarExpanded(!isSidebarExpanded)} 
+                        className={`p-1.5 rounded-md text-gray-400 hover:text-natu-brown hover:bg-gray-100 transition-colors ${!isSidebarExpanded && 'mx-auto'}`}
+                        title={isSidebarExpanded ? "Encolher menu" : "Expandir menu"}
+                    >
+                        <Unicon name={isSidebarExpanded ? "angle-left" : "bars"} size={20} />
+                    </button>
+                </div>
 
-                    <div className="flex gap-2">
-                        {view === 'list' || view === 'leads' ? (
-                            <div className="flex flex-col sm:flex-row items-center gap-4">
-                                <div className="flex flex-wrap bg-gray-50 border border-gray-200 p-1.5 rounded-2xl">
-                                    <button
-                                        onClick={() => setView('list')}
-                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'list' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
-                                    >
-                                        <Unicon name="file-alt" size={14} /> Artigos
-                                    </button>
-                                    <button
-                                        onClick={() => setView('leads')}
-                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'leads' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
-                                    >
-                                        <Unicon name="users-alt" size={14} /> Leads
-                                    </button>
-                                    <button
-                                        onClick={() => setView('ads-list')}
-                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'ads-list' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
-                                    >
-                                        <Unicon name="image" size={14} /> Banners
-                                    </button>
-                                    <button
-                                        onClick={() => setView('settings')}
-                                        className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all ${view === 'settings' ? 'bg-white text-natu-brown border border-gray-100' : 'text-gray-500 hover:text-natu-brown hover:bg-white/50 border border-transparent'}`}
-                                    >
-                                        <Unicon name="setting" size={14} /> Configurações
-                                    </button>
-                                </div>
+                {/* Navigation Links */}
+                <nav className="flex-1 overflow-y-auto py-6 flex flex-col gap-1 px-3">
+                    <button 
+                        onClick={() => setView('list')} 
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${view === 'list' ? 'bg-natu-brown/5 text-natu-brown font-medium' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'} ${!isSidebarExpanded && 'justify-center'}`}
+                        title="Artigos"
+                    >
+                        <Unicon name="file-alt" size={20} className={view === 'list' ? 'text-natu-brown' : 'text-gray-400'} />
+                        {isSidebarExpanded && <span className="text-sm">Artigos</span>}
+                    </button>
+                    <button 
+                        onClick={() => setView('leads')} 
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${view === 'leads' ? 'bg-natu-brown/5 text-natu-brown font-medium' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'} ${!isSidebarExpanded && 'justify-center'}`}
+                        title="Leads"
+                    >
+                        <Unicon name="users-alt" size={20} className={view === 'leads' ? 'text-natu-brown' : 'text-gray-400'} />
+                        {isSidebarExpanded && <span className="text-sm">Leads</span>}
+                    </button>
+                    <button 
+                        onClick={() => setView('ads-list')} 
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${view === 'ads-list' ? 'bg-natu-brown/5 text-natu-brown font-medium' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'} ${!isSidebarExpanded && 'justify-center'}`}
+                        title="Banners"
+                    >
+                        <Unicon name="megaphone" size={20} className={view === 'ads-list' ? 'text-natu-brown' : 'text-gray-400'} />
+                        {isSidebarExpanded && <span className="text-sm">Banners</span>}
+                    </button>
+                    <button 
+                        onClick={() => setIsGalleryOpen(true)} 
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 ${!isSidebarExpanded && 'justify-center'}`}
+                        title="Galeria de Mídia"
+                    >
+                        <Unicon name="image" size={20} className="text-gray-400" />
+                        {isSidebarExpanded && <span className="text-sm">Galeria</span>}
+                    </button>
+                    <button 
+                        onClick={() => setView('settings')} 
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${view === 'settings' ? 'bg-natu-brown/5 text-natu-brown font-medium' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'} ${!isSidebarExpanded && 'justify-center'}`}
+                        title="Configurações"
+                    >
+                        <Unicon name="setting" size={20} className={view === 'settings' ? 'text-natu-brown' : 'text-gray-400'} />
+                        {isSidebarExpanded && <span className="text-sm">Configurações</span>}
+                    </button>
+                </nav>
+
+                {/* Bottom Actions */}
+                <div className="p-4 border-t border-gray-100 shrink-0">
+                    <button 
+                        onClick={goBack} 
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg w-full transition-colors text-gray-500 hover:text-red-600 hover:bg-red-50 ${!isSidebarExpanded && 'justify-center'}`}
+                        title="Sair do Painel"
+                    >
+                        <Unicon name="sign-out-alt" size={20} />
+                        {isSidebarExpanded && <span className="text-sm font-medium">Sair</span>}
+                    </button>
+                </div>
+            </aside>
+
+            {/* Mobile Header (Only visible on small screens) */}
+            <div className="md:hidden absolute top-0 left-0 right-0 h-16 bg-white border-b border-gray-100 z-30 flex items-center justify-between px-4">
+                <span className="font-bold text-natu-brown text-lg">Natuclinic</span>
+                <div className="flex gap-2">
+                    <button onClick={() => setView('list')} className="p-2 text-gray-500"><Unicon name="file-alt" size={20} /></button>
+                    <button onClick={() => setView('leads')} className="p-2 text-gray-500"><Unicon name="users-alt" size={20} /></button>
+                    <button onClick={() => setView('ads-list')} className="p-2 text-gray-500"><Unicon name="megaphone" size={20} /></button>
+                    <button onClick={() => setIsGalleryOpen(true)} className="p-2 text-gray-500"><Unicon name="image" size={20} /></button>
+                    <button onClick={() => setView('settings')} className="p-2 text-gray-500"><Unicon name="setting" size={20} /></button>
+                    <button onClick={goBack} className="p-2 text-red-500"><Unicon name="sign-out-alt" size={20} /></button>
+                </div>
+            </div>
+
+            {/* Main Content Area */}
+            <main className="flex-1 flex flex-col h-screen overflow-y-auto pt-16 md:pt-0">
+                <div className="p-4 md:p-8 lg:p-10 w-full max-w-6xl mx-auto">
+                    
+                    {/* Content Header */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                        <div>
+                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+                                {view === 'list' ? 'Artigos do Blog' :
+                                    view === 'leads' ? 'Leads Capturados' :
+                                    view === 'ads-list' ? 'Banners de Anúncios' :
+                                    view === 'preview' ? 'Preview' :
+                                    view === 'edit' ? 'Editar Artigo' :
+                                    view.startsWith('ad-config') ? 'Configurar Anúncio' : 
+                                    view === 'settings' ? 'Configurações' : 'Novo Artigo'}
+                            </h1>
+                            <p className="text-sm text-gray-500 mt-1">Gerencie os conteúdos do seu site</p>
+                        </div>
+
+                        {/* Top Right Action Buttons */}
+                        <div className="flex items-center gap-3">
+                            {['list', 'leads', 'ads-list', 'settings'].includes(view) ? (
                                 <button
                                     onClick={() => { setFormData(initialForm); setView('create'); }}
-                                    className="bg-natu-brown text-white px-6 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-[#6c4b3a] transition-all"
+                                    className="bg-natu-brown text-white px-5 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-[#6c4b3a] transition-all shadow-sm"
                                 >
-                                    <Unicon name="plus" size={14} /> Novo Post
+                                    <Unicon name="plus" size={18} /> Novo Post
                                 </button>
-                            </div>
-
-                        ) : view === 'preview' ? (
-                            <button
-                                onClick={() => setView(editingId ? 'edit' : 'create')}
-                                className="bg-natu-brown text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-all"
-                            >
-                                Voltar para Edição
-                            </button>
-                        ) : (
-                            <div className="flex gap-2">
+                            ) : view === 'preview' ? (
                                 <button
-                                    onClick={() => setView('preview')}
-                                    className="bg-gray-800 text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-gray-900 transition-all"
+                                    onClick={() => setView(editingId ? 'edit' : 'create')}
+                                    className="bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-gray-50 transition-all shadow-sm"
                                 >
-                                    <Unicon name="eye" size={14} /> Preview
+                                    <Unicon name="arrow-left" size={18} /> Voltar para Edição
                                 </button>
-                                <button
-                                    onClick={() => setView('list')}
-                                    className="bg-gray-100 text-gray-500 px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-all"
-                                >
-                                    Cancelar
-                                </button>
-                            </div>
-                        )}
-                        <button onClick={goBack} className="text-[10px] font-bold uppercase tracking-widest text-gray-300 hover:text-natu-pink transition-colors ml-4">Voltar ao Site</button>
+                            ) : (
+                                <>
+                                    <button
+                                        onClick={() => setView('preview')}
+                                        className="bg-white border border-gray-200 text-gray-700 px-4 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-gray-50 transition-all shadow-sm hidden sm:flex"
+                                    >
+                                        <Unicon name="eye" size={18} /> Preview
+                                    </button>
+                                    <button
+                                        onClick={() => setView('list')}
+                                        className="bg-white border border-gray-200 text-red-600 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-50 transition-all shadow-sm"
+                                    >
+                                        Cancelar
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -583,7 +645,7 @@ const AdminPost = ({ goBack }) => {
                                                             </div>
                                                             <div className="overflow-hidden">
                                                                 <div className="flex items-center gap-2">
-                                                                    <h3 className="font-bold text-natu-brown text-sm truncate max-w-xs">
+                                                                    <h3 className="font-medium text-natu-brown text-sm truncate max-w-xs">
                                                                         {article.title}
                                                                     </h3>
                                                                     {isDraft && <span className="bg-orange-100 text-orange-600 px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest">Rascunho</span>}
@@ -941,7 +1003,8 @@ const AdminPost = ({ goBack }) => {
                         </div>
                     </form>
                 )}
-            </div>
+                </div>
+            </main>
 
             <MediaGalleryModal 
                 isOpen={isGalleryOpen} 

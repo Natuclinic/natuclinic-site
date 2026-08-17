@@ -136,6 +136,8 @@ export default function App() {
     location.pathname !== '/procedimentos/hipro' &&
     location.pathname !== '/procedimentos/harmonizacao';
 
+  const isAdminPage = location.pathname.startsWith('/adminblogpost');
+
   const globalSchema = {
     "@context": "https://schema.org",
     "@type": ["MedicalClinic", "HealthAndBeautyBusiness"],
@@ -185,7 +187,7 @@ export default function App() {
         <ErrorBoundary>
         <React.Suspense fallback={null}>
           <main className="relative z-10 bg-natu-ivory">
-            {!isServicePage && <Navbar />}
+            {!isServicePage && !isAdminPage && <Navbar />}
             <Routes>
               <Route path="/" element={
                 <>
@@ -240,7 +242,7 @@ export default function App() {
             </Routes>
           </main>
 
-          {!isServicePage && <FooterNew />}
+          {!isServicePage && !isAdminPage && <FooterNew />}
         </React.Suspense>
         </ErrorBoundary>
 
