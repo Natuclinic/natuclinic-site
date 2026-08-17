@@ -210,6 +210,39 @@ export default {
             }
         }
 
+        // GET /leads
+        if (url.pathname === "/leads" && request.method === "GET") {
+            try {
+                const { results } = await env.DB.prepare(
+                    "SELECT * FROM leads ORDER BY created_at DESC"
+                ).all();
+                return new Response(JSON.stringify(results), {
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            } catch (e) {
+                return new Response(JSON.stringify({ error: e.message }), {
+                    status: 500,
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            }
+        }
+
+        // DELETE /leads/:id
+        if (url.pathname.startsWith("/leads/") && request.method === "DELETE") {
+            try {
+                const leadId = url.pathname.split('/')[2];
+                await env.DB.prepare("DELETE FROM leads WHERE id = ?").bind(leadId).run();
+                return new Response(JSON.stringify({ success: true }), {
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            } catch (e) {
+                return new Response(JSON.stringify({ error: e.message }), {
+                    status: 500,
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            }
+        }
+
         return new Response("Not Found", { status: 404, headers: corsHeaders });
     },
 };

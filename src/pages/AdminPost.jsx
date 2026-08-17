@@ -13,6 +13,8 @@ const AdminPost = ({ goBack }) => {
     const [view, setView] = useState('list'); // 'list', 'edit', 'create', 'ad-config', 'settings'
     const [articles, setArticles] = useState([]);
     const [editingId, setEditingId] = useState(null);
+    const [leads, setLeads] = useState([]);
+    const [loadingLeads, setLoadingLeads] = useState(false);
     
     // Novas variáveis de estado
     const [searchTerm, setSearchTerm] = useState('');
@@ -42,6 +44,7 @@ const AdminPost = ({ goBack }) => {
     useEffect(() => {
         if (isAuthenticated) {
             fetchArticles();
+            fetchLeads();
         }
     }, [isAuthenticated]);
 
@@ -57,6 +60,38 @@ const AdminPost = ({ goBack }) => {
             setStatus({ type: 'error', message: 'Erro ao carregar artigos do Cloudflare D1.' });
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchLeads = async () => {
+        setLoadingLeads(true);
+        try {
+            const response = await fetch('https://natuclinic-api.fabriccioarts.workers.dev/leads');
+            if (!response.ok) throw new Error('Falha ao buscar leads do Cloudflare');
+            const data = await response.json();
+            setLeads(data || []);
+        } catch (err) {
+            console.error('Erro ao buscar leads:', err);
+        } finally {
+            setLoadingLeads(false);
+        }
+    };
+
+    const handleDeleteLead = async (id) => {
+        if (!window.confirm('Tem certeza que deseja apagar este lead?')) return;
+        setLoadingLeads(true);
+        try {
+            const response = await fetch(`https://natuclinic-api.fabriccioarts.workers.dev/leads/${encodeURIComponent(id)}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error('Falha ao deletar lead');
+            fetchLeads();
+            alert('Lead removido com sucesso!');
+        } catch (err) {
+            console.error('Erro ao deletar lead:', err);
+            alert('Erro ao deletar lead: ' + err.message);
+        } finally {
+            setLoadingLeads(false);
         }
     };
 
@@ -411,7 +446,7 @@ const AdminPost = ({ goBack }) => {
                         <div className="p-6 bg-blue-50/50 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
                             <div>
                                 <h2 className="font-bold text-natu-brown text-lg">Últimos Contatos</h2>
-                                <p className="text-xs text-gray-500">Exibindo dados de demonstração (Aguardando Chaves do Supabase)</p>
+                                <p className="text-xs text-gray-500">Lista completa de leads capturados pelo site.</p>
                             </div>
                         </div>
                         <div className="overflow-x-auto">
@@ -425,27 +460,41 @@ const AdminPost = ({ goBack }) => {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-50">
-                                    {[
-                                        { id: 1, name: 'Maria Silva', email: 'maria@email.com', phone: '(61) 98888-7777', source: 'Formulário Site', date: 'Hoje, 10:30' },
-                                        { id: 2, name: 'João Santos', email: 'joao@email.com', phone: '(61) 99999-5555', source: 'Instagram Link', date: 'Ontem, 15:45' },
-                                        { id: 3, name: 'Ana Costa', email: 'ana@email.com', phone: '(61) 97777-4444', source: 'Google Ads', date: '11/08/2026' },
-                                    ].map(lead => (
-                                        <tr key={lead.id} className="hover:bg-gray-50/50 transition-colors">
-                                            <td className="px-6 py-4 whitespace-nowrap text-gray-500 text-xs">{lead.date}</td>
-                                            <td className="px-6 py-4 font-bold text-natu-brown">{lead.name}</td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex flex-col">
-                                                    <span className="text-gray-900 font-medium">{lead.phone}</span>
-                                                    <span className="text-gray-400 text-xs">{lead.email}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                                                    {lead.source}
-                                                </span>
-                                            </td>
+                                    {leads.length === 0 && !loadingLeads ? (
+                                        <tr>
+                                            <td colSpan="5" className="px-6 py-10 text-center text-gray-400">Nenhum lead encontrado no banco de dados.</td>
                                         </tr>
-                                    ))}
+                                    ) : (
+                                        leads.map(lead => {
+                                            const formattedDate = new Date(lead.created_at).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                                            return (
+                                                <tr key={lead.id} className="hover:bg-gray-50/50 transition-colors">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-gray-500 text-xs">{formattedDate}</td>
+                                                    <td className="px-6 py-4 font-bold text-natu-brown">{lead.name}</td>
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex flex-col">
+                                                            <span className="text-gray-900 font-medium">{lead.phone}</span>
+                                                            <span className="text-gray-400 text-xs">{lead.email}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                                                            {lead.source}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-right">
+                                                        <button 
+                                                            onClick={() => handleDeleteLead(lead.id)}
+                                                            className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                            title="Excluir Lead"
+                                                        >
+                                                            <Unicon name="trash" size={16} />
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })
+                                    )}
                                 </tbody>
                             </table>
                         </div>
