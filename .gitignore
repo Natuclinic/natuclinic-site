@@ -29,3 +29,6 @@ dist-ssr
 
 # Google Cloud Keys
 google-credentials.json
+
+# DB dumps / scratch
+articles_dump.json
