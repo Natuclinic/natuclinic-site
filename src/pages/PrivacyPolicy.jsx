@@ -110,7 +110,7 @@ const PrivacyPolicy = ({ goBack }) => {
                 <div className="desktop-container text-center">
                     <h3 className="font-sans font-bold tracking-tight text-3xl text-natu-brown mb-8">Dúvidas sobre seus dados?</h3>
                     <a
-                        href="https://wa.me/5561992551867?text=Olá! Tenho uma dúvida sobre a proteção de meus dados na Natuclinic."
+                        href="https://wa.me/5561982582150?text=Olá! Tenho uma dúvida sobre a proteção de meus dados na Natuclinic."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-4 bg-natu-brown text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-black transition-all"

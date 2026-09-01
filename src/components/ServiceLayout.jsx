@@ -77,7 +77,7 @@ const ServiceLayout = ({ title, subtitle, children, goBack, coverImage, whatsapp
                         Dê o primeiro passo com segurança e acolhimento. Agende sua consulta avaliativa.
                     </p>
                     <a
-                        href={`https://wa.me/5561992551867?text=${encodeURIComponent(whatsappMessage || "Olá! Gostaria de agendar uma consulta.")}`}
+                        href={`https://wa.me/5561982582150?text=${encodeURIComponent(whatsappMessage || "Olá! Gostaria de agendar uma consulta.")}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block px-10 py-4 border border-[#F2F0E9]/30 rounded-full text-xs tracking-[0.2em] uppercase font-sans hover:bg-[#F2F0E9] hover:text-natu-brown transition-all duration-500"

@@ -57,7 +57,7 @@ const FeedbackSection = () => {
     }, []);
 
     const handleWhatsApp = () => {
-        const phone = "5561992551867";
+        const phone = "5561982582150";
         const message = encodeURIComponent("Olá! Vi as avaliações da Natuclinic e gostaria de agendar uma consulta.");
         window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
     };

@@ -2,11 +2,11 @@
  * Centralized WhatsApp Link Configuration
  */
 
-const PHONE_NUMBER = "5561992551867"; // Natuclinic Official Number
+const PHONE_NUMBER = "5561982582150"; // Natuclinic Official Number
 export const UNIT_PHONES = {
     TAGUATINGA: "(61) 3372-9962",
     PLANALTINA: "(61) 3388-6025",
-    WHATSAPP: "(61) 99255-1867"
+    WHATSAPP: "(61) 98258-2150"
 };
 
 const WHATSAPP_BASE = `https://wa.me/${PHONE_NUMBER}`;

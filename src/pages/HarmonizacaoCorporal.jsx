@@ -196,7 +196,7 @@ const HarmonizacaoCorporal = () => {
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent(`Olá! Gostaria de saber mais sobre a Harmonização Corporal.`);
-        window.open(`${WHATSAPP_LINKS.GENERAL || 'https://wa.me/5561992551867'}&text=${message}`, '_blank');
+        window.open(`${WHATSAPP_LINKS.GENERAL || 'https://wa.me/5561982582150'}&text=${message}`, '_blank');
     };
 
     const handleSubmit = async (e) => {

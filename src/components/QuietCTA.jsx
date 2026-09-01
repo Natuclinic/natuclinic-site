@@ -70,7 +70,7 @@ const QuietCTA = () => {
                 {/* Right: Action */}
                 <div className="w-1/3 flex justify-end">
                     <button
-                        onClick={() => window.open('https://wa.me/5561992551867?text=Olá! Gostaria de mais informações sobre os tratamentos.', '_blank')}
+                        onClick={() => window.open('https://wa.me/5561982582150?text=Olá! Gostaria de mais informações sobre os tratamentos.', '_blank')}
                         className="px-3 py-1.5 md:px-10 md:py-3 border border-[#F2F0E9] rounded-full text-[7px] md:text-[10px] lg:text-xs tracking-[0.2em] uppercase font-sans hover:bg-[#F2F0E9] hover:text-natu-brown transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap bg-transparent cursor-pointer"
                     >
                         Contato

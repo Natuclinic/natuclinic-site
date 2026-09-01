@@ -228,7 +228,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
     }, []);
 
     const handleWhatsApp = () => {
-        window.open("https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma consulta de Nutrição Ortomolecular na Natuclinic.", '_blank');
+        window.open("https://wa.me/5561982582150?text=Olá! Gostaria de agendar uma consulta de Nutrição Ortomolecular na Natuclinic.", '_blank');
     };
 
     return (

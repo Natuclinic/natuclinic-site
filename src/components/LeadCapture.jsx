@@ -39,7 +39,7 @@ const LeadCapture = () => {
             }).catch(() => {});
 
             const message = encodeURIComponent(`Olá! Meu nome é ${formData.name}. Gostaria de agendar minha avaliação personalizada.`);
-            const whatsappUrl = `https://wa.me/5561992551867?text=${message}`;
+            const whatsappUrl = `https://wa.me/5561982582150?text=${message}`;
 
             setStatus({ type: 'success', message: 'Redirecionando para o WhatsApp...' });
             setTimeout(() => {

@@ -262,7 +262,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
             role: 'Biomédica Esteta',
             credentials: 'CRBM-DF 26802',
             image: '/dra-debora.jpg',
-            whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação de Estética Avançada.",
+            whatsapp: "https://wa.me/5561982582150?text=Olá! Gostaria de agendar uma avaliação de Estética Avançada.",
             text: 'O primeiro passo é uma avaliação estética detalhada e individualizada que entende o seu caso.',
             footer: 'Você fala direto com a Natuclinic • Brasília'
         };
@@ -272,7 +272,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
             role: 'Nutricionista Ortomolecular',
             credentials: 'CRN-DF 21414',
             image: '/nutricionista-ortomolecular-integrativo-dr-julimar-meneses.jpeg',
-            whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação Nutricional.",
+            whatsapp: "https://wa.me/5561982582150?text=Olá! Gostaria de agendar uma avaliação Nutricional.",
             text: 'O primeiro passo é uma avaliação médica e nutricional que entende o seu metabolismo.',
             footer: 'Você fala direto com a Natuclinic • Brasília'
         };
@@ -282,7 +282,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
             role: 'Especialistas',
             credentials: 'Brasília - DF',
             image: '/logo-svg.svg',
-            whatsapp: "https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação.",
+            whatsapp: "https://wa.me/5561982582150?text=Olá! Gostaria de agendar uma avaliação.",
             text: 'O primeiro passo é uma avaliação personalizada que entende o seu caso.',
             footer: 'Você fala direto com a Natuclinic • Brasília'
         };
@@ -509,7 +509,7 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
                             A avaliação médica é o caminho para decidir com segurança, contexto e acompanhamento.
                         </p>
                         <a
-                            href="https://wa.me/5561992551867?text=Olá! Gostaria de agendar uma avaliação."
+                            href="https://wa.me/5561982582150?text=Olá! Gostaria de agendar uma avaliação."
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full md:w-max bg-white text-natu-brown py-3.5 px-8 rounded-full font-sans font-bold flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors text-[15px]"
