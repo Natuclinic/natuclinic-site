@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Unicon from './Unicon';
 import { API_URLS } from '../constants/links';
+import { sendLeadToCRM } from '../services/crm';
 
 const LeadCapture = () => {
     const [loading, setLoading] = useState(false);
@@ -37,6 +38,8 @@ const LeadCapture = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...formData, source: 'lead_capture_hero' })
             }).catch(() => {});
+
+            sendLeadToCRM({ ...formData, source: 'lead_capture_hero' });
 
             const message = encodeURIComponent(`Olá! Meu nome é ${formData.name}. Gostaria de agendar minha avaliação personalizada.`);
             const whatsappUrl = `https://wa.me/5561982582150?text=${message}`;

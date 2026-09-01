@@ -37,6 +37,7 @@ const Contato = React.lazy(() => import('./pages/Contato'));
 const Soroterapia = React.lazy(() => import('./pages/Soroterapia'));
 const Sobre = React.lazy(() => import('./pages/Sobre'));
 import { useArticles } from './hooks/useArticles';
+import { captureAttribution } from './services/leadTracking';
 
 import Navbar from './components/Navbar';
 import HomeIntro from './components/HomeIntro';
@@ -112,6 +113,11 @@ export default function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
+
+  // Captura a atribuição de origem (UTM) uma vez, no primeiro carregamento.
+  useEffect(() => {
+    captureAttribution();
+  }, []);
 
   const [showScrollTop, setShowScrollTop] = React.useState(false);
   const [scrollProgress, setScrollProgress] = React.useState(0);

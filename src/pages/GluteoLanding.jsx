@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import Unicon from '../components/Unicon';
 import Silk from '../components/Silk';
 import { WHATSAPP_LINKS } from '../constants/links';
+import { sendLeadToCRM } from '../services/crm';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,6 +82,13 @@ const GluteoLanding = () => {
                 })
             });
             if (!response.ok) throw new Error('Erro ao enviar');
+
+            sendLeadToCRM({
+                name: formData.name,
+                phone: formData.phone,
+                email: 'nao@informado.com',
+                source: 'gluteo_landing_final_cta',
+            });
 
             setStatus({ type: 'success', message: 'Agendamento solicitado! Redirecionando para o WhatsApp...' });
 

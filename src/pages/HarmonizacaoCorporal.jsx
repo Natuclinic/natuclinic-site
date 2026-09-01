@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { API_URLS } from '../constants/links';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { WHATSAPP_LINKS } from '../constants/links';
+import { sendLeadToCRM } from '../services/crm';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import VideoFeedbacks from '../components/VideoFeedbacks';
@@ -219,6 +220,13 @@ const HarmonizacaoCorporal = () => {
                 })
             });
             if (!response.ok) throw new Error('Erro ao enviar');
+
+            sendLeadToCRM({
+                name: formData.name,
+                phone: formData.phone,
+                email: 'nao@informado.com',
+                source: 'Landing_Harmone_BEE',
+            });
             setStatus({ type: 'success', message: 'Enviado. Redirecionando para o WhatsApp...' });
             setTimeout(() => {
                 handleWhatsApp();

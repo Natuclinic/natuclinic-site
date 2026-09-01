@@ -3,6 +3,7 @@ import Unicon from './Unicon';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { API_URLS } from '../constants/links';
+import { sendLeadToCRM } from '../services/crm';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,8 +41,10 @@ const ResultsCTA = () => {
             fetch(`${API_URLS.BASE}/leads`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, source: 'lead_capture_hero' })
+                body: JSON.stringify({ ...formData, source: 'results_cta' })
             }).catch(() => {});
+
+            sendLeadToCRM({ ...formData, source: 'results_cta' });
 
             const message = encodeURIComponent(`Olá! Meu nome é ${formData.name}. Gostaria de agendar minha avaliação personalizada.`);
             const whatsappUrl = `https://wa.me/5561982582150?text=${message}`;
