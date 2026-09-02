@@ -34,14 +34,6 @@ const CookieConsent = () => {
             });
         }
 
-        // Initialize Meta Pixel if marketing is allowed
-        if (consents.marketing && window.fbq) {
-            if (!window._fbq_natu_init) {
-                window.fbq('init', '899389778630417');
-                window._fbq_natu_init = true;
-            }
-            window.fbq('track', 'PageView');
-        }
     };
 
     const handleAcceptAll = () => {
@@ -153,7 +145,7 @@ const CookieConsent = () => {
                                         <div className="flex items-start justify-between gap-4 p-3 rounded-2xl border border-gray-100">
                                             <div className="flex flex-col gap-1">
                                                 <span className="text-sm font-medium text-natu-brown">Marketing</span>
-                                                <span className="text-[11px] text-gray-500 font-light leading-snug">Meta Pixel para oferecer anúncios mais relevantes.</span>
+                                                <span className="text-[11px] text-gray-500 font-light leading-snug">Google Ads para oferecer anúncios mais relevantes.</span>
                                             </div>
                                             <button
                                                 onClick={() => setPreferences(prev => ({ ...prev, marketing: !prev.marketing }))}
