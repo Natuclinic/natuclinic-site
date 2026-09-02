@@ -3,6 +3,24 @@
 
 <head>
   <meta charset="UTF-8" />
+
+  <!-- Google Consent Mode (Default Denied) — precede o GTM/gtag para o gating de consentimento funcionar -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',
+      'personalization_storage': 'denied',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+    gtag('set', 'ads_data_redaction', true);
+  </script>
+
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
@@ -56,21 +74,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
     rel="stylesheet" />
 
-
-  <!-- Google Consent Mode (Default Denied) -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'analytics_storage': 'denied',
-      'functionality_storage': 'granted',
-      'personalization_storage': 'denied',
-      'security_storage': 'granted',
-      'wait_for_update': 500
-    });
-    gtag('set', 'ads_data_redaction', true);
-  </script>
 
   <!-- Google tags (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16460728165"></script>
