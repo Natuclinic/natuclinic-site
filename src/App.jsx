@@ -33,6 +33,7 @@ const BlogHighlights = React.lazy(() => import('./components/BlogHighlights'));
 const VideoFeedbacks = React.lazy(() => import('./components/VideoFeedbacks'));
 const GoogleReviews = React.lazy(() => import('./components/GoogleReviews'));
 const GluteoLanding = React.lazy(() => import('./pages/GluteoLanding'));
+const DepilacaoLaser = React.lazy(() => import('./pages/DepilacaoLaser'));
 const Contato = React.lazy(() => import('./pages/Contato'));
 const Soroterapia = React.lazy(() => import('./pages/Soroterapia'));
 const Sobre = React.lazy(() => import('./pages/Sobre'));
@@ -240,6 +241,7 @@ export default function App() {
               <Route path="/blog-post-nutricao" element={<Navigate to="/blog/nutricao-ortomolecular-o-que-e" replace />} />
 
               <Route path="/gluteo-dos-sonhos" element={<GluteoLanding />} />
+              <Route path="/depilacao-a-laser" element={<DepilacaoLaser />} />
               <Route path="/sobre" element={<Sobre />} />
               <Route path="/procedimentos/soroterapia" element={<Soroterapia goBack={() => navigate(-1)} />} />
               <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />

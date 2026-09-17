@@ -9,7 +9,8 @@ export const UNIT_PHONES = {
     WHATSAPP: "(61) 98258-2150"
 };
 
-const WHATSAPP_BASE = `https://wa.me/${PHONE_NUMBER}`;
+// Exportado para telas que montam a própria mensagem (ex: simuladores de orçamento).
+export const WHATSAPP_BASE = `https://wa.me/${PHONE_NUMBER}`;
 
 export const WHATSAPP_LINKS = {
     GENERAL: `${WHATSAPP_BASE}?text=${encodeURIComponent("Olá! Vim pelo site da Natuclinic e gostaria de mais informações.")}`,

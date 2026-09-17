@@ -81,6 +81,7 @@ const ProceduresSection = () => {
         { title: "Saúde da Mulher e Ginecologia Integrativa", category: "Saúde da Mulher", imageUrl: "/images/saude-da-mulher-bg.jpg", theme: "var(--theme-brown)", href: WHATSAPP_LINKS.MSG_SAUDE_MULHER, description: "Cuidado íntimo, equilíbrio hormonal e estética feminina sem cortes." },
         { title: "HIPRO: Derretimento Facial", category: "Tratamento de Sustentação", imageUrl: "/instituto-natuclinic-hipro-em-brasilia.png", theme: "var(--theme-brown)", path: "/procedimentos/hipro", description: "Ultrassom focado para tratar flacidez, pálpebra caída e bochecha de buldogue sem cortes." },
         { title: "Endolaser", category: "Contorno Corporal", imageUrl: "/images/blog-images/Blog-image-endolaser.jpg", theme: "var(--theme-brown)", path: "/blog/endolaser", description: "Tratamento a laser para flacidez e contorno corporal sem cirurgia." },
+        { title: "Depilação a Laser", category: "Estética Corporal", imageUrl: "/harmonizacao-corporal.jpg", theme: "var(--theme-brown)", path: "/depilacao-a-laser", description: "Monte seu tratamento e simule o investimento por área em poucos cliques." },
     ];
 
     return (
