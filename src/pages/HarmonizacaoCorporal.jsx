@@ -283,7 +283,7 @@ const HarmonizacaoCorporal = () => {
                     {/* Content on the left / Centered on mobile */}
                     <div className="flex flex-col justify-center items-center text-center md:items-start md:text-left relative order-first">
 
-                        <Fade delay={0.1} className="mix-blend-difference w-full">
+                        <Fade delay={0.1} className="w-full">
                             <h1 className="text-3xl md:text-4xl font-normal leading-[1.1] tracking-tight mb-8 text-white max-w-4xl mx-auto md:mx-0 drop-shadow-2xl">
                                 Seu corpo cansou das dietas. <strong className="font-serif italic bg-gradient-to-r from-[#C5A059] to-[#E5C992] bg-clip-text text-transparent inline-block">A gente também.</strong> Alcance seu melhor corpo em 90 dias.
                             </h1>
