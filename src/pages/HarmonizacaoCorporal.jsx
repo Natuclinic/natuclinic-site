@@ -107,8 +107,6 @@ const VideoPlayer = ({ src }) => {
 
             {/* Progress bar — always visible, pinned to bottom */}
             <div className="absolute bottom-0 left-0 right-0 z-20">
-                {/* Thin gradient fade above the bar for contrast */}
-                <div className="h-8 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                 <div
                     ref={progressRef}
                     className="relative w-full h-1 bg-white/20 cursor-pointer group"
