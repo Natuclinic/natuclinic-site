@@ -135,7 +135,7 @@ const FooterNew = () => {
                     <div className="flex items-center gap-1.5 text-[10px] text-[#F2F0E9]/30">
                         <span>Desenvolvido por</span>
                         <a
-                            href="https://www.instagram.com/gone.assessoria"
+                            href="https://agenciagone.com.br"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:opacity-60 transition-opacity"
