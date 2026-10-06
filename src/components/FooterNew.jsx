@@ -73,7 +73,7 @@ const FooterNew = () => {
                             />
                         </button>
                         <p className="text-[#F2F0E9]/50 text-xs leading-relaxed font-light mb-6 max-w-[220px]">
-                            Referência em estética integral e nutrição ortomolecular em Brasília e Taguatinga.
+                            Referência em estética integral e nutrição ortomolecular em Taguatinga e Planaltina-DF.
                         </p>
                         <div className="flex gap-2.5">
                             {socials.map(({ icon, href, label }) => (
