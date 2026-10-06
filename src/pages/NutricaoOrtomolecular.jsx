@@ -359,7 +359,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             </BlurFade>
                             <BlurFade delay={0.6}>
                                 <p className="mt-4 text-xs md:text-base font-normal text-white/90 max-w-lg leading-relaxed text-center md:text-left mx-auto md:mx-0 font-sans">
-                                    Cansaço, intestino travado e emagrecimento resistente têm uma causa bioquímica. A Nutrição Ortomolecular trata essa raiz e devolve energia, equilíbrio e resultado real.
+                                    Cansaço, intestino travado e dificuldade no emagrecimento têm uma causa profunda. A Nutrição Ortomolecular investiga essa raiz e ajusta o que o seu corpo precisa para funcionar bem de novo.
                                 </p>
                             </BlurFade>
                             <BlurFade delay={0.8}>
@@ -838,7 +838,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             Para quem é indicado?
                         </h2>
                         <p className="mt-4 font-sans font-light text-white/60 max-w-2xl mx-auto">
-                            A Nutrição Ortomolecular atua em um amplo espectro de condições e objetivos de saúde, tratando a causa e não apenas os sintomas.
+                            Indicada para todas as idades, a Nutrição Ortomolecular atua em um amplo espectro de condições e patologias derivadas da nutrição, tratando a causa e não apenas os sintomas.
                         </p>
                     </BlurFade>
 
