@@ -68,7 +68,7 @@ const ServiceLayout = ({ title, subtitle, children, goBack, coverImage, whatsapp
             </main>
 
             {/* Footer CTA */}
-            <section className="bg-natu-brown text-[#F2F0E9] py-32 text-center px-6">
+            <section className="bg-[#1a0e09] text-[#F2F0E9] py-32 text-center px-6">
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-serif italic mb-8">
                         Sua jornada começa aqui.

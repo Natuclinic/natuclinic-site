@@ -290,7 +290,7 @@ const ResultsSection = ({ id }) => {
     const translateX = -(currentIndex * itemWidth) + centerOffset;
 
     return (
-        <section id={id} ref={sectionRef} className="py-12 md:py-20 bg-natu-ivory border-t border-black/5 overflow-hidden">
+        <section id={id} ref={sectionRef} className="py-16 md:py-24 bg-natu-ivory border-t border-black/5 overflow-hidden">
             <div className="desktop-container-fluid">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16 results-header">
                     <div>
@@ -334,12 +334,14 @@ const ResultsSection = ({ id }) => {
                 <div className="flex justify-center gap-6 mt-12">
                     <button
                         onClick={() => { prevSlide(); resetResumeTimer(); }}
+                        aria-label="Resultado anterior"
                         className="w-14 h-14 rounded-full border border-natu-brown/10 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all active:scale-95"
                     >
                         <Unicon name="arrow-left" size={24} />
                     </button>
                     <button
                         onClick={() => { nextSlide(); resetResumeTimer(); }}
+                        aria-label="Próximo resultado"
                         className="w-14 h-14 rounded-full border border-natu-brown/10 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all active:scale-95"
                     >
                         <Unicon name="arrow-right" size={24} />

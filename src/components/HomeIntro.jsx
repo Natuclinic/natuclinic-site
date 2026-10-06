@@ -7,7 +7,6 @@ import { NatuButton } from './Navbar';
 const HomeIntro = () => {
     const containerRef = useRef(null);
     const bgRef = useRef(null);
-    const indicatorRef = useRef(null);
 
     useEffect(() => {
         const video = bgRef.current;

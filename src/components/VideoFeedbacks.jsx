@@ -3,7 +3,7 @@ import Unicon from './Unicon';
 import { gsap } from 'gsap';
 import { motion, AnimatePresence } from 'motion/react';
 
-const feedbacks = [
+const defaultFeedbacks = [
     {
         id: 'edilza',
         name: "Edilza",
@@ -34,7 +34,8 @@ const feedbacks = [
     }
 ];
 
-const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass = "py-12 md:py-24" }) => {
+const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-white", pyClass = "py-16 md:py-24", feedbacks: customFeedbacks, title, subtitle }) => {
+    const feedbacks = customFeedbacks || defaultFeedbacks;
     const [activeId, setActiveId] = useState(feedbacks[0].id);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -165,9 +166,11 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
             <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 {showTitle && (
                     <div className="mb-6 space-y-2 text-center lg:text-left">
-
+                        <span className="text-natu-brown/60 font-medium text-[10px] uppercase tracking-wider block mb-4">
+                            {subtitle || "Resultados reais de pacientes reais"}
+                        </span>
                         <h2 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight text-natu-brown leading-[0.95]">
-                            Depoimentos que inspiram
+                            {title || "Depoimentos que inspiram"}
                         </h2>
                     </div>
                 )}
@@ -201,7 +204,7 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
                                     key={f.id}
                                     ref={el => itemRefs.current[f.id] = el}
                                     className={`flex flex-col shrink-0 lg:shrink transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] snap-center
-                                        ${isActive ? (isPlaying ? 'w-[180px] lg:w-[225px] flex-none opacity-100' : 'lg:flex-[2.5] w-[85%] lg:w-full opacity-100') : 'lg:flex-[1] w-[85%] lg:w-full opacity-40 lg:opacity-40 hover:opacity-100'}`}
+                                        ${isActive ? ((f.youtubeId || isPlaying) ? 'w-[180px] lg:w-[225px] flex-none opacity-100' : 'lg:flex-[2.5] w-[85%] lg:w-full opacity-100') : 'lg:flex-[1] w-[85%] lg:w-full opacity-40 lg:opacity-40 hover:opacity-100'}`}
                                     onClick={() => handleToggle(f.id)}
                                 >
                                     {/* Video Container */}
@@ -210,31 +213,59 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
                                             ${isActive ? '' : 'opacity-80 scale-[0.98] lg:scale-100'}
                                         `}
                                     >
-                                        <video
-                                            ref={el => videoRefs.current[f.id] = el}
-                                            src={f.video}
-                                            className="absolute inset-0 w-full h-full object-cover"
-                                            playsInline
-                                            preload="metadata"
-                                            loop
-                                            muted={!isActive}
-                                            onEnded={() => setIsPlaying(false)}
-                                            onClick={(e) => {
-                                                if (isActive) {
-                                                    e.stopPropagation();
-                                                    togglePlay(f.id);
-                                                }
-                                            }}
-                                        />
+                                        {f.youtubeId ? (
+                                            isActive ? (
+                                                <iframe
+                                                    key={f.youtubeId}
+                                                    src={`https://www.youtube.com/embed/${f.youtubeId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=${f.youtubeId}`}
+                                                    className="absolute inset-0 w-full h-full"
+                                                    allow="autoplay; encrypted-media; picture-in-picture"
+                                                    allowFullScreen
+                                                    title={f.name}
+                                                />
+                                            ) : (
+                                                <div className="absolute inset-0 w-full h-full">
+                                                    <img
+                                                        src={`https://i.ytimg.com/vi/${f.youtubeId}/hqdefault.jpg`}
+                                                        alt={f.name}
+                                                        loading="lazy"
+                                                        className="absolute inset-0 w-full h-full object-cover"
+                                                    />
+                                                    <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
+                                                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 flex items-center justify-center text-white">
+                                                            <Unicon name="play" size={22} className="ml-1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        ) : (
+                                            <video
+                                                ref={el => videoRefs.current[f.id] = el}
+                                                src={f.video}
+                                                className="absolute inset-0 w-full h-full object-cover"
+                                                playsInline
+                                                preload="metadata"
+                                                loop
+                                                muted={!isActive}
+                                                onEnded={() => setIsPlaying(false)}
+                                                onClick={(e) => {
+                                                    if (isActive) {
+                                                        e.stopPropagation();
+                                                        togglePlay(f.id);
+                                                    }
+                                                }}
+                                            />
+                                        )}
 
-                                        {/* Play/Pause Overlay */}
-                                        {isActive && (
+                                        {/* Play/Pause Overlay (apenas para vídeos .mp4 auto-hospedados) */}
+                                        {isActive && !f.youtubeId && (
                                             <div
                                                 className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 pointer-events-none
                                                     ${isPlaying ? 'opacity-0' : 'opacity-100 bg-black/10'}`}
                                             >
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); togglePlay(f.id); }}
+                                                    aria-label={isPlaying ? "Pausar vídeo" : "Reproduzir vídeo"}
                                                     className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 flex items-center justify-center text-white pointer-events-auto hover:bg-white hover:text-black transition-all active:scale-95 flicker-fix"
                                                 >
                                                     <Unicon name={isPlaying ? "pause" : "play"} size={22} className={isPlaying ? "" : "ml-1"} />
@@ -252,9 +283,9 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-natu-ivory", pyClass =
                                             {f.result}
                                         </h3>
 
-                                        <button className="flex items-center gap-2 text-natu-pink font-bold uppercase tracking-widest text-[9px] hover:gap-3 transition-all group">
+                                        <a href="/procedimentos" className="flex items-center gap-2 text-natu-pink font-bold uppercase tracking-widest text-[9px] hover:gap-3 transition-all group no-underline">
                                             Conheça o Protocolo <Unicon name="arrow-right" size={12} />
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             );

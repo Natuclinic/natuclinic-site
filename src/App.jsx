@@ -200,11 +200,107 @@ export default function App() {
                 <>
                   <SEO
                     title="Natuclinic — Estética e Nutrição Ortomolecular em Brasília e Taguatinga"
-                    description="Clínica especializada em nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes, endolaser e estética corporal em Brasília e Taguatinga. Agende sua avaliação."
+                    description="Clínica especializada em nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes, endolaser e estética corporal. Unidades em Taguatinga Norte e Planaltina, DF. Agende sua avaliação personalizada."
                     url="https://www.natuclinic.com.br"
                     canonical="https://www.natuclinic.com.br"
-                    keywords="clínica estética brasília, nutrição ortomolecular taguatinga, harmonização facial brasília, ninfoplastia sem cortes, endolaser brasília, natuclinic"
+                    keywords="clínica estética brasília, nutrição ortomolecular taguatinga, harmonização facial brasília, ninfoplastia sem cortes, endolaser brasília, natuclinic, clínica estética planaltina"
                     image="/og-default.jpg"
+                    jsonLdList={[
+                      {
+                        "@context": "https://schema.org",
+                        "@type": "MedicalBusiness",
+                        "name": "Instituto Natuclinic",
+                        "url": "https://www.natuclinic.com.br",
+                        "logo": "https://www.natuclinic.com.br/logo-natuclinic.png",
+                        "image": "https://www.natuclinic.com.br/og-default.jpg",
+                        "description": "Clínica especializada em nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes, endolaser e estética corporal no Distrito Federal.",
+                        "telephone": "+55-61-98258-2150",
+                        "email": "contato@natuclinic.com.br",
+                        "priceRange": "$$",
+                        "currenciesAccepted": "BRL",
+                        "paymentAccepted": "Dinheiro, Cartão de Crédito, Cartão de Débito, PIX",
+                        "address": [
+                          {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Taguatinga Norte",
+                            "addressLocality": "Brasília",
+                            "addressRegion": "DF",
+                            "addressCountry": "BR"
+                          },
+                          {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Planaltina",
+                            "addressLocality": "Planaltina",
+                            "addressRegion": "DF",
+                            "addressCountry": "BR"
+                          }
+                        ],
+                        "sameAs": [
+                          "https://www.instagram.com/natuclinic"
+                        ],
+                        "aggregateRating": {
+                          "@type": "AggregateRating",
+                          "ratingValue": "5",
+                          "reviewCount": "87",
+                          "bestRating": "5",
+                          "worstRating": "1"
+                        }
+                      },
+                      {
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                          {
+                            "@type": "Question",
+                            "name": "Vocês aceitam convênio?",
+                            "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Não. Trabalhamos exclusivamente com atendimento particular. Isso nos permite dedicar tempo, atenção e personalização completos a cada paciente, sem restrições impostas por operadoras de plano."
+                            }
+                          },
+                          {
+                            "@type": "Question",
+                            "name": "Como funciona a primeira consulta?",
+                            "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "A primeira consulta é uma avaliação completa. Analisamos seu histórico, objetivos e exames para montar um protocolo individualizado. Não existe receita pronta: cada plano é construído exclusivamente para você."
+                            }
+                          },
+                          {
+                            "@type": "Question",
+                            "name": "Posso fazer procedimentos estéticos e nutrição ortomolecular ao mesmo tempo?",
+                            "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Sim, e é exatamente assim que obtemos os melhores resultados. A nutrição ortomolecular potencializa os efeitos dos procedimentos estéticos ao equilibrar o organismo por dentro, acelerando recuperação e prolongando os resultados."
+                            }
+                          },
+                          {
+                            "@type": "Question",
+                            "name": "Os resultados dos procedimentos são permanentes?",
+                            "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Depende do procedimento. Alguns tratamentos oferecem resultados duradouros que podem ser mantidos com cuidados simples; outros exigem manutenção periódica. Durante a consulta, explicamos em detalhes a expectativa real de cada protocolo."
+                            }
+                          },
+                          {
+                            "@type": "Question",
+                            "name": "Onde ficam as unidades da Natuclinic?",
+                            "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Temos duas unidades no Distrito Federal: Taguatinga Norte e Planaltina. Entre em contato pelo WhatsApp para saber qual unidade está mais próxima de você e agendar sua avaliação."
+                            }
+                          },
+                          {
+                            "@type": "Question",
+                            "name": "Quanto tempo leva para ver resultados?",
+                            "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Varia conforme o protocolo e o organismo de cada paciente. Em tratamentos estéticos, resultados iniciais costumam aparecer entre 1 e 3 sessões. Na nutrição ortomolecular, as primeiras mudanças perceptíveis geralmente ocorrem entre 30 e 60 dias de acompanhamento."
+                            }
+                          }
+                        ]
+                      }
+                    ]}
                   />
                   <HomeIntro />
                   <ProceduresSection />

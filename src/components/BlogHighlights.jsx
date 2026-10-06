@@ -150,7 +150,7 @@ const BlogHighlights = () => {
     const highlightArticles = articles.slice(0, 6);
 
     return (
-        <section ref={sectionRef} className="py-12 md:py-24 bg-white overflow-hidden select-none">
+        <section ref={sectionRef} className="py-16 md:py-24 bg-white overflow-hidden select-none">
             <div className="desktop-container-fluid">
                 <div className="flex flex-col gap-12 lg:gap-16">
                     

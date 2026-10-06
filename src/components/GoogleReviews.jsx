@@ -105,6 +105,8 @@ const GoogleReviews = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -119,6 +121,21 @@ const GoogleReviews = () => {
   const handleMouseUp = () => {
     setIsDragging(false);
   };
+
+  const updateEdges = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 4);
+    setAtEnd(el.scrollLeft >= el.scrollWidth - el.clientWidth - 4);
+  };
+
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', updateEdges, { passive: true });
+    updateEdges();
+    return () => el.removeEventListener('scroll', updateEdges);
+  }, []);
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
@@ -139,9 +156,9 @@ const GoogleReviews = () => {
   };
 
   return (
-    <section className="py-24 bg-natu-ivory overflow-hidden relative">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center mb-12 max-w-7xl mx-auto">
+    <section className="py-16 md:py-24 bg-natu-ivory overflow-hidden relative">
+      <div className="desktop-container-fluid">
+        <div className="flex flex-col items-center text-center mb-12">
           <div className="max-w-2xl flex flex-col items-center">
             <a href="https://share.google/YAwph5RkZ8DJZUFMK" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
               <img src="/google-logo-new-history-png-9.png" alt="Google Logo" className="h-8 mb-4 object-contain" />
@@ -158,7 +175,7 @@ const GoogleReviews = () => {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
-          className={`flex gap-6 overflow-x-auto pb-10 px-4 -mx-4 scrollbar-hide snap-x max-w-7xl mx-auto ${isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab snap-mandatory'}`}
+          className={`flex gap-6 overflow-x-auto pb-10 scrollbar-hide snap-x ${isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab snap-mandatory'}`}
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {reviews.map((review) => (
@@ -166,17 +183,19 @@ const GoogleReviews = () => {
           ))}
         </div>
 
-        <div className="flex justify-center gap-4 mt-8 max-w-7xl mx-auto">
-          <button 
+        <div className="flex justify-center gap-4 mt-8">
+          <button
             onClick={() => scroll('left')}
-            className="w-12 h-12 rounded-full border border-natu-brown/20 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+            disabled={atStart}
+            className="w-12 h-12 rounded-full border border-natu-brown/20 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-natu-brown"
             aria-label="Anterior"
           >
             <Unicon name="angle-left" />
           </button>
-          <button 
+          <button
             onClick={() => scroll('right')}
-            className="w-12 h-12 rounded-full border border-natu-brown/20 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+            disabled={atEnd}
+            className="w-12 h-12 rounded-full border border-natu-brown/20 flex items-center justify-center text-natu-brown hover:bg-natu-brown hover:text-white transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-natu-brown"
             aria-label="Próximo"
           >
             <Unicon name="angle-right" />

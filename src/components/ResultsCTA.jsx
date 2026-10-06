@@ -93,7 +93,7 @@ const ResultsCTA = () => {
                 ref={containerRef}
                 className="w-full max-w-md mx-auto pointer-events-auto"
             >
-                <div className="bg-natu-brown rounded-2xl p-6 md:p-8 relative overflow-hidden group transition-transform duration-500 [backface-visibility:hidden] [transform:translate3d(0,0,0)]">
+                <div className="bg-natu-brown rounded-2xl py-10 px-6 md:p-8 relative overflow-hidden group transition-transform duration-500 [backface-visibility:hidden] [transform:translate3d(0,0,0)]">
                     {/* Decorative Background Elements */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-colors duration-500"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/3 group-hover:bg-white/10 transition-colors duration-500"></div>
@@ -105,7 +105,7 @@ const ResultsCTA = () => {
                         className="absolute top-1/2 right-[10%] -translate-y-1/2 h-[180%] w-auto opacity-10 pointer-events-none select-none invert rotate-12"
                     />
 
-                    <div className="relative z-10 flex flex-col items-center justify-center gap-6 text-center">
+                    <div className="relative z-10 flex flex-col items-center justify-center gap-8 text-center">
 
                         <div className="space-y-3 max-w-sm">
                             <h3 className="font-sans font-bold tracking-tight text-3xl text-[#F2F0E9] leading-[0.95]">
@@ -118,7 +118,7 @@ const ResultsCTA = () => {
                         </div>
 
                         <div className="shrink-0 w-full">
-                            <div className="bg-white rounded-2xl p-6 shadow-2xl text-gray-800 relative z-20">
+                            <div className="bg-white rounded-2xl p-6 text-gray-800 relative z-20">
                                 <div className="text-center mb-5">
                                     <h3 className="text-lg font-sans font-bold text-natu-brown mb-1">
                                         Garanta sua vaga
@@ -155,11 +155,19 @@ const ResultsCTA = () => {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full bg-[#1CD760] text-white py-3 rounded-lg text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#19b350] transition-colors shadow-lg shadow-[#1CD760]/30 disabled:opacity-70 font-sans mt-2"
+                                        className="relative w-full bg-[#1CD760] text-white py-3 rounded-lg text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#19b350] transition-colors disabled:opacity-70 font-sans mt-2 overflow-hidden"
                                     >
+                                        <span className="absolute inset-0 -translate-x-full animate-[shine_2.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg]" />
                                         {loading ? 'Aguarde...' : 'CONTINUAR NO WHATSAPP'}
                                         {!loading && <Unicon name="arrow-right" size={16} />}
                                     </button>
+                                    <p className="text-[9px] text-gray-400 text-center leading-relaxed mt-2">
+                                        Ao continuar, você concorda com nossa{' '}
+                                        <a href="/politica-de-privacidade" className="underline hover:text-gray-600 transition-colors">
+                                            Política de Privacidade
+                                        </a>{' '}
+                                        e autoriza o uso dos seus dados para contato, conforme a LGPD (Lei 13.709/2018).
+                                    </p>
                                 </form>
                             </div>
                         </div>

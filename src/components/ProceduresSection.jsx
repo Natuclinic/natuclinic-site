@@ -15,6 +15,7 @@ const ProcedureCard = ({ imageUrl, title, category, path, href, themeColor, desc
             <img
                 src={imageUrl}
                 alt={title}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 [transform:translate3d(0,0,0)] [backface-visibility:hidden]"
             />
             <div

@@ -156,17 +156,15 @@ const Navbar = () => {
                 </span>
 
                 {/* Mobile Toggle */}
-                <button
-                    className="md:hidden z-[60] relative p-2 text-natu-brown bg-transparent border-none"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    aria-label="Toggle Menu"
-                >
-                    {mobileMenuOpen ? (
-                        <Unicon name="times" size={24} />
-                    ) : (
+                {!mobileMenuOpen && (
+                    <button
+                        className="md:hidden z-[60] relative p-2 text-natu-brown bg-transparent border-none"
+                        onClick={() => setMobileMenuOpen(true)}
+                        aria-label="Abrir menu"
+                    >
                         <Unicon name="bars" size={24} />
-                    )}
-                </button>
+                    </button>
+                )}
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-14 font-sans">

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, AnimatePresence } from 'motion/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,16 +104,25 @@ const FaqSection = () => {
                                         )}
                                     </span>
                                 </button>
-                                {open === i && (
-                                    <div className="animate-in fade-in duration-300">
-                                        <div className="border-t border-natu-brown/10 mx-5 md:mx-6" />
-                                        <div className="p-5 md:p-6">
-                                            <p className="text-sm md:text-base font-sans font-light text-[#3D1E15]/85 leading-relaxed m-0">
-                                                {faq.a}
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
+                                <AnimatePresence initial={false}>
+                                    {open === i && (
+                                        <motion.div
+                                            key="content"
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                            style={{ overflow: 'hidden' }}
+                                        >
+                                            <div className="border-t border-natu-brown/10 mx-5 md:mx-6" />
+                                            <div className="p-5 md:p-6">
+                                                <p className="text-sm md:text-base font-sans font-light text-[#3D1E15]/85 leading-relaxed m-0">
+                                                    {faq.a}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         ))}
                     </div>
