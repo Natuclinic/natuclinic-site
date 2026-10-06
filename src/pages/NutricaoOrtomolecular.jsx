@@ -359,7 +359,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                             </BlurFade>
                             <BlurFade delay={0.6}>
                                 <p className="mt-4 text-xs md:text-base font-normal text-white/90 max-w-lg leading-relaxed text-center md:text-left mx-auto md:mx-0 font-sans">
-                                    Cansaço, intestino travado e emagrecimento resistente não são "normais". Podem ser sinais de algo acontecendo por dentro. O Dr. Julimar investiga a raiz.
+                                    Cansaço, intestino travado e emagrecimento resistente têm uma causa bioquímica. A Nutrição Ortomolecular trata essa raiz e devolve energia, equilíbrio e resultado real.
                                 </p>
                             </BlurFade>
                             <BlurFade delay={0.8}>
@@ -451,7 +451,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                         <div className="flex flex-col gap-4">
                             {[
                                 "Cansaço constante, mesmo dormindo bem",
-                                "Acorda cansado, mesmo após uma boa noite de sono",
+                                "Memória e concentração mais fracas que o normal",
                                 "Intestino preso ou inchaço frequente",
                                 "Desânimo e falta de disposição",
                                 "Já tentou emagrecer, mas o corpo não responde",
@@ -646,7 +646,7 @@ const NutricaoOrtomolecular = ({ goBack }) => {
                                 </div>
                                 <div className="w-full md:w-1/2">
                                     <p className="text-base text-[#424245] font-sans font-light leading-relaxed relative z-10">
-                                        Suporte bioquímico fundamental através do ajuste fino de nutrientes para mitigar efeitos colaterais e fortalecer o sistema imunológico durante a jornada terapêutica.
+                                        Suporte bioquímico fundamental através do ajuste fino de nutrientes para mitigar (reduzir os danos) efeitos colaterais e fortalecer o sistema imunológico durante a jornada terapêutica.
                                     </p>
                                 </div>
                             </div>
