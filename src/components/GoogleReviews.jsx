@@ -1,7 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Unicon from './Unicon';
 
-const reviews = [
+const PLACE_ID = import.meta.env.VITE_GOOGLE_PLACE_ID;
+const API_KEY = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
+
+// Fallback estático — usado enquanto a busca ao vivo não responde, ou se faltar a API key.
+const fallbackReviews = [
   {
     id: 1,
     name: 'Maria Nunes',
@@ -68,7 +72,19 @@ const ReviewCard = ({ review }) => {
     <div className="bg-white rounded-3xl p-8 border border-gray-200 w-[280px] md:w-[320px] min-h-[420px] flex-shrink-0 snap-start flex flex-col antialiased">
       <div className="flex flex-col items-start gap-4 mb-6">
         <div className="flex items-center gap-3 w-full">
-          <div className="w-12 h-12 rounded-full bg-natu-brown/10 flex items-center justify-center text-natu-brown font-bold text-xl uppercase shrink-0">
+          {review.avatarPhoto ? (
+            <img
+              src={review.avatarPhoto}
+              alt={review.name}
+              referrerPolicy="no-referrer"
+              className="w-12 h-12 rounded-full object-cover shrink-0"
+              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+            />
+          ) : null}
+          <div
+            className="w-12 h-12 rounded-full bg-natu-brown/10 items-center justify-center text-natu-brown font-bold text-xl uppercase shrink-0"
+            style={{ display: review.avatarPhoto ? 'none' : 'flex' }}
+          >
             {review.avatarLetter}
           </div>
           <div className="flex-grow flex items-center">
@@ -107,6 +123,33 @@ const GoogleReviews = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+  const [reviews, setReviews] = useState(fallbackReviews);
+
+  useEffect(() => {
+    if (!API_KEY || !PLACE_ID) return;
+
+    fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}?fields=reviews&key=${API_KEY}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data?.reviews?.length) return;
+        const liveReviews = data.reviews
+          .filter((r) => r.rating >= 4 && (r.text?.text || r.originalText?.text))
+          .map((r) => {
+            const name = r.authorAttribution?.displayName || 'Paciente Natuclinic';
+            return {
+              id: r.name,
+              name,
+              text: r.text?.text || r.originalText?.text,
+              avatarLetter: name.charAt(0).toUpperCase(),
+              avatarPhoto: r.authorAttribution?.photoUri || null,
+            };
+          });
+        if (liveReviews.length) setReviews(liveReviews);
+      })
+      .catch(() => {
+        // Mantém o fallback estático em caso de falha na busca.
+      });
+  }, []);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);

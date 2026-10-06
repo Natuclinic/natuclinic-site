@@ -217,7 +217,7 @@ const VideoFeedbacks = ({ showTitle = true, bgColor = "bg-white", pyClass = "py-
                                             isActive ? (
                                                 <iframe
                                                     key={f.youtubeId}
-                                                    src={`https://www.youtube.com/embed/${f.youtubeId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=${f.youtubeId}`}
+                                                    src={`https://www.youtube.com/embed/${f.youtubeId}?autoplay=0&mute=0&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=${f.youtubeId}`}
                                                     className="absolute inset-0 w-full h-full"
                                                     allow="autoplay; encrypted-media; picture-in-picture"
                                                     allowFullScreen
