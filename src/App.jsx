@@ -40,6 +40,7 @@ const Sobre = React.lazy(() => import('./pages/Sobre'));
 const Bio = React.lazy(() => import('./pages/Bio'));
 import { useArticles } from './hooks/useArticles';
 import { captureAttribution } from './services/leadTracking';
+import { installWhatsAppAttribution } from './services/whatsappAttribution';
 
 import Navbar from './components/Navbar';
 import HomeIntro from './components/HomeIntro';
@@ -120,6 +121,10 @@ export default function App() {
   useEffect(() => {
     captureAttribution();
   }, []);
+
+  // Marca toda mensagem de WhatsApp que sai do site com "(vim pelo site)",
+  // a frase-gatilho da campanha "Site" no CRM (origem do lead).
+  useEffect(() => installWhatsAppAttribution(), []);
 
   const [showScrollTop, setShowScrollTop] = React.useState(false);
   const [scrollProgress, setScrollProgress] = React.useState(0);

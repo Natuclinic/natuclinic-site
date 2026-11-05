@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { API_URLS } from '../constants/links';
 import { motion, useScroll, useTransform } from "framer-motion";
-import { WHATSAPP_LINKS } from '../constants/links';
+import { WHATSAPP_BASE, WHATSAPP_LINKS } from '../constants/links';
 import { sendLeadToCRM } from '../services/crm';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -195,7 +195,8 @@ const HarmonizacaoCorporal = () => {
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent(`Olá! Gostaria de saber mais sobre a Harmonização Corporal.`);
-        window.open(`${WHATSAPP_LINKS.GENERAL || 'https://wa.me/5561982582150'}&text=${message}`, '_blank');
+        // Antes somava "&text=" ao link GENERAL (que já tem ?text=), gerando dois textos na URL.
+        window.open(`${WHATSAPP_BASE}?text=${message}`, '_blank');
     };
 
     const handleSubmit = async (e) => {
