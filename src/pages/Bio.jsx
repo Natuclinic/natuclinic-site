@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion as Motion, useReducedMotion } from 'motion/react';
 import Unicon from '../components/Unicon';
-import { UNIT_PHONES } from '../constants/links';
+import { UNIT_PHONES, WHATSAPP_BASE } from '../constants/links';
 import { useGoogleReviews } from '../hooks/useGoogleReviews';
 
 // Página "link na bio" do Instagram (@instituto.natuclinic).
 // Endereço para colocar no Instagram:
 //   https://www.natuclinic.com.br/bio?utm_source=instagram&utm_medium=social&utm_content=link_in_bio
-// O WhatsApp daqui é o número de agendamento usado no Instagram, e a mensagem
+// O WhatsApp é o número oficial do site (constants/links), e a mensagem
 // começa com "Vim pelo Instagram" para a recepção marcar a origem no CRM.
 
-const AGENDAR = `https://wa.me/5561992551867?text=${encodeURIComponent('Olá! Vim pelo Instagram e quero agendar uma consulta na Natuclinic.')}`;
+const AGENDAR = `${WHATSAPP_BASE}?text=${encodeURIComponent('Olá! Vim pelo Instagram e quero agendar uma consulta na Natuclinic.')}`;
 
 // Mesmos pares de /images/resultados usados na home, em versão leve (public/images/bio).
 const RESULTADOS = ['01', '06', '09', '04', '05', '07', '02', '08', '10'];
