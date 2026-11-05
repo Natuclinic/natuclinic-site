@@ -16,6 +16,18 @@ import { useGoogleReviews } from '../hooks/useGoogleReviews';
 
 const AGENDAR = `${WHATSAPP_BASE}?text=${encodeURIComponent('Olá! Vim de: link da bio. Quero agendar uma consulta na Natuclinic.')}`;
 
+// Diferenciais e credenciais: mesmos textos já publicados no FAQ e na página Sobre.
+const PADRAO = [
+    { titulo: 'Atendimento exclusivamente particular', texto: 'Sem convênio, para dedicar o tempo e a atenção que cada caso exige.' },
+    { titulo: 'Avaliação completa antes de tudo', texto: 'Histórico, objetivos e exames. Não existe receita pronta: cada plano é construído para você.' },
+    { titulo: 'Saúde e estética no mesmo plano', texto: 'A nutrição ortomolecular equilibra o organismo por dentro e potencializa os resultados dos procedimentos.' },
+];
+
+const EQUIPE = [
+    { nome: 'Dr. Julimar Meneses', credenciais: 'Nutricionista ortomolecular e farmacêutico · CRN-DF 21414', foto: '/images/bio/dr-julimar.webp' },
+    { nome: 'Dra. Débora Meneses', credenciais: 'Biomédica esteta, especialista em harmonização facial', foto: '/images/bio/dra-debora.webp' },
+];
+
 // Mesmos pares de /images/resultados usados na home, em versão leve (public/images/bio).
 const RESULTADOS = ['01', '06', '09', '04', '05', '07', '02', '08', '10'];
 
@@ -317,7 +329,7 @@ const Bio = () => {
         <div className="min-h-[100svh] bg-white font-sans text-natu-brown selection:bg-natu-pink selection:text-natu-brown">
             <Helmet>
                 <title>Natuclinic | Saúde e estética de dentro para fora</title>
-                <meta name="description" content="Nutrição ortomolecular com o Dr. Julimar e estética com a Dra. Débora. Agende sua consulta em Taguatinga ou Planaltina-DF." />
+                <meta name="description" content="Clínica particular de nutrição ortomolecular e estética avançada, com o Dr. Julimar e a Dra. Débora. Agende sua consulta em Taguatinga ou Planaltina-DF." />
                 <meta name="robots" content="noindex, follow" />
                 <link rel="canonical" href="https://www.natuclinic.com.br/bio" />
             </Helmet>
@@ -344,8 +356,8 @@ const Bio = () => {
                         <h1 className="font-serif text-[38px] leading-[1.02] tracking-[-0.015em] [text-wrap:balance]">
                             Saúde e estética de dentro para fora
                         </h1>
-                        <p className="mt-3 max-w-[32ch] text-[15px] leading-snug text-white/80">
-                            Nutrição ortomolecular com o Dr. Julimar e estética com a Dra. Débora, em Taguatinga e Planaltina.
+                        <p className="mt-3 max-w-[34ch] text-[15px] leading-snug text-white/80">
+                            Clínica particular de nutrição ortomolecular e estética avançada, com o Dr. Julimar e a Dra. Débora. Taguatinga e Planaltina, DF.
                         </p>
 
                         <div className="mt-7 flex flex-col gap-3">
@@ -361,21 +373,66 @@ const Bio = () => {
                                     <Unicon name="whatsapp" size={24} />
                                 </span>
                             </a>
-                            <Link
-                                to="/sobre"
-                                onClick={() => track('conhecer-clinica')}
+                            <a
+                                href="#padrao"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    track('conhecer-clinica');
+                                    document.getElementById('padrao')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+                                }}
                                 className="group flex min-h-[64px] items-center justify-between rounded-full border border-white/35 pl-6 pr-2 text-white transition-colors duration-300 hover:border-white/70 hover:bg-white/[0.06] active:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                             >
                                 <span className="text-[16px] font-bold">Conhecer a clínica</span>
-                                <span className="flex h-12 w-12 items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5">
-                                    <Unicon name="arrow-right" size={20} />
+                                <span className="flex h-12 w-12 items-center justify-center transition-transform duration-300 group-hover:translate-y-0.5">
+                                    <Unicon name="arrow-down" size={20} />
                                 </span>
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </header>
 
                 <div className="px-4 pb-12 sm:px-0">
+                    {/* O padrão da clínica: só fatos já publicados no site (FAQ e página Sobre) */}
+                    <section id="padrao" aria-labelledby="bio-padrao" className="scroll-mt-4">
+                        <h2 id="bio-padrao" className="mt-14 font-serif text-[28px] leading-[1.1] tracking-[-0.01em]">
+                            O padrão Natuclinic
+                        </h2>
+                        <p className="mt-3 max-w-[38ch] text-[15px] leading-relaxed text-natu-brown/75">
+                            Uma clínica particular, com tempo para cada paciente e um plano construído só para você.
+                        </p>
+
+                        <div className="mt-6 grid grid-cols-2 gap-[3px] overflow-hidden rounded-[20px] bg-natu-brown/5">
+                            <img src="/images/bio/espaco-recepcao.webp" alt="Recepção da Natuclinic" width="560" height="746" loading="lazy" className="aspect-[3/4] h-full w-full object-cover" />
+                            <img src="/images/bio/espaco-espera.webp" alt="Sala de espera da Natuclinic" width="560" height="746" loading="lazy" className="aspect-[3/4] h-full w-full object-cover" />
+                        </div>
+
+                        <dl className="mt-6 border-t border-natu-brown/15">
+                            {PADRAO.map((p) => (
+                                <div key={p.titulo} className="border-b border-natu-brown/15 py-5">
+                                    <dt className="font-serif text-[20px] leading-tight">{p.titulo}</dt>
+                                    <dd className="mt-1.5 text-[14px] leading-snug text-natu-brown/70">{p.texto}</dd>
+                                </div>
+                            ))}
+                        </dl>
+
+                        <h3 className="mt-9 text-[16px] font-bold">Quem cuida de você</h3>
+                        <ul className="mt-4 flex flex-col gap-5">
+                            {EQUIPE.map((m) => (
+                                <li key={m.nome} className="flex items-center gap-4">
+                                    <img src={m.foto} alt="" width="160" height="160" loading="lazy" className="h-16 w-16 shrink-0 rounded-full object-cover" />
+                                    <div>
+                                        <p className="font-serif text-[19px] leading-tight">{m.nome}</p>
+                                        <p className="mt-1 text-[13px] leading-snug text-natu-brown/70">{m.credenciais}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        <Link to="/sobre" onClick={() => track('historia-clinica')} className={`mt-4 ${textLink}`}>
+                            Conheça a história da clínica
+                            <Unicon name="arrow-right" size={14} />
+                        </Link>
+                    </section>
+
                     {/* Feedbacks e resultados */}
                     <section aria-labelledby="bio-resultados">
                         <h2 id="bio-resultados" className="mt-14 font-serif text-[28px] leading-[1.1] tracking-[-0.01em]">
