@@ -9,10 +9,12 @@ import { useGoogleReviews } from '../hooks/useGoogleReviews';
 // Página "link na bio" do Instagram (@instituto.natuclinic).
 // Endereço para colocar no Instagram:
 //   https://www.natuclinic.com.br/bio?utm_source=instagram&utm_medium=social&utm_content=link_in_bio
-// O WhatsApp é o número oficial do site (constants/links), e a mensagem
-// começa com "Vim pelo Instagram" para a recepção marcar a origem no CRM.
+// O WhatsApp é o número oficial do site (constants/links), o mesmo conectado ao CRM.
+// A mensagem começa com a frase-gatilho da campanha "link da bio" do CRM
+// ("Olá! Vim de: link da bio"): o lead entra com essa origem sozinho. Se a frase
+// mudar lá no CRM, mude aqui também.
 
-const AGENDAR = `${WHATSAPP_BASE}?text=${encodeURIComponent('Olá! Vim pelo Instagram e quero agendar uma consulta na Natuclinic.')}`;
+const AGENDAR = `${WHATSAPP_BASE}?text=${encodeURIComponent('Olá! Vim de: link da bio. Quero agendar uma consulta na Natuclinic.')}`;
 
 // Mesmos pares de /images/resultados usados na home, em versão leve (public/images/bio).
 const RESULTADOS = ['01', '06', '09', '04', '05', '07', '02', '08', '10'];
