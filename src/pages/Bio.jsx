@@ -268,7 +268,7 @@ const ReviewItem = ({ review }) => {
                     </span>
                 </span>
             </header>
-            <p className={`mt-3 font-serif text-[17px] leading-[1.4] ${long && !open ? 'line-clamp-5' : ''}`}>“{review.text}”</p>
+            <p className={`mt-3 text-[15px] leading-relaxed ${long && !open ? 'line-clamp-5' : ''}`}>“{review.text}”</p>
             {long && (
                 <button
                     type="button"
