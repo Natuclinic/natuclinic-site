@@ -37,6 +37,7 @@ const DepilacaoLaser = React.lazy(() => import('./pages/DepilacaoLaser'));
 const Contato = React.lazy(() => import('./pages/Contato'));
 const Soroterapia = React.lazy(() => import('./pages/Soroterapia'));
 const Sobre = React.lazy(() => import('./pages/Sobre'));
+const Bio = React.lazy(() => import('./pages/Bio'));
 import { useArticles } from './hooks/useArticles';
 import { captureAttribution } from './services/leadTracking';
 
@@ -145,6 +146,9 @@ export default function App() {
 
   const isAdminPage = location.pathname.startsWith('/adminblogpost');
 
+  // Página "link na bio" do Instagram: tela própria, sem menu, rodapé nem botões flutuantes.
+  const isBioPage = location.pathname === '/bio' || location.pathname === '/bio/';
+
   const globalSchema = {
     "@context": "https://schema.org",
     "@type": ["MedicalClinic", "HealthAndBeautyBusiness"],
@@ -194,7 +198,7 @@ export default function App() {
         <ErrorBoundary>
         <React.Suspense fallback={null}>
           <main className="relative z-10 bg-natu-ivory">
-            {!isServicePage && !isAdminPage && <Navbar />}
+            {!isServicePage && !isAdminPage && !isBioPage && <Navbar />}
             <Routes>
               <Route path="/" element={
                 <>
@@ -341,17 +345,18 @@ export default function App() {
               <Route path="/sobre" element={<Sobre />} />
               <Route path="/procedimentos/soroterapia" element={<Soroterapia goBack={() => navigate(-1)} />} />
               <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
+              <Route path="/bio" element={<Bio />} />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>
 
-          {!isServicePage && !isAdminPage && <FooterNew />}
+          {!isServicePage && !isAdminPage && !isBioPage && <FooterNew />}
         </React.Suspense>
         </ErrorBoundary>
 
         {/* Botões flutuantes */}
-        <div className="fixed bottom-10 right-10 flex flex-col items-center gap-3 z-[9999]">
+        <div className={`fixed bottom-10 right-10 flex-col items-center gap-3 z-[9999] ${isBioPage ? 'hidden' : 'flex'}`}>
           <button
             onClick={() => lenisRef.current?.scrollTo(0)}
             aria-label="Voltar ao topo"

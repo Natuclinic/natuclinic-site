@@ -1,8 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import Unicon from './Unicon';
-
-const PLACE_ID = import.meta.env.VITE_GOOGLE_PLACE_ID;
-const API_KEY = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
+import { useGoogleReviews } from '../hooks/useGoogleReviews';
 
 // Fallback estático — usado enquanto a busca ao vivo não responde, ou se faltar a API key.
 const fallbackReviews = [
@@ -123,33 +121,8 @@ const GoogleReviews = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
-  const [reviews, setReviews] = useState(fallbackReviews);
-
-  useEffect(() => {
-    if (!API_KEY || !PLACE_ID) return;
-
-    fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}?fields=reviews&key=${API_KEY}`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (!data?.reviews?.length) return;
-        const liveReviews = data.reviews
-          .filter((r) => r.rating >= 4 && (r.text?.text || r.originalText?.text))
-          .map((r) => {
-            const name = r.authorAttribution?.displayName || 'Paciente Natuclinic';
-            return {
-              id: r.name,
-              name,
-              text: r.text?.text || r.originalText?.text,
-              avatarLetter: name.charAt(0).toUpperCase(),
-              avatarPhoto: r.authorAttribution?.photoUri || null,
-            };
-          });
-        if (liveReviews.length) setReviews(liveReviews);
-      })
-      .catch(() => {
-        // Mantém o fallback estático em caso de falha na busca.
-      });
-  }, []);
+  // Ao vivo do Google; mantém o fallback estático enquanto carrega ou se a busca falhar.
+  const { reviews } = useGoogleReviews(fallbackReviews);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
