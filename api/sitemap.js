@@ -36,6 +36,8 @@ export default async function handler(req, res) {
                 })
                 .join('')}
       ${articles
+                // Slugs que o vercel.json redireciona para outro endereço não entram no sitemap.
+                .filter((post) => !['nutricao-ortomolecular-o-que-e-como-funciona-e-para-que-serve'].includes(post.slug || post.id))
                 .map((post) => {
                     const slug = post.slug || post.id;
                     const lastMod = post.updated_at || post.created_at || new Date().toISOString();

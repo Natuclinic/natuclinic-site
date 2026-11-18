@@ -145,8 +145,8 @@ const Contato = () => {
     return (
         <div ref={containerRef} className="min-h-screen bg-white font-sans">
             <SEO
-                title="Clínica Estética em Taguatinga e Planaltina | Agende na Natuclinic"
-                description="Endereços e telefones da Natuclinic. Agende sua avaliação em estética avançada e nutrição ortomolecular em nossas unidades no DF (Taguatinga e Planaltina)."
+                title="Contato e Endereços em Taguatinga e Planaltina | Natuclinic"
+                description="Endereços e telefones da Natuclinic. Agende sua avaliação em estética avançada e nutrição ortomolecular nas unidades de Taguatinga e Planaltina (DF)."
                 url="https://www.natuclinic.com.br/contato"
                 canonical="https://www.natuclinic.com.br/contato"
                 keywords="contato natuclinic, clínica estética brasília, agendamento taguatinga, nutrição ortomolecular planaltina, natuclinic endereço, telefone clínica estética taguatinga, agendar estética planaltina, endereço natuclinic df, clínica nutrição ortomolecular df"

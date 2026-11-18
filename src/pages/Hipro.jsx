@@ -78,7 +78,7 @@ export default function Hipro({ goBack }) {
     return (
         <div className="bg-[#F5F5F5] min-h-screen antialiased">
             <SEO
-                title="Ultrassom Microfocado HIPRO® em Brasília — Natuclinic"
+                title="Ultrassom Microfocado HIPRO® em Brasília | Natuclinic"
                 description="Tratamento com Ultrassom Microfocado HIPRO® em Brasília para flacidez, contorno facial, papada e rejuvenescimento na Natuclinic."
                 url="https://www.natuclinic.com.br/procedimentos/hipro"
                 canonical="https://www.natuclinic.com.br/procedimentos/hipro"

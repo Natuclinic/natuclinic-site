@@ -116,8 +116,8 @@ const Sobre = () => {
     return (
         <div ref={containerRef} className="pt-36 pb-24 min-h-screen bg-white">
             <SEO
-                title="Melhor Clínica de Estética Integrativa de Brasília | Natuclinic"
-                description="Conheça a Natuclinic: Clínica especializada em Estética Avançada e Nutrição Ortomolecular em Brasília e Taguatinga. Agende sua avaliação."
+                title="Clínica de Estética Integrativa em Brasília | Natuclinic"
+                description="Conheça a Natuclinic: clínica especializada em estética avançada e nutrição ortomolecular em Brasília e Taguatinga. Agende sua avaliação."
                 url="https://www.natuclinic.com.br/sobre"
                 canonical="https://www.natuclinic.com.br/sobre"
                 keywords="natuclinic sobre, clínica estética brasília história, Dr. Julimar Meneses naturopata, Dra. Débora Natuclinic, missão visão natuclinic, estética integrativa brasília, clínica de estética brasília, clínica integrativa taguatinga, nutricionista ortomolecular df, biomédica esteta brasília, estética avançada df"

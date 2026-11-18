@@ -148,7 +148,7 @@ const Soroterapia = ({ goBack }) => {
             hideHeader={true}
             whatsappMessage="Olá! Tenho interesse na Soroterapia (Soro da Beleza/Imunidade)."
             seo={{
-                title: "Soroterapia em Brasília: Soro da Beleza e Imunidade | Natuclinic",
+                title: "Soroterapia em Brasília: Beleza e Imunidade | Natuclinic",
                 description: "Reposição de vitaminas e minerais na veia com a Soroterapia (Soro da Beleza e Soro da Imunidade) em Brasília e Taguatinga. Mais saúde e vitalidade.",
                 url: "https://www.natuclinic.com.br/procedimentos/soroterapia",
                 canonical: "https://www.natuclinic.com.br/procedimentos/soroterapia",

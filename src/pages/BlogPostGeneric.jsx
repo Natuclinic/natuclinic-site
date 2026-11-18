@@ -6,7 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import '../styles/blog-system.css';
 import Unicon from '../components/Unicon';
 import { gsap } from 'gsap';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import CarouselAd from '../components/CarouselAd';
 
 const NatuButton = ({ children, href, className }) => (
@@ -97,19 +97,9 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
         );
     }, [post?.id]);
 
-    // Removed the original useEffect for dynamic head tags, SEO component will handle it.
+    // Título, description, canonical e Open Graph vêm do componente <SEO> no render.
     useEffect(() => {
         if (!post) return;
-        // Update Title
-        document.title = `${post.title || ''} - Blog Natuclinic`;
-
-        // Update Meta Keywords
-        let metaKeywords = document.querySelector('meta[name="keywords"]');
-        if (!metaKeywords) {
-            metaKeywords = document.createElement('meta');
-            metaKeywords.name = "keywords";
-            document.head.appendChild(metaKeywords);
-        }
         // Update JSON-LD Structured Data
         let jsonLdScript = document.getElementById('blog-post-schema');
         if (!jsonLdScript) {
@@ -320,8 +310,21 @@ const BlogPostGeneric = ({ goBack, post, articles = [], adConfig = null, setCurr
         </div>
     );
 
+    const postUrl = `https://www.natuclinic.com.br/blog/${post.slug || post.id}`;
+    const postDescription = String(post.meta_description || post.excerpt || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
     return (
         <div className="blog-system-wrapper pt-28 md:pt-32 pb-20 md:pb-32">
+            <SEO
+                title={post.title}
+                description={postDescription.length > 160 ? `${postDescription.slice(0, 157).trimEnd()}...` : postDescription || undefined}
+                image={post.image}
+                url={postUrl}
+                canonical={postUrl}
+                type="article"
+            />
             {/* Reading Progress Bar */}
             <div
                 ref={progressBarRef}

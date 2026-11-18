@@ -208,8 +208,8 @@ export default function App() {
               <Route path="/" element={
                 <>
                   <SEO
-                    title="Natuclinic — Estética e Nutrição Ortomolecular em Brasília e Taguatinga"
-                    description="Clínica especializada em nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes, endolaser e estética corporal. Unidades em Taguatinga Norte e Planaltina, DF. Agende sua avaliação personalizada."
+                    title="Natuclinic | Estética e Nutrição Ortomolecular em Brasília"
+                    description="Nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes e endolaser. Unidades em Taguatinga Norte e Planaltina (DF). Agende sua avaliação."
                     url="https://www.natuclinic.com.br"
                     canonical="https://www.natuclinic.com.br"
                     keywords="clínica estética brasília, nutrição ortomolecular taguatinga, harmonização facial brasília, ninfoplastia sem cortes, endolaser brasília, natuclinic, clínica estética planaltina"
@@ -326,6 +326,12 @@ export default function App() {
 
               <Route path="/procedimentos" element={
                 <div className="pt-48 min-h-screen">
+                  <SEO
+                    title="Procedimentos Estéticos e Nutrição Ortomolecular"
+                    description="Conheça os procedimentos da Natuclinic: harmonização corporal e de glúteos, HIPRO®, soroterapia, nutrição ortomolecular e mais. Taguatinga e Planaltina (DF)."
+                    url="https://www.natuclinic.com.br/procedimentos"
+                    canonical="https://www.natuclinic.com.br/procedimentos"
+                  />
                   <ProceduresSection />
                 </div>
               } />
@@ -352,7 +358,14 @@ export default function App() {
               <Route path="/contato" element={<Contato goBack={() => navigate(-1)} />} />
               <Route path="/bio" element={<Bio />} />
 
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="*" element={
+                <div className="pt-48 pb-32 min-h-screen flex flex-col items-center text-center px-6">
+                  <SEO title="Página não encontrada" noindex />
+                  <h1 className="font-serif text-4xl md:text-5xl text-natu-brown mb-4">Página não encontrada</h1>
+                  <p className="text-natu-brown/70 mb-10 max-w-md">O endereço que você acessou não existe ou mudou de lugar.</p>
+                  <button onClick={() => navigate('/')} className="natu-button">Voltar para o início</button>
+                </div>
+              } />
             </Routes>
           </main>
 

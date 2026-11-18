@@ -266,8 +266,8 @@ const NutricaoOrtomolecular = ({ goBack }) => {
             hideHeader={true}
             whatsappMessage="Olá! Gostaria de agendar uma consulta de Nutrição Ortomolecular na Natuclinic."
             seo={{
-                title: "Nutrição Ortomolecular — Inflamação Silenciosa, Cansaço e Emagrecimento Travado",
-                description: "Cansaço mesmo dormindo bem, intestino que trava tudo, emagrecimento que não acontece: pode ser inflamação silenciosa. Dr. Julimar Meneses investiga a causa bioquímica e monta seu protocolo de nutrição ortomolecular em Brasília.",
+                title: "Nutrição Ortomolecular e Inflamação Silenciosa | Natuclinic",
+                description: "Cansaço, intestino travado, emagrecimento que não acontece: pode ser inflamação silenciosa. O Dr. Julimar Meneses investiga a causa e monta seu protocolo.",
                 url: "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
                 canonical: "https://www.natuclinic.com.br/procedimentos/nutricao-ortomolecular",
                 keywords: "inflamação silenciosa, intestino inflamado emagrecimento, cansaço mesmo dormindo, por que não emagreço mesmo fazendo dieta, disbiose intestinal, nutrição ortomolecular brasília, naturopatia brasília, nutrição funcional taguatinga, nutricionista ortomolecular taguatinga, Dr Julimar Meneses naturopata, emagrecimento ortomolecular",
