@@ -14,7 +14,20 @@ import { useGoogleReviews } from '../hooks/useGoogleReviews';
 // ("Olá! Vim de: link da bio"): o lead entra com essa origem sozinho. Se a frase
 // mudar lá no CRM, mude aqui também.
 
-const AGENDAR = `${WHATSAPP_BASE}?text=${encodeURIComponent('Olá! Vim de: link da bio. Quero agendar uma consulta na Natuclinic.')}`;
+const whatsapp = (assunto) => `${WHATSAPP_BASE}?text=${encodeURIComponent(`Olá! Vim de: link da bio. ${assunto}`)}`;
+
+const AGENDAR = whatsapp('Quero agendar uma consulta na Natuclinic.');
+
+// Um botão por serviço: a mensagem pronta já diz o assunto, então a equipe (e a IA
+// do CRM) começa sabendo o que a pessoa quer. Continua com a frase-gatilho da
+// campanha "link da bio", então a origem do lead não muda.
+const SERVICOS = [
+    { id: 'laser', titulo: 'Depilação a laser', texto: 'Axilas, virilha, buço, pernas e combos', msg: 'Quero saber sobre a depilação a laser.' },
+    { id: 'rosto', titulo: 'Rosto', texto: 'HIPRO, botox, lábios e harmonização', msg: 'Quero saber sobre tratamentos para o rosto (HIPRO, botox, lábios).' },
+    { id: 'corpo', titulo: 'Corpo e emagrecimento', texto: 'Harmone Bee, flacidez, glúteo e estrias', msg: 'Quero saber sobre tratamentos para o corpo e emagrecimento.' },
+    { id: 'mulher', titulo: 'Saúde da mulher', texto: 'Consulta médica, saúde íntima e assoalho pélvico', msg: 'Quero saber sobre a consulta de saúde da mulher.' },
+    { id: 'julimar', titulo: 'Consulta com o Dr. Julimar', texto: 'Nutrição ortomolecular, presencial ou online', msg: 'Quero agendar uma consulta com o Dr. Julimar.' },
+];
 
 // Diferenciais e credenciais: mesmos textos já publicados no FAQ e na página Sobre.
 const PADRAO = [
@@ -392,6 +405,37 @@ const Bio = () => {
                 </header>
 
                 <div className="px-4 pb-12 sm:px-0">
+                    {/* Atalhos por serviço: cada um abre o WhatsApp com o assunto já escrito */}
+                    <section aria-labelledby="bio-servicos">
+                        <h2 id="bio-servicos" className="mt-10 font-serif text-[28px] leading-[1.1] tracking-[-0.01em]">
+                            O que você quer cuidar?
+                        </h2>
+                        <p className="mt-2 text-[14px] leading-snug text-natu-brown/70">
+                            Toque no assunto e fale direto com a nossa equipe no WhatsApp.
+                        </p>
+                        <ul className="mt-5 border-t border-natu-brown/15">
+                            {SERVICOS.map((s) => (
+                                <li key={s.id} className="border-b border-natu-brown/15">
+                                    <a
+                                        href={whatsapp(s.msg)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => track(`servico-${s.id}`)}
+                                        className={`group flex min-h-[68px] items-center justify-between gap-4 py-3 ${focusRing}`}
+                                    >
+                                        <span className="flex min-w-0 flex-col">
+                                            <span className="font-serif text-[20px] leading-tight">{s.titulo}</span>
+                                            <span className="mt-1 text-[13px] leading-snug text-natu-brown/65">{s.texto}</span>
+                                        </span>
+                                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-natu-pink/60 text-natu-brown transition-transform duration-300 group-hover:translate-x-0.5">
+                                            <Unicon name="arrow-right" size={18} />
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+
                     {/* O padrão da clínica: só fatos já publicados no site (FAQ e página Sobre) */}
                     <section id="padrao" aria-labelledby="bio-padrao" className="scroll-mt-4">
                         <h2 id="bio-padrao" className="mt-14 font-serif text-[28px] leading-[1.1] tracking-[-0.01em]">
