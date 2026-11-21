@@ -159,6 +159,51 @@ const FaqItem = ({ question, answer, delay = 0 }) => {
     );
 };
 
+// Perguntas frequentes: aparecem na página e também vão para o Google (FAQPage).
+// As primeiras usam os termos que as pessoas mais buscam (Google Trends, nov/2026).
+const FAQ_ITEMS = [
+    {
+        q: "O Harmone Bee® funciona para gordura localizada na barriga?",
+        a: "Gordura localizada na barriga é uma das queixas que mais chegam até nós. No Harmone Bee® ela é tratada por dois lados: por dentro, com nutrição ortomolecular e detox para desinchar e mudar a composição corporal; e por fora, com procedimentos estéticos escolhidos para a sua região. Tudo sem cirurgia. Quais procedimentos entram no seu plano é definido na avaliação."
+    },
+    {
+        q: "Ajuda na flacidez depois de emagrecer?",
+        a: "Sim, esse é um dos focos do protocolo. Quem perde peso rápido costuma ficar com a pele flácida na barriga, nos braços e nas pernas. O plano combina alimentação que preserva a massa magra, suplementação direcionada e procedimentos estéticos para firmar a pele ao longo dos 90 dias."
+    },
+    {
+        q: "Uso ou parei de usar Mounjaro ou Ozempic. O Harmone Bee® é para mim?",
+        a: "Pode ser. Muita gente chega até nós usando as canetas ou depois de parar, com medo da flacidez e do efeito sanfona. O Harmone Bee® cuida da alimentação, dos hábitos e da pele para você manter o resultado. Qualquer decisão sobre a medicação continua sendo com o seu médico."
+    },
+    {
+        q: "Quanto custa o Harmone Bee®?",
+        a: "O valor depende do plano montado para você: quais procedimentos entram, quantas sessões e o tipo de acompanhamento. Na avaliação com a Dra. Débora você recebe o plano completo com o investimento, sem compromisso."
+    },
+    {
+        q: "Funciona pra qualquer tipo de corpo?",
+        a: "Funciona pra qualquer mulher disposta a seguir o protocolo. O que muda é o ponto de partida e o ritmo. Corpo magro com inchaço crônico, corpo com 15kg pra perder, corpo no pós-parto ou na perimenopausa — cada um tem um Harmone Bee® próprio. A avaliação inicial define isso."
+    },
+    {
+        q: "Preciso fazer dieta restritiva?",
+        a: "Não. Restrição extrema é justamente o que faz você desistir no dia 12. O plano é funcional: come comida de verdade, em quantidade que sustenta seu dia, com ajustes ortomoleculares. Você vai sentir menos fome, não mais."
+    },
+    {
+        q: "Em quanto tempo vejo resultado?",
+        a: "Inchaço e energia costumam mudar nas primeiras 2 a 3 semanas. Medidas e composição corporal aparecem entre 30 e 60 dias. O resultado consolidado — o que fica depois do protocolo — é o objetivo dos 90 dias inteiros. A gente prefere te falar isso na cara do que prometer milagre."
+    },
+    {
+        q: "O que está incluído nos 90 dias?",
+        a: "Avaliação inicial completa, plano alimentar funcional, protocolo de detox com suplementação direcionada, sessões de procedimentos estéticos conforme seu plano, reavaliações periódicas e acompanhamento diário no WhatsApp com a equipe."
+    },
+    {
+        q: "Preciso morar em Brasília?",
+        a: "Pra parte estética, sim — os procedimentos são presenciais aqui em Taguatinga. A nutrição e o acompanhamento podem ser feitos à distância, mas o protocolo completo entrega mais quando você consegue vir à clínica. Se você é de outra cidade, conversa com a gente que adaptamos."
+    },
+    {
+        q: "Como começar?",
+        a: "Clica no botão, manda uma mensagem no WhatsApp e a gente agenda sua avaliação com a Dra. Débora. Nessa primeira conversa você entende se o Harmone Bee® é pra você — sem compromisso, sem pressão."
+    },
+];
+
 const HarmonizacaoCorporal = () => {
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ type: '', message: '' });
@@ -168,7 +213,6 @@ const HarmonizacaoCorporal = () => {
     const queixaBgRef = useRef(null);
 
     useEffect(() => {
-        document.title = "Harmonização Corporal | Natuclinic";
         window.scrollTo(0, 0);
 
         // GSAP Parallax Animation
@@ -242,24 +286,35 @@ const HarmonizacaoCorporal = () => {
     return (
         <div className="bg-white text-[#4C261A] font-sans overflow-x-hidden harmonizacao-page">
             <SEO
-                title="Harmone Bee®: Harmonização Corporal em 90 Dias"
-                description="O Harmone Bee® une nutrição ortomolecular, procedimentos estéticos e acompanhamento intensivo para transformar seu corpo em 90 dias. Natuclinic, Brasília."
+                title="Harmone Bee®: Gordura Localizada e Flacidez em Brasília"
+                description="Gordura na barriga, flacidez ou efeito sanfona depois de emagrecer? O Harmone Bee® une nutrição ortomolecular e estética, sem cirurgia, em 90 dias. Brasília (DF)."
                 url="https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal"
-                keywords="harmonização corporal, harmone bee, protocolo emagrecimento, nutrição ortomolecular, estética corporal Brasília, natuclinic"
+                keywords="harmone bee, gordura localizada na barriga, gordura localizada brasília, como perder barriga, flacidez abdominal, flacidez depois de emagrecer, barriga pós-parto, emagrecer com acompanhamento, depois do mounjaro, nutricionista brasília, harmonização corporal, nutrição ortomolecular df"
                 image="/og-harmonizacao-corporal.jpg"
-                jsonLd={{
-                    "@context": "https://schema.org",
-                    "@type": "MedicalProcedure",
-                    "name": "Harmone Bee® — Harmonização Corporal",
-                    "description": "Protocolo Harmone Bee® que une nutrição ortomolecular, procedimentos estéticos e acompanhamento intensivo para transformar o corpo em 90 dias. Natuclinic, Brasília.",
-                    "url": "https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal",
-                    "procedureType": "Noninvasive",
-                    "performer": {
-                        "@type": "MedicalBusiness",
-                        "name": "Natuclinic",
-                        "address": { "@type": "PostalAddress", "addressLocality": "Brasília", "addressRegion": "DF" }
+                jsonLdList={[
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "MedicalProcedure",
+                        "name": "Harmone Bee® — Harmonização Corporal",
+                        "description": "Protocolo Harmone Bee® para gordura localizada e flacidez, sem cirurgia: nutrição ortomolecular, detox, procedimentos estéticos e acompanhamento diário por 90 dias. Natuclinic, Brasília (DF).",
+                        "url": "https://www.natuclinic.com.br/procedimentos/harmonizacao-corporal",
+                        "procedureType": "Noninvasive",
+                        "performer": {
+                            "@type": "MedicalBusiness",
+                            "name": "Natuclinic",
+                            "address": { "@type": "PostalAddress", "addressLocality": "Brasília", "addressRegion": "DF" }
+                        }
+                    },
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": FAQ_ITEMS.map((item) => ({
+                            "@type": "Question",
+                            "name": item.q,
+                            "acceptedAnswer": { "@type": "Answer", "text": item.a }
+                        }))
                     }
-                }}
+                ]}
             />
 
             {/* Hero */}
@@ -683,32 +738,7 @@ const HarmonizacaoCorporal = () => {
                         </Fade>
                         {/* Perguntas à direita */}
                         <div className="divide-y divide-[#4C261A]/10">
-                            {[
-                                {
-                                    q: "Funciona pra qualquer tipo de corpo?",
-                                    a: "Funciona pra qualquer mulher disposta a seguir o protocolo. O que muda é o ponto de partida e o ritmo. Corpo magro com inchaço crônico, corpo com 15kg pra perder, corpo na perimenopausa — cada um tem um Harmone Bee® próprio. A avaliação inicial define isso."
-                                },
-                                {
-                                    q: "Preciso fazer dieta restritiva?",
-                                    a: "Não. Restrição extrema é justamente o que faz você desistir no dia 12. O plano é funcional: come comida de verdade, em quantidade que sustenta seu dia, com ajustes ortomoleculares. Você vai sentir menos fome, não mais."
-                                },
-                                {
-                                    q: "Em quanto tempo vejo resultado?",
-                                    a: "Inchaço e energia costumam mudar nas primeiras 2 a 3 semanas. Medidas e composição corporal aparecem entre 30 e 60 dias. O resultado consolidado — o que fica depois do protocolo — é o objetivo dos 90 dias inteiros. A gente prefere te falar isso na cara do que prometer milagre."
-                                },
-                                {
-                                    q: "O que está incluído nos 90 dias?",
-                                    a: "Avaliação inicial completa, plano alimentar funcional, protocolo de detox com suplementação direcionada, sessões de procedimentos estéticos conforme seu plano, reavaliações periódicas e acompanhamento diário no WhatsApp com a equipe."
-                                },
-                                {
-                                    q: "Preciso morar em Brasília?",
-                                    a: "Pra parte estética, sim — os procedimentos são presenciais aqui em Taguatinga. A nutrição e o acompanhamento podem ser feitos à distância, mas o protocolo completo entrega mais quando você consegue vir à clínica. Se você é de outra cidade, conversa com a gente que adaptamos."
-                                },
-                                {
-                                    q: "Como começar?",
-                                    a: "Clica no botão, manda uma mensagem no WhatsApp e a gente agenda sua avaliação com a Dra. Débora. Nessa primeira conversa você entende se o Harmone Bee® é pra você — sem compromisso, sem pressão."
-                                },
-                            ].map((item, i) => (
+                            {FAQ_ITEMS.map((item, i) => (
                                 <FaqItem key={i} question={item.q} answer={item.a} delay={i * 0.05} />
                             ))}
                         </div>

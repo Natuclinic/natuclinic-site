@@ -209,10 +209,10 @@ export default function App() {
                 <>
                   <SEO
                     title="Natuclinic | Estética e Nutrição Ortomolecular em Brasília"
-                    description="Nutrição ortomolecular, harmonização facial, ninfoplastia sem cortes e endolaser. Unidades em Taguatinga Norte e Planaltina (DF). Agende sua avaliação."
+                    description="Harmone Bee® para gordura localizada e flacidez, botox, preenchimento labial e nutrição ortomolecular em Brasília. Unidades em Taguatinga e Planaltina (DF)."
                     url="https://www.natuclinic.com.br"
                     canonical="https://www.natuclinic.com.br"
-                    keywords="clínica estética brasília, nutrição ortomolecular taguatinga, harmonização facial brasília, ninfoplastia sem cortes, endolaser brasília, natuclinic, clínica estética planaltina"
+                    keywords="clínica estética brasília, harmone bee, gordura localizada brasília, flacidez depois de emagrecer, botox brasília, botox preço, botox masseter, preenchimento labial brasília, preenchimento labial valor, nutricionista brasília, nutrição ortomolecular df, harmonização facial brasília, ninfoplastia sem cortes, endolaser brasília, natuclinic, clínica estética planaltina"
                     image="/og-default.jpg"
                     jsonLdList={[
                       {
@@ -327,8 +327,9 @@ export default function App() {
               <Route path="/procedimentos" element={
                 <div className="pt-48 min-h-screen">
                   <SEO
-                    title="Procedimentos Estéticos e Nutrição Ortomolecular"
-                    description="Conheça os procedimentos da Natuclinic: harmonização corporal e de glúteos, HIPRO®, soroterapia, nutrição ortomolecular e mais. Taguatinga e Planaltina (DF)."
+                    title="Procedimentos Estéticos em Brasília"
+                    description="Procedimentos da Natuclinic em Brasília: Harmone Bee® para gordura localizada e flacidez, glúteos, HIPRO®, soroterapia e nutrição ortomolecular. Unidades no DF."
+                    keywords="procedimentos estéticos brasília, gordura localizada brasília, flacidez abdominal, harmone bee, botox brasília, preenchimento labial brasília, ultrassom microfocado brasília, soroterapia brasília, nutrição ortomolecular df"
                     url="https://www.natuclinic.com.br/procedimentos"
                     canonical="https://www.natuclinic.com.br/procedimentos"
                   />

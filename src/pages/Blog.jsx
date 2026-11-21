@@ -38,7 +38,7 @@ const Blog = ({ goBack, setCurrentPage, articles, adConfig, loading }) => {
                 description="Artigos sobre nutrição ortomolecular, estética, emagrecimento saudável e bem-estar, escritos pela equipe especialista da Natuclinic em Brasília."
                 url="https://www.natuclinic.com.br/blog"
                 canonical="https://www.natuclinic.com.br/blog"
-                keywords="blog saúde brasília, nutrição ortomolecular, estética corporal, emagrecimento saudável"
+                keywords="blog saúde brasília, nutrição ortomolecular, estética corporal, emagrecimento saudável, gordura localizada, flacidez depois de emagrecer, depois do mounjaro, cuidados após botox, preenchimento labial, perimenopausa"
             />
             <div className="desktop-container">
 
